@@ -4,20 +4,25 @@ import os
 
 
 def getRealTime (filepath):
-	str=""
+	realTime=""
 	files = os.listdir(filepath)
 	for file in files :
 		cmd="cat | grep real"
 		cmd=cmd[:4]+filepath+"/"+file+cmd[4:]
-		str = str+os.popen(cmd).read()
-	return str
+		realTime = realTime+os.popen(cmd).read()
+	return realTime
 
-def totalBenchmarkTime():
-	f2=open("realtime.txt", "r")
-	str=f2.read()
-	print str
-	f2.close()
+def totalBenchmarkTime(realTime):
+	totalTime=0.0
+	str=realTime.split("\n")
+	for s in str :
+		if(s==""): # fliter the empty string
+			break
+		totalTime=totalTime + float(s[6:])
+	return totalTime
 
-str=getRealTime("output5/output2") 
-print str
-#totalBenchmarkTime()
+
+
+realTime=getRealTime("output5/output2") 
+totalTime=totalBenchmarkTime(realTime)
+print totalTime
