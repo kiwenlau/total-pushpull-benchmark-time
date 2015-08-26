@@ -14,18 +14,21 @@ def getRealTime (filepath):
 
 def totalBenchmarkTime(realTime):
 	totalTime=0.0
-	str=realTime.split("\n")
-	for s in str :
+	strings=realTime.split("\n")
+	for s in strings :
 		if(s==""): # fliter the empty string
 			break
 		totalTime=totalTime + float(s[6:])
 	return totalTime
 
+def allBenchmark(outputPath):
+	for i in range(1, 13):
+		filepath=outputPath+"output"+str(i)
+		realTime=getRealTime(filepath)
+		totalTime=totalBenchmarkTime(realTime)
+		print totalTime/3600
+	print "\n\n"
 
-
-realTime=getRealTime("output5/output2") 
-totalTime=totalBenchmarkTime(realTime)
-print totalTime
-
-for i in range(12):
-	print i
+allBenchmark("output5/")
+allBenchmark("output7/")
+allBenchmark("output8/")
