@@ -26,3 +26,6 @@ def totalBenchmarkTime(realTime):
 realTime=getRealTime("output5/output2") 
 totalTime=totalBenchmarkTime(realTime)
 print totalTime
+
+for i in range(12):
+	print i
