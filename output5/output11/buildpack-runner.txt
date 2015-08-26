@@ -1,0 +1,1505 @@
+
+pullpush benchmark: transfer buildpack-runner image to 136.187.101.71 host
+ 
+hostname: kuruwa-gw
+begin date: Sun Jun 21 07:59:42 JST 2015
+
+sudo docker images
+kiwenlau/buildpack-runner    latest              e3740e3094dc        10 months ago       1.146 GB
+
+sudo docker images
+kiwenlau/buildpack-runner    latest              e3740e3094dc        10 months ago       1.146 GB
+
+
+Test 1: ./pushpull.sh kai 136.187.101.71 buildpack-runner
+
+docker images
+kiwenlau/buildpack-runner    latest              e3740e3094dc        10 months ago       1.146 GB
+
+docker tag kiwenlau/buildpack-runner:latest 136.187.101.80:5000/buildpack-runner:latest
+
+docker images
+136.187.101.80:5000/buildpack-runner   latest              e3740e3094dc        10 months ago       1.146 GB
+kiwenlau/buildpack-runner              latest              e3740e3094dc        10 months ago       1.146 GB
+
+docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1
+9d47c1797bfb        kiwenlau/registry:2.0.1   "registry cmd/regist   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.80:5000/buildpack-runner:latest
+The push refers to a repository [136.187.101.80:5000/buildpack-runner] (len: 1)
+e3740e3094dc: Buffering to Disk
+e3740e3094dc: Image successfully pushed
+e3740e3094dc: Image already exists
+f7d2249f2e30: Image already exists
+00de2aab4a88: Image already exists
+92bfd75c5789: Image already exists
+b3fe452b81c5: Image already exists
+4d1d5edb3242: Buffering to Disk
+4d1d5edb3242: Image successfully pushed
+f1615c92dbca: Image already exists
+a758444b3733: Image already exists
+30d87febe0c4: Buffering to Disk
+30d87febe0c4: Image successfully pushed
+e522a447d81c: Buffering to Disk
+e522a447d81c: Image successfully pushed
+3c9aff01533e: Buffering to Disk
+3c9aff01533e: Image successfully pushed
+63c1e62090d2: Buffering to Disk
+63c1e62090d2: Image successfully pushed
+694fee0bf001: Image already exists
+e54ca5efa2e9: Buffering to Disk
+e54ca5efa2e9: Image successfully pushed
+6c37f792ddac: Buffering to Disk
+6c37f792ddac: Image successfully pushed
+83ff768040a0: Buffering to Disk
+83ff768040a0: Image successfully pushed
+2f4b4d6a4a06: Buffering to Disk
+2f4b4d6a4a06: Image successfully pushed
+d7ac5e4f1812: Buffering to Disk
+d7ac5e4f1812: Image successfully pushed
+511136ea3c5a: Image already exists
+Digest: sha256:988217a64a685e1333d7005da226f8fee9911070b2bce5099c6bbdf706550876
+
+real  167.08
+
+ssh kai@136.187.101.71 "docker images | grep buildpack-runner"
+
+docker pull 136.187.101.80:5000/buildpack-runner:latest
+latest: Pulling from 136.187.101.80:5000/buildpack-runner
+511136ea3c5a: Pulling fs layer
+d7ac5e4f1812: Pulling fs layer
+2f4b4d6a4a06: Pulling fs layer
+83ff768040a0: Pulling fs layer
+6c37f792ddac: Pulling fs layer
+e54ca5efa2e9: Pulling fs layer
+694fee0bf001: Pulling fs layer
+63c1e62090d2: Pulling fs layer
+3c9aff01533e: Pulling fs layer
+e522a447d81c: Pulling fs layer
+30d87febe0c4: Pulling fs layer
+a758444b3733: Pulling fs layer
+f1615c92dbca: Pulling fs layer
+4d1d5edb3242: Pulling fs layer
+b3fe452b81c5: Pulling fs layer
+92bfd75c5789: Pulling fs layer
+00de2aab4a88: Pulling fs layer
+f7d2249f2e30: Pulling fs layer
+e3740e3094dc: Pulling fs layer
+e3740e3094dc: Pulling fs layer
+e3740e3094dc: Layer already being pulled by another client. Waiting.
+511136ea3c5a: Verifying Checksum
+511136ea3c5a: Download complete
+83ff768040a0: Verifying Checksum
+83ff768040a0: Download complete
+2f4b4d6a4a06: Verifying Checksum
+2f4b4d6a4a06: Download complete
+e54ca5efa2e9: Verifying Checksum
+e54ca5efa2e9: Download complete
+694fee0bf001: Verifying Checksum
+694fee0bf001: Download complete
+511136ea3c5a: Pull complete
+63c1e62090d2: Verifying Checksum
+63c1e62090d2: Download complete
+3c9aff01533e: Verifying Checksum
+3c9aff01533e: Download complete
+30d87febe0c4: Verifying Checksum
+30d87febe0c4: Download complete
+a758444b3733: Verifying Checksum
+a758444b3733: Download complete
+f1615c92dbca: Verifying Checksum
+f1615c92dbca: Download complete
+4d1d5edb3242: Verifying Checksum
+4d1d5edb3242: Download complete
+b3fe452b81c5: Verifying Checksum
+b3fe452b81c5: Download complete
+f7d2249f2e30: Verifying Checksum
+f7d2249f2e30: Download complete
+92bfd75c5789: Verifying Checksum
+92bfd75c5789: Download complete
+00de2aab4a88: Verifying Checksum
+00de2aab4a88: Download complete
+e3740e3094dc: Verifying Checksum
+e3740e3094dc: Download complete
+e3740e3094dc: Download complete
+6c37f792ddac: Verifying Checksum
+6c37f792ddac: Download complete
+d7ac5e4f1812: Verifying Checksum
+d7ac5e4f1812: Download complete
+e522a447d81c: Verifying Checksum
+e522a447d81c: Download complete
+d7ac5e4f1812: Pull complete
+2f4b4d6a4a06: Pull complete
+83ff768040a0: Pull complete
+6c37f792ddac: Pull complete
+e54ca5efa2e9: Pull complete
+694fee0bf001: Pull complete
+63c1e62090d2: Pull complete
+3c9aff01533e: Pull complete
+e522a447d81c: Pull complete
+30d87febe0c4: Pull complete
+a758444b3733: Pull complete
+f1615c92dbca: Pull complete
+4d1d5edb3242: Pull complete
+b3fe452b81c5: Pull complete
+92bfd75c5789: Pull complete
+00de2aab4a88: Pull complete
+f7d2249f2e30: Pull complete
+e3740e3094dc: Pull complete
+e3740e3094dc: Already exists
+Digest: sha256:988217a64a685e1333d7005da226f8fee9911070b2bce5099c6bbdf706550876
+Status: Downloaded newer image for 136.187.101.80:5000/buildpack-runner:latest
+
+real  30.81
+
+ssh kai@136.187.101.71 "docker images | grep buildpack-runner"
+136.187.101.80:5000/buildpack-runner   latest              e3740e3094dc        10 months ago       1.146 GB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.80:5000/buildpack-runner:latest"
+ssh kai@136.187.101.71 "docker images | grep buildpack-runner"
+
+docker rm -f docker_registry
+
+
+Test 2: ./pushpull.sh kai 136.187.101.71 buildpack-runner
+
+docker images
+kiwenlau/buildpack-runner    latest              e3740e3094dc        10 months ago       1.146 GB
+
+docker tag kiwenlau/buildpack-runner:latest 136.187.101.80:5000/buildpack-runner:latest
+
+docker images
+kiwenlau/buildpack-runner              latest              e3740e3094dc        10 months ago       1.146 GB
+136.187.101.80:5000/buildpack-runner   latest              e3740e3094dc        10 months ago       1.146 GB
+
+docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1
+1823ed9272b1        kiwenlau/registry:2.0.1   "registry cmd/regist   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.80:5000/buildpack-runner:latest
+The push refers to a repository [136.187.101.80:5000/buildpack-runner] (len: 1)
+e3740e3094dc: Buffering to Disk
+e3740e3094dc: Image successfully pushed
+e3740e3094dc: Image already exists
+f7d2249f2e30: Image already exists
+00de2aab4a88: Image already exists
+92bfd75c5789: Image already exists
+b3fe452b81c5: Image already exists
+4d1d5edb3242: Buffering to Disk
+4d1d5edb3242: Image successfully pushed
+f1615c92dbca: Image already exists
+a758444b3733: Image already exists
+30d87febe0c4: Buffering to Disk
+30d87febe0c4: Image successfully pushed
+e522a447d81c: Buffering to Disk
+e522a447d81c: Image successfully pushed
+3c9aff01533e: Buffering to Disk
+3c9aff01533e: Image successfully pushed
+63c1e62090d2: Buffering to Disk
+63c1e62090d2: Image successfully pushed
+694fee0bf001: Image already exists
+e54ca5efa2e9: Buffering to Disk
+e54ca5efa2e9: Image successfully pushed
+6c37f792ddac: Buffering to Disk
+6c37f792ddac: Image successfully pushed
+83ff768040a0: Buffering to Disk
+83ff768040a0: Image successfully pushed
+2f4b4d6a4a06: Buffering to Disk
+2f4b4d6a4a06: Image successfully pushed
+d7ac5e4f1812: Buffering to Disk
+d7ac5e4f1812: Image successfully pushed
+511136ea3c5a: Image already exists
+Digest: sha256:01734f7f9f4be749e54998ee2236fdbabea897218a55c1ea24c79caaa2b0baf8
+
+real  168.71
+
+ssh kai@136.187.101.71 "docker images | grep buildpack-runner"
+
+docker pull 136.187.101.80:5000/buildpack-runner:latest
+latest: Pulling from 136.187.101.80:5000/buildpack-runner
+511136ea3c5a: Pulling fs layer
+d7ac5e4f1812: Pulling fs layer
+2f4b4d6a4a06: Pulling fs layer
+83ff768040a0: Pulling fs layer
+6c37f792ddac: Pulling fs layer
+e54ca5efa2e9: Pulling fs layer
+694fee0bf001: Pulling fs layer
+63c1e62090d2: Pulling fs layer
+3c9aff01533e: Pulling fs layer
+e522a447d81c: Pulling fs layer
+30d87febe0c4: Pulling fs layer
+a758444b3733: Pulling fs layer
+f1615c92dbca: Pulling fs layer
+4d1d5edb3242: Pulling fs layer
+b3fe452b81c5: Pulling fs layer
+92bfd75c5789: Pulling fs layer
+00de2aab4a88: Pulling fs layer
+f7d2249f2e30: Pulling fs layer
+e3740e3094dc: Pulling fs layer
+e3740e3094dc: Pulling fs layer
+e3740e3094dc: Layer already being pulled by another client. Waiting.
+511136ea3c5a: Verifying Checksum
+511136ea3c5a: Download complete
+2f4b4d6a4a06: Verifying Checksum
+2f4b4d6a4a06: Download complete
+83ff768040a0: Verifying Checksum
+83ff768040a0: Download complete
+e54ca5efa2e9: Verifying Checksum
+e54ca5efa2e9: Download complete
+511136ea3c5a: Pull complete
+3c9aff01533e: Verifying Checksum
+3c9aff01533e: Download complete
+63c1e62090d2: Verifying Checksum
+63c1e62090d2: Download complete
+694fee0bf001: Verifying Checksum
+694fee0bf001: Download complete
+30d87febe0c4: Verifying Checksum
+30d87febe0c4: Download complete
+f1615c92dbca: Verifying Checksum
+f1615c92dbca: Download complete
+a758444b3733: Verifying Checksum
+a758444b3733: Download complete
+4d1d5edb3242: Verifying Checksum
+4d1d5edb3242: Download complete
+92bfd75c5789: Verifying Checksum
+92bfd75c5789: Download complete
+f7d2249f2e30: Verifying Checksum
+f7d2249f2e30: Download complete
+b3fe452b81c5: Verifying Checksum
+b3fe452b81c5: Download complete
+00de2aab4a88: Verifying Checksum
+00de2aab4a88: Download complete
+e3740e3094dc: Verifying Checksum
+e3740e3094dc: Download complete
+e3740e3094dc: Download complete
+6c37f792ddac: Verifying Checksum
+6c37f792ddac: Download complete
+d7ac5e4f1812: Verifying Checksum
+d7ac5e4f1812: Download complete
+e522a447d81c: Verifying Checksum
+e522a447d81c: Download complete
+d7ac5e4f1812: Pull complete
+2f4b4d6a4a06: Pull complete
+83ff768040a0: Pull complete
+6c37f792ddac: Pull complete
+e54ca5efa2e9: Pull complete
+694fee0bf001: Pull complete
+63c1e62090d2: Pull complete
+3c9aff01533e: Pull complete
+e522a447d81c: Pull complete
+30d87febe0c4: Pull complete
+a758444b3733: Pull complete
+f1615c92dbca: Pull complete
+4d1d5edb3242: Pull complete
+b3fe452b81c5: Pull complete
+92bfd75c5789: Pull complete
+00de2aab4a88: Pull complete
+f7d2249f2e30: Pull complete
+e3740e3094dc: Pull complete
+e3740e3094dc: Already exists
+Digest: sha256:01734f7f9f4be749e54998ee2236fdbabea897218a55c1ea24c79caaa2b0baf8
+Status: Downloaded newer image for 136.187.101.80:5000/buildpack-runner:latest
+
+real  29.93
+
+ssh kai@136.187.101.71 "docker images | grep buildpack-runner"
+136.187.101.80:5000/buildpack-runner   latest              e3740e3094dc        10 months ago       1.146 GB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.80:5000/buildpack-runner:latest"
+ssh kai@136.187.101.71 "docker images | grep buildpack-runner"
+
+docker rm -f docker_registry
+
+
+Test 3: ./pushpull.sh kai 136.187.101.71 buildpack-runner
+
+docker images
+kiwenlau/buildpack-runner    latest              e3740e3094dc        10 months ago       1.146 GB
+
+docker tag kiwenlau/buildpack-runner:latest 136.187.101.80:5000/buildpack-runner:latest
+
+docker images
+136.187.101.80:5000/buildpack-runner   latest              e3740e3094dc        10 months ago       1.146 GB
+kiwenlau/buildpack-runner              latest              e3740e3094dc        10 months ago       1.146 GB
+
+docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1
+4932da783ac4        kiwenlau/registry:2.0.1   "registry cmd/regist   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.80:5000/buildpack-runner:latest
+The push refers to a repository [136.187.101.80:5000/buildpack-runner] (len: 1)
+e3740e3094dc: Buffering to Disk
+e3740e3094dc: Image successfully pushed
+e3740e3094dc: Image already exists
+f7d2249f2e30: Image already exists
+00de2aab4a88: Image already exists
+92bfd75c5789: Image already exists
+b3fe452b81c5: Image already exists
+4d1d5edb3242: Buffering to Disk
+4d1d5edb3242: Image successfully pushed
+f1615c92dbca: Image already exists
+a758444b3733: Image already exists
+30d87febe0c4: Buffering to Disk
+30d87febe0c4: Image successfully pushed
+e522a447d81c: Buffering to Disk
+e522a447d81c: Image successfully pushed
+3c9aff01533e: Buffering to Disk
+3c9aff01533e: Image successfully pushed
+63c1e62090d2: Buffering to Disk
+63c1e62090d2: Image successfully pushed
+694fee0bf001: Image already exists
+e54ca5efa2e9: Buffering to Disk
+e54ca5efa2e9: Image successfully pushed
+6c37f792ddac: Buffering to Disk
+6c37f792ddac: Image successfully pushed
+83ff768040a0: Buffering to Disk
+83ff768040a0: Image successfully pushed
+2f4b4d6a4a06: Buffering to Disk
+2f4b4d6a4a06: Image successfully pushed
+d7ac5e4f1812: Buffering to Disk
+d7ac5e4f1812: Image successfully pushed
+511136ea3c5a: Image already exists
+Digest: sha256:01734f7f9f4be749e54998ee2236fdbabea897218a55c1ea24c79caaa2b0baf8
+
+real  175.12
+
+ssh kai@136.187.101.71 "docker images | grep buildpack-runner"
+
+docker pull 136.187.101.80:5000/buildpack-runner:latest
+latest: Pulling from 136.187.101.80:5000/buildpack-runner
+511136ea3c5a: Pulling fs layer
+d7ac5e4f1812: Pulling fs layer
+2f4b4d6a4a06: Pulling fs layer
+83ff768040a0: Pulling fs layer
+6c37f792ddac: Pulling fs layer
+e54ca5efa2e9: Pulling fs layer
+694fee0bf001: Pulling fs layer
+63c1e62090d2: Pulling fs layer
+3c9aff01533e: Pulling fs layer
+e522a447d81c: Pulling fs layer
+30d87febe0c4: Pulling fs layer
+a758444b3733: Pulling fs layer
+f1615c92dbca: Pulling fs layer
+4d1d5edb3242: Pulling fs layer
+b3fe452b81c5: Pulling fs layer
+92bfd75c5789: Pulling fs layer
+00de2aab4a88: Pulling fs layer
+f7d2249f2e30: Pulling fs layer
+e3740e3094dc: Pulling fs layer
+e3740e3094dc: Pulling fs layer
+e3740e3094dc: Layer already being pulled by another client. Waiting.
+511136ea3c5a: Verifying Checksum
+511136ea3c5a: Download complete
+511136ea3c5a: Pull complete
+694fee0bf001: Verifying Checksum
+694fee0bf001: Download complete
+83ff768040a0: Verifying Checksum
+83ff768040a0: Download complete
+2f4b4d6a4a06: Verifying Checksum
+2f4b4d6a4a06: Download complete
+e54ca5efa2e9: Verifying Checksum
+e54ca5efa2e9: Download complete
+3c9aff01533e: Verifying Checksum
+3c9aff01533e: Download complete
+63c1e62090d2: Verifying Checksum
+63c1e62090d2: Download complete
+30d87febe0c4: Verifying Checksum
+30d87febe0c4: Download complete
+a758444b3733: Verifying Checksum
+a758444b3733: Download complete
+f1615c92dbca: Verifying Checksum
+f1615c92dbca: Download complete
+4d1d5edb3242: Verifying Checksum
+4d1d5edb3242: Download complete
+b3fe452b81c5: Verifying Checksum
+b3fe452b81c5: Download complete
+92bfd75c5789: Verifying Checksum
+92bfd75c5789: Download complete
+f7d2249f2e30: Verifying Checksum
+f7d2249f2e30: Download complete
+00de2aab4a88: Verifying Checksum
+00de2aab4a88: Download complete
+e3740e3094dc: Verifying Checksum
+e3740e3094dc: Download complete
+e3740e3094dc: Download complete
+6c37f792ddac: Verifying Checksum
+6c37f792ddac: Download complete
+d7ac5e4f1812: Verifying Checksum
+d7ac5e4f1812: Download complete
+e522a447d81c: Verifying Checksum
+e522a447d81c: Download complete
+d7ac5e4f1812: Pull complete
+2f4b4d6a4a06: Pull complete
+83ff768040a0: Pull complete
+6c37f792ddac: Pull complete
+e54ca5efa2e9: Pull complete
+694fee0bf001: Pull complete
+63c1e62090d2: Pull complete
+3c9aff01533e: Pull complete
+e522a447d81c: Pull complete
+30d87febe0c4: Pull complete
+a758444b3733: Pull complete
+f1615c92dbca: Pull complete
+4d1d5edb3242: Pull complete
+b3fe452b81c5: Pull complete
+92bfd75c5789: Pull complete
+00de2aab4a88: Pull complete
+f7d2249f2e30: Pull complete
+e3740e3094dc: Pull complete
+e3740e3094dc: Already exists
+Digest: sha256:01734f7f9f4be749e54998ee2236fdbabea897218a55c1ea24c79caaa2b0baf8
+Status: Downloaded newer image for 136.187.101.80:5000/buildpack-runner:latest
+
+real  30.03
+
+ssh kai@136.187.101.71 "docker images | grep buildpack-runner"
+136.187.101.80:5000/buildpack-runner   latest              e3740e3094dc        10 months ago       1.146 GB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.80:5000/buildpack-runner:latest"
+ssh kai@136.187.101.71 "docker images | grep buildpack-runner"
+
+docker rm -f docker_registry
+
+
+Test 4: ./pushpull.sh kai 136.187.101.71 buildpack-runner
+
+docker images
+kiwenlau/buildpack-runner    latest              e3740e3094dc        10 months ago       1.146 GB
+
+docker tag kiwenlau/buildpack-runner:latest 136.187.101.80:5000/buildpack-runner:latest
+
+docker images
+136.187.101.80:5000/buildpack-runner   latest              e3740e3094dc        10 months ago       1.146 GB
+kiwenlau/buildpack-runner              latest              e3740e3094dc        10 months ago       1.146 GB
+
+docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1
+54e4eeab654c        kiwenlau/registry:2.0.1   "registry cmd/regist   1 seconds ago       Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.80:5000/buildpack-runner:latest
+The push refers to a repository [136.187.101.80:5000/buildpack-runner] (len: 1)
+e3740e3094dc: Buffering to Disk
+e3740e3094dc: Image successfully pushed
+e3740e3094dc: Image already exists
+f7d2249f2e30: Image already exists
+00de2aab4a88: Image already exists
+92bfd75c5789: Image already exists
+b3fe452b81c5: Image already exists
+4d1d5edb3242: Buffering to Disk
+4d1d5edb3242: Image successfully pushed
+f1615c92dbca: Image already exists
+a758444b3733: Image already exists
+30d87febe0c4: Buffering to Disk
+30d87febe0c4: Image successfully pushed
+e522a447d81c: Buffering to Disk
+e522a447d81c: Image successfully pushed
+3c9aff01533e: Buffering to Disk
+3c9aff01533e: Image successfully pushed
+63c1e62090d2: Buffering to Disk
+63c1e62090d2: Image successfully pushed
+694fee0bf001: Image already exists
+e54ca5efa2e9: Buffering to Disk
+e54ca5efa2e9: Image successfully pushed
+6c37f792ddac: Buffering to Disk
+6c37f792ddac: Image successfully pushed
+83ff768040a0: Buffering to Disk
+83ff768040a0: Image successfully pushed
+2f4b4d6a4a06: Buffering to Disk
+2f4b4d6a4a06: Image successfully pushed
+d7ac5e4f1812: Buffering to Disk
+d7ac5e4f1812: Image successfully pushed
+511136ea3c5a: Image already exists
+Digest: sha256:8098103614946589a0654d0537bee6810eb745b7c32b1e23210a72ac0b47c856
+
+real  174.36
+
+ssh kai@136.187.101.71 "docker images | grep buildpack-runner"
+
+docker pull 136.187.101.80:5000/buildpack-runner:latest
+latest: Pulling from 136.187.101.80:5000/buildpack-runner
+511136ea3c5a: Pulling fs layer
+d7ac5e4f1812: Pulling fs layer
+2f4b4d6a4a06: Pulling fs layer
+83ff768040a0: Pulling fs layer
+6c37f792ddac: Pulling fs layer
+e54ca5efa2e9: Pulling fs layer
+694fee0bf001: Pulling fs layer
+63c1e62090d2: Pulling fs layer
+3c9aff01533e: Pulling fs layer
+e522a447d81c: Pulling fs layer
+30d87febe0c4: Pulling fs layer
+a758444b3733: Pulling fs layer
+f1615c92dbca: Pulling fs layer
+4d1d5edb3242: Pulling fs layer
+b3fe452b81c5: Pulling fs layer
+92bfd75c5789: Pulling fs layer
+00de2aab4a88: Pulling fs layer
+f7d2249f2e30: Pulling fs layer
+e3740e3094dc: Pulling fs layer
+e3740e3094dc: Pulling fs layer
+e3740e3094dc: Layer already being pulled by another client. Waiting.
+511136ea3c5a: Verifying Checksum
+511136ea3c5a: Download complete
+83ff768040a0: Verifying Checksum
+83ff768040a0: Download complete
+511136ea3c5a: Pull complete
+e54ca5efa2e9: Verifying Checksum
+e54ca5efa2e9: Download complete
+63c1e62090d2: Verifying Checksum
+63c1e62090d2: Download complete
+2f4b4d6a4a06: Verifying Checksum
+2f4b4d6a4a06: Download complete
+694fee0bf001: Verifying Checksum
+694fee0bf001: Download complete
+3c9aff01533e: Verifying Checksum
+3c9aff01533e: Download complete
+a758444b3733: Verifying Checksum
+a758444b3733: Download complete
+30d87febe0c4: Verifying Checksum
+30d87febe0c4: Download complete
+b3fe452b81c5: Verifying Checksum
+b3fe452b81c5: Download complete
+92bfd75c5789: Verifying Checksum
+92bfd75c5789: Download complete
+f1615c92dbca: Verifying Checksum
+f1615c92dbca: Download complete
+4d1d5edb3242: Verifying Checksum
+4d1d5edb3242: Download complete
+00de2aab4a88: Verifying Checksum
+00de2aab4a88: Download complete
+e3740e3094dc: Verifying Checksum
+e3740e3094dc: Download complete
+e3740e3094dc: Download complete
+f7d2249f2e30: Verifying Checksum
+f7d2249f2e30: Download complete
+6c37f792ddac: Verifying Checksum
+6c37f792ddac: Download complete
+d7ac5e4f1812: Verifying Checksum
+d7ac5e4f1812: Download complete
+e522a447d81c: Verifying Checksum
+e522a447d81c: Download complete
+d7ac5e4f1812: Pull complete
+2f4b4d6a4a06: Pull complete
+83ff768040a0: Pull complete
+6c37f792ddac: Pull complete
+e54ca5efa2e9: Pull complete
+694fee0bf001: Pull complete
+63c1e62090d2: Pull complete
+3c9aff01533e: Pull complete
+e522a447d81c: Pull complete
+30d87febe0c4: Pull complete
+a758444b3733: Pull complete
+f1615c92dbca: Pull complete
+4d1d5edb3242: Pull complete
+b3fe452b81c5: Pull complete
+92bfd75c5789: Pull complete
+00de2aab4a88: Pull complete
+f7d2249f2e30: Pull complete
+e3740e3094dc: Pull complete
+e3740e3094dc: Already exists
+Digest: sha256:8098103614946589a0654d0537bee6810eb745b7c32b1e23210a72ac0b47c856
+Status: Downloaded newer image for 136.187.101.80:5000/buildpack-runner:latest
+
+real  29.95
+
+ssh kai@136.187.101.71 "docker images | grep buildpack-runner"
+136.187.101.80:5000/buildpack-runner   latest              e3740e3094dc        10 months ago       1.146 GB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.80:5000/buildpack-runner:latest"
+ssh kai@136.187.101.71 "docker images | grep buildpack-runner"
+
+docker rm -f docker_registry
+
+
+Test 5: ./pushpull.sh kai 136.187.101.71 buildpack-runner
+
+docker images
+kiwenlau/buildpack-runner    latest              e3740e3094dc        10 months ago       1.146 GB
+
+docker tag kiwenlau/buildpack-runner:latest 136.187.101.80:5000/buildpack-runner:latest
+
+docker images
+136.187.101.80:5000/buildpack-runner   latest              e3740e3094dc        10 months ago       1.146 GB
+kiwenlau/buildpack-runner              latest              e3740e3094dc        10 months ago       1.146 GB
+
+docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1
+75256f0865bd        kiwenlau/registry:2.0.1   "registry cmd/regist   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.80:5000/buildpack-runner:latest
+The push refers to a repository [136.187.101.80:5000/buildpack-runner] (len: 1)
+e3740e3094dc: Buffering to Disk
+e3740e3094dc: Image successfully pushed
+e3740e3094dc: Image already exists
+f7d2249f2e30: Image already exists
+00de2aab4a88: Image already exists
+92bfd75c5789: Image already exists
+b3fe452b81c5: Image already exists
+4d1d5edb3242: Buffering to Disk
+4d1d5edb3242: Image successfully pushed
+f1615c92dbca: Image already exists
+a758444b3733: Image already exists
+30d87febe0c4: Buffering to Disk
+30d87febe0c4: Image successfully pushed
+e522a447d81c: Buffering to Disk
+e522a447d81c: Image successfully pushed
+3c9aff01533e: Buffering to Disk
+3c9aff01533e: Image successfully pushed
+63c1e62090d2: Buffering to Disk
+63c1e62090d2: Image successfully pushed
+694fee0bf001: Image already exists
+e54ca5efa2e9: Buffering to Disk
+e54ca5efa2e9: Image successfully pushed
+6c37f792ddac: Buffering to Disk
+6c37f792ddac: Image successfully pushed
+83ff768040a0: Buffering to Disk
+83ff768040a0: Image successfully pushed
+2f4b4d6a4a06: Buffering to Disk
+2f4b4d6a4a06: Image successfully pushed
+d7ac5e4f1812: Buffering to Disk
+d7ac5e4f1812: Image successfully pushed
+511136ea3c5a: Image already exists
+Digest: sha256:3924392feb53f0b9a003c8eb8477070cfa6852beec3de0bed50933a56365130e
+
+real  176.40
+
+ssh kai@136.187.101.71 "docker images | grep buildpack-runner"
+
+docker pull 136.187.101.80:5000/buildpack-runner:latest
+latest: Pulling from 136.187.101.80:5000/buildpack-runner
+511136ea3c5a: Pulling fs layer
+d7ac5e4f1812: Pulling fs layer
+2f4b4d6a4a06: Pulling fs layer
+83ff768040a0: Pulling fs layer
+6c37f792ddac: Pulling fs layer
+e54ca5efa2e9: Pulling fs layer
+694fee0bf001: Pulling fs layer
+63c1e62090d2: Pulling fs layer
+3c9aff01533e: Pulling fs layer
+e522a447d81c: Pulling fs layer
+30d87febe0c4: Pulling fs layer
+a758444b3733: Pulling fs layer
+f1615c92dbca: Pulling fs layer
+4d1d5edb3242: Pulling fs layer
+b3fe452b81c5: Pulling fs layer
+92bfd75c5789: Pulling fs layer
+00de2aab4a88: Pulling fs layer
+f7d2249f2e30: Pulling fs layer
+e3740e3094dc: Pulling fs layer
+e3740e3094dc: Pulling fs layer
+e3740e3094dc: Layer already being pulled by another client. Waiting.
+511136ea3c5a: Verifying Checksum
+511136ea3c5a: Download complete
+511136ea3c5a: Pull complete
+83ff768040a0: Verifying Checksum
+83ff768040a0: Download complete
+2f4b4d6a4a06: Verifying Checksum
+2f4b4d6a4a06: Download complete
+e54ca5efa2e9: Verifying Checksum
+e54ca5efa2e9: Download complete
+694fee0bf001: Verifying Checksum
+694fee0bf001: Download complete
+3c9aff01533e: Verifying Checksum
+3c9aff01533e: Download complete
+63c1e62090d2: Verifying Checksum
+63c1e62090d2: Download complete
+30d87febe0c4: Verifying Checksum
+30d87febe0c4: Download complete
+a758444b3733: Verifying Checksum
+a758444b3733: Download complete
+f1615c92dbca: Verifying Checksum
+f1615c92dbca: Download complete
+b3fe452b81c5: Verifying Checksum
+b3fe452b81c5: Download complete
+92bfd75c5789: Verifying Checksum
+92bfd75c5789: Download complete
+4d1d5edb3242: Verifying Checksum
+4d1d5edb3242: Download complete
+00de2aab4a88: Verifying Checksum
+00de2aab4a88: Download complete
+f7d2249f2e30: Verifying Checksum
+f7d2249f2e30: Download complete
+e3740e3094dc: Verifying Checksum
+e3740e3094dc: Download complete
+e3740e3094dc: Download complete
+6c37f792ddac: Verifying Checksum
+6c37f792ddac: Download complete
+d7ac5e4f1812: Verifying Checksum
+d7ac5e4f1812: Download complete
+e522a447d81c: Verifying Checksum
+e522a447d81c: Download complete
+d7ac5e4f1812: Pull complete
+2f4b4d6a4a06: Pull complete
+83ff768040a0: Pull complete
+6c37f792ddac: Pull complete
+e54ca5efa2e9: Pull complete
+694fee0bf001: Pull complete
+63c1e62090d2: Pull complete
+3c9aff01533e: Pull complete
+e522a447d81c: Pull complete
+30d87febe0c4: Pull complete
+a758444b3733: Pull complete
+f1615c92dbca: Pull complete
+4d1d5edb3242: Pull complete
+b3fe452b81c5: Pull complete
+92bfd75c5789: Pull complete
+00de2aab4a88: Pull complete
+f7d2249f2e30: Pull complete
+e3740e3094dc: Pull complete
+e3740e3094dc: Already exists
+Digest: sha256:3924392feb53f0b9a003c8eb8477070cfa6852beec3de0bed50933a56365130e
+Status: Downloaded newer image for 136.187.101.80:5000/buildpack-runner:latest
+
+real  29.84
+
+ssh kai@136.187.101.71 "docker images | grep buildpack-runner"
+136.187.101.80:5000/buildpack-runner   latest              e3740e3094dc        10 months ago       1.146 GB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.80:5000/buildpack-runner:latest"
+ssh kai@136.187.101.71 "docker images | grep buildpack-runner"
+
+docker rm -f docker_registry
+
+
+Test 6: ./pushpull.sh kai 136.187.101.71 buildpack-runner
+
+docker images
+kiwenlau/buildpack-runner    latest              e3740e3094dc        10 months ago       1.146 GB
+
+docker tag kiwenlau/buildpack-runner:latest 136.187.101.80:5000/buildpack-runner:latest
+
+docker images
+136.187.101.80:5000/buildpack-runner   latest              e3740e3094dc        10 months ago       1.146 GB
+kiwenlau/buildpack-runner              latest              e3740e3094dc        10 months ago       1.146 GB
+
+docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1
+aa4ac58c4a50        kiwenlau/registry:2.0.1   "registry cmd/regist   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.80:5000/buildpack-runner:latest
+The push refers to a repository [136.187.101.80:5000/buildpack-runner] (len: 1)
+e3740e3094dc: Buffering to Disk
+e3740e3094dc: Image successfully pushed
+e3740e3094dc: Image already exists
+f7d2249f2e30: Image already exists
+00de2aab4a88: Image already exists
+92bfd75c5789: Image already exists
+b3fe452b81c5: Image already exists
+4d1d5edb3242: Buffering to Disk
+4d1d5edb3242: Image successfully pushed
+f1615c92dbca: Image already exists
+a758444b3733: Image already exists
+30d87febe0c4: Buffering to Disk
+30d87febe0c4: Image successfully pushed
+e522a447d81c: Buffering to Disk
+e522a447d81c: Image successfully pushed
+3c9aff01533e: Buffering to Disk
+3c9aff01533e: Image successfully pushed
+63c1e62090d2: Buffering to Disk
+63c1e62090d2: Image successfully pushed
+694fee0bf001: Image already exists
+e54ca5efa2e9: Buffering to Disk
+e54ca5efa2e9: Image successfully pushed
+6c37f792ddac: Buffering to Disk
+6c37f792ddac: Image successfully pushed
+83ff768040a0: Buffering to Disk
+83ff768040a0: Image successfully pushed
+2f4b4d6a4a06: Buffering to Disk
+2f4b4d6a4a06: Image successfully pushed
+d7ac5e4f1812: Buffering to Disk
+d7ac5e4f1812: Image successfully pushed
+511136ea3c5a: Image already exists
+Digest: sha256:8098103614946589a0654d0537bee6810eb745b7c32b1e23210a72ac0b47c856
+
+real  174.78
+
+ssh kai@136.187.101.71 "docker images | grep buildpack-runner"
+
+docker pull 136.187.101.80:5000/buildpack-runner:latest
+latest: Pulling from 136.187.101.80:5000/buildpack-runner
+511136ea3c5a: Pulling fs layer
+d7ac5e4f1812: Pulling fs layer
+2f4b4d6a4a06: Pulling fs layer
+83ff768040a0: Pulling fs layer
+6c37f792ddac: Pulling fs layer
+e54ca5efa2e9: Pulling fs layer
+694fee0bf001: Pulling fs layer
+63c1e62090d2: Pulling fs layer
+3c9aff01533e: Pulling fs layer
+e522a447d81c: Pulling fs layer
+30d87febe0c4: Pulling fs layer
+a758444b3733: Pulling fs layer
+f1615c92dbca: Pulling fs layer
+4d1d5edb3242: Pulling fs layer
+b3fe452b81c5: Pulling fs layer
+92bfd75c5789: Pulling fs layer
+00de2aab4a88: Pulling fs layer
+f7d2249f2e30: Pulling fs layer
+e3740e3094dc: Pulling fs layer
+e3740e3094dc: Pulling fs layer
+e3740e3094dc: Layer already being pulled by another client. Waiting.
+511136ea3c5a: Verifying Checksum
+511136ea3c5a: Download complete
+83ff768040a0: Verifying Checksum
+83ff768040a0: Download complete
+511136ea3c5a: Pull complete
+e54ca5efa2e9: Verifying Checksum
+e54ca5efa2e9: Download complete
+63c1e62090d2: Verifying Checksum
+63c1e62090d2: Download complete
+2f4b4d6a4a06: Verifying Checksum
+2f4b4d6a4a06: Download complete
+694fee0bf001: Verifying Checksum
+694fee0bf001: Download complete
+3c9aff01533e: Verifying Checksum
+3c9aff01533e: Download complete
+a758444b3733: Verifying Checksum
+a758444b3733: Download complete
+30d87febe0c4: Verifying Checksum
+30d87febe0c4: Download complete
+f1615c92dbca: Verifying Checksum
+f1615c92dbca: Download complete
+4d1d5edb3242: Verifying Checksum
+4d1d5edb3242: Download complete
+00de2aab4a88: Verifying Checksum
+00de2aab4a88: Download complete
+b3fe452b81c5: Verifying Checksum
+b3fe452b81c5: Download complete
+92bfd75c5789: Verifying Checksum
+92bfd75c5789: Download complete
+f7d2249f2e30: Verifying Checksum
+f7d2249f2e30: Download complete
+e3740e3094dc: Verifying Checksum
+e3740e3094dc: Download complete
+e3740e3094dc: Download complete
+6c37f792ddac: Verifying Checksum
+6c37f792ddac: Download complete
+d7ac5e4f1812: Verifying Checksum
+d7ac5e4f1812: Download complete
+e522a447d81c: Verifying Checksum
+e522a447d81c: Download complete
+d7ac5e4f1812: Pull complete
+2f4b4d6a4a06: Pull complete
+83ff768040a0: Pull complete
+6c37f792ddac: Pull complete
+e54ca5efa2e9: Pull complete
+694fee0bf001: Pull complete
+63c1e62090d2: Pull complete
+3c9aff01533e: Pull complete
+e522a447d81c: Pull complete
+30d87febe0c4: Pull complete
+a758444b3733: Pull complete
+f1615c92dbca: Pull complete
+4d1d5edb3242: Pull complete
+b3fe452b81c5: Pull complete
+92bfd75c5789: Pull complete
+00de2aab4a88: Pull complete
+f7d2249f2e30: Pull complete
+e3740e3094dc: Pull complete
+e3740e3094dc: Already exists
+Digest: sha256:8098103614946589a0654d0537bee6810eb745b7c32b1e23210a72ac0b47c856
+Status: Downloaded newer image for 136.187.101.80:5000/buildpack-runner:latest
+
+real  30.21
+
+ssh kai@136.187.101.71 "docker images | grep buildpack-runner"
+136.187.101.80:5000/buildpack-runner   latest              e3740e3094dc        10 months ago       1.146 GB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.80:5000/buildpack-runner:latest"
+ssh kai@136.187.101.71 "docker images | grep buildpack-runner"
+
+docker rm -f docker_registry
+
+
+Test 7: ./pushpull.sh kai 136.187.101.71 buildpack-runner
+
+docker images
+kiwenlau/buildpack-runner    latest              e3740e3094dc        10 months ago       1.146 GB
+
+docker tag kiwenlau/buildpack-runner:latest 136.187.101.80:5000/buildpack-runner:latest
+
+docker images
+136.187.101.80:5000/buildpack-runner   latest              e3740e3094dc        10 months ago       1.146 GB
+kiwenlau/buildpack-runner              latest              e3740e3094dc        10 months ago       1.146 GB
+
+docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1
+e03856646a94        kiwenlau/registry:2.0.1   "registry cmd/regist   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.80:5000/buildpack-runner:latest
+The push refers to a repository [136.187.101.80:5000/buildpack-runner] (len: 1)
+e3740e3094dc: Buffering to Disk
+e3740e3094dc: Image successfully pushed
+e3740e3094dc: Image already exists
+f7d2249f2e30: Image already exists
+00de2aab4a88: Image already exists
+92bfd75c5789: Image already exists
+b3fe452b81c5: Image already exists
+4d1d5edb3242: Buffering to Disk
+4d1d5edb3242: Image successfully pushed
+f1615c92dbca: Image already exists
+a758444b3733: Image already exists
+30d87febe0c4: Buffering to Disk
+30d87febe0c4: Image successfully pushed
+e522a447d81c: Buffering to Disk
+e522a447d81c: Image successfully pushed
+3c9aff01533e: Buffering to Disk
+3c9aff01533e: Image successfully pushed
+63c1e62090d2: Buffering to Disk
+63c1e62090d2: Image successfully pushed
+694fee0bf001: Image already exists
+e54ca5efa2e9: Buffering to Disk
+e54ca5efa2e9: Image successfully pushed
+6c37f792ddac: Buffering to Disk
+6c37f792ddac: Image successfully pushed
+83ff768040a0: Buffering to Disk
+83ff768040a0: Image successfully pushed
+2f4b4d6a4a06: Buffering to Disk
+2f4b4d6a4a06: Image successfully pushed
+d7ac5e4f1812: Buffering to Disk
+d7ac5e4f1812: Image successfully pushed
+511136ea3c5a: Image already exists
+Digest: sha256:3924392feb53f0b9a003c8eb8477070cfa6852beec3de0bed50933a56365130e
+
+real  174.78
+
+ssh kai@136.187.101.71 "docker images | grep buildpack-runner"
+
+docker pull 136.187.101.80:5000/buildpack-runner:latest
+latest: Pulling from 136.187.101.80:5000/buildpack-runner
+511136ea3c5a: Pulling fs layer
+d7ac5e4f1812: Pulling fs layer
+2f4b4d6a4a06: Pulling fs layer
+83ff768040a0: Pulling fs layer
+6c37f792ddac: Pulling fs layer
+e54ca5efa2e9: Pulling fs layer
+694fee0bf001: Pulling fs layer
+63c1e62090d2: Pulling fs layer
+3c9aff01533e: Pulling fs layer
+e522a447d81c: Pulling fs layer
+30d87febe0c4: Pulling fs layer
+a758444b3733: Pulling fs layer
+f1615c92dbca: Pulling fs layer
+4d1d5edb3242: Pulling fs layer
+b3fe452b81c5: Pulling fs layer
+92bfd75c5789: Pulling fs layer
+00de2aab4a88: Pulling fs layer
+f7d2249f2e30: Pulling fs layer
+e3740e3094dc: Pulling fs layer
+e3740e3094dc: Pulling fs layer
+e3740e3094dc: Layer already being pulled by another client. Waiting.
+511136ea3c5a: Verifying Checksum
+511136ea3c5a: Download complete
+511136ea3c5a: Pull complete
+83ff768040a0: Verifying Checksum
+83ff768040a0: Download complete
+694fee0bf001: Verifying Checksum
+694fee0bf001: Download complete
+e54ca5efa2e9: Verifying Checksum
+e54ca5efa2e9: Download complete
+3c9aff01533e: Verifying Checksum
+3c9aff01533e: Download complete
+63c1e62090d2: Verifying Checksum
+63c1e62090d2: Download complete
+30d87febe0c4: Verifying Checksum
+30d87febe0c4: Download complete
+a758444b3733: Verifying Checksum
+a758444b3733: Download complete
+2f4b4d6a4a06: Verifying Checksum
+2f4b4d6a4a06: Download complete
+4d1d5edb3242: Verifying Checksum
+4d1d5edb3242: Download complete
+f1615c92dbca: Verifying Checksum
+f1615c92dbca: Download complete
+92bfd75c5789: Verifying Checksum
+92bfd75c5789: Download complete
+b3fe452b81c5: Verifying Checksum
+b3fe452b81c5: Download complete
+f7d2249f2e30: Verifying Checksum
+f7d2249f2e30: Download complete
+00de2aab4a88: Verifying Checksum
+00de2aab4a88: Download complete
+e3740e3094dc: Verifying Checksum
+e3740e3094dc: Download complete
+e3740e3094dc: Download complete
+6c37f792ddac: Verifying Checksum
+6c37f792ddac: Download complete
+d7ac5e4f1812: Verifying Checksum
+d7ac5e4f1812: Download complete
+e522a447d81c: Verifying Checksum
+e522a447d81c: Download complete
+d7ac5e4f1812: Pull complete
+2f4b4d6a4a06: Pull complete
+83ff768040a0: Pull complete
+6c37f792ddac: Pull complete
+e54ca5efa2e9: Pull complete
+694fee0bf001: Pull complete
+63c1e62090d2: Pull complete
+3c9aff01533e: Pull complete
+e522a447d81c: Pull complete
+30d87febe0c4: Pull complete
+a758444b3733: Pull complete
+f1615c92dbca: Pull complete
+4d1d5edb3242: Pull complete
+b3fe452b81c5: Pull complete
+92bfd75c5789: Pull complete
+00de2aab4a88: Pull complete
+f7d2249f2e30: Pull complete
+e3740e3094dc: Pull complete
+e3740e3094dc: Already exists
+Digest: sha256:3924392feb53f0b9a003c8eb8477070cfa6852beec3de0bed50933a56365130e
+Status: Downloaded newer image for 136.187.101.80:5000/buildpack-runner:latest
+
+real  30.04
+
+ssh kai@136.187.101.71 "docker images | grep buildpack-runner"
+136.187.101.80:5000/buildpack-runner   latest              e3740e3094dc        10 months ago       1.146 GB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.80:5000/buildpack-runner:latest"
+ssh kai@136.187.101.71 "docker images | grep buildpack-runner"
+
+docker rm -f docker_registry
+
+
+Test 8: ./pushpull.sh kai 136.187.101.71 buildpack-runner
+
+docker images
+kiwenlau/buildpack-runner    latest              e3740e3094dc        10 months ago       1.146 GB
+
+docker tag kiwenlau/buildpack-runner:latest 136.187.101.80:5000/buildpack-runner:latest
+
+docker images
+136.187.101.80:5000/buildpack-runner   latest              e3740e3094dc        10 months ago       1.146 GB
+kiwenlau/buildpack-runner              latest              e3740e3094dc        10 months ago       1.146 GB
+
+docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1
+86975c905c2d        kiwenlau/registry:2.0.1   "registry cmd/regist   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.80:5000/buildpack-runner:latest
+The push refers to a repository [136.187.101.80:5000/buildpack-runner] (len: 1)
+e3740e3094dc: Buffering to Disk
+e3740e3094dc: Image successfully pushed
+e3740e3094dc: Image already exists
+f7d2249f2e30: Image already exists
+00de2aab4a88: Image already exists
+92bfd75c5789: Image already exists
+b3fe452b81c5: Image already exists
+4d1d5edb3242: Buffering to Disk
+4d1d5edb3242: Image successfully pushed
+f1615c92dbca: Image already exists
+a758444b3733: Image already exists
+30d87febe0c4: Buffering to Disk
+30d87febe0c4: Image successfully pushed
+e522a447d81c: Buffering to Disk
+e522a447d81c: Image successfully pushed
+3c9aff01533e: Buffering to Disk
+3c9aff01533e: Image successfully pushed
+63c1e62090d2: Buffering to Disk
+63c1e62090d2: Image successfully pushed
+694fee0bf001: Image already exists
+e54ca5efa2e9: Buffering to Disk
+e54ca5efa2e9: Image successfully pushed
+6c37f792ddac: Buffering to Disk
+6c37f792ddac: Image successfully pushed
+83ff768040a0: Buffering to Disk
+83ff768040a0: Image successfully pushed
+2f4b4d6a4a06: Buffering to Disk
+2f4b4d6a4a06: Image successfully pushed
+d7ac5e4f1812: Buffering to Disk
+d7ac5e4f1812: Image successfully pushed
+511136ea3c5a: Image already exists
+Digest: sha256:8098103614946589a0654d0537bee6810eb745b7c32b1e23210a72ac0b47c856
+
+real  175.36
+
+ssh kai@136.187.101.71 "docker images | grep buildpack-runner"
+
+docker pull 136.187.101.80:5000/buildpack-runner:latest
+latest: Pulling from 136.187.101.80:5000/buildpack-runner
+511136ea3c5a: Pulling fs layer
+d7ac5e4f1812: Pulling fs layer
+2f4b4d6a4a06: Pulling fs layer
+83ff768040a0: Pulling fs layer
+6c37f792ddac: Pulling fs layer
+e54ca5efa2e9: Pulling fs layer
+694fee0bf001: Pulling fs layer
+63c1e62090d2: Pulling fs layer
+3c9aff01533e: Pulling fs layer
+e522a447d81c: Pulling fs layer
+30d87febe0c4: Pulling fs layer
+a758444b3733: Pulling fs layer
+f1615c92dbca: Pulling fs layer
+4d1d5edb3242: Pulling fs layer
+b3fe452b81c5: Pulling fs layer
+92bfd75c5789: Pulling fs layer
+00de2aab4a88: Pulling fs layer
+f7d2249f2e30: Pulling fs layer
+e3740e3094dc: Pulling fs layer
+e3740e3094dc: Pulling fs layer
+e3740e3094dc: Layer already being pulled by another client. Waiting.
+4d1d5edb3242: Verifying Checksum
+4d1d5edb3242: Download complete
+511136ea3c5a: Verifying Checksum
+511136ea3c5a: Download complete
+83ff768040a0: Verifying Checksum
+83ff768040a0: Download complete
+2f4b4d6a4a06: Verifying Checksum
+2f4b4d6a4a06: Download complete
+63c1e62090d2: Verifying Checksum
+63c1e62090d2: Download complete
+511136ea3c5a: Pull complete
+e54ca5efa2e9: Verifying Checksum
+e54ca5efa2e9: Download complete
+694fee0bf001: Verifying Checksum
+694fee0bf001: Download complete
+3c9aff01533e: Verifying Checksum
+3c9aff01533e: Download complete
+f1615c92dbca: Verifying Checksum
+f1615c92dbca: Download complete
+30d87febe0c4: Verifying Checksum
+30d87febe0c4: Download complete
+a758444b3733: Verifying Checksum
+a758444b3733: Download complete
+b3fe452b81c5: Verifying Checksum
+b3fe452b81c5: Download complete
+00de2aab4a88: Verifying Checksum
+00de2aab4a88: Download complete
+f7d2249f2e30: Verifying Checksum
+f7d2249f2e30: Download complete
+92bfd75c5789: Verifying Checksum
+92bfd75c5789: Download complete
+e3740e3094dc: Verifying Checksum
+e3740e3094dc: Download complete
+e3740e3094dc: Download complete
+6c37f792ddac: Verifying Checksum
+6c37f792ddac: Download complete
+d7ac5e4f1812: Verifying Checksum
+d7ac5e4f1812: Download complete
+e522a447d81c: Verifying Checksum
+e522a447d81c: Download complete
+d7ac5e4f1812: Pull complete
+2f4b4d6a4a06: Pull complete
+83ff768040a0: Pull complete
+6c37f792ddac: Pull complete
+e54ca5efa2e9: Pull complete
+694fee0bf001: Pull complete
+63c1e62090d2: Pull complete
+3c9aff01533e: Pull complete
+e522a447d81c: Pull complete
+30d87febe0c4: Pull complete
+a758444b3733: Pull complete
+f1615c92dbca: Pull complete
+4d1d5edb3242: Pull complete
+b3fe452b81c5: Pull complete
+92bfd75c5789: Pull complete
+00de2aab4a88: Pull complete
+f7d2249f2e30: Pull complete
+e3740e3094dc: Pull complete
+e3740e3094dc: Already exists
+Digest: sha256:8098103614946589a0654d0537bee6810eb745b7c32b1e23210a72ac0b47c856
+Status: Downloaded newer image for 136.187.101.80:5000/buildpack-runner:latest
+
+real  30.01
+
+ssh kai@136.187.101.71 "docker images | grep buildpack-runner"
+136.187.101.80:5000/buildpack-runner   latest              e3740e3094dc        10 months ago       1.146 GB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.80:5000/buildpack-runner:latest"
+ssh kai@136.187.101.71 "docker images | grep buildpack-runner"
+
+docker rm -f docker_registry
+
+
+Test 9: ./pushpull.sh kai 136.187.101.71 buildpack-runner
+
+docker images
+kiwenlau/buildpack-runner    latest              e3740e3094dc        10 months ago       1.146 GB
+
+docker tag kiwenlau/buildpack-runner:latest 136.187.101.80:5000/buildpack-runner:latest
+
+docker images
+kiwenlau/buildpack-runner              latest              e3740e3094dc        10 months ago       1.146 GB
+136.187.101.80:5000/buildpack-runner   latest              e3740e3094dc        10 months ago       1.146 GB
+
+docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1
+4f734563bb68        kiwenlau/registry:2.0.1   "registry cmd/regist   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.80:5000/buildpack-runner:latest
+The push refers to a repository [136.187.101.80:5000/buildpack-runner] (len: 1)
+e3740e3094dc: Buffering to Disk
+e3740e3094dc: Image successfully pushed
+e3740e3094dc: Image already exists
+f7d2249f2e30: Image already exists
+00de2aab4a88: Image already exists
+92bfd75c5789: Image already exists
+b3fe452b81c5: Image already exists
+4d1d5edb3242: Buffering to Disk
+4d1d5edb3242: Image successfully pushed
+f1615c92dbca: Image already exists
+a758444b3733: Image already exists
+30d87febe0c4: Buffering to Disk
+30d87febe0c4: Image successfully pushed
+e522a447d81c: Buffering to Disk
+e522a447d81c: Image successfully pushed
+3c9aff01533e: Buffering to Disk
+3c9aff01533e: Image successfully pushed
+63c1e62090d2: Buffering to Disk
+63c1e62090d2: Image successfully pushed
+694fee0bf001: Image already exists
+e54ca5efa2e9: Buffering to Disk
+e54ca5efa2e9: Image successfully pushed
+6c37f792ddac: Buffering to Disk
+6c37f792ddac: Image successfully pushed
+83ff768040a0: Buffering to Disk
+83ff768040a0: Image successfully pushed
+2f4b4d6a4a06: Buffering to Disk
+2f4b4d6a4a06: Image successfully pushed
+d7ac5e4f1812: Buffering to Disk
+d7ac5e4f1812: Image successfully pushed
+511136ea3c5a: Image already exists
+Digest: sha256:f96b59396fa0188c8c5c3098a61d0612fc239dd711c6a6fe5c44122f06948b81
+
+real  178.32
+
+ssh kai@136.187.101.71 "docker images | grep buildpack-runner"
+
+docker pull 136.187.101.80:5000/buildpack-runner:latest
+latest: Pulling from 136.187.101.80:5000/buildpack-runner
+511136ea3c5a: Pulling fs layer
+d7ac5e4f1812: Pulling fs layer
+2f4b4d6a4a06: Pulling fs layer
+83ff768040a0: Pulling fs layer
+6c37f792ddac: Pulling fs layer
+e54ca5efa2e9: Pulling fs layer
+694fee0bf001: Pulling fs layer
+63c1e62090d2: Pulling fs layer
+3c9aff01533e: Pulling fs layer
+e522a447d81c: Pulling fs layer
+30d87febe0c4: Pulling fs layer
+a758444b3733: Pulling fs layer
+f1615c92dbca: Pulling fs layer
+4d1d5edb3242: Pulling fs layer
+b3fe452b81c5: Pulling fs layer
+92bfd75c5789: Pulling fs layer
+00de2aab4a88: Pulling fs layer
+f7d2249f2e30: Pulling fs layer
+e3740e3094dc: Pulling fs layer
+e3740e3094dc: Pulling fs layer
+e3740e3094dc: Layer already being pulled by another client. Waiting.
+f1615c92dbca: Verifying Checksum
+f1615c92dbca: Download complete
+511136ea3c5a: Verifying Checksum
+511136ea3c5a: Download complete
+83ff768040a0: Verifying Checksum
+83ff768040a0: Download complete
+e54ca5efa2e9: Verifying Checksum
+e54ca5efa2e9: Download complete
+63c1e62090d2: Verifying Checksum
+63c1e62090d2: Download complete
+694fee0bf001: Verifying Checksum
+694fee0bf001: Download complete
+511136ea3c5a: Pull complete
+2f4b4d6a4a06: Verifying Checksum
+2f4b4d6a4a06: Download complete
+3c9aff01533e: Verifying Checksum
+3c9aff01533e: Download complete
+30d87febe0c4: Verifying Checksum
+30d87febe0c4: Download complete
+a758444b3733: Verifying Checksum
+a758444b3733: Download complete
+4d1d5edb3242: Verifying Checksum
+4d1d5edb3242: Download complete
+b3fe452b81c5: Verifying Checksum
+b3fe452b81c5: Download complete
+92bfd75c5789: Verifying Checksum
+92bfd75c5789: Download complete
+f7d2249f2e30: Verifying Checksum
+f7d2249f2e30: Download complete
+00de2aab4a88: Verifying Checksum
+00de2aab4a88: Download complete
+e3740e3094dc: Verifying Checksum
+e3740e3094dc: Download complete
+e3740e3094dc: Download complete
+6c37f792ddac: Verifying Checksum
+6c37f792ddac: Download complete
+d7ac5e4f1812: Verifying Checksum
+d7ac5e4f1812: Download complete
+e522a447d81c: Verifying Checksum
+e522a447d81c: Download complete
+d7ac5e4f1812: Pull complete
+2f4b4d6a4a06: Pull complete
+83ff768040a0: Pull complete
+6c37f792ddac: Pull complete
+e54ca5efa2e9: Pull complete
+694fee0bf001: Pull complete
+63c1e62090d2: Pull complete
+3c9aff01533e: Pull complete
+e522a447d81c: Pull complete
+30d87febe0c4: Pull complete
+a758444b3733: Pull complete
+f1615c92dbca: Pull complete
+4d1d5edb3242: Pull complete
+b3fe452b81c5: Pull complete
+92bfd75c5789: Pull complete
+00de2aab4a88: Pull complete
+f7d2249f2e30: Pull complete
+e3740e3094dc: Pull complete
+e3740e3094dc: Already exists
+Digest: sha256:f96b59396fa0188c8c5c3098a61d0612fc239dd711c6a6fe5c44122f06948b81
+Status: Downloaded newer image for 136.187.101.80:5000/buildpack-runner:latest
+
+real  29.83
+
+ssh kai@136.187.101.71 "docker images | grep buildpack-runner"
+136.187.101.80:5000/buildpack-runner   latest              e3740e3094dc        10 months ago       1.146 GB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.80:5000/buildpack-runner:latest"
+ssh kai@136.187.101.71 "docker images | grep buildpack-runner"
+
+docker rm -f docker_registry
+
+
+Test 10: ./pushpull.sh kai 136.187.101.71 buildpack-runner
+
+docker images
+kiwenlau/buildpack-runner    latest              e3740e3094dc        10 months ago       1.146 GB
+
+docker tag kiwenlau/buildpack-runner:latest 136.187.101.80:5000/buildpack-runner:latest
+
+docker images
+136.187.101.80:5000/buildpack-runner   latest              e3740e3094dc        10 months ago       1.146 GB
+kiwenlau/buildpack-runner              latest              e3740e3094dc        10 months ago       1.146 GB
+
+docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1
+f3b1ffa17874        kiwenlau/registry:2.0.1   "registry cmd/regist   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.80:5000/buildpack-runner:latest
+The push refers to a repository [136.187.101.80:5000/buildpack-runner] (len: 1)
+e3740e3094dc: Buffering to Disk
+e3740e3094dc: Image successfully pushed
+e3740e3094dc: Image already exists
+f7d2249f2e30: Image already exists
+00de2aab4a88: Image already exists
+92bfd75c5789: Image already exists
+b3fe452b81c5: Image already exists
+4d1d5edb3242: Buffering to Disk
+4d1d5edb3242: Image successfully pushed
+f1615c92dbca: Image already exists
+a758444b3733: Image already exists
+30d87febe0c4: Buffering to Disk
+30d87febe0c4: Image successfully pushed
+e522a447d81c: Buffering to Disk
+e522a447d81c: Image successfully pushed
+3c9aff01533e: Buffering to Disk
+3c9aff01533e: Image successfully pushed
+63c1e62090d2: Buffering to Disk
+63c1e62090d2: Image successfully pushed
+694fee0bf001: Image already exists
+e54ca5efa2e9: Buffering to Disk
+e54ca5efa2e9: Image successfully pushed
+6c37f792ddac: Buffering to Disk
+6c37f792ddac: Image successfully pushed
+83ff768040a0: Buffering to Disk
+83ff768040a0: Image successfully pushed
+2f4b4d6a4a06: Buffering to Disk
+2f4b4d6a4a06: Image successfully pushed
+d7ac5e4f1812: Buffering to Disk
+d7ac5e4f1812: Image successfully pushed
+511136ea3c5a: Image already exists
+Digest: sha256:3924392feb53f0b9a003c8eb8477070cfa6852beec3de0bed50933a56365130e
+
+real  176.27
+
+ssh kai@136.187.101.71 "docker images | grep buildpack-runner"
+
+docker pull 136.187.101.80:5000/buildpack-runner:latest
+latest: Pulling from 136.187.101.80:5000/buildpack-runner
+511136ea3c5a: Pulling fs layer
+d7ac5e4f1812: Pulling fs layer
+2f4b4d6a4a06: Pulling fs layer
+83ff768040a0: Pulling fs layer
+6c37f792ddac: Pulling fs layer
+e54ca5efa2e9: Pulling fs layer
+694fee0bf001: Pulling fs layer
+63c1e62090d2: Pulling fs layer
+3c9aff01533e: Pulling fs layer
+e522a447d81c: Pulling fs layer
+30d87febe0c4: Pulling fs layer
+a758444b3733: Pulling fs layer
+f1615c92dbca: Pulling fs layer
+4d1d5edb3242: Pulling fs layer
+b3fe452b81c5: Pulling fs layer
+92bfd75c5789: Pulling fs layer
+00de2aab4a88: Pulling fs layer
+f7d2249f2e30: Pulling fs layer
+e3740e3094dc: Pulling fs layer
+e3740e3094dc: Pulling fs layer
+e3740e3094dc: Layer already being pulled by another client. Waiting.
+511136ea3c5a: Verifying Checksum
+511136ea3c5a: Download complete
+511136ea3c5a: Pull complete
+2f4b4d6a4a06: Verifying Checksum
+2f4b4d6a4a06: Download complete
+83ff768040a0: Verifying Checksum
+83ff768040a0: Download complete
+e54ca5efa2e9: Verifying Checksum
+e54ca5efa2e9: Download complete
+63c1e62090d2: Verifying Checksum
+63c1e62090d2: Download complete
+694fee0bf001: Verifying Checksum
+694fee0bf001: Download complete
+3c9aff01533e: Verifying Checksum
+3c9aff01533e: Download complete
+a758444b3733: Verifying Checksum
+a758444b3733: Download complete
+f1615c92dbca: Verifying Checksum
+f1615c92dbca: Download complete
+30d87febe0c4: Verifying Checksum
+30d87febe0c4: Download complete
+4d1d5edb3242: Verifying Checksum
+4d1d5edb3242: Download complete
+92bfd75c5789: Verifying Checksum
+92bfd75c5789: Download complete
+00de2aab4a88: Verifying Checksum
+00de2aab4a88: Download complete
+b3fe452b81c5: Verifying Checksum
+b3fe452b81c5: Download complete
+e3740e3094dc: Verifying Checksum
+e3740e3094dc: Download complete
+f7d2249f2e30: Verifying Checksum
+f7d2249f2e30: Download complete
+e3740e3094dc: Download complete
+6c37f792ddac: Verifying Checksum
+6c37f792ddac: Download complete
+d7ac5e4f1812: Verifying Checksum
+d7ac5e4f1812: Download complete
+e522a447d81c: Verifying Checksum
+e522a447d81c: Download complete
+d7ac5e4f1812: Pull complete
+2f4b4d6a4a06: Pull complete
+83ff768040a0: Pull complete
+6c37f792ddac: Pull complete
+e54ca5efa2e9: Pull complete
+694fee0bf001: Pull complete
+63c1e62090d2: Pull complete
+3c9aff01533e: Pull complete
+e522a447d81c: Pull complete
+30d87febe0c4: Pull complete
+a758444b3733: Pull complete
+f1615c92dbca: Pull complete
+4d1d5edb3242: Pull complete
+b3fe452b81c5: Pull complete
+92bfd75c5789: Pull complete
+00de2aab4a88: Pull complete
+f7d2249f2e30: Pull complete
+e3740e3094dc: Pull complete
+e3740e3094dc: Already exists
+Digest: sha256:3924392feb53f0b9a003c8eb8477070cfa6852beec3de0bed50933a56365130e
+Status: Downloaded newer image for 136.187.101.80:5000/buildpack-runner:latest
+
+real  29.83
+
+ssh kai@136.187.101.71 "docker images | grep buildpack-runner"
+136.187.101.80:5000/buildpack-runner   latest              e3740e3094dc        10 months ago       1.146 GB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.80:5000/buildpack-runner:latest"
+ssh kai@136.187.101.71 "docker images | grep buildpack-runner"
+
+docker rm -f docker_registry
+
+end date: Sun Jun 21 08:34:59 JST 2015
+
+

@@ -1,0 +1,1175 @@
+
+pullpush benchmark: transfer sultans-bin image to 136.187.101.71 host
+ 
+hostname: kuruwa-gw
+begin date: Thu Jun 11 00:03:38 JST 2015
+
+sudo docker images
+kiwenlau/sultans-bin         latest              3f4ed987e157        5 days ago          43.89 MB
+
+sudo docker images
+kiwenlau/sultans-bin         latest              3f4ed987e157        5 days ago          43.89 MB
+
+
+Test 1: ./pushpull.sh kai 136.187.101.71 sultans-bin
+
+docker images
+kiwenlau/sultans-bin         latest              3f4ed987e157        5 days ago          43.89 MB
+
+docker tag kiwenlau/sultans-bin:latest 136.187.101.71:5000/sultans-bin:latest
+
+docker images
+kiwenlau/sultans-bin              latest              3f4ed987e157        5 days ago          43.89 MB
+136.187.101.71:5000/sultans-bin   latest              3f4ed987e157        5 days ago          43.89 MB
+
+ssh kai@136.187.101.71 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+1fa4c2622d10        kiwenlau/registry:0.9.1   "docker-registry"   1 seconds ago       Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.71:5000/sultans-bin:latest
+
+ssh kai@136.187.101.71 "docker rm -f docker_registry"
+
+
+
+Test 1: ./pushpull.sh kai 136.187.101.71 sultans-bin
+
+docker images
+kiwenlau/sultans-bin         latest              3f4ed987e157        5 days ago          43.89 MB
+
+docker tag kiwenlau/sultans-bin:latest 136.187.101.71:5000/sultans-bin:latest
+
+docker images
+136.187.101.71:5000/sultans-bin   latest              3f4ed987e157        5 days ago          43.89 MB
+kiwenlau/sultans-bin              latest              3f4ed987e157        5 days ago          43.89 MB
+
+ssh kai@136.187.101.71 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+1ca17471905a        kiwenlau/registry:0.9.1   "docker-registry"   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.71:5000/sultans-bin:latest
+The push refers to a repository [136.187.101.71:5000/sultans-bin] (len: 1)
+Sending image list
+Pushing repository 136.187.101.71:5000/sultans-bin (1 tags)
+511136ea3c5a: Pushing
+511136ea3c5a: Buffering to disk
+511136ea3c5a: Image successfully pushed
+79f1c40f7ff6: Pushing
+79f1c40f7ff6: Buffering to disk
+79f1c40f7ff6: Image successfully pushed
+d0484a74dd3b: Pushing
+d0484a74dd3b: Buffering to disk
+d0484a74dd3b: Image successfully pushed
+b68de37d4ed1: Pushing
+b68de37d4ed1: Buffering to disk
+b68de37d4ed1: Image successfully pushed
+93bd9c6e212d: Pushing
+93bd9c6e212d: Buffering to disk
+93bd9c6e212d: Image successfully pushed
+41c62756a0bd: Pushing
+41c62756a0bd: Buffering to disk
+41c62756a0bd: Image successfully pushed
+e69c9739c916: Pushing
+e69c9739c916: Buffering to disk
+e69c9739c916: Image successfully pushed
+0404f3130598: Pushing
+0404f3130598: Buffering to disk
+0404f3130598: Image successfully pushed
+8f135c1aa359: Pushing
+8f135c1aa359: Buffering to disk
+8f135c1aa359: Image successfully pushed
+3f4ed987e157: Pushing
+3f4ed987e157: Buffering to disk
+3f4ed987e157: Image successfully pushed
+Pushing tag for rev [3f4ed987e157] on {http://136.187.101.71:5000/v1/repositories/sultans-bin/tags/latest}
+
+real  13.33
+
+ssh kai@136.187.101.71 "docker images | grep sultans-bin"
+
+docker pull 136.187.101.71:5000/sultans-bin:latest
+Pulling repository 136.187.101.71:5000/sultans-bin
+3f4ed987e157: Pulling image (latest) from 136.187.101.71:5000/sultans-bin
+3f4ed987e157: Pulling image (latest) from 136.187.101.71:5000/sultans-bin, endpoint: http://136.187.101.71:5000/v1/
+3f4ed987e157: Pulling dependent layers
+511136ea3c5a: Pulling metadata
+511136ea3c5a: Pulling fs layer
+511136ea3c5a: Download complete
+79f1c40f7ff6: Pulling metadata
+79f1c40f7ff6: Pulling fs layer
+79f1c40f7ff6: Download complete
+d0484a74dd3b: Pulling metadata
+d0484a74dd3b: Pulling fs layer
+d0484a74dd3b: Download complete
+b68de37d4ed1: Pulling metadata
+b68de37d4ed1: Pulling fs layer
+b68de37d4ed1: Download complete
+93bd9c6e212d: Pulling metadata
+93bd9c6e212d: Pulling fs layer
+93bd9c6e212d: Download complete
+41c62756a0bd: Pulling metadata
+41c62756a0bd: Pulling fs layer
+41c62756a0bd: Download complete
+e69c9739c916: Pulling metadata
+e69c9739c916: Pulling fs layer
+e69c9739c916: Download complete
+0404f3130598: Pulling metadata
+0404f3130598: Pulling fs layer
+0404f3130598: Download complete
+8f135c1aa359: Pulling metadata
+8f135c1aa359: Pulling fs layer
+8f135c1aa359: Download complete
+3f4ed987e157: Pulling metadata
+3f4ed987e157: Pulling fs layer
+3f4ed987e157: Download complete
+3f4ed987e157: Download complete
+Status: Downloaded newer image for 136.187.101.71:5000/sultans-bin:latest
+
+real  5.65
+
+ssh kai@136.187.101.71 "docker images | grep sultans-bin"
+136.187.101.71:5000/sultans-bin   latest              3f4ed987e157        5 days ago          43.89 MB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.71:5000/sultans-bin:latest"
+ssh kai@136.187.101.71 "docker images | grep sultans-bin"
+mkdir: cannot create directory 'logs': File exists
+
+ssh kai@136.187.101.71 "docker rm -f docker_registry"
+
+
+Test 2: ./pushpull.sh kai 136.187.101.71 sultans-bin
+
+docker images
+kiwenlau/sultans-bin         latest              3f4ed987e157        5 days ago          43.89 MB
+
+docker tag kiwenlau/sultans-bin:latest 136.187.101.71:5000/sultans-bin:latest
+
+docker images
+136.187.101.71:5000/sultans-bin   latest              3f4ed987e157        5 days ago          43.89 MB
+kiwenlau/sultans-bin              latest              3f4ed987e157        5 days ago          43.89 MB
+
+ssh kai@136.187.101.71 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+e5f7b5204612        kiwenlau/registry:0.9.1   "docker-registry"   1 seconds ago       Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.71:5000/sultans-bin:latest
+The push refers to a repository [136.187.101.71:5000/sultans-bin] (len: 1)
+Sending image list
+Pushing repository 136.187.101.71:5000/sultans-bin (1 tags)
+511136ea3c5a: Pushing
+511136ea3c5a: Buffering to disk
+511136ea3c5a: Image successfully pushed
+79f1c40f7ff6: Pushing
+79f1c40f7ff6: Buffering to disk
+79f1c40f7ff6: Image successfully pushed
+d0484a74dd3b: Pushing
+d0484a74dd3b: Buffering to disk
+d0484a74dd3b: Image successfully pushed
+b68de37d4ed1: Pushing
+b68de37d4ed1: Buffering to disk
+b68de37d4ed1: Image successfully pushed
+93bd9c6e212d: Pushing
+93bd9c6e212d: Buffering to disk
+93bd9c6e212d: Image successfully pushed
+41c62756a0bd: Pushing
+41c62756a0bd: Buffering to disk
+41c62756a0bd: Image successfully pushed
+e69c9739c916: Pushing
+e69c9739c916: Buffering to disk
+e69c9739c916: Image successfully pushed
+0404f3130598: Pushing
+0404f3130598: Buffering to disk
+0404f3130598: Image successfully pushed
+8f135c1aa359: Pushing
+8f135c1aa359: Buffering to disk
+8f135c1aa359: Image successfully pushed
+3f4ed987e157: Pushing
+3f4ed987e157: Buffering to disk
+3f4ed987e157: Image successfully pushed
+Pushing tag for rev [3f4ed987e157] on {http://136.187.101.71:5000/v1/repositories/sultans-bin/tags/latest}
+
+real  13.57
+
+ssh kai@136.187.101.71 "docker images | grep sultans-bin"
+
+docker pull 136.187.101.71:5000/sultans-bin:latest
+Pulling repository 136.187.101.71:5000/sultans-bin
+3f4ed987e157: Pulling image (latest) from 136.187.101.71:5000/sultans-bin
+3f4ed987e157: Pulling image (latest) from 136.187.101.71:5000/sultans-bin, endpoint: http://136.187.101.71:5000/v1/
+3f4ed987e157: Pulling dependent layers
+511136ea3c5a: Pulling metadata
+511136ea3c5a: Pulling fs layer
+511136ea3c5a: Download complete
+79f1c40f7ff6: Pulling metadata
+79f1c40f7ff6: Pulling fs layer
+79f1c40f7ff6: Download complete
+d0484a74dd3b: Pulling metadata
+d0484a74dd3b: Pulling fs layer
+d0484a74dd3b: Download complete
+b68de37d4ed1: Pulling metadata
+b68de37d4ed1: Pulling fs layer
+b68de37d4ed1: Download complete
+93bd9c6e212d: Pulling metadata
+93bd9c6e212d: Pulling fs layer
+93bd9c6e212d: Download complete
+41c62756a0bd: Pulling metadata
+41c62756a0bd: Pulling fs layer
+41c62756a0bd: Download complete
+e69c9739c916: Pulling metadata
+e69c9739c916: Pulling fs layer
+e69c9739c916: Download complete
+0404f3130598: Pulling metadata
+0404f3130598: Pulling fs layer
+0404f3130598: Download complete
+8f135c1aa359: Pulling metadata
+8f135c1aa359: Pulling fs layer
+8f135c1aa359: Download complete
+3f4ed987e157: Pulling metadata
+3f4ed987e157: Pulling fs layer
+3f4ed987e157: Download complete
+3f4ed987e157: Download complete
+Status: Downloaded newer image for 136.187.101.71:5000/sultans-bin:latest
+
+real  5.64
+
+ssh kai@136.187.101.71 "docker images | grep sultans-bin"
+136.187.101.71:5000/sultans-bin   latest              3f4ed987e157        5 days ago          43.89 MB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.71:5000/sultans-bin:latest"
+ssh kai@136.187.101.71 "docker images | grep sultans-bin"
+mkdir: cannot create directory 'logs': File exists
+
+ssh kai@136.187.101.71 "docker rm -f docker_registry"
+
+
+Test 3: ./pushpull.sh kai 136.187.101.71 sultans-bin
+
+docker images
+kiwenlau/sultans-bin         latest              3f4ed987e157        5 days ago          43.89 MB
+
+docker tag kiwenlau/sultans-bin:latest 136.187.101.71:5000/sultans-bin:latest
+
+docker images
+136.187.101.71:5000/sultans-bin   latest              3f4ed987e157        5 days ago          43.89 MB
+kiwenlau/sultans-bin              latest              3f4ed987e157        5 days ago          43.89 MB
+
+ssh kai@136.187.101.71 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+f4cc9480ef39        kiwenlau/registry:0.9.1   "docker-registry"   1 seconds ago       Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.71:5000/sultans-bin:latest
+
+ssh kai@136.187.101.71 "docker rm -f docker_registry"
+
+
+
+Test 3: ./pushpull.sh kai 136.187.101.71 sultans-bin
+
+docker images
+kiwenlau/sultans-bin         latest              3f4ed987e157        5 days ago          43.89 MB
+
+docker tag kiwenlau/sultans-bin:latest 136.187.101.71:5000/sultans-bin:latest
+
+docker images
+kiwenlau/sultans-bin              latest              3f4ed987e157        5 days ago          43.89 MB
+136.187.101.71:5000/sultans-bin   latest              3f4ed987e157        5 days ago          43.89 MB
+
+ssh kai@136.187.101.71 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+0db9141f51f1        kiwenlau/registry:0.9.1   "docker-registry"   1 seconds ago       Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.71:5000/sultans-bin:latest
+The push refers to a repository [136.187.101.71:5000/sultans-bin] (len: 1)
+Sending image list
+Pushing repository 136.187.101.71:5000/sultans-bin (1 tags)
+511136ea3c5a: Pushing
+511136ea3c5a: Buffering to disk
+511136ea3c5a: Image successfully pushed
+79f1c40f7ff6: Pushing
+79f1c40f7ff6: Buffering to disk
+79f1c40f7ff6: Image successfully pushed
+d0484a74dd3b: Pushing
+d0484a74dd3b: Buffering to disk
+d0484a74dd3b: Image successfully pushed
+b68de37d4ed1: Pushing
+b68de37d4ed1: Buffering to disk
+b68de37d4ed1: Image successfully pushed
+93bd9c6e212d: Pushing
+93bd9c6e212d: Buffering to disk
+93bd9c6e212d: Image successfully pushed
+41c62756a0bd: Pushing
+41c62756a0bd: Buffering to disk
+41c62756a0bd: Image successfully pushed
+e69c9739c916: Pushing
+e69c9739c916: Buffering to disk
+e69c9739c916: Image successfully pushed
+0404f3130598: Pushing
+0404f3130598: Buffering to disk
+0404f3130598: Image successfully pushed
+8f135c1aa359: Pushing
+8f135c1aa359: Buffering to disk
+8f135c1aa359: Image successfully pushed
+3f4ed987e157: Pushing
+3f4ed987e157: Buffering to disk
+3f4ed987e157: Image successfully pushed
+Pushing tag for rev [3f4ed987e157] on {http://136.187.101.71:5000/v1/repositories/sultans-bin/tags/latest}
+
+real  13.86
+
+ssh kai@136.187.101.71 "docker images | grep sultans-bin"
+
+docker pull 136.187.101.71:5000/sultans-bin:latest
+Pulling repository 136.187.101.71:5000/sultans-bin
+3f4ed987e157: Pulling image (latest) from 136.187.101.71:5000/sultans-bin
+3f4ed987e157: Pulling image (latest) from 136.187.101.71:5000/sultans-bin, endpoint: http://136.187.101.71:5000/v1/
+3f4ed987e157: Pulling dependent layers
+511136ea3c5a: Pulling metadata
+511136ea3c5a: Pulling fs layer
+511136ea3c5a: Download complete
+79f1c40f7ff6: Pulling metadata
+79f1c40f7ff6: Pulling fs layer
+79f1c40f7ff6: Download complete
+d0484a74dd3b: Pulling metadata
+d0484a74dd3b: Pulling fs layer
+d0484a74dd3b: Download complete
+b68de37d4ed1: Pulling metadata
+b68de37d4ed1: Pulling fs layer
+b68de37d4ed1: Download complete
+93bd9c6e212d: Pulling metadata
+93bd9c6e212d: Pulling fs layer
+93bd9c6e212d: Download complete
+41c62756a0bd: Pulling metadata
+41c62756a0bd: Pulling fs layer
+41c62756a0bd: Download complete
+e69c9739c916: Pulling metadata
+e69c9739c916: Pulling fs layer
+e69c9739c916: Download complete
+0404f3130598: Pulling metadata
+0404f3130598: Pulling fs layer
+0404f3130598: Download complete
+8f135c1aa359: Pulling metadata
+8f135c1aa359: Pulling fs layer
+8f135c1aa359: Download complete
+3f4ed987e157: Pulling metadata
+3f4ed987e157: Pulling fs layer
+3f4ed987e157: Download complete
+3f4ed987e157: Download complete
+Status: Downloaded newer image for 136.187.101.71:5000/sultans-bin:latest
+
+real  5.66
+
+ssh kai@136.187.101.71 "docker images | grep sultans-bin"
+136.187.101.71:5000/sultans-bin   latest              3f4ed987e157        5 days ago          43.89 MB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.71:5000/sultans-bin:latest"
+ssh kai@136.187.101.71 "docker images | grep sultans-bin"
+mkdir: cannot create directory 'logs': File exists
+
+ssh kai@136.187.101.71 "docker rm -f docker_registry"
+
+
+Test 4: ./pushpull.sh kai 136.187.101.71 sultans-bin
+
+docker images
+kiwenlau/sultans-bin         latest              3f4ed987e157        5 days ago          43.89 MB
+
+docker tag kiwenlau/sultans-bin:latest 136.187.101.71:5000/sultans-bin:latest
+
+docker images
+kiwenlau/sultans-bin              latest              3f4ed987e157        5 days ago          43.89 MB
+136.187.101.71:5000/sultans-bin   latest              3f4ed987e157        5 days ago          43.89 MB
+
+ssh kai@136.187.101.71 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+ba0d8d0a9f90        kiwenlau/registry:0.9.1   "docker-registry"   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.71:5000/sultans-bin:latest
+The push refers to a repository [136.187.101.71:5000/sultans-bin] (len: 1)
+Sending image list
+Pushing repository 136.187.101.71:5000/sultans-bin (1 tags)
+511136ea3c5a: Pushing
+511136ea3c5a: Buffering to disk
+511136ea3c5a: Image successfully pushed
+79f1c40f7ff6: Pushing
+79f1c40f7ff6: Buffering to disk
+79f1c40f7ff6: Image successfully pushed
+d0484a74dd3b: Pushing
+d0484a74dd3b: Buffering to disk
+d0484a74dd3b: Image successfully pushed
+b68de37d4ed1: Pushing
+b68de37d4ed1: Buffering to disk
+b68de37d4ed1: Image successfully pushed
+93bd9c6e212d: Pushing
+93bd9c6e212d: Buffering to disk
+93bd9c6e212d: Image successfully pushed
+41c62756a0bd: Pushing
+41c62756a0bd: Buffering to disk
+41c62756a0bd: Image successfully pushed
+e69c9739c916: Pushing
+e69c9739c916: Buffering to disk
+e69c9739c916: Image successfully pushed
+0404f3130598: Pushing
+0404f3130598: Buffering to disk
+0404f3130598: Image successfully pushed
+8f135c1aa359: Pushing
+8f135c1aa359: Buffering to disk
+8f135c1aa359: Image successfully pushed
+3f4ed987e157: Pushing
+3f4ed987e157: Buffering to disk
+3f4ed987e157: Image successfully pushed
+Pushing tag for rev [3f4ed987e157] on {http://136.187.101.71:5000/v1/repositories/sultans-bin/tags/latest}
+
+real  13.35
+
+ssh kai@136.187.101.71 "docker images | grep sultans-bin"
+
+docker pull 136.187.101.71:5000/sultans-bin:latest
+Pulling repository 136.187.101.71:5000/sultans-bin
+3f4ed987e157: Pulling image (latest) from 136.187.101.71:5000/sultans-bin
+3f4ed987e157: Pulling image (latest) from 136.187.101.71:5000/sultans-bin, endpoint: http://136.187.101.71:5000/v1/
+3f4ed987e157: Pulling dependent layers
+511136ea3c5a: Pulling metadata
+511136ea3c5a: Pulling fs layer
+511136ea3c5a: Download complete
+79f1c40f7ff6: Pulling metadata
+79f1c40f7ff6: Pulling fs layer
+79f1c40f7ff6: Download complete
+d0484a74dd3b: Pulling metadata
+d0484a74dd3b: Pulling fs layer
+d0484a74dd3b: Download complete
+b68de37d4ed1: Pulling metadata
+b68de37d4ed1: Pulling fs layer
+b68de37d4ed1: Download complete
+93bd9c6e212d: Pulling metadata
+93bd9c6e212d: Pulling fs layer
+93bd9c6e212d: Download complete
+41c62756a0bd: Pulling metadata
+41c62756a0bd: Pulling fs layer
+41c62756a0bd: Download complete
+e69c9739c916: Pulling metadata
+e69c9739c916: Pulling fs layer
+e69c9739c916: Download complete
+0404f3130598: Pulling metadata
+0404f3130598: Pulling fs layer
+0404f3130598: Download complete
+8f135c1aa359: Pulling metadata
+8f135c1aa359: Pulling fs layer
+8f135c1aa359: Download complete
+3f4ed987e157: Pulling metadata
+3f4ed987e157: Pulling fs layer
+3f4ed987e157: Download complete
+3f4ed987e157: Download complete
+Status: Downloaded newer image for 136.187.101.71:5000/sultans-bin:latest
+
+real  5.62
+
+ssh kai@136.187.101.71 "docker images | grep sultans-bin"
+136.187.101.71:5000/sultans-bin   latest              3f4ed987e157        5 days ago          43.89 MB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.71:5000/sultans-bin:latest"
+ssh kai@136.187.101.71 "docker images | grep sultans-bin"
+mkdir: cannot create directory 'logs': File exists
+
+ssh kai@136.187.101.71 "docker rm -f docker_registry"
+
+
+Test 5: ./pushpull.sh kai 136.187.101.71 sultans-bin
+
+docker images
+kiwenlau/sultans-bin         latest              3f4ed987e157        5 days ago          43.89 MB
+
+docker tag kiwenlau/sultans-bin:latest 136.187.101.71:5000/sultans-bin:latest
+
+docker images
+136.187.101.71:5000/sultans-bin   latest              3f4ed987e157        5 days ago          43.89 MB
+kiwenlau/sultans-bin              latest              3f4ed987e157        5 days ago          43.89 MB
+
+ssh kai@136.187.101.71 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+fd33b5701f9a        kiwenlau/registry:0.9.1   "docker-registry"   1 seconds ago       Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.71:5000/sultans-bin:latest
+The push refers to a repository [136.187.101.71:5000/sultans-bin] (len: 1)
+Sending image list
+Pushing repository 136.187.101.71:5000/sultans-bin (1 tags)
+511136ea3c5a: Pushing
+511136ea3c5a: Buffering to disk
+511136ea3c5a: Image successfully pushed
+79f1c40f7ff6: Pushing
+79f1c40f7ff6: Buffering to disk
+79f1c40f7ff6: Image successfully pushed
+d0484a74dd3b: Pushing
+d0484a74dd3b: Buffering to disk
+d0484a74dd3b: Image successfully pushed
+b68de37d4ed1: Pushing
+b68de37d4ed1: Buffering to disk
+b68de37d4ed1: Image successfully pushed
+93bd9c6e212d: Pushing
+93bd9c6e212d: Buffering to disk
+93bd9c6e212d: Image successfully pushed
+41c62756a0bd: Pushing
+41c62756a0bd: Buffering to disk
+41c62756a0bd: Image successfully pushed
+e69c9739c916: Pushing
+e69c9739c916: Buffering to disk
+e69c9739c916: Image successfully pushed
+0404f3130598: Pushing
+0404f3130598: Buffering to disk
+0404f3130598: Image successfully pushed
+8f135c1aa359: Pushing
+8f135c1aa359: Buffering to disk
+8f135c1aa359: Image successfully pushed
+3f4ed987e157: Pushing
+3f4ed987e157: Buffering to disk
+3f4ed987e157: Image successfully pushed
+Pushing tag for rev [3f4ed987e157] on {http://136.187.101.71:5000/v1/repositories/sultans-bin/tags/latest}
+
+real  13.58
+
+ssh kai@136.187.101.71 "docker images | grep sultans-bin"
+
+docker pull 136.187.101.71:5000/sultans-bin:latest
+Pulling repository 136.187.101.71:5000/sultans-bin
+3f4ed987e157: Pulling image (latest) from 136.187.101.71:5000/sultans-bin
+3f4ed987e157: Pulling image (latest) from 136.187.101.71:5000/sultans-bin, endpoint: http://136.187.101.71:5000/v1/
+3f4ed987e157: Pulling dependent layers
+511136ea3c5a: Pulling metadata
+511136ea3c5a: Pulling fs layer
+511136ea3c5a: Download complete
+79f1c40f7ff6: Pulling metadata
+79f1c40f7ff6: Pulling fs layer
+79f1c40f7ff6: Download complete
+d0484a74dd3b: Pulling metadata
+d0484a74dd3b: Pulling fs layer
+d0484a74dd3b: Download complete
+b68de37d4ed1: Pulling metadata
+b68de37d4ed1: Pulling fs layer
+b68de37d4ed1: Download complete
+93bd9c6e212d: Pulling metadata
+93bd9c6e212d: Pulling fs layer
+93bd9c6e212d: Download complete
+41c62756a0bd: Pulling metadata
+41c62756a0bd: Pulling fs layer
+41c62756a0bd: Download complete
+e69c9739c916: Pulling metadata
+e69c9739c916: Pulling fs layer
+e69c9739c916: Download complete
+0404f3130598: Pulling metadata
+0404f3130598: Pulling fs layer
+0404f3130598: Download complete
+8f135c1aa359: Pulling metadata
+8f135c1aa359: Pulling fs layer
+8f135c1aa359: Download complete
+3f4ed987e157: Pulling metadata
+3f4ed987e157: Pulling fs layer
+3f4ed987e157: Download complete
+3f4ed987e157: Download complete
+Status: Downloaded newer image for 136.187.101.71:5000/sultans-bin:latest
+
+real  5.59
+
+ssh kai@136.187.101.71 "docker images | grep sultans-bin"
+136.187.101.71:5000/sultans-bin   latest              3f4ed987e157        5 days ago          43.89 MB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.71:5000/sultans-bin:latest"
+ssh kai@136.187.101.71 "docker images | grep sultans-bin"
+mkdir: cannot create directory 'logs': File exists
+
+ssh kai@136.187.101.71 "docker rm -f docker_registry"
+
+
+Test 6: ./pushpull.sh kai 136.187.101.71 sultans-bin
+
+docker images
+kiwenlau/sultans-bin         latest              3f4ed987e157        5 days ago          43.89 MB
+
+docker tag kiwenlau/sultans-bin:latest 136.187.101.71:5000/sultans-bin:latest
+
+docker images
+136.187.101.71:5000/sultans-bin   latest              3f4ed987e157        5 days ago          43.89 MB
+kiwenlau/sultans-bin              latest              3f4ed987e157        5 days ago          43.89 MB
+
+ssh kai@136.187.101.71 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+0296aa7adcfb        kiwenlau/registry:0.9.1   "docker-registry"   1 seconds ago       Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.71:5000/sultans-bin:latest
+
+ssh kai@136.187.101.71 "docker rm -f docker_registry"
+
+
+
+Test 6: ./pushpull.sh kai 136.187.101.71 sultans-bin
+
+docker images
+kiwenlau/sultans-bin         latest              3f4ed987e157        5 days ago          43.89 MB
+
+docker tag kiwenlau/sultans-bin:latest 136.187.101.71:5000/sultans-bin:latest
+
+docker images
+kiwenlau/sultans-bin              latest              3f4ed987e157        5 days ago          43.89 MB
+136.187.101.71:5000/sultans-bin   latest              3f4ed987e157        5 days ago          43.89 MB
+
+ssh kai@136.187.101.71 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+dcc5dd0a5e4c        kiwenlau/registry:0.9.1   "docker-registry"   1 seconds ago       Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.71:5000/sultans-bin:latest
+The push refers to a repository [136.187.101.71:5000/sultans-bin] (len: 1)
+Sending image list
+Pushing repository 136.187.101.71:5000/sultans-bin (1 tags)
+511136ea3c5a: Pushing
+511136ea3c5a: Buffering to disk
+511136ea3c5a: Image successfully pushed
+79f1c40f7ff6: Pushing
+79f1c40f7ff6: Buffering to disk
+79f1c40f7ff6: Image successfully pushed
+d0484a74dd3b: Pushing
+d0484a74dd3b: Buffering to disk
+d0484a74dd3b: Image successfully pushed
+b68de37d4ed1: Pushing
+b68de37d4ed1: Buffering to disk
+b68de37d4ed1: Image successfully pushed
+93bd9c6e212d: Pushing
+93bd9c6e212d: Buffering to disk
+93bd9c6e212d: Image successfully pushed
+41c62756a0bd: Pushing
+41c62756a0bd: Buffering to disk
+41c62756a0bd: Image successfully pushed
+e69c9739c916: Pushing
+e69c9739c916: Buffering to disk
+e69c9739c916: Image successfully pushed
+0404f3130598: Pushing
+0404f3130598: Buffering to disk
+0404f3130598: Image successfully pushed
+8f135c1aa359: Pushing
+8f135c1aa359: Buffering to disk
+8f135c1aa359: Image successfully pushed
+3f4ed987e157: Pushing
+3f4ed987e157: Buffering to disk
+3f4ed987e157: Image successfully pushed
+Pushing tag for rev [3f4ed987e157] on {http://136.187.101.71:5000/v1/repositories/sultans-bin/tags/latest}
+
+real  13.89
+
+ssh kai@136.187.101.71 "docker images | grep sultans-bin"
+
+docker pull 136.187.101.71:5000/sultans-bin:latest
+Pulling repository 136.187.101.71:5000/sultans-bin
+3f4ed987e157: Pulling image (latest) from 136.187.101.71:5000/sultans-bin
+3f4ed987e157: Pulling image (latest) from 136.187.101.71:5000/sultans-bin, endpoint: http://136.187.101.71:5000/v1/
+3f4ed987e157: Pulling dependent layers
+511136ea3c5a: Pulling metadata
+511136ea3c5a: Pulling fs layer
+511136ea3c5a: Download complete
+79f1c40f7ff6: Pulling metadata
+79f1c40f7ff6: Pulling fs layer
+79f1c40f7ff6: Download complete
+d0484a74dd3b: Pulling metadata
+d0484a74dd3b: Pulling fs layer
+d0484a74dd3b: Download complete
+b68de37d4ed1: Pulling metadata
+b68de37d4ed1: Pulling fs layer
+b68de37d4ed1: Download complete
+93bd9c6e212d: Pulling metadata
+93bd9c6e212d: Pulling fs layer
+93bd9c6e212d: Download complete
+41c62756a0bd: Pulling metadata
+41c62756a0bd: Pulling fs layer
+41c62756a0bd: Download complete
+e69c9739c916: Pulling metadata
+e69c9739c916: Pulling fs layer
+e69c9739c916: Download complete
+0404f3130598: Pulling metadata
+0404f3130598: Pulling fs layer
+0404f3130598: Download complete
+8f135c1aa359: Pulling metadata
+8f135c1aa359: Pulling fs layer
+8f135c1aa359: Download complete
+3f4ed987e157: Pulling metadata
+3f4ed987e157: Pulling fs layer
+3f4ed987e157: Download complete
+3f4ed987e157: Download complete
+Status: Downloaded newer image for 136.187.101.71:5000/sultans-bin:latest
+
+real  5.64
+
+ssh kai@136.187.101.71 "docker images | grep sultans-bin"
+136.187.101.71:5000/sultans-bin   latest              3f4ed987e157        5 days ago          43.89 MB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.71:5000/sultans-bin:latest"
+ssh kai@136.187.101.71 "docker images | grep sultans-bin"
+mkdir: cannot create directory 'logs': File exists
+
+ssh kai@136.187.101.71 "docker rm -f docker_registry"
+
+
+Test 7: ./pushpull.sh kai 136.187.101.71 sultans-bin
+
+docker images
+kiwenlau/sultans-bin         latest              3f4ed987e157        5 days ago          43.89 MB
+
+docker tag kiwenlau/sultans-bin:latest 136.187.101.71:5000/sultans-bin:latest
+
+docker images
+kiwenlau/sultans-bin              latest              3f4ed987e157        5 days ago          43.89 MB
+136.187.101.71:5000/sultans-bin   latest              3f4ed987e157        5 days ago          43.89 MB
+
+ssh kai@136.187.101.71 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+dbe3771db7dc        kiwenlau/registry:0.9.1   "docker-registry"   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.71:5000/sultans-bin:latest
+
+ssh kai@136.187.101.71 "docker rm -f docker_registry"
+
+
+
+Test 7: ./pushpull.sh kai 136.187.101.71 sultans-bin
+
+docker images
+kiwenlau/sultans-bin         latest              3f4ed987e157        5 days ago          43.89 MB
+
+docker tag kiwenlau/sultans-bin:latest 136.187.101.71:5000/sultans-bin:latest
+
+docker images
+136.187.101.71:5000/sultans-bin   latest              3f4ed987e157        5 days ago          43.89 MB
+kiwenlau/sultans-bin              latest              3f4ed987e157        5 days ago          43.89 MB
+
+ssh kai@136.187.101.71 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+f805d8658cb1        kiwenlau/registry:0.9.1   "docker-registry"   1 seconds ago       Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.71:5000/sultans-bin:latest
+The push refers to a repository [136.187.101.71:5000/sultans-bin] (len: 1)
+Sending image list
+Pushing repository 136.187.101.71:5000/sultans-bin (1 tags)
+511136ea3c5a: Pushing
+511136ea3c5a: Buffering to disk
+511136ea3c5a: Image successfully pushed
+79f1c40f7ff6: Pushing
+79f1c40f7ff6: Buffering to disk
+79f1c40f7ff6: Image successfully pushed
+d0484a74dd3b: Pushing
+d0484a74dd3b: Buffering to disk
+d0484a74dd3b: Image successfully pushed
+b68de37d4ed1: Pushing
+b68de37d4ed1: Buffering to disk
+b68de37d4ed1: Image successfully pushed
+93bd9c6e212d: Pushing
+93bd9c6e212d: Buffering to disk
+93bd9c6e212d: Image successfully pushed
+41c62756a0bd: Pushing
+41c62756a0bd: Buffering to disk
+41c62756a0bd: Image successfully pushed
+e69c9739c916: Pushing
+e69c9739c916: Buffering to disk
+e69c9739c916: Image successfully pushed
+0404f3130598: Pushing
+0404f3130598: Buffering to disk
+0404f3130598: Image successfully pushed
+8f135c1aa359: Pushing
+8f135c1aa359: Buffering to disk
+8f135c1aa359: Image successfully pushed
+3f4ed987e157: Pushing
+3f4ed987e157: Buffering to disk
+3f4ed987e157: Image successfully pushed
+Pushing tag for rev [3f4ed987e157] on {http://136.187.101.71:5000/v1/repositories/sultans-bin/tags/latest}
+
+real  13.64
+
+ssh kai@136.187.101.71 "docker images | grep sultans-bin"
+
+docker pull 136.187.101.71:5000/sultans-bin:latest
+Pulling repository 136.187.101.71:5000/sultans-bin
+3f4ed987e157: Pulling image (latest) from 136.187.101.71:5000/sultans-bin
+3f4ed987e157: Pulling image (latest) from 136.187.101.71:5000/sultans-bin, endpoint: http://136.187.101.71:5000/v1/
+3f4ed987e157: Pulling dependent layers
+511136ea3c5a: Pulling metadata
+511136ea3c5a: Pulling fs layer
+511136ea3c5a: Download complete
+79f1c40f7ff6: Pulling metadata
+79f1c40f7ff6: Pulling fs layer
+79f1c40f7ff6: Download complete
+d0484a74dd3b: Pulling metadata
+d0484a74dd3b: Pulling fs layer
+d0484a74dd3b: Download complete
+b68de37d4ed1: Pulling metadata
+b68de37d4ed1: Pulling fs layer
+b68de37d4ed1: Download complete
+93bd9c6e212d: Pulling metadata
+93bd9c6e212d: Pulling fs layer
+93bd9c6e212d: Download complete
+41c62756a0bd: Pulling metadata
+41c62756a0bd: Pulling fs layer
+41c62756a0bd: Download complete
+e69c9739c916: Pulling metadata
+e69c9739c916: Pulling fs layer
+e69c9739c916: Download complete
+0404f3130598: Pulling metadata
+0404f3130598: Pulling fs layer
+0404f3130598: Download complete
+8f135c1aa359: Pulling metadata
+8f135c1aa359: Pulling fs layer
+8f135c1aa359: Download complete
+3f4ed987e157: Pulling metadata
+3f4ed987e157: Pulling fs layer
+3f4ed987e157: Download complete
+3f4ed987e157: Download complete
+Status: Downloaded newer image for 136.187.101.71:5000/sultans-bin:latest
+
+real  5.64
+
+ssh kai@136.187.101.71 "docker images | grep sultans-bin"
+136.187.101.71:5000/sultans-bin   latest              3f4ed987e157        5 days ago          43.89 MB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.71:5000/sultans-bin:latest"
+ssh kai@136.187.101.71 "docker images | grep sultans-bin"
+mkdir: cannot create directory 'logs': File exists
+
+ssh kai@136.187.101.71 "docker rm -f docker_registry"
+
+
+Test 8: ./pushpull.sh kai 136.187.101.71 sultans-bin
+
+docker images
+kiwenlau/sultans-bin         latest              3f4ed987e157        5 days ago          43.89 MB
+
+docker tag kiwenlau/sultans-bin:latest 136.187.101.71:5000/sultans-bin:latest
+
+docker images
+kiwenlau/sultans-bin              latest              3f4ed987e157        5 days ago          43.89 MB
+136.187.101.71:5000/sultans-bin   latest              3f4ed987e157        5 days ago          43.89 MB
+
+ssh kai@136.187.101.71 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+d0a328f8072b        kiwenlau/registry:0.9.1   "docker-registry"   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.71:5000/sultans-bin:latest
+
+ssh kai@136.187.101.71 "docker rm -f docker_registry"
+
+
+
+Test 8: ./pushpull.sh kai 136.187.101.71 sultans-bin
+
+docker images
+kiwenlau/sultans-bin         latest              3f4ed987e157        5 days ago          43.89 MB
+
+docker tag kiwenlau/sultans-bin:latest 136.187.101.71:5000/sultans-bin:latest
+
+docker images
+kiwenlau/sultans-bin              latest              3f4ed987e157        5 days ago          43.89 MB
+136.187.101.71:5000/sultans-bin   latest              3f4ed987e157        5 days ago          43.89 MB
+
+ssh kai@136.187.101.71 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+98d301d31ea7        kiwenlau/registry:0.9.1   "docker-registry"   1 seconds ago       Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.71:5000/sultans-bin:latest
+The push refers to a repository [136.187.101.71:5000/sultans-bin] (len: 1)
+Sending image list
+Pushing repository 136.187.101.71:5000/sultans-bin (1 tags)
+511136ea3c5a: Pushing
+511136ea3c5a: Buffering to disk
+511136ea3c5a: Image successfully pushed
+79f1c40f7ff6: Pushing
+79f1c40f7ff6: Buffering to disk
+79f1c40f7ff6: Image successfully pushed
+d0484a74dd3b: Pushing
+d0484a74dd3b: Buffering to disk
+d0484a74dd3b: Image successfully pushed
+b68de37d4ed1: Pushing
+b68de37d4ed1: Buffering to disk
+b68de37d4ed1: Image successfully pushed
+93bd9c6e212d: Pushing
+93bd9c6e212d: Buffering to disk
+93bd9c6e212d: Image successfully pushed
+41c62756a0bd: Pushing
+41c62756a0bd: Buffering to disk
+41c62756a0bd: Image successfully pushed
+e69c9739c916: Pushing
+e69c9739c916: Buffering to disk
+e69c9739c916: Image successfully pushed
+0404f3130598: Pushing
+0404f3130598: Buffering to disk
+0404f3130598: Image successfully pushed
+8f135c1aa359: Pushing
+8f135c1aa359: Buffering to disk
+8f135c1aa359: Image successfully pushed
+3f4ed987e157: Pushing
+3f4ed987e157: Buffering to disk
+3f4ed987e157: Image successfully pushed
+Pushing tag for rev [3f4ed987e157] on {http://136.187.101.71:5000/v1/repositories/sultans-bin/tags/latest}
+
+real  13.87
+
+ssh kai@136.187.101.71 "docker images | grep sultans-bin"
+
+docker pull 136.187.101.71:5000/sultans-bin:latest
+Pulling repository 136.187.101.71:5000/sultans-bin
+3f4ed987e157: Pulling image (latest) from 136.187.101.71:5000/sultans-bin
+3f4ed987e157: Pulling image (latest) from 136.187.101.71:5000/sultans-bin, endpoint: http://136.187.101.71:5000/v1/
+3f4ed987e157: Pulling dependent layers
+511136ea3c5a: Pulling metadata
+511136ea3c5a: Pulling fs layer
+511136ea3c5a: Download complete
+79f1c40f7ff6: Pulling metadata
+79f1c40f7ff6: Pulling fs layer
+79f1c40f7ff6: Download complete
+d0484a74dd3b: Pulling metadata
+d0484a74dd3b: Pulling fs layer
+d0484a74dd3b: Download complete
+b68de37d4ed1: Pulling metadata
+b68de37d4ed1: Pulling fs layer
+b68de37d4ed1: Download complete
+93bd9c6e212d: Pulling metadata
+93bd9c6e212d: Pulling fs layer
+93bd9c6e212d: Download complete
+41c62756a0bd: Pulling metadata
+41c62756a0bd: Pulling fs layer
+41c62756a0bd: Download complete
+e69c9739c916: Pulling metadata
+e69c9739c916: Pulling fs layer
+e69c9739c916: Download complete
+0404f3130598: Pulling metadata
+0404f3130598: Pulling fs layer
+0404f3130598: Download complete
+8f135c1aa359: Pulling metadata
+8f135c1aa359: Pulling fs layer
+8f135c1aa359: Download complete
+3f4ed987e157: Pulling metadata
+3f4ed987e157: Pulling fs layer
+3f4ed987e157: Download complete
+3f4ed987e157: Download complete
+Status: Downloaded newer image for 136.187.101.71:5000/sultans-bin:latest
+
+real  5.65
+
+ssh kai@136.187.101.71 "docker images | grep sultans-bin"
+136.187.101.71:5000/sultans-bin   latest              3f4ed987e157        5 days ago          43.89 MB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.71:5000/sultans-bin:latest"
+ssh kai@136.187.101.71 "docker images | grep sultans-bin"
+mkdir: cannot create directory 'logs': File exists
+
+ssh kai@136.187.101.71 "docker rm -f docker_registry"
+
+
+Test 9: ./pushpull.sh kai 136.187.101.71 sultans-bin
+
+docker images
+kiwenlau/sultans-bin         latest              3f4ed987e157        5 days ago          43.89 MB
+
+docker tag kiwenlau/sultans-bin:latest 136.187.101.71:5000/sultans-bin:latest
+
+docker images
+kiwenlau/sultans-bin              latest              3f4ed987e157        5 days ago          43.89 MB
+136.187.101.71:5000/sultans-bin   latest              3f4ed987e157        5 days ago          43.89 MB
+
+ssh kai@136.187.101.71 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+2e03a1614ae9        kiwenlau/registry:0.9.1   "docker-registry"   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.71:5000/sultans-bin:latest
+
+ssh kai@136.187.101.71 "docker rm -f docker_registry"
+
+
+
+Test 9: ./pushpull.sh kai 136.187.101.71 sultans-bin
+
+docker images
+kiwenlau/sultans-bin         latest              3f4ed987e157        5 days ago          43.89 MB
+
+docker tag kiwenlau/sultans-bin:latest 136.187.101.71:5000/sultans-bin:latest
+
+docker images
+kiwenlau/sultans-bin              latest              3f4ed987e157        5 days ago          43.89 MB
+136.187.101.71:5000/sultans-bin   latest              3f4ed987e157        5 days ago          43.89 MB
+
+ssh kai@136.187.101.71 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+46847c4a7e6a        kiwenlau/registry:0.9.1   "docker-registry"   1 seconds ago       Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.71:5000/sultans-bin:latest
+The push refers to a repository [136.187.101.71:5000/sultans-bin] (len: 1)
+Sending image list
+Pushing repository 136.187.101.71:5000/sultans-bin (1 tags)
+511136ea3c5a: Pushing
+511136ea3c5a: Buffering to disk
+511136ea3c5a: Image successfully pushed
+79f1c40f7ff6: Pushing
+79f1c40f7ff6: Buffering to disk
+79f1c40f7ff6: Image successfully pushed
+d0484a74dd3b: Pushing
+d0484a74dd3b: Buffering to disk
+d0484a74dd3b: Image successfully pushed
+b68de37d4ed1: Pushing
+b68de37d4ed1: Buffering to disk
+b68de37d4ed1: Image successfully pushed
+93bd9c6e212d: Pushing
+93bd9c6e212d: Buffering to disk
+93bd9c6e212d: Image successfully pushed
+41c62756a0bd: Pushing
+41c62756a0bd: Buffering to disk
+41c62756a0bd: Image successfully pushed
+e69c9739c916: Pushing
+e69c9739c916: Buffering to disk
+e69c9739c916: Image successfully pushed
+0404f3130598: Pushing
+0404f3130598: Buffering to disk
+0404f3130598: Image successfully pushed
+8f135c1aa359: Pushing
+8f135c1aa359: Buffering to disk
+8f135c1aa359: Image successfully pushed
+3f4ed987e157: Pushing
+3f4ed987e157: Buffering to disk
+3f4ed987e157: Image successfully pushed
+Pushing tag for rev [3f4ed987e157] on {http://136.187.101.71:5000/v1/repositories/sultans-bin/tags/latest}
+
+real  13.69
+
+ssh kai@136.187.101.71 "docker images | grep sultans-bin"
+
+docker pull 136.187.101.71:5000/sultans-bin:latest
+Pulling repository 136.187.101.71:5000/sultans-bin
+3f4ed987e157: Pulling image (latest) from 136.187.101.71:5000/sultans-bin
+3f4ed987e157: Pulling image (latest) from 136.187.101.71:5000/sultans-bin, endpoint: http://136.187.101.71:5000/v1/
+3f4ed987e157: Pulling dependent layers
+511136ea3c5a: Pulling metadata
+511136ea3c5a: Pulling fs layer
+511136ea3c5a: Download complete
+79f1c40f7ff6: Pulling metadata
+79f1c40f7ff6: Pulling fs layer
+79f1c40f7ff6: Download complete
+d0484a74dd3b: Pulling metadata
+d0484a74dd3b: Pulling fs layer
+d0484a74dd3b: Download complete
+b68de37d4ed1: Pulling metadata
+b68de37d4ed1: Pulling fs layer
+b68de37d4ed1: Download complete
+93bd9c6e212d: Pulling metadata
+93bd9c6e212d: Pulling fs layer
+93bd9c6e212d: Download complete
+41c62756a0bd: Pulling metadata
+41c62756a0bd: Pulling fs layer
+41c62756a0bd: Download complete
+e69c9739c916: Pulling metadata
+e69c9739c916: Pulling fs layer
+e69c9739c916: Download complete
+0404f3130598: Pulling metadata
+0404f3130598: Pulling fs layer
+0404f3130598: Download complete
+8f135c1aa359: Pulling metadata
+8f135c1aa359: Pulling fs layer
+8f135c1aa359: Download complete
+3f4ed987e157: Pulling metadata
+3f4ed987e157: Pulling fs layer
+3f4ed987e157: Download complete
+3f4ed987e157: Download complete
+Status: Downloaded newer image for 136.187.101.71:5000/sultans-bin:latest
+
+real  5.61
+
+ssh kai@136.187.101.71 "docker images | grep sultans-bin"
+136.187.101.71:5000/sultans-bin   latest              3f4ed987e157        5 days ago          43.89 MB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.71:5000/sultans-bin:latest"
+ssh kai@136.187.101.71 "docker images | grep sultans-bin"
+mkdir: cannot create directory 'logs': File exists
+
+ssh kai@136.187.101.71 "docker rm -f docker_registry"
+
+
+Test 10: ./pushpull.sh kai 136.187.101.71 sultans-bin
+
+docker images
+kiwenlau/sultans-bin         latest              3f4ed987e157        5 days ago          43.89 MB
+
+docker tag kiwenlau/sultans-bin:latest 136.187.101.71:5000/sultans-bin:latest
+
+docker images
+kiwenlau/sultans-bin              latest              3f4ed987e157        5 days ago          43.89 MB
+136.187.101.71:5000/sultans-bin   latest              3f4ed987e157        5 days ago          43.89 MB
+
+ssh kai@136.187.101.71 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+a022e2dd4761        kiwenlau/registry:0.9.1   "docker-registry"   1 seconds ago       Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.71:5000/sultans-bin:latest
+The push refers to a repository [136.187.101.71:5000/sultans-bin] (len: 1)
+Sending image list
+Pushing repository 136.187.101.71:5000/sultans-bin (1 tags)
+511136ea3c5a: Pushing
+511136ea3c5a: Buffering to disk
+511136ea3c5a: Image successfully pushed
+79f1c40f7ff6: Pushing
+79f1c40f7ff6: Buffering to disk
+79f1c40f7ff6: Image successfully pushed
+d0484a74dd3b: Pushing
+d0484a74dd3b: Buffering to disk
+d0484a74dd3b: Image successfully pushed
+b68de37d4ed1: Pushing
+b68de37d4ed1: Buffering to disk
+b68de37d4ed1: Image successfully pushed
+93bd9c6e212d: Pushing
+93bd9c6e212d: Buffering to disk
+93bd9c6e212d: Image successfully pushed
+41c62756a0bd: Pushing
+41c62756a0bd: Buffering to disk
+41c62756a0bd: Image successfully pushed
+e69c9739c916: Pushing
+e69c9739c916: Buffering to disk
+e69c9739c916: Image successfully pushed
+0404f3130598: Pushing
+0404f3130598: Buffering to disk
+0404f3130598: Image successfully pushed
+8f135c1aa359: Pushing
+8f135c1aa359: Buffering to disk
+8f135c1aa359: Image successfully pushed
+3f4ed987e157: Pushing
+3f4ed987e157: Buffering to disk
+3f4ed987e157: Image successfully pushed
+Pushing tag for rev [3f4ed987e157] on {http://136.187.101.71:5000/v1/repositories/sultans-bin/tags/latest}
+
+real  13.84
+
+ssh kai@136.187.101.71 "docker images | grep sultans-bin"
+
+docker pull 136.187.101.71:5000/sultans-bin:latest
+Pulling repository 136.187.101.71:5000/sultans-bin
+3f4ed987e157: Pulling image (latest) from 136.187.101.71:5000/sultans-bin
+3f4ed987e157: Pulling image (latest) from 136.187.101.71:5000/sultans-bin, endpoint: http://136.187.101.71:5000/v1/
+3f4ed987e157: Pulling dependent layers
+511136ea3c5a: Pulling metadata
+511136ea3c5a: Pulling fs layer
+511136ea3c5a: Download complete
+79f1c40f7ff6: Pulling metadata
+79f1c40f7ff6: Pulling fs layer
+79f1c40f7ff6: Download complete
+d0484a74dd3b: Pulling metadata
+d0484a74dd3b: Pulling fs layer
+d0484a74dd3b: Download complete
+b68de37d4ed1: Pulling metadata
+b68de37d4ed1: Pulling fs layer
+b68de37d4ed1: Download complete
+93bd9c6e212d: Pulling metadata
+93bd9c6e212d: Pulling fs layer
+93bd9c6e212d: Download complete
+41c62756a0bd: Pulling metadata
+41c62756a0bd: Pulling fs layer
+41c62756a0bd: Download complete
+e69c9739c916: Pulling metadata
+e69c9739c916: Pulling fs layer
+e69c9739c916: Download complete
+0404f3130598: Pulling metadata
+0404f3130598: Pulling fs layer
+0404f3130598: Download complete
+8f135c1aa359: Pulling metadata
+8f135c1aa359: Pulling fs layer
+8f135c1aa359: Download complete
+3f4ed987e157: Pulling metadata
+3f4ed987e157: Pulling fs layer
+3f4ed987e157: Download complete
+3f4ed987e157: Download complete
+Status: Downloaded newer image for 136.187.101.71:5000/sultans-bin:latest
+
+real  5.58
+
+ssh kai@136.187.101.71 "docker images | grep sultans-bin"
+136.187.101.71:5000/sultans-bin   latest              3f4ed987e157        5 days ago          43.89 MB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.71:5000/sultans-bin:latest"
+ssh kai@136.187.101.71 "docker images | grep sultans-bin"
+mkdir: cannot create directory 'logs': File exists
+
+ssh kai@136.187.101.71 "docker rm -f docker_registry"
+
+end date: Thu Jun 11 00:08:47 JST 2015
+
+

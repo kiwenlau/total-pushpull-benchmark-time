@@ -1,0 +1,1465 @@
+
+pullpush benchmark: transfer gocd-base image to 136.187.101.71 host
+ 
+hostname: kuruwa-gw
+begin date: Mon Jun 15 05:50:22 JST 2015
+
+sudo docker images
+kiwenlau/gocd-base           latest              d309ca835650        10 months ago       1.017 GB
+
+sudo docker images
+kiwenlau/gocd-base           latest              d309ca835650        10 months ago       1.017 GB
+
+
+Test 1: ./pushpull.sh kai 136.187.101.71 gocd-base
+
+docker images
+kiwenlau/gocd-base           latest              d309ca835650        10 months ago       1.017 GB
+
+docker tag kiwenlau/gocd-base:latest 136.187.101.71:5000/gocd-base:latest
+
+docker images
+kiwenlau/gocd-base              latest              d309ca835650        10 months ago       1.017 GB
+136.187.101.71:5000/gocd-base   latest              d309ca835650        10 months ago       1.017 GB
+
+ssh kai@136.187.101.71 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+209e40c306de        kiwenlau/registry:2.0.1   "registry cmd/regist   1 seconds ago       Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.71:5000/gocd-base:latest
+The push refers to a repository [136.187.101.71:5000/gocd-base] (len: 1)
+d309ca835650: Buffering to Disk
+d309ca835650: Image successfully pushed
+d309ca835650: Image already exists
+24e607a9fc7d: Buffering to Disk
+24e607a9fc7d: Image successfully pushed
+5a514e44e3a8: Buffering to Disk
+5a514e44e3a8: Image successfully pushed
+e06fc63b2fb2: Image already exists
+97faf481e0ef: Image already exists
+215d8e5c3afa: Buffering to Disk
+215d8e5c3afa: Image successfully pushed
+767cb0646bac: Buffering to Disk
+767cb0646bac: Image successfully pushed
+dcd01c67be9d: Image already exists
+55116292b253: Image already exists
+66a08ad2904f: Image already exists
+850b5e6cfe58: Buffering to Disk
+850b5e6cfe58: Image successfully pushed
+8d8858d9ae05: Image already exists
+e54ca5efa2e9: Buffering to Disk
+e54ca5efa2e9: Image successfully pushed
+6c37f792ddac: Buffering to Disk
+6c37f792ddac: Image successfully pushed
+83ff768040a0: Buffering to Disk
+83ff768040a0: Image successfully pushed
+2f4b4d6a4a06: Buffering to Disk
+2f4b4d6a4a06: Image successfully pushed
+d7ac5e4f1812: Buffering to Disk
+d7ac5e4f1812: Image successfully pushed
+511136ea3c5a: Image already exists
+Digest: sha256:c609cd3ce9f0289c3c5d8e6e577c69fb6c98d585dbb5c47f5fa58dcb45868e70
+
+real  134.68
+
+ssh kai@136.187.101.71 "docker images | grep gocd-base"
+
+docker pull 136.187.101.71:5000/gocd-base:latest
+latest: Pulling from 136.187.101.71:5000/gocd-base
+511136ea3c5a: Pulling fs layer
+d7ac5e4f1812: Pulling fs layer
+2f4b4d6a4a06: Pulling fs layer
+83ff768040a0: Pulling fs layer
+6c37f792ddac: Pulling fs layer
+e54ca5efa2e9: Pulling fs layer
+8d8858d9ae05: Pulling fs layer
+850b5e6cfe58: Pulling fs layer
+66a08ad2904f: Pulling fs layer
+55116292b253: Pulling fs layer
+dcd01c67be9d: Pulling fs layer
+767cb0646bac: Pulling fs layer
+215d8e5c3afa: Pulling fs layer
+97faf481e0ef: Pulling fs layer
+e06fc63b2fb2: Pulling fs layer
+5a514e44e3a8: Pulling fs layer
+24e607a9fc7d: Pulling fs layer
+d309ca835650: Pulling fs layer
+d309ca835650: Pulling fs layer
+d309ca835650: Layer already being pulled by another client. Waiting.
+e06fc63b2fb2: Verifying Checksum
+e06fc63b2fb2: Download complete
+2f4b4d6a4a06: Verifying Checksum
+2f4b4d6a4a06: Download complete
+511136ea3c5a: Verifying Checksum
+511136ea3c5a: Download complete
+d309ca835650: Verifying Checksum
+d309ca835650: Download complete
+24e607a9fc7d: Verifying Checksum
+24e607a9fc7d: Download complete
+55116292b253: Verifying Checksum
+55116292b253: Download complete
+66a08ad2904f: Verifying Checksum
+66a08ad2904f: Download complete
+e54ca5efa2e9: Verifying Checksum
+e54ca5efa2e9: Download complete
+83ff768040a0: Verifying Checksum
+83ff768040a0: Download complete
+d309ca835650: Download complete
+8d8858d9ae05: Verifying Checksum
+8d8858d9ae05: Download complete
+97faf481e0ef: Verifying Checksum
+97faf481e0ef: Download complete
+215d8e5c3afa: Verifying Checksum
+215d8e5c3afa: Download complete
+dcd01c67be9d: Verifying Checksum
+dcd01c67be9d: Download complete
+511136ea3c5a: Pull complete
+850b5e6cfe58: Verifying Checksum
+850b5e6cfe58: Download complete
+6c37f792ddac: Verifying Checksum
+6c37f792ddac: Download complete
+d7ac5e4f1812: Verifying Checksum
+d7ac5e4f1812: Download complete
+5a514e44e3a8: Verifying Checksum
+5a514e44e3a8: Download complete
+767cb0646bac: Verifying Checksum
+767cb0646bac: Download complete
+d7ac5e4f1812: Pull complete
+2f4b4d6a4a06: Pull complete
+83ff768040a0: Pull complete
+6c37f792ddac: Pull complete
+e54ca5efa2e9: Pull complete
+8d8858d9ae05: Pull complete
+850b5e6cfe58: Pull complete
+66a08ad2904f: Pull complete
+55116292b253: Pull complete
+dcd01c67be9d: Pull complete
+767cb0646bac: Pull complete
+215d8e5c3afa: Pull complete
+97faf481e0ef: Pull complete
+e06fc63b2fb2: Pull complete
+5a514e44e3a8: Pull complete
+24e607a9fc7d: Pull complete
+d309ca835650: Pull complete
+d309ca835650: Already exists
+Digest: sha256:c609cd3ce9f0289c3c5d8e6e577c69fb6c98d585dbb5c47f5fa58dcb45868e70
+Status: Downloaded newer image for 136.187.101.71:5000/gocd-base:latest
+
+real  26.36
+
+ssh kai@136.187.101.71 "docker images | grep gocd-base"
+136.187.101.71:5000/gocd-base   latest              d309ca835650        10 months ago       1.017 GB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.71:5000/gocd-base:latest"
+ssh kai@136.187.101.71 "docker images | grep gocd-base"
+mkdir: cannot create directory 'logs': File exists
+
+ssh kai@136.187.101.71 "docker rm -f docker_registry"
+
+
+Test 2: ./pushpull.sh kai 136.187.101.71 gocd-base
+
+docker images
+kiwenlau/gocd-base           latest              d309ca835650        10 months ago       1.017 GB
+
+docker tag kiwenlau/gocd-base:latest 136.187.101.71:5000/gocd-base:latest
+
+docker images
+kiwenlau/gocd-base              latest              d309ca835650        10 months ago       1.017 GB
+136.187.101.71:5000/gocd-base   latest              d309ca835650        10 months ago       1.017 GB
+
+ssh kai@136.187.101.71 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+8a444e0206b8        kiwenlau/registry:2.0.1   "registry cmd/regist   1 seconds ago       Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.71:5000/gocd-base:latest
+The push refers to a repository [136.187.101.71:5000/gocd-base] (len: 1)
+d309ca835650: Buffering to Disk
+d309ca835650: Image successfully pushed
+d309ca835650: Image already exists
+24e607a9fc7d: Buffering to Disk
+24e607a9fc7d: Image successfully pushed
+5a514e44e3a8: Buffering to Disk
+5a514e44e3a8: Image successfully pushed
+e06fc63b2fb2: Image already exists
+97faf481e0ef: Image already exists
+215d8e5c3afa: Buffering to Disk
+215d8e5c3afa: Image successfully pushed
+767cb0646bac: Buffering to Disk
+767cb0646bac: Image successfully pushed
+dcd01c67be9d: Image already exists
+55116292b253: Image already exists
+66a08ad2904f: Image already exists
+850b5e6cfe58: Buffering to Disk
+850b5e6cfe58: Image successfully pushed
+8d8858d9ae05: Image already exists
+e54ca5efa2e9: Buffering to Disk
+e54ca5efa2e9: Image successfully pushed
+6c37f792ddac: Buffering to Disk
+6c37f792ddac: Image successfully pushed
+83ff768040a0: Buffering to Disk
+83ff768040a0: Image successfully pushed
+2f4b4d6a4a06: Buffering to Disk
+2f4b4d6a4a06: Image successfully pushed
+d7ac5e4f1812: Buffering to Disk
+d7ac5e4f1812: Image successfully pushed
+511136ea3c5a: Image already exists
+Digest: sha256:4c4ec0195531e7d666b3fd4ce3f6a4b305233442beaf86caa8ec633226906822
+
+real  139.59
+
+ssh kai@136.187.101.71 "docker images | grep gocd-base"
+
+docker pull 136.187.101.71:5000/gocd-base:latest
+latest: Pulling from 136.187.101.71:5000/gocd-base
+511136ea3c5a: Pulling fs layer
+d7ac5e4f1812: Pulling fs layer
+2f4b4d6a4a06: Pulling fs layer
+83ff768040a0: Pulling fs layer
+6c37f792ddac: Pulling fs layer
+e54ca5efa2e9: Pulling fs layer
+8d8858d9ae05: Pulling fs layer
+850b5e6cfe58: Pulling fs layer
+66a08ad2904f: Pulling fs layer
+55116292b253: Pulling fs layer
+dcd01c67be9d: Pulling fs layer
+767cb0646bac: Pulling fs layer
+215d8e5c3afa: Pulling fs layer
+97faf481e0ef: Pulling fs layer
+e06fc63b2fb2: Pulling fs layer
+5a514e44e3a8: Pulling fs layer
+24e607a9fc7d: Pulling fs layer
+d309ca835650: Pulling fs layer
+d309ca835650: Pulling fs layer
+d309ca835650: Layer already being pulled by another client. Waiting.
+d309ca835650: Verifying Checksum
+d309ca835650: Download complete
+d309ca835650: Download complete
+511136ea3c5a: Verifying Checksum
+511136ea3c5a: Download complete
+2f4b4d6a4a06: Verifying Checksum
+2f4b4d6a4a06: Download complete
+511136ea3c5a: Pull complete
+8d8858d9ae05: Verifying Checksum
+8d8858d9ae05: Download complete
+e54ca5efa2e9: Verifying Checksum
+e54ca5efa2e9: Download complete
+83ff768040a0: Verifying Checksum
+83ff768040a0: Download complete
+97faf481e0ef: Verifying Checksum
+97faf481e0ef: Download complete
+215d8e5c3afa: Verifying Checksum
+215d8e5c3afa: Download complete
+dcd01c67be9d: Verifying Checksum
+dcd01c67be9d: Download complete
+55116292b253: Verifying Checksum
+55116292b253: Download complete
+66a08ad2904f: Verifying Checksum
+66a08ad2904f: Download complete
+24e607a9fc7d: Verifying Checksum
+24e607a9fc7d: Download complete
+e06fc63b2fb2: Verifying Checksum
+e06fc63b2fb2: Download complete
+850b5e6cfe58: Verifying Checksum
+850b5e6cfe58: Download complete
+6c37f792ddac: Verifying Checksum
+6c37f792ddac: Download complete
+d7ac5e4f1812: Verifying Checksum
+d7ac5e4f1812: Download complete
+5a514e44e3a8: Verifying Checksum
+5a514e44e3a8: Download complete
+767cb0646bac: Verifying Checksum
+767cb0646bac: Download complete
+d7ac5e4f1812: Pull complete
+2f4b4d6a4a06: Pull complete
+83ff768040a0: Pull complete
+6c37f792ddac: Pull complete
+e54ca5efa2e9: Pull complete
+8d8858d9ae05: Pull complete
+850b5e6cfe58: Pull complete
+66a08ad2904f: Pull complete
+55116292b253: Pull complete
+dcd01c67be9d: Pull complete
+767cb0646bac: Pull complete
+215d8e5c3afa: Pull complete
+97faf481e0ef: Pull complete
+e06fc63b2fb2: Pull complete
+5a514e44e3a8: Pull complete
+24e607a9fc7d: Pull complete
+d309ca835650: Pull complete
+d309ca835650: Already exists
+Digest: sha256:4c4ec0195531e7d666b3fd4ce3f6a4b305233442beaf86caa8ec633226906822
+Status: Downloaded newer image for 136.187.101.71:5000/gocd-base:latest
+
+real  25.52
+
+ssh kai@136.187.101.71 "docker images | grep gocd-base"
+136.187.101.71:5000/gocd-base   latest              d309ca835650        10 months ago       1.017 GB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.71:5000/gocd-base:latest"
+ssh kai@136.187.101.71 "docker images | grep gocd-base"
+mkdir: cannot create directory 'logs': File exists
+
+ssh kai@136.187.101.71 "docker rm -f docker_registry"
+
+
+Test 3: ./pushpull.sh kai 136.187.101.71 gocd-base
+
+docker images
+kiwenlau/gocd-base           latest              d309ca835650        10 months ago       1.017 GB
+
+docker tag kiwenlau/gocd-base:latest 136.187.101.71:5000/gocd-base:latest
+
+docker images
+kiwenlau/gocd-base              latest              d309ca835650        10 months ago       1.017 GB
+136.187.101.71:5000/gocd-base   latest              d309ca835650        10 months ago       1.017 GB
+
+ssh kai@136.187.101.71 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+3aa7eb2e7512        kiwenlau/registry:2.0.1   "registry cmd/regist   1 seconds ago       Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.71:5000/gocd-base:latest
+The push refers to a repository [136.187.101.71:5000/gocd-base] (len: 1)
+d309ca835650: Buffering to Disk
+d309ca835650: Image successfully pushed
+d309ca835650: Image already exists
+24e607a9fc7d: Buffering to Disk
+24e607a9fc7d: Image successfully pushed
+5a514e44e3a8: Buffering to Disk
+5a514e44e3a8: Image successfully pushed
+e06fc63b2fb2: Image already exists
+97faf481e0ef: Image already exists
+215d8e5c3afa: Buffering to Disk
+215d8e5c3afa: Image successfully pushed
+767cb0646bac: Buffering to Disk
+767cb0646bac: Image successfully pushed
+dcd01c67be9d: Image already exists
+55116292b253: Image already exists
+66a08ad2904f: Image already exists
+850b5e6cfe58: Buffering to Disk
+850b5e6cfe58: Image successfully pushed
+8d8858d9ae05: Image already exists
+e54ca5efa2e9: Buffering to Disk
+e54ca5efa2e9: Image successfully pushed
+6c37f792ddac: Buffering to Disk
+6c37f792ddac: Image successfully pushed
+83ff768040a0: Buffering to Disk
+83ff768040a0: Image successfully pushed
+2f4b4d6a4a06: Buffering to Disk
+2f4b4d6a4a06: Image successfully pushed
+d7ac5e4f1812: Buffering to Disk
+d7ac5e4f1812: Image successfully pushed
+511136ea3c5a: Image already exists
+Digest: sha256:9910e493a4ca7c7452f186b798fdcb234969e6fde50b8071b2099cee074e3c89
+
+real  139.05
+
+ssh kai@136.187.101.71 "docker images | grep gocd-base"
+
+docker pull 136.187.101.71:5000/gocd-base:latest
+latest: Pulling from 136.187.101.71:5000/gocd-base
+511136ea3c5a: Pulling fs layer
+d7ac5e4f1812: Pulling fs layer
+2f4b4d6a4a06: Pulling fs layer
+83ff768040a0: Pulling fs layer
+6c37f792ddac: Pulling fs layer
+e54ca5efa2e9: Pulling fs layer
+8d8858d9ae05: Pulling fs layer
+850b5e6cfe58: Pulling fs layer
+66a08ad2904f: Pulling fs layer
+55116292b253: Pulling fs layer
+dcd01c67be9d: Pulling fs layer
+767cb0646bac: Pulling fs layer
+215d8e5c3afa: Pulling fs layer
+97faf481e0ef: Pulling fs layer
+e06fc63b2fb2: Pulling fs layer
+5a514e44e3a8: Pulling fs layer
+24e607a9fc7d: Pulling fs layer
+d309ca835650: Pulling fs layer
+d309ca835650: Pulling fs layer
+d309ca835650: Layer already being pulled by another client. Waiting.
+e54ca5efa2e9: Verifying Checksum
+e54ca5efa2e9: Download complete
+8d8858d9ae05: Verifying Checksum
+8d8858d9ae05: Download complete
+66a08ad2904f: Verifying Checksum
+66a08ad2904f: Download complete
+e06fc63b2fb2: Verifying Checksum
+e06fc63b2fb2: Download complete
+97faf481e0ef: Verifying Checksum
+97faf481e0ef: Download complete
+215d8e5c3afa: Verifying Checksum
+215d8e5c3afa: Download complete
+dcd01c67be9d: Verifying Checksum
+dcd01c67be9d: Download complete
+55116292b253: Verifying Checksum
+55116292b253: Download complete
+2f4b4d6a4a06: Verifying Checksum
+2f4b4d6a4a06: Download complete
+511136ea3c5a: Verifying Checksum
+511136ea3c5a: Download complete
+d309ca835650: Verifying Checksum
+d309ca835650: Download complete
+24e607a9fc7d: Verifying Checksum
+24e607a9fc7d: Download complete
+83ff768040a0: Verifying Checksum
+83ff768040a0: Download complete
+d309ca835650: Download complete
+511136ea3c5a: Pull complete
+850b5e6cfe58: Verifying Checksum
+850b5e6cfe58: Download complete
+6c37f792ddac: Verifying Checksum
+6c37f792ddac: Download complete
+d7ac5e4f1812: Verifying Checksum
+d7ac5e4f1812: Download complete
+5a514e44e3a8: Verifying Checksum
+5a514e44e3a8: Download complete
+767cb0646bac: Verifying Checksum
+767cb0646bac: Download complete
+d7ac5e4f1812: Pull complete
+2f4b4d6a4a06: Pull complete
+83ff768040a0: Pull complete
+6c37f792ddac: Pull complete
+e54ca5efa2e9: Pull complete
+8d8858d9ae05: Pull complete
+850b5e6cfe58: Pull complete
+66a08ad2904f: Pull complete
+55116292b253: Pull complete
+dcd01c67be9d: Pull complete
+767cb0646bac: Pull complete
+215d8e5c3afa: Pull complete
+97faf481e0ef: Pull complete
+e06fc63b2fb2: Pull complete
+5a514e44e3a8: Pull complete
+24e607a9fc7d: Pull complete
+d309ca835650: Pull complete
+d309ca835650: Already exists
+Digest: sha256:9910e493a4ca7c7452f186b798fdcb234969e6fde50b8071b2099cee074e3c89
+Status: Downloaded newer image for 136.187.101.71:5000/gocd-base:latest
+
+real  25.51
+
+ssh kai@136.187.101.71 "docker images | grep gocd-base"
+136.187.101.71:5000/gocd-base   latest              d309ca835650        10 months ago       1.017 GB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.71:5000/gocd-base:latest"
+ssh kai@136.187.101.71 "docker images | grep gocd-base"
+mkdir: cannot create directory 'logs': File exists
+
+ssh kai@136.187.101.71 "docker rm -f docker_registry"
+
+
+Test 4: ./pushpull.sh kai 136.187.101.71 gocd-base
+
+docker images
+kiwenlau/gocd-base           latest              d309ca835650        10 months ago       1.017 GB
+
+docker tag kiwenlau/gocd-base:latest 136.187.101.71:5000/gocd-base:latest
+
+docker images
+kiwenlau/gocd-base              latest              d309ca835650        10 months ago       1.017 GB
+136.187.101.71:5000/gocd-base   latest              d309ca835650        10 months ago       1.017 GB
+
+ssh kai@136.187.101.71 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+00a36eb3e2fd        kiwenlau/registry:2.0.1   "registry cmd/regist   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.71:5000/gocd-base:latest
+The push refers to a repository [136.187.101.71:5000/gocd-base] (len: 1)
+d309ca835650: Buffering to Disk
+d309ca835650: Image successfully pushed
+d309ca835650: Image already exists
+24e607a9fc7d: Buffering to Disk
+24e607a9fc7d: Image successfully pushed
+5a514e44e3a8: Buffering to Disk
+5a514e44e3a8: Image successfully pushed
+e06fc63b2fb2: Image already exists
+97faf481e0ef: Image already exists
+215d8e5c3afa: Buffering to Disk
+215d8e5c3afa: Image successfully pushed
+767cb0646bac: Buffering to Disk
+767cb0646bac: Image successfully pushed
+dcd01c67be9d: Image already exists
+55116292b253: Image already exists
+66a08ad2904f: Image already exists
+850b5e6cfe58: Buffering to Disk
+850b5e6cfe58: Image successfully pushed
+8d8858d9ae05: Image already exists
+e54ca5efa2e9: Buffering to Disk
+e54ca5efa2e9: Image successfully pushed
+6c37f792ddac: Buffering to Disk
+6c37f792ddac: Image successfully pushed
+83ff768040a0: Buffering to Disk
+83ff768040a0: Image successfully pushed
+2f4b4d6a4a06: Buffering to Disk
+2f4b4d6a4a06: Image successfully pushed
+d7ac5e4f1812: Buffering to Disk
+d7ac5e4f1812: Image successfully pushed
+511136ea3c5a: Image already exists
+Digest: sha256:9910e493a4ca7c7452f186b798fdcb234969e6fde50b8071b2099cee074e3c89
+
+real  139.62
+
+ssh kai@136.187.101.71 "docker images | grep gocd-base"
+
+docker pull 136.187.101.71:5000/gocd-base:latest
+latest: Pulling from 136.187.101.71:5000/gocd-base
+511136ea3c5a: Pulling fs layer
+d7ac5e4f1812: Pulling fs layer
+2f4b4d6a4a06: Pulling fs layer
+83ff768040a0: Pulling fs layer
+6c37f792ddac: Pulling fs layer
+e54ca5efa2e9: Pulling fs layer
+8d8858d9ae05: Pulling fs layer
+850b5e6cfe58: Pulling fs layer
+66a08ad2904f: Pulling fs layer
+55116292b253: Pulling fs layer
+dcd01c67be9d: Pulling fs layer
+767cb0646bac: Pulling fs layer
+215d8e5c3afa: Pulling fs layer
+97faf481e0ef: Pulling fs layer
+e06fc63b2fb2: Pulling fs layer
+5a514e44e3a8: Pulling fs layer
+24e607a9fc7d: Pulling fs layer
+d309ca835650: Pulling fs layer
+d309ca835650: Pulling fs layer
+d309ca835650: Layer already being pulled by another client. Waiting.
+d309ca835650: Verifying Checksum
+d309ca835650: Download complete
+d309ca835650: Download complete
+511136ea3c5a: Verifying Checksum
+511136ea3c5a: Download complete
+2f4b4d6a4a06: Verifying Checksum
+2f4b4d6a4a06: Download complete
+83ff768040a0: Verifying Checksum
+83ff768040a0: Download complete
+e54ca5efa2e9: Verifying Checksum
+e54ca5efa2e9: Download complete
+8d8858d9ae05: Verifying Checksum
+8d8858d9ae05: Download complete
+66a08ad2904f: Verifying Checksum
+66a08ad2904f: Download complete
+511136ea3c5a: Pull complete
+55116292b253: Verifying Checksum
+55116292b253: Download complete
+dcd01c67be9d: Verifying Checksum
+dcd01c67be9d: Download complete
+97faf481e0ef: Verifying Checksum
+97faf481e0ef: Download complete
+215d8e5c3afa: Verifying Checksum
+215d8e5c3afa: Download complete
+24e607a9fc7d: Verifying Checksum
+24e607a9fc7d: Download complete
+e06fc63b2fb2: Verifying Checksum
+e06fc63b2fb2: Download complete
+850b5e6cfe58: Verifying Checksum
+850b5e6cfe58: Download complete
+6c37f792ddac: Verifying Checksum
+6c37f792ddac: Download complete
+d7ac5e4f1812: Verifying Checksum
+d7ac5e4f1812: Download complete
+5a514e44e3a8: Verifying Checksum
+5a514e44e3a8: Download complete
+767cb0646bac: Verifying Checksum
+767cb0646bac: Download complete
+d7ac5e4f1812: Pull complete
+2f4b4d6a4a06: Pull complete
+83ff768040a0: Pull complete
+6c37f792ddac: Pull complete
+e54ca5efa2e9: Pull complete
+8d8858d9ae05: Pull complete
+850b5e6cfe58: Pull complete
+66a08ad2904f: Pull complete
+55116292b253: Pull complete
+dcd01c67be9d: Pull complete
+767cb0646bac: Pull complete
+215d8e5c3afa: Pull complete
+97faf481e0ef: Pull complete
+e06fc63b2fb2: Pull complete
+5a514e44e3a8: Pull complete
+24e607a9fc7d: Pull complete
+d309ca835650: Pull complete
+d309ca835650: Already exists
+Digest: sha256:9910e493a4ca7c7452f186b798fdcb234969e6fde50b8071b2099cee074e3c89
+Status: Downloaded newer image for 136.187.101.71:5000/gocd-base:latest
+
+real  25.42
+
+ssh kai@136.187.101.71 "docker images | grep gocd-base"
+136.187.101.71:5000/gocd-base   latest              d309ca835650        10 months ago       1.017 GB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.71:5000/gocd-base:latest"
+ssh kai@136.187.101.71 "docker images | grep gocd-base"
+mkdir: cannot create directory 'logs': File exists
+
+ssh kai@136.187.101.71 "docker rm -f docker_registry"
+
+
+Test 5: ./pushpull.sh kai 136.187.101.71 gocd-base
+
+docker images
+kiwenlau/gocd-base           latest              d309ca835650        10 months ago       1.017 GB
+
+docker tag kiwenlau/gocd-base:latest 136.187.101.71:5000/gocd-base:latest
+
+docker images
+kiwenlau/gocd-base              latest              d309ca835650        10 months ago       1.017 GB
+136.187.101.71:5000/gocd-base   latest              d309ca835650        10 months ago       1.017 GB
+
+ssh kai@136.187.101.71 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+3ec3db4c814d        kiwenlau/registry:2.0.1   "registry cmd/regist   1 seconds ago       Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.71:5000/gocd-base:latest
+The push refers to a repository [136.187.101.71:5000/gocd-base] (len: 1)
+d309ca835650: Buffering to Disk
+d309ca835650: Image successfully pushed
+d309ca835650: Image already exists
+24e607a9fc7d: Buffering to Disk
+24e607a9fc7d: Image successfully pushed
+5a514e44e3a8: Buffering to Disk
+5a514e44e3a8: Image successfully pushed
+e06fc63b2fb2: Image already exists
+97faf481e0ef: Image already exists
+215d8e5c3afa: Buffering to Disk
+215d8e5c3afa: Image successfully pushed
+767cb0646bac: Buffering to Disk
+767cb0646bac: Image successfully pushed
+dcd01c67be9d: Image already exists
+55116292b253: Image already exists
+66a08ad2904f: Image already exists
+850b5e6cfe58: Buffering to Disk
+850b5e6cfe58: Image successfully pushed
+8d8858d9ae05: Image already exists
+e54ca5efa2e9: Buffering to Disk
+e54ca5efa2e9: Image successfully pushed
+6c37f792ddac: Buffering to Disk
+6c37f792ddac: Image successfully pushed
+83ff768040a0: Buffering to Disk
+83ff768040a0: Image successfully pushed
+2f4b4d6a4a06: Buffering to Disk
+2f4b4d6a4a06: Image successfully pushed
+d7ac5e4f1812: Buffering to Disk
+d7ac5e4f1812: Image successfully pushed
+511136ea3c5a: Image already exists
+Digest: sha256:ce93a8c61454703b5b3cf799f749ff79f6ceefeaf19df92804e59b50cb60f466
+
+real  142.35
+
+ssh kai@136.187.101.71 "docker images | grep gocd-base"
+
+docker pull 136.187.101.71:5000/gocd-base:latest
+latest: Pulling from 136.187.101.71:5000/gocd-base
+511136ea3c5a: Pulling fs layer
+d7ac5e4f1812: Pulling fs layer
+2f4b4d6a4a06: Pulling fs layer
+83ff768040a0: Pulling fs layer
+6c37f792ddac: Pulling fs layer
+e54ca5efa2e9: Pulling fs layer
+8d8858d9ae05: Pulling fs layer
+850b5e6cfe58: Pulling fs layer
+66a08ad2904f: Pulling fs layer
+55116292b253: Pulling fs layer
+dcd01c67be9d: Pulling fs layer
+767cb0646bac: Pulling fs layer
+215d8e5c3afa: Pulling fs layer
+97faf481e0ef: Pulling fs layer
+e06fc63b2fb2: Pulling fs layer
+5a514e44e3a8: Pulling fs layer
+24e607a9fc7d: Pulling fs layer
+d309ca835650: Pulling fs layer
+d309ca835650: Pulling fs layer
+d309ca835650: Layer already being pulled by another client. Waiting.
+d309ca835650: Verifying Checksum
+d309ca835650: Download complete
+d309ca835650: Download complete
+511136ea3c5a: Verifying Checksum
+511136ea3c5a: Download complete
+83ff768040a0: Verifying Checksum
+83ff768040a0: Download complete
+2f4b4d6a4a06: Verifying Checksum
+2f4b4d6a4a06: Download complete
+66a08ad2904f: Verifying Checksum
+66a08ad2904f: Download complete
+8d8858d9ae05: Verifying Checksum
+8d8858d9ae05: Download complete
+e54ca5efa2e9: Verifying Checksum
+e54ca5efa2e9: Download complete
+215d8e5c3afa: Verifying Checksum
+215d8e5c3afa: Download complete
+dcd01c67be9d: Verifying Checksum
+dcd01c67be9d: Download complete
+55116292b253: Verifying Checksum
+55116292b253: Download complete
+97faf481e0ef: Verifying Checksum
+97faf481e0ef: Download complete
+e06fc63b2fb2: Verifying Checksum
+e06fc63b2fb2: Download complete
+24e607a9fc7d: Verifying Checksum
+24e607a9fc7d: Download complete
+511136ea3c5a: Pull complete
+850b5e6cfe58: Verifying Checksum
+850b5e6cfe58: Download complete
+6c37f792ddac: Verifying Checksum
+6c37f792ddac: Download complete
+5a514e44e3a8: Verifying Checksum
+5a514e44e3a8: Download complete
+d7ac5e4f1812: Verifying Checksum
+d7ac5e4f1812: Download complete
+767cb0646bac: Verifying Checksum
+767cb0646bac: Download complete
+d7ac5e4f1812: Pull complete
+2f4b4d6a4a06: Pull complete
+83ff768040a0: Pull complete
+6c37f792ddac: Pull complete
+e54ca5efa2e9: Pull complete
+8d8858d9ae05: Pull complete
+850b5e6cfe58: Pull complete
+66a08ad2904f: Pull complete
+55116292b253: Pull complete
+dcd01c67be9d: Pull complete
+767cb0646bac: Pull complete
+215d8e5c3afa: Pull complete
+97faf481e0ef: Pull complete
+e06fc63b2fb2: Pull complete
+5a514e44e3a8: Pull complete
+24e607a9fc7d: Pull complete
+d309ca835650: Pull complete
+d309ca835650: Already exists
+Digest: sha256:ce93a8c61454703b5b3cf799f749ff79f6ceefeaf19df92804e59b50cb60f466
+Status: Downloaded newer image for 136.187.101.71:5000/gocd-base:latest
+
+real  25.44
+
+ssh kai@136.187.101.71 "docker images | grep gocd-base"
+136.187.101.71:5000/gocd-base   latest              d309ca835650        10 months ago       1.017 GB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.71:5000/gocd-base:latest"
+ssh kai@136.187.101.71 "docker images | grep gocd-base"
+mkdir: cannot create directory 'logs': File exists
+
+ssh kai@136.187.101.71 "docker rm -f docker_registry"
+
+
+Test 6: ./pushpull.sh kai 136.187.101.71 gocd-base
+
+docker images
+kiwenlau/gocd-base           latest              d309ca835650        10 months ago       1.017 GB
+
+docker tag kiwenlau/gocd-base:latest 136.187.101.71:5000/gocd-base:latest
+
+docker images
+kiwenlau/gocd-base              latest              d309ca835650        10 months ago       1.017 GB
+136.187.101.71:5000/gocd-base   latest              d309ca835650        10 months ago       1.017 GB
+
+ssh kai@136.187.101.71 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+e174775f185b        kiwenlau/registry:2.0.1   "registry cmd/regist   1 seconds ago       Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.71:5000/gocd-base:latest
+The push refers to a repository [136.187.101.71:5000/gocd-base] (len: 1)
+d309ca835650: Buffering to Disk
+d309ca835650: Image successfully pushed
+d309ca835650: Image already exists
+24e607a9fc7d: Buffering to Disk
+24e607a9fc7d: Image successfully pushed
+5a514e44e3a8: Buffering to Disk
+5a514e44e3a8: Image successfully pushed
+e06fc63b2fb2: Image already exists
+97faf481e0ef: Image already exists
+215d8e5c3afa: Buffering to Disk
+215d8e5c3afa: Image successfully pushed
+767cb0646bac: Buffering to Disk
+767cb0646bac: Image successfully pushed
+dcd01c67be9d: Image already exists
+55116292b253: Image already exists
+66a08ad2904f: Image already exists
+850b5e6cfe58: Buffering to Disk
+850b5e6cfe58: Image successfully pushed
+8d8858d9ae05: Image already exists
+e54ca5efa2e9: Buffering to Disk
+e54ca5efa2e9: Image successfully pushed
+6c37f792ddac: Buffering to Disk
+6c37f792ddac: Image successfully pushed
+83ff768040a0: Buffering to Disk
+83ff768040a0: Image successfully pushed
+2f4b4d6a4a06: Buffering to Disk
+2f4b4d6a4a06: Image successfully pushed
+d7ac5e4f1812: Buffering to Disk
+d7ac5e4f1812: Image successfully pushed
+511136ea3c5a: Image already exists
+Digest: sha256:d9bd44e99cbed1dd83a19a9f0790572e397c859b9115a0269aaa125f8ccc7eca
+
+real  141.09
+
+ssh kai@136.187.101.71 "docker images | grep gocd-base"
+
+docker pull 136.187.101.71:5000/gocd-base:latest
+latest: Pulling from 136.187.101.71:5000/gocd-base
+511136ea3c5a: Pulling fs layer
+d7ac5e4f1812: Pulling fs layer
+2f4b4d6a4a06: Pulling fs layer
+83ff768040a0: Pulling fs layer
+6c37f792ddac: Pulling fs layer
+e54ca5efa2e9: Pulling fs layer
+8d8858d9ae05: Pulling fs layer
+850b5e6cfe58: Pulling fs layer
+66a08ad2904f: Pulling fs layer
+55116292b253: Pulling fs layer
+dcd01c67be9d: Pulling fs layer
+767cb0646bac: Pulling fs layer
+215d8e5c3afa: Pulling fs layer
+97faf481e0ef: Pulling fs layer
+e06fc63b2fb2: Pulling fs layer
+5a514e44e3a8: Pulling fs layer
+24e607a9fc7d: Pulling fs layer
+d309ca835650: Pulling fs layer
+d309ca835650: Pulling fs layer
+d309ca835650: Layer already being pulled by another client. Waiting.
+d309ca835650: Verifying Checksum
+d309ca835650: Download complete
+d309ca835650: Download complete
+511136ea3c5a: Verifying Checksum
+511136ea3c5a: Download complete
+511136ea3c5a: Pull complete
+83ff768040a0: Verifying Checksum
+83ff768040a0: Download complete
+2f4b4d6a4a06: Verifying Checksum
+2f4b4d6a4a06: Download complete
+e54ca5efa2e9: Verifying Checksum
+e54ca5efa2e9: Download complete
+8d8858d9ae05: Verifying Checksum
+8d8858d9ae05: Download complete
+66a08ad2904f: Verifying Checksum
+66a08ad2904f: Download complete
+55116292b253: Verifying Checksum
+55116292b253: Download complete
+dcd01c67be9d: Verifying Checksum
+dcd01c67be9d: Download complete
+215d8e5c3afa: Verifying Checksum
+215d8e5c3afa: Download complete
+e06fc63b2fb2: Verifying Checksum
+e06fc63b2fb2: Download complete
+97faf481e0ef: Verifying Checksum
+97faf481e0ef: Download complete
+24e607a9fc7d: Verifying Checksum
+24e607a9fc7d: Download complete
+850b5e6cfe58: Verifying Checksum
+850b5e6cfe58: Download complete
+6c37f792ddac: Verifying Checksum
+6c37f792ddac: Download complete
+d7ac5e4f1812: Verifying Checksum
+d7ac5e4f1812: Download complete
+5a514e44e3a8: Verifying Checksum
+5a514e44e3a8: Download complete
+767cb0646bac: Verifying Checksum
+767cb0646bac: Download complete
+d7ac5e4f1812: Pull complete
+2f4b4d6a4a06: Pull complete
+83ff768040a0: Pull complete
+6c37f792ddac: Pull complete
+e54ca5efa2e9: Pull complete
+8d8858d9ae05: Pull complete
+850b5e6cfe58: Pull complete
+66a08ad2904f: Pull complete
+55116292b253: Pull complete
+dcd01c67be9d: Pull complete
+767cb0646bac: Pull complete
+215d8e5c3afa: Pull complete
+97faf481e0ef: Pull complete
+e06fc63b2fb2: Pull complete
+5a514e44e3a8: Pull complete
+24e607a9fc7d: Pull complete
+d309ca835650: Pull complete
+d309ca835650: Already exists
+Digest: sha256:d9bd44e99cbed1dd83a19a9f0790572e397c859b9115a0269aaa125f8ccc7eca
+Status: Downloaded newer image for 136.187.101.71:5000/gocd-base:latest
+
+real  25.51
+
+ssh kai@136.187.101.71 "docker images | grep gocd-base"
+136.187.101.71:5000/gocd-base   latest              d309ca835650        10 months ago       1.017 GB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.71:5000/gocd-base:latest"
+ssh kai@136.187.101.71 "docker images | grep gocd-base"
+mkdir: cannot create directory 'logs': File exists
+
+ssh kai@136.187.101.71 "docker rm -f docker_registry"
+
+
+Test 7: ./pushpull.sh kai 136.187.101.71 gocd-base
+
+docker images
+kiwenlau/gocd-base           latest              d309ca835650        10 months ago       1.017 GB
+
+docker tag kiwenlau/gocd-base:latest 136.187.101.71:5000/gocd-base:latest
+
+docker images
+kiwenlau/gocd-base              latest              d309ca835650        10 months ago       1.017 GB
+136.187.101.71:5000/gocd-base   latest              d309ca835650        10 months ago       1.017 GB
+
+ssh kai@136.187.101.71 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+63225cf0637c        kiwenlau/registry:2.0.1   "registry cmd/regist   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.71:5000/gocd-base:latest
+The push refers to a repository [136.187.101.71:5000/gocd-base] (len: 1)
+d309ca835650: Buffering to Disk
+d309ca835650: Image successfully pushed
+d309ca835650: Image already exists
+24e607a9fc7d: Buffering to Disk
+24e607a9fc7d: Image successfully pushed
+5a514e44e3a8: Buffering to Disk
+5a514e44e3a8: Image successfully pushed
+e06fc63b2fb2: Image already exists
+97faf481e0ef: Image already exists
+215d8e5c3afa: Buffering to Disk
+215d8e5c3afa: Image successfully pushed
+767cb0646bac: Buffering to Disk
+767cb0646bac: Image successfully pushed
+dcd01c67be9d: Image already exists
+55116292b253: Image already exists
+66a08ad2904f: Image already exists
+850b5e6cfe58: Buffering to Disk
+850b5e6cfe58: Image successfully pushed
+8d8858d9ae05: Image already exists
+e54ca5efa2e9: Buffering to Disk
+e54ca5efa2e9: Image successfully pushed
+6c37f792ddac: Buffering to Disk
+6c37f792ddac: Image successfully pushed
+83ff768040a0: Buffering to Disk
+83ff768040a0: Image successfully pushed
+2f4b4d6a4a06: Buffering to Disk
+2f4b4d6a4a06: Image successfully pushed
+d7ac5e4f1812: Buffering to Disk
+d7ac5e4f1812: Image successfully pushed
+511136ea3c5a: Image already exists
+Digest: sha256:4c4ec0195531e7d666b3fd4ce3f6a4b305233442beaf86caa8ec633226906822
+
+real  143.51
+
+ssh kai@136.187.101.71 "docker images | grep gocd-base"
+
+docker pull 136.187.101.71:5000/gocd-base:latest
+latest: Pulling from 136.187.101.71:5000/gocd-base
+511136ea3c5a: Pulling fs layer
+d7ac5e4f1812: Pulling fs layer
+2f4b4d6a4a06: Pulling fs layer
+83ff768040a0: Pulling fs layer
+6c37f792ddac: Pulling fs layer
+e54ca5efa2e9: Pulling fs layer
+8d8858d9ae05: Pulling fs layer
+850b5e6cfe58: Pulling fs layer
+66a08ad2904f: Pulling fs layer
+55116292b253: Pulling fs layer
+dcd01c67be9d: Pulling fs layer
+767cb0646bac: Pulling fs layer
+215d8e5c3afa: Pulling fs layer
+97faf481e0ef: Pulling fs layer
+e06fc63b2fb2: Pulling fs layer
+5a514e44e3a8: Pulling fs layer
+24e607a9fc7d: Pulling fs layer
+d309ca835650: Pulling fs layer
+d309ca835650: Pulling fs layer
+d309ca835650: Layer already being pulled by another client. Waiting.
+511136ea3c5a: Verifying Checksum
+511136ea3c5a: Download complete
+511136ea3c5a: Pull complete
+83ff768040a0: Verifying Checksum
+83ff768040a0: Download complete
+2f4b4d6a4a06: Verifying Checksum
+2f4b4d6a4a06: Download complete
+8d8858d9ae05: Verifying Checksum
+8d8858d9ae05: Download complete
+e54ca5efa2e9: Verifying Checksum
+e54ca5efa2e9: Download complete
+dcd01c67be9d: Verifying Checksum
+dcd01c67be9d: Download complete
+55116292b253: Verifying Checksum
+55116292b253: Download complete
+66a08ad2904f: Verifying Checksum
+66a08ad2904f: Download complete
+e06fc63b2fb2: Verifying Checksum
+e06fc63b2fb2: Download complete
+97faf481e0ef: Verifying Checksum
+97faf481e0ef: Download complete
+215d8e5c3afa: Verifying Checksum
+215d8e5c3afa: Download complete
+d309ca835650: Verifying Checksum
+d309ca835650: Download complete
+24e607a9fc7d: Verifying Checksum
+24e607a9fc7d: Download complete
+d309ca835650: Download complete
+850b5e6cfe58: Verifying Checksum
+850b5e6cfe58: Download complete
+6c37f792ddac: Verifying Checksum
+6c37f792ddac: Download complete
+d7ac5e4f1812: Verifying Checksum
+d7ac5e4f1812: Download complete
+5a514e44e3a8: Verifying Checksum
+5a514e44e3a8: Download complete
+767cb0646bac: Verifying Checksum
+767cb0646bac: Download complete
+d7ac5e4f1812: Pull complete
+2f4b4d6a4a06: Pull complete
+83ff768040a0: Pull complete
+6c37f792ddac: Pull complete
+e54ca5efa2e9: Pull complete
+8d8858d9ae05: Pull complete
+850b5e6cfe58: Pull complete
+66a08ad2904f: Pull complete
+55116292b253: Pull complete
+dcd01c67be9d: Pull complete
+767cb0646bac: Pull complete
+215d8e5c3afa: Pull complete
+97faf481e0ef: Pull complete
+e06fc63b2fb2: Pull complete
+5a514e44e3a8: Pull complete
+24e607a9fc7d: Pull complete
+d309ca835650: Pull complete
+d309ca835650: Already exists
+Digest: sha256:4c4ec0195531e7d666b3fd4ce3f6a4b305233442beaf86caa8ec633226906822
+Status: Downloaded newer image for 136.187.101.71:5000/gocd-base:latest
+
+real  25.48
+
+ssh kai@136.187.101.71 "docker images | grep gocd-base"
+136.187.101.71:5000/gocd-base   latest              d309ca835650        10 months ago       1.017 GB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.71:5000/gocd-base:latest"
+ssh kai@136.187.101.71 "docker images | grep gocd-base"
+mkdir: cannot create directory 'logs': File exists
+
+ssh kai@136.187.101.71 "docker rm -f docker_registry"
+
+
+Test 8: ./pushpull.sh kai 136.187.101.71 gocd-base
+
+docker images
+kiwenlau/gocd-base           latest              d309ca835650        10 months ago       1.017 GB
+
+docker tag kiwenlau/gocd-base:latest 136.187.101.71:5000/gocd-base:latest
+
+docker images
+kiwenlau/gocd-base              latest              d309ca835650        10 months ago       1.017 GB
+136.187.101.71:5000/gocd-base   latest              d309ca835650        10 months ago       1.017 GB
+
+ssh kai@136.187.101.71 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+f6ade0ec6bd3        kiwenlau/registry:2.0.1   "registry cmd/regist   1 seconds ago       Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.71:5000/gocd-base:latest
+The push refers to a repository [136.187.101.71:5000/gocd-base] (len: 1)
+d309ca835650: Buffering to Disk
+d309ca835650: Image successfully pushed
+d309ca835650: Image already exists
+24e607a9fc7d: Buffering to Disk
+24e607a9fc7d: Image successfully pushed
+5a514e44e3a8: Buffering to Disk
+5a514e44e3a8: Image successfully pushed
+e06fc63b2fb2: Image already exists
+97faf481e0ef: Image already exists
+215d8e5c3afa: Buffering to Disk
+215d8e5c3afa: Image successfully pushed
+767cb0646bac: Buffering to Disk
+767cb0646bac: Image successfully pushed
+dcd01c67be9d: Image already exists
+55116292b253: Image already exists
+66a08ad2904f: Image already exists
+850b5e6cfe58: Buffering to Disk
+850b5e6cfe58: Image successfully pushed
+8d8858d9ae05: Image already exists
+e54ca5efa2e9: Buffering to Disk
+e54ca5efa2e9: Image successfully pushed
+6c37f792ddac: Buffering to Disk
+6c37f792ddac: Image successfully pushed
+83ff768040a0: Buffering to Disk
+83ff768040a0: Image successfully pushed
+2f4b4d6a4a06: Buffering to Disk
+2f4b4d6a4a06: Image successfully pushed
+d7ac5e4f1812: Buffering to Disk
+d7ac5e4f1812: Image successfully pushed
+511136ea3c5a: Image already exists
+Digest: sha256:9910e493a4ca7c7452f186b798fdcb234969e6fde50b8071b2099cee074e3c89
+
+real  146.25
+
+ssh kai@136.187.101.71 "docker images | grep gocd-base"
+
+docker pull 136.187.101.71:5000/gocd-base:latest
+latest: Pulling from 136.187.101.71:5000/gocd-base
+511136ea3c5a: Pulling fs layer
+d7ac5e4f1812: Pulling fs layer
+2f4b4d6a4a06: Pulling fs layer
+83ff768040a0: Pulling fs layer
+6c37f792ddac: Pulling fs layer
+e54ca5efa2e9: Pulling fs layer
+8d8858d9ae05: Pulling fs layer
+850b5e6cfe58: Pulling fs layer
+66a08ad2904f: Pulling fs layer
+55116292b253: Pulling fs layer
+dcd01c67be9d: Pulling fs layer
+767cb0646bac: Pulling fs layer
+215d8e5c3afa: Pulling fs layer
+97faf481e0ef: Pulling fs layer
+e06fc63b2fb2: Pulling fs layer
+5a514e44e3a8: Pulling fs layer
+24e607a9fc7d: Pulling fs layer
+d309ca835650: Pulling fs layer
+d309ca835650: Pulling fs layer
+d309ca835650: Layer already being pulled by another client. Waiting.
+d309ca835650: Verifying Checksum
+d309ca835650: Download complete
+d309ca835650: Download complete
+511136ea3c5a: Verifying Checksum
+511136ea3c5a: Download complete
+2f4b4d6a4a06: Verifying Checksum
+2f4b4d6a4a06: Download complete
+83ff768040a0: Verifying Checksum
+83ff768040a0: Download complete
+511136ea3c5a: Pull complete
+66a08ad2904f: Verifying Checksum
+66a08ad2904f: Download complete
+8d8858d9ae05: Verifying Checksum
+8d8858d9ae05: Download complete
+e54ca5efa2e9: Verifying Checksum
+e54ca5efa2e9: Download complete
+97faf481e0ef: Verifying Checksum
+97faf481e0ef: Download complete
+215d8e5c3afa: Verifying Checksum
+215d8e5c3afa: Download complete
+dcd01c67be9d: Verifying Checksum
+dcd01c67be9d: Download complete
+55116292b253: Verifying Checksum
+55116292b253: Download complete
+24e607a9fc7d: Verifying Checksum
+24e607a9fc7d: Download complete
+e06fc63b2fb2: Verifying Checksum
+e06fc63b2fb2: Download complete
+850b5e6cfe58: Verifying Checksum
+850b5e6cfe58: Download complete
+6c37f792ddac: Verifying Checksum
+6c37f792ddac: Download complete
+d7ac5e4f1812: Verifying Checksum
+d7ac5e4f1812: Download complete
+5a514e44e3a8: Verifying Checksum
+5a514e44e3a8: Download complete
+767cb0646bac: Verifying Checksum
+767cb0646bac: Download complete
+d7ac5e4f1812: Pull complete
+2f4b4d6a4a06: Pull complete
+83ff768040a0: Pull complete
+6c37f792ddac: Pull complete
+e54ca5efa2e9: Pull complete
+8d8858d9ae05: Pull complete
+850b5e6cfe58: Pull complete
+66a08ad2904f: Pull complete
+55116292b253: Pull complete
+dcd01c67be9d: Pull complete
+767cb0646bac: Pull complete
+215d8e5c3afa: Pull complete
+97faf481e0ef: Pull complete
+e06fc63b2fb2: Pull complete
+5a514e44e3a8: Pull complete
+24e607a9fc7d: Pull complete
+d309ca835650: Pull complete
+d309ca835650: Already exists
+Digest: sha256:9910e493a4ca7c7452f186b798fdcb234969e6fde50b8071b2099cee074e3c89
+Status: Downloaded newer image for 136.187.101.71:5000/gocd-base:latest
+
+real  25.46
+
+ssh kai@136.187.101.71 "docker images | grep gocd-base"
+136.187.101.71:5000/gocd-base   latest              d309ca835650        10 months ago       1.017 GB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.71:5000/gocd-base:latest"
+ssh kai@136.187.101.71 "docker images | grep gocd-base"
+mkdir: cannot create directory 'logs': File exists
+
+ssh kai@136.187.101.71 "docker rm -f docker_registry"
+
+
+Test 9: ./pushpull.sh kai 136.187.101.71 gocd-base
+
+docker images
+kiwenlau/gocd-base           latest              d309ca835650        10 months ago       1.017 GB
+
+docker tag kiwenlau/gocd-base:latest 136.187.101.71:5000/gocd-base:latest
+
+docker images
+kiwenlau/gocd-base              latest              d309ca835650        10 months ago       1.017 GB
+136.187.101.71:5000/gocd-base   latest              d309ca835650        10 months ago       1.017 GB
+
+ssh kai@136.187.101.71 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+8835dfff7437        kiwenlau/registry:2.0.1   "registry cmd/regist   1 seconds ago       Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.71:5000/gocd-base:latest
+The push refers to a repository [136.187.101.71:5000/gocd-base] (len: 1)
+d309ca835650: Buffering to Disk
+d309ca835650: Image successfully pushed
+d309ca835650: Image already exists
+24e607a9fc7d: Buffering to Disk
+24e607a9fc7d: Image successfully pushed
+5a514e44e3a8: Buffering to Disk
+5a514e44e3a8: Image successfully pushed
+e06fc63b2fb2: Image already exists
+97faf481e0ef: Image already exists
+215d8e5c3afa: Buffering to Disk
+215d8e5c3afa: Image successfully pushed
+767cb0646bac: Buffering to Disk
+767cb0646bac: Image successfully pushed
+dcd01c67be9d: Image already exists
+55116292b253: Image already exists
+66a08ad2904f: Image already exists
+850b5e6cfe58: Buffering to Disk
+850b5e6cfe58: Image successfully pushed
+8d8858d9ae05: Image already exists
+e54ca5efa2e9: Buffering to Disk
+e54ca5efa2e9: Image successfully pushed
+6c37f792ddac: Buffering to Disk
+6c37f792ddac: Image successfully pushed
+83ff768040a0: Buffering to Disk
+83ff768040a0: Image successfully pushed
+2f4b4d6a4a06: Buffering to Disk
+2f4b4d6a4a06: Image successfully pushed
+d7ac5e4f1812: Buffering to Disk
+d7ac5e4f1812: Image successfully pushed
+511136ea3c5a: Image already exists
+Digest: sha256:8d4857f5a390e0fc1553744e489d85419dc186ab52e327fd4affab8929019ad8
+
+real  145.26
+
+ssh kai@136.187.101.71 "docker images | grep gocd-base"
+
+docker pull 136.187.101.71:5000/gocd-base:latest
+latest: Pulling from 136.187.101.71:5000/gocd-base
+511136ea3c5a: Pulling fs layer
+d7ac5e4f1812: Pulling fs layer
+2f4b4d6a4a06: Pulling fs layer
+83ff768040a0: Pulling fs layer
+6c37f792ddac: Pulling fs layer
+e54ca5efa2e9: Pulling fs layer
+8d8858d9ae05: Pulling fs layer
+850b5e6cfe58: Pulling fs layer
+66a08ad2904f: Pulling fs layer
+55116292b253: Pulling fs layer
+dcd01c67be9d: Pulling fs layer
+767cb0646bac: Pulling fs layer
+215d8e5c3afa: Pulling fs layer
+97faf481e0ef: Pulling fs layer
+e06fc63b2fb2: Pulling fs layer
+5a514e44e3a8: Pulling fs layer
+24e607a9fc7d: Pulling fs layer
+d309ca835650: Pulling fs layer
+d309ca835650: Pulling fs layer
+d309ca835650: Layer already being pulled by another client. Waiting.
+d309ca835650: Verifying Checksum
+d309ca835650: Download complete
+d309ca835650: Download complete
+83ff768040a0: Verifying Checksum
+83ff768040a0: Download complete
+2f4b4d6a4a06: Verifying Checksum
+2f4b4d6a4a06: Download complete
+511136ea3c5a: Verifying Checksum
+511136ea3c5a: Download complete
+8d8858d9ae05: Verifying Checksum
+8d8858d9ae05: Download complete
+e54ca5efa2e9: Verifying Checksum
+e54ca5efa2e9: Download complete
+dcd01c67be9d: Verifying Checksum
+dcd01c67be9d: Download complete
+e06fc63b2fb2: Verifying Checksum
+e06fc63b2fb2: Download complete
+97faf481e0ef: Verifying Checksum
+97faf481e0ef: Download complete
+215d8e5c3afa: Verifying Checksum
+215d8e5c3afa: Download complete
+55116292b253: Verifying Checksum
+55116292b253: Download complete
+66a08ad2904f: Verifying Checksum
+66a08ad2904f: Download complete
+24e607a9fc7d: Verifying Checksum
+24e607a9fc7d: Download complete
+511136ea3c5a: Pull complete
+850b5e6cfe58: Verifying Checksum
+850b5e6cfe58: Download complete
+6c37f792ddac: Verifying Checksum
+6c37f792ddac: Download complete
+d7ac5e4f1812: Verifying Checksum
+d7ac5e4f1812: Download complete
+5a514e44e3a8: Verifying Checksum
+5a514e44e3a8: Download complete
+767cb0646bac: Verifying Checksum
+767cb0646bac: Download complete
+d7ac5e4f1812: Pull complete
+2f4b4d6a4a06: Pull complete
+83ff768040a0: Pull complete
+6c37f792ddac: Pull complete
+e54ca5efa2e9: Pull complete
+8d8858d9ae05: Pull complete
+850b5e6cfe58: Pull complete
+66a08ad2904f: Pull complete
+55116292b253: Pull complete
+dcd01c67be9d: Pull complete
+767cb0646bac: Pull complete
+215d8e5c3afa: Pull complete
+97faf481e0ef: Pull complete
+e06fc63b2fb2: Pull complete
+5a514e44e3a8: Pull complete
+24e607a9fc7d: Pull complete
+d309ca835650: Pull complete
+d309ca835650: Already exists
+Digest: sha256:8d4857f5a390e0fc1553744e489d85419dc186ab52e327fd4affab8929019ad8
+Status: Downloaded newer image for 136.187.101.71:5000/gocd-base:latest
+
+real  25.41
+
+ssh kai@136.187.101.71 "docker images | grep gocd-base"
+136.187.101.71:5000/gocd-base   latest              d309ca835650        10 months ago       1.017 GB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.71:5000/gocd-base:latest"
+ssh kai@136.187.101.71 "docker images | grep gocd-base"
+mkdir: cannot create directory 'logs': File exists
+
+ssh kai@136.187.101.71 "docker rm -f docker_registry"
+
+
+Test 10: ./pushpull.sh kai 136.187.101.71 gocd-base
+
+docker images
+kiwenlau/gocd-base           latest              d309ca835650        10 months ago       1.017 GB
+
+docker tag kiwenlau/gocd-base:latest 136.187.101.71:5000/gocd-base:latest
+
+docker images
+kiwenlau/gocd-base              latest              d309ca835650        10 months ago       1.017 GB
+136.187.101.71:5000/gocd-base   latest              d309ca835650        10 months ago       1.017 GB
+
+ssh kai@136.187.101.71 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+33e54fe8134d        kiwenlau/registry:2.0.1   "registry cmd/regist   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.71:5000/gocd-base:latest
+The push refers to a repository [136.187.101.71:5000/gocd-base] (len: 1)
+d309ca835650: Buffering to Disk
+d309ca835650: Image successfully pushed
+d309ca835650: Image already exists
+24e607a9fc7d: Buffering to Disk
+24e607a9fc7d: Image successfully pushed
+5a514e44e3a8: Buffering to Disk
+5a514e44e3a8: Image successfully pushed
+e06fc63b2fb2: Image already exists
+97faf481e0ef: Image already exists
+215d8e5c3afa: Buffering to Disk
+215d8e5c3afa: Image successfully pushed
+767cb0646bac: Buffering to Disk
+767cb0646bac: Image successfully pushed
+dcd01c67be9d: Image already exists
+55116292b253: Image already exists
+66a08ad2904f: Image already exists
+850b5e6cfe58: Buffering to Disk
+850b5e6cfe58: Image successfully pushed
+8d8858d9ae05: Image already exists
+e54ca5efa2e9: Buffering to Disk
+e54ca5efa2e9: Image successfully pushed
+6c37f792ddac: Buffering to Disk
+6c37f792ddac: Image successfully pushed
+83ff768040a0: Buffering to Disk
+83ff768040a0: Image successfully pushed
+2f4b4d6a4a06: Buffering to Disk
+2f4b4d6a4a06: Image successfully pushed
+d7ac5e4f1812: Buffering to Disk
+d7ac5e4f1812: Image successfully pushed
+511136ea3c5a: Image already exists
+Digest: sha256:d9bd44e99cbed1dd83a19a9f0790572e397c859b9115a0269aaa125f8ccc7eca
+
+real  144.39
+
+ssh kai@136.187.101.71 "docker images | grep gocd-base"
+
+docker pull 136.187.101.71:5000/gocd-base:latest
+latest: Pulling from 136.187.101.71:5000/gocd-base
+511136ea3c5a: Pulling fs layer
+d7ac5e4f1812: Pulling fs layer
+2f4b4d6a4a06: Pulling fs layer
+83ff768040a0: Pulling fs layer
+6c37f792ddac: Pulling fs layer
+e54ca5efa2e9: Pulling fs layer
+8d8858d9ae05: Pulling fs layer
+850b5e6cfe58: Pulling fs layer
+66a08ad2904f: Pulling fs layer
+55116292b253: Pulling fs layer
+dcd01c67be9d: Pulling fs layer
+767cb0646bac: Pulling fs layer
+215d8e5c3afa: Pulling fs layer
+97faf481e0ef: Pulling fs layer
+e06fc63b2fb2: Pulling fs layer
+5a514e44e3a8: Pulling fs layer
+24e607a9fc7d: Pulling fs layer
+d309ca835650: Pulling fs layer
+d309ca835650: Pulling fs layer
+d309ca835650: Layer already being pulled by another client. Waiting.
+2f4b4d6a4a06: Verifying Checksum
+2f4b4d6a4a06: Download complete
+66a08ad2904f: Verifying Checksum
+66a08ad2904f: Download complete
+8d8858d9ae05: Verifying Checksum
+8d8858d9ae05: Download complete
+e54ca5efa2e9: Verifying Checksum
+e54ca5efa2e9: Download complete
+83ff768040a0: Verifying Checksum
+83ff768040a0: Download complete
+215d8e5c3afa: Verifying Checksum
+215d8e5c3afa: Download complete
+dcd01c67be9d: Verifying Checksum
+dcd01c67be9d: Download complete
+55116292b253: Verifying Checksum
+55116292b253: Download complete
+d309ca835650: Verifying Checksum
+d309ca835650: Download complete
+24e607a9fc7d: Verifying Checksum
+24e607a9fc7d: Download complete
+e06fc63b2fb2: Verifying Checksum
+e06fc63b2fb2: Download complete
+97faf481e0ef: Verifying Checksum
+97faf481e0ef: Download complete
+511136ea3c5a: Verifying Checksum
+511136ea3c5a: Download complete
+d309ca835650: Download complete
+511136ea3c5a: Pull complete
+6c37f792ddac: Verifying Checksum
+6c37f792ddac: Download complete
+850b5e6cfe58: Verifying Checksum
+850b5e6cfe58: Download complete
+d7ac5e4f1812: Verifying Checksum
+d7ac5e4f1812: Download complete
+5a514e44e3a8: Verifying Checksum
+5a514e44e3a8: Download complete
+767cb0646bac: Verifying Checksum
+767cb0646bac: Download complete
+d7ac5e4f1812: Pull complete
+2f4b4d6a4a06: Pull complete
+83ff768040a0: Pull complete
+6c37f792ddac: Pull complete
+e54ca5efa2e9: Pull complete
+8d8858d9ae05: Pull complete
+850b5e6cfe58: Pull complete
+66a08ad2904f: Pull complete
+55116292b253: Pull complete
+dcd01c67be9d: Pull complete
+767cb0646bac: Pull complete
+215d8e5c3afa: Pull complete
+97faf481e0ef: Pull complete
+e06fc63b2fb2: Pull complete
+5a514e44e3a8: Pull complete
+24e607a9fc7d: Pull complete
+d309ca835650: Pull complete
+d309ca835650: Already exists
+Digest: sha256:d9bd44e99cbed1dd83a19a9f0790572e397c859b9115a0269aaa125f8ccc7eca
+Status: Downloaded newer image for 136.187.101.71:5000/gocd-base:latest
+
+real  25.44
+
+ssh kai@136.187.101.71 "docker images | grep gocd-base"
+136.187.101.71:5000/gocd-base   latest              d309ca835650        10 months ago       1.017 GB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.71:5000/gocd-base:latest"
+ssh kai@136.187.101.71 "docker images | grep gocd-base"
+mkdir: cannot create directory 'logs': File exists
+
+ssh kai@136.187.101.71 "docker rm -f docker_registry"
+
+end date: Mon Jun 15 06:19:46 JST 2015
+
+

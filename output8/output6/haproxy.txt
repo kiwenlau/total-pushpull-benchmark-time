@@ -1,0 +1,887 @@
+
+pullpush benchmark: transfer haproxy image to 54.225.249.141 host
+ 
+hostname: kuruwa-gw
+begin date: Fri Aug  7 00:18:03 JST 2015
+
+sudo docker images
+kiwenlau/haproxy                flat                2ca286a6b88c        6 weeks ago         96.3 MB
+kiwenlau/haproxy                latest              dfe3e3cd92a5        12 weeks ago        97.91 MB
+
+sudo docker images
+kiwenlau/haproxy                flat                2ca286a6b88c        6 weeks ago         96.3 MB
+kiwenlau/haproxy                latest              dfe3e3cd92a5        12 weeks ago        97.91 MB
+
+
+Test 1: ./pushpull.sh kai 54.225.249.141 haproxy
+
+docker images
+kiwenlau/haproxy                latest              dfe3e3cd92a5        12 weeks ago        97.91 MB
+
+docker tag kiwenlau/haproxy:latest 54.225.249.141:5000/haproxy:latest
+
+docker images
+kiwenlau/haproxy                latest              dfe3e3cd92a5        12 weeks ago        97.91 MB
+54.225.249.141:5000/haproxy     latest              dfe3e3cd92a5        12 weeks ago        97.91 MB
+
+ssh kai@54.225.249.141 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+c464d823247f        kiwenlau/registry:2.0.1   "registry cmd/regist   3 seconds ago       Up 2 seconds        0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 54.225.249.141:5000/haproxy:latest
+The push refers to a repository [54.225.249.141:5000/haproxy] (len: 1)
+dfe3e3cd92a5: Buffering to Disk
+dfe3e3cd92a5: Image successfully pushed
+dfe3e3cd92a5: Image already exists
+5408df9cff00: Buffering to Disk
+5408df9cff00: Image successfully pushed
+09d6aa7ac4e3: Image already exists
+f111ea60fdc4: Image already exists
+4ae31d69e28b: Image already exists
+760f5612c717: Buffering to Disk
+760f5612c717: Image successfully pushed
+b3d362b23ec1: Image already exists
+21e4345e9035: Buffering to Disk
+21e4345e9035: Image successfully pushed
+Digest: sha256:68ed14dad9c5e6aaf08cdbd245dfea67d460ba4e299a5c7d9ef0c31f27d413a0
+
+real  39.80
+
+ssh kai@54.225.249.141 "docker images | grep haproxy"
+
+docker pull 54.225.249.141:5000/haproxy:latest
+latest: Pulling from 54.225.249.141:5000/haproxy
+21e4345e9035: Pulling fs layer
+b3d362b23ec1: Pulling fs layer
+760f5612c717: Pulling fs layer
+4ae31d69e28b: Pulling fs layer
+f111ea60fdc4: Pulling fs layer
+09d6aa7ac4e3: Pulling fs layer
+5408df9cff00: Pulling fs layer
+dfe3e3cd92a5: Pulling fs layer
+dfe3e3cd92a5: Pulling fs layer
+dfe3e3cd92a5: Layer already being pulled by another client. Waiting.
+4ae31d69e28b: Verifying Checksum
+4ae31d69e28b: Download complete
+dfe3e3cd92a5: Verifying Checksum
+dfe3e3cd92a5: Download complete
+dfe3e3cd92a5: Download complete
+09d6aa7ac4e3: Verifying Checksum
+09d6aa7ac4e3: Download complete
+f111ea60fdc4: Verifying Checksum
+f111ea60fdc4: Download complete
+b3d362b23ec1: Verifying Checksum
+b3d362b23ec1: Download complete
+5408df9cff00: Verifying Checksum
+5408df9cff00: Download complete
+760f5612c717: Verifying Checksum
+760f5612c717: Download complete
+21e4345e9035: Verifying Checksum
+21e4345e9035: Download complete
+21e4345e9035: Pull complete
+b3d362b23ec1: Pull complete
+760f5612c717: Pull complete
+4ae31d69e28b: Pull complete
+f111ea60fdc4: Pull complete
+09d6aa7ac4e3: Pull complete
+5408df9cff00: Pull complete
+dfe3e3cd92a5: Pull complete
+dfe3e3cd92a5: Already exists
+Digest: sha256:68ed14dad9c5e6aaf08cdbd245dfea67d460ba4e299a5c7d9ef0c31f27d413a0
+Status: Downloaded newer image for 54.225.249.141:5000/haproxy:latest
+
+real  3.97
+
+ssh kai@54.225.249.141 "docker images | grep haproxy"
+54.225.249.141:5000/haproxy   latest              dfe3e3cd92a5        12 weeks ago        97.88 MB
+
+ssh kai@54.225.249.141 "docker rmi 54.225.249.141:5000/haproxy:latest"
+ssh kai@54.225.249.141 "docker images | grep haproxy"
+
+ssh kai@54.225.249.141 "docker rm -f docker_registry"
+
+
+Test 2: ./pushpull.sh kai 54.225.249.141 haproxy
+
+docker images
+kiwenlau/haproxy                latest              dfe3e3cd92a5        12 weeks ago        97.91 MB
+
+docker tag kiwenlau/haproxy:latest 54.225.249.141:5000/haproxy:latest
+
+docker images
+kiwenlau/haproxy                latest              dfe3e3cd92a5        12 weeks ago        97.91 MB
+54.225.249.141:5000/haproxy     latest              dfe3e3cd92a5        12 weeks ago        97.91 MB
+
+ssh kai@54.225.249.141 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+c435c5fe6764        kiwenlau/registry:2.0.1   "registry cmd/regist   2 seconds ago       Up 2 seconds        0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 54.225.249.141:5000/haproxy:latest
+The push refers to a repository [54.225.249.141:5000/haproxy] (len: 1)
+dfe3e3cd92a5: Buffering to Disk
+dfe3e3cd92a5: Image successfully pushed
+dfe3e3cd92a5: Image already exists
+5408df9cff00: Buffering to Disk
+5408df9cff00: Image successfully pushed
+09d6aa7ac4e3: Image already exists
+f111ea60fdc4: Image already exists
+4ae31d69e28b: Image already exists
+760f5612c717: Buffering to Disk
+760f5612c717: Image successfully pushed
+b3d362b23ec1: Image already exists
+21e4345e9035: Buffering to Disk
+21e4345e9035: Image successfully pushed
+Digest: sha256:68ed14dad9c5e6aaf08cdbd245dfea67d460ba4e299a5c7d9ef0c31f27d413a0
+
+real  40.33
+
+ssh kai@54.225.249.141 "docker images | grep haproxy"
+
+docker pull 54.225.249.141:5000/haproxy:latest
+latest: Pulling from 54.225.249.141:5000/haproxy
+21e4345e9035: Pulling fs layer
+b3d362b23ec1: Pulling fs layer
+760f5612c717: Pulling fs layer
+4ae31d69e28b: Pulling fs layer
+f111ea60fdc4: Pulling fs layer
+09d6aa7ac4e3: Pulling fs layer
+5408df9cff00: Pulling fs layer
+dfe3e3cd92a5: Pulling fs layer
+dfe3e3cd92a5: Pulling fs layer
+dfe3e3cd92a5: Layer already being pulled by another client. Waiting.
+b3d362b23ec1: Verifying Checksum
+b3d362b23ec1: Download complete
+4ae31d69e28b: Verifying Checksum
+4ae31d69e28b: Download complete
+dfe3e3cd92a5: Verifying Checksum
+dfe3e3cd92a5: Download complete
+dfe3e3cd92a5: Download complete
+f111ea60fdc4: Verifying Checksum
+f111ea60fdc4: Download complete
+09d6aa7ac4e3: Verifying Checksum
+09d6aa7ac4e3: Download complete
+5408df9cff00: Verifying Checksum
+5408df9cff00: Download complete
+760f5612c717: Verifying Checksum
+760f5612c717: Download complete
+21e4345e9035: Verifying Checksum
+21e4345e9035: Download complete
+21e4345e9035: Pull complete
+b3d362b23ec1: Pull complete
+760f5612c717: Pull complete
+4ae31d69e28b: Pull complete
+f111ea60fdc4: Pull complete
+09d6aa7ac4e3: Pull complete
+5408df9cff00: Pull complete
+dfe3e3cd92a5: Pull complete
+dfe3e3cd92a5: Already exists
+Digest: sha256:68ed14dad9c5e6aaf08cdbd245dfea67d460ba4e299a5c7d9ef0c31f27d413a0
+Status: Downloaded newer image for 54.225.249.141:5000/haproxy:latest
+
+real  3.98
+
+ssh kai@54.225.249.141 "docker images | grep haproxy"
+54.225.249.141:5000/haproxy   latest              dfe3e3cd92a5        12 weeks ago        97.88 MB
+
+ssh kai@54.225.249.141 "docker rmi 54.225.249.141:5000/haproxy:latest"
+ssh kai@54.225.249.141 "docker images | grep haproxy"
+
+ssh kai@54.225.249.141 "docker rm -f docker_registry"
+
+
+Test 3: ./pushpull.sh kai 54.225.249.141 haproxy
+
+docker images
+kiwenlau/haproxy                latest              dfe3e3cd92a5        12 weeks ago        97.91 MB
+
+docker tag kiwenlau/haproxy:latest 54.225.249.141:5000/haproxy:latest
+
+docker images
+kiwenlau/haproxy                latest              dfe3e3cd92a5        12 weeks ago        97.91 MB
+54.225.249.141:5000/haproxy     latest              dfe3e3cd92a5        12 weeks ago        97.91 MB
+
+ssh kai@54.225.249.141 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+8b5a68f3989c        kiwenlau/registry:2.0.1   "registry cmd/regist   3 seconds ago       Up 2 seconds        0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 54.225.249.141:5000/haproxy:latest
+The push refers to a repository [54.225.249.141:5000/haproxy] (len: 1)
+dfe3e3cd92a5: Buffering to Disk
+dfe3e3cd92a5: Image successfully pushed
+dfe3e3cd92a5: Image already exists
+5408df9cff00: Buffering to Disk
+5408df9cff00: Image successfully pushed
+09d6aa7ac4e3: Image already exists
+f111ea60fdc4: Image already exists
+4ae31d69e28b: Image already exists
+760f5612c717: Buffering to Disk
+760f5612c717: Image successfully pushed
+b3d362b23ec1: Image already exists
+21e4345e9035: Buffering to Disk
+21e4345e9035: Image successfully pushed
+Digest: sha256:68ed14dad9c5e6aaf08cdbd245dfea67d460ba4e299a5c7d9ef0c31f27d413a0
+
+real  38.39
+
+ssh kai@54.225.249.141 "docker images | grep haproxy"
+
+docker pull 54.225.249.141:5000/haproxy:latest
+latest: Pulling from 54.225.249.141:5000/haproxy
+21e4345e9035: Pulling fs layer
+b3d362b23ec1: Pulling fs layer
+760f5612c717: Pulling fs layer
+4ae31d69e28b: Pulling fs layer
+f111ea60fdc4: Pulling fs layer
+09d6aa7ac4e3: Pulling fs layer
+5408df9cff00: Pulling fs layer
+dfe3e3cd92a5: Pulling fs layer
+dfe3e3cd92a5: Pulling fs layer
+dfe3e3cd92a5: Layer already being pulled by another client. Waiting.
+09d6aa7ac4e3: Verifying Checksum
+09d6aa7ac4e3: Download complete
+dfe3e3cd92a5: Verifying Checksum
+dfe3e3cd92a5: Download complete
+dfe3e3cd92a5: Download complete
+f111ea60fdc4: Verifying Checksum
+f111ea60fdc4: Download complete
+b3d362b23ec1: Verifying Checksum
+b3d362b23ec1: Download complete
+4ae31d69e28b: Verifying Checksum
+4ae31d69e28b: Download complete
+5408df9cff00: Verifying Checksum
+5408df9cff00: Download complete
+760f5612c717: Verifying Checksum
+760f5612c717: Download complete
+21e4345e9035: Verifying Checksum
+21e4345e9035: Download complete
+21e4345e9035: Pull complete
+b3d362b23ec1: Pull complete
+760f5612c717: Pull complete
+4ae31d69e28b: Pull complete
+f111ea60fdc4: Pull complete
+09d6aa7ac4e3: Pull complete
+5408df9cff00: Pull complete
+dfe3e3cd92a5: Pull complete
+dfe3e3cd92a5: Already exists
+Digest: sha256:68ed14dad9c5e6aaf08cdbd245dfea67d460ba4e299a5c7d9ef0c31f27d413a0
+Status: Downloaded newer image for 54.225.249.141:5000/haproxy:latest
+
+real  4.09
+
+ssh kai@54.225.249.141 "docker images | grep haproxy"
+54.225.249.141:5000/haproxy   latest              dfe3e3cd92a5        12 weeks ago        97.88 MB
+
+ssh kai@54.225.249.141 "docker rmi 54.225.249.141:5000/haproxy:latest"
+ssh kai@54.225.249.141 "docker images | grep haproxy"
+
+ssh kai@54.225.249.141 "docker rm -f docker_registry"
+
+
+Test 4: ./pushpull.sh kai 54.225.249.141 haproxy
+
+docker images
+kiwenlau/haproxy                latest              dfe3e3cd92a5        12 weeks ago        97.91 MB
+
+docker tag kiwenlau/haproxy:latest 54.225.249.141:5000/haproxy:latest
+
+docker images
+kiwenlau/haproxy                latest              dfe3e3cd92a5        12 weeks ago        97.91 MB
+54.225.249.141:5000/haproxy     latest              dfe3e3cd92a5        12 weeks ago        97.91 MB
+
+ssh kai@54.225.249.141 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+4da1b3085d75        kiwenlau/registry:2.0.1   "registry cmd/regist   3 seconds ago       Up 2 seconds        0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 54.225.249.141:5000/haproxy:latest
+The push refers to a repository [54.225.249.141:5000/haproxy] (len: 1)
+dfe3e3cd92a5: Buffering to Disk
+dfe3e3cd92a5: Image successfully pushed
+dfe3e3cd92a5: Image already exists
+5408df9cff00: Buffering to Disk
+5408df9cff00: Image successfully pushed
+09d6aa7ac4e3: Image already exists
+f111ea60fdc4: Image already exists
+4ae31d69e28b: Image already exists
+760f5612c717: Buffering to Disk
+760f5612c717: Image successfully pushed
+b3d362b23ec1: Image already exists
+21e4345e9035: Buffering to Disk
+21e4345e9035: Image successfully pushed
+Digest: sha256:68ed14dad9c5e6aaf08cdbd245dfea67d460ba4e299a5c7d9ef0c31f27d413a0
+
+real  38.14
+
+ssh kai@54.225.249.141 "docker images | grep haproxy"
+
+docker pull 54.225.249.141:5000/haproxy:latest
+latest: Pulling from 54.225.249.141:5000/haproxy
+21e4345e9035: Pulling fs layer
+b3d362b23ec1: Pulling fs layer
+760f5612c717: Pulling fs layer
+4ae31d69e28b: Pulling fs layer
+f111ea60fdc4: Pulling fs layer
+09d6aa7ac4e3: Pulling fs layer
+5408df9cff00: Pulling fs layer
+dfe3e3cd92a5: Pulling fs layer
+dfe3e3cd92a5: Pulling fs layer
+dfe3e3cd92a5: Layer already being pulled by another client. Waiting.
+4ae31d69e28b: Verifying Checksum
+4ae31d69e28b: Download complete
+f111ea60fdc4: Verifying Checksum
+f111ea60fdc4: Download complete
+09d6aa7ac4e3: Verifying Checksum
+09d6aa7ac4e3: Download complete
+b3d362b23ec1: Verifying Checksum
+b3d362b23ec1: Download complete
+dfe3e3cd92a5: Verifying Checksum
+dfe3e3cd92a5: Download complete
+dfe3e3cd92a5: Download complete
+5408df9cff00: Verifying Checksum
+5408df9cff00: Download complete
+760f5612c717: Verifying Checksum
+760f5612c717: Download complete
+21e4345e9035: Verifying Checksum
+21e4345e9035: Download complete
+21e4345e9035: Pull complete
+b3d362b23ec1: Pull complete
+760f5612c717: Pull complete
+4ae31d69e28b: Pull complete
+f111ea60fdc4: Pull complete
+09d6aa7ac4e3: Pull complete
+5408df9cff00: Pull complete
+dfe3e3cd92a5: Pull complete
+dfe3e3cd92a5: Already exists
+Digest: sha256:68ed14dad9c5e6aaf08cdbd245dfea67d460ba4e299a5c7d9ef0c31f27d413a0
+Status: Downloaded newer image for 54.225.249.141:5000/haproxy:latest
+
+real  4.02
+
+ssh kai@54.225.249.141 "docker images | grep haproxy"
+54.225.249.141:5000/haproxy   latest              dfe3e3cd92a5        12 weeks ago        97.88 MB
+
+ssh kai@54.225.249.141 "docker rmi 54.225.249.141:5000/haproxy:latest"
+ssh kai@54.225.249.141 "docker images | grep haproxy"
+
+ssh kai@54.225.249.141 "docker rm -f docker_registry"
+
+
+Test 5: ./pushpull.sh kai 54.225.249.141 haproxy
+
+docker images
+kiwenlau/haproxy                latest              dfe3e3cd92a5        12 weeks ago        97.91 MB
+
+docker tag kiwenlau/haproxy:latest 54.225.249.141:5000/haproxy:latest
+
+docker images
+54.225.249.141:5000/haproxy     latest              dfe3e3cd92a5        12 weeks ago        97.91 MB
+kiwenlau/haproxy                latest              dfe3e3cd92a5        12 weeks ago        97.91 MB
+
+ssh kai@54.225.249.141 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+858f9cab5822        kiwenlau/registry:2.0.1   "registry cmd/regist   2 seconds ago       Up 2 seconds        0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 54.225.249.141:5000/haproxy:latest
+The push refers to a repository [54.225.249.141:5000/haproxy] (len: 1)
+dfe3e3cd92a5: Buffering to Disk
+dfe3e3cd92a5: Image successfully pushed
+dfe3e3cd92a5: Image already exists
+5408df9cff00: Buffering to Disk
+5408df9cff00: Image successfully pushed
+09d6aa7ac4e3: Image already exists
+f111ea60fdc4: Image already exists
+4ae31d69e28b: Image already exists
+760f5612c717: Buffering to Disk
+760f5612c717: Image successfully pushed
+b3d362b23ec1: Image already exists
+21e4345e9035: Buffering to Disk
+21e4345e9035: Image successfully pushed
+Digest: sha256:68ed14dad9c5e6aaf08cdbd245dfea67d460ba4e299a5c7d9ef0c31f27d413a0
+
+real  36.84
+
+ssh kai@54.225.249.141 "docker images | grep haproxy"
+
+docker pull 54.225.249.141:5000/haproxy:latest
+latest: Pulling from 54.225.249.141:5000/haproxy
+21e4345e9035: Pulling fs layer
+b3d362b23ec1: Pulling fs layer
+760f5612c717: Pulling fs layer
+4ae31d69e28b: Pulling fs layer
+f111ea60fdc4: Pulling fs layer
+09d6aa7ac4e3: Pulling fs layer
+5408df9cff00: Pulling fs layer
+dfe3e3cd92a5: Pulling fs layer
+dfe3e3cd92a5: Pulling fs layer
+dfe3e3cd92a5: Layer already being pulled by another client. Waiting.
+f111ea60fdc4: Verifying Checksum
+f111ea60fdc4: Download complete
+09d6aa7ac4e3: Verifying Checksum
+09d6aa7ac4e3: Download complete
+dfe3e3cd92a5: Verifying Checksum
+dfe3e3cd92a5: Download complete
+dfe3e3cd92a5: Download complete
+b3d362b23ec1: Verifying Checksum
+b3d362b23ec1: Download complete
+4ae31d69e28b: Verifying Checksum
+4ae31d69e28b: Download complete
+760f5612c717: Verifying Checksum
+760f5612c717: Download complete
+5408df9cff00: Verifying Checksum
+5408df9cff00: Download complete
+21e4345e9035: Verifying Checksum
+21e4345e9035: Download complete
+21e4345e9035: Pull complete
+b3d362b23ec1: Pull complete
+760f5612c717: Pull complete
+4ae31d69e28b: Pull complete
+f111ea60fdc4: Pull complete
+09d6aa7ac4e3: Pull complete
+5408df9cff00: Pull complete
+dfe3e3cd92a5: Pull complete
+dfe3e3cd92a5: Already exists
+Digest: sha256:68ed14dad9c5e6aaf08cdbd245dfea67d460ba4e299a5c7d9ef0c31f27d413a0
+Status: Downloaded newer image for 54.225.249.141:5000/haproxy:latest
+
+real  4.04
+
+ssh kai@54.225.249.141 "docker images | grep haproxy"
+54.225.249.141:5000/haproxy   latest              dfe3e3cd92a5        12 weeks ago        97.88 MB
+
+ssh kai@54.225.249.141 "docker rmi 54.225.249.141:5000/haproxy:latest"
+ssh kai@54.225.249.141 "docker images | grep haproxy"
+
+ssh kai@54.225.249.141 "docker rm -f docker_registry"
+
+
+Test 6: ./pushpull.sh kai 54.225.249.141 haproxy
+
+docker images
+kiwenlau/haproxy                latest              dfe3e3cd92a5        12 weeks ago        97.91 MB
+
+docker tag kiwenlau/haproxy:latest 54.225.249.141:5000/haproxy:latest
+
+docker images
+kiwenlau/haproxy                latest              dfe3e3cd92a5        12 weeks ago        97.91 MB
+54.225.249.141:5000/haproxy     latest              dfe3e3cd92a5        12 weeks ago        97.91 MB
+
+ssh kai@54.225.249.141 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+dffb02c7b20d        kiwenlau/registry:2.0.1   "registry cmd/regist   3 seconds ago       Up 2 seconds        0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 54.225.249.141:5000/haproxy:latest
+The push refers to a repository [54.225.249.141:5000/haproxy] (len: 1)
+dfe3e3cd92a5: Buffering to Disk
+dfe3e3cd92a5: Image successfully pushed
+dfe3e3cd92a5: Image already exists
+5408df9cff00: Buffering to Disk
+5408df9cff00: Image successfully pushed
+09d6aa7ac4e3: Image already exists
+f111ea60fdc4: Image already exists
+4ae31d69e28b: Image already exists
+760f5612c717: Buffering to Disk
+760f5612c717: Image successfully pushed
+b3d362b23ec1: Image already exists
+21e4345e9035: Buffering to Disk
+21e4345e9035: Image successfully pushed
+Digest: sha256:68ed14dad9c5e6aaf08cdbd245dfea67d460ba4e299a5c7d9ef0c31f27d413a0
+
+real  37.26
+
+ssh kai@54.225.249.141 "docker images | grep haproxy"
+
+docker pull 54.225.249.141:5000/haproxy:latest
+latest: Pulling from 54.225.249.141:5000/haproxy
+21e4345e9035: Pulling fs layer
+b3d362b23ec1: Pulling fs layer
+760f5612c717: Pulling fs layer
+4ae31d69e28b: Pulling fs layer
+f111ea60fdc4: Pulling fs layer
+09d6aa7ac4e3: Pulling fs layer
+5408df9cff00: Pulling fs layer
+dfe3e3cd92a5: Pulling fs layer
+dfe3e3cd92a5: Pulling fs layer
+dfe3e3cd92a5: Layer already being pulled by another client. Waiting.
+4ae31d69e28b: Verifying Checksum
+4ae31d69e28b: Download complete
+dfe3e3cd92a5: Verifying Checksum
+dfe3e3cd92a5: Download complete
+dfe3e3cd92a5: Download complete
+f111ea60fdc4: Verifying Checksum
+f111ea60fdc4: Download complete
+09d6aa7ac4e3: Verifying Checksum
+09d6aa7ac4e3: Download complete
+b3d362b23ec1: Verifying Checksum
+b3d362b23ec1: Download complete
+760f5612c717: Verifying Checksum
+760f5612c717: Download complete
+5408df9cff00: Verifying Checksum
+5408df9cff00: Download complete
+21e4345e9035: Verifying Checksum
+21e4345e9035: Download complete
+21e4345e9035: Pull complete
+b3d362b23ec1: Pull complete
+760f5612c717: Pull complete
+4ae31d69e28b: Pull complete
+f111ea60fdc4: Pull complete
+09d6aa7ac4e3: Pull complete
+5408df9cff00: Pull complete
+dfe3e3cd92a5: Pull complete
+dfe3e3cd92a5: Already exists
+Digest: sha256:68ed14dad9c5e6aaf08cdbd245dfea67d460ba4e299a5c7d9ef0c31f27d413a0
+Status: Downloaded newer image for 54.225.249.141:5000/haproxy:latest
+
+real  3.95
+
+ssh kai@54.225.249.141 "docker images | grep haproxy"
+54.225.249.141:5000/haproxy   latest              dfe3e3cd92a5        12 weeks ago        97.88 MB
+
+ssh kai@54.225.249.141 "docker rmi 54.225.249.141:5000/haproxy:latest"
+ssh kai@54.225.249.141 "docker images | grep haproxy"
+
+ssh kai@54.225.249.141 "docker rm -f docker_registry"
+
+
+Test 7: ./pushpull.sh kai 54.225.249.141 haproxy
+
+docker images
+kiwenlau/haproxy                latest              dfe3e3cd92a5        12 weeks ago        97.91 MB
+
+docker tag kiwenlau/haproxy:latest 54.225.249.141:5000/haproxy:latest
+
+docker images
+kiwenlau/haproxy                latest              dfe3e3cd92a5        12 weeks ago        97.91 MB
+54.225.249.141:5000/haproxy     latest              dfe3e3cd92a5        12 weeks ago        97.91 MB
+
+ssh kai@54.225.249.141 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+bfd8fb85fa5c        kiwenlau/registry:2.0.1   "registry cmd/regist   2 seconds ago       Up 2 seconds        0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 54.225.249.141:5000/haproxy:latest
+The push refers to a repository [54.225.249.141:5000/haproxy] (len: 1)
+dfe3e3cd92a5: Buffering to Disk
+dfe3e3cd92a5: Image successfully pushed
+dfe3e3cd92a5: Image already exists
+5408df9cff00: Buffering to Disk
+5408df9cff00: Image successfully pushed
+09d6aa7ac4e3: Image already exists
+f111ea60fdc4: Image already exists
+4ae31d69e28b: Image already exists
+760f5612c717: Buffering to Disk
+760f5612c717: Image successfully pushed
+b3d362b23ec1: Image already exists
+21e4345e9035: Buffering to Disk
+21e4345e9035: Image successfully pushed
+Digest: sha256:68ed14dad9c5e6aaf08cdbd245dfea67d460ba4e299a5c7d9ef0c31f27d413a0
+
+real  37.71
+
+ssh kai@54.225.249.141 "docker images | grep haproxy"
+
+docker pull 54.225.249.141:5000/haproxy:latest
+latest: Pulling from 54.225.249.141:5000/haproxy
+21e4345e9035: Pulling fs layer
+b3d362b23ec1: Pulling fs layer
+760f5612c717: Pulling fs layer
+4ae31d69e28b: Pulling fs layer
+f111ea60fdc4: Pulling fs layer
+09d6aa7ac4e3: Pulling fs layer
+5408df9cff00: Pulling fs layer
+dfe3e3cd92a5: Pulling fs layer
+dfe3e3cd92a5: Pulling fs layer
+dfe3e3cd92a5: Layer already being pulled by another client. Waiting.
+4ae31d69e28b: Verifying Checksum
+4ae31d69e28b: Download complete
+f111ea60fdc4: Verifying Checksum
+f111ea60fdc4: Download complete
+09d6aa7ac4e3: Verifying Checksum
+09d6aa7ac4e3: Download complete
+b3d362b23ec1: Verifying Checksum
+b3d362b23ec1: Download complete
+dfe3e3cd92a5: Verifying Checksum
+dfe3e3cd92a5: Download complete
+dfe3e3cd92a5: Download complete
+760f5612c717: Verifying Checksum
+760f5612c717: Download complete
+5408df9cff00: Verifying Checksum
+5408df9cff00: Download complete
+21e4345e9035: Verifying Checksum
+21e4345e9035: Download complete
+21e4345e9035: Pull complete
+b3d362b23ec1: Pull complete
+760f5612c717: Pull complete
+4ae31d69e28b: Pull complete
+f111ea60fdc4: Pull complete
+09d6aa7ac4e3: Pull complete
+5408df9cff00: Pull complete
+dfe3e3cd92a5: Pull complete
+dfe3e3cd92a5: Already exists
+Digest: sha256:68ed14dad9c5e6aaf08cdbd245dfea67d460ba4e299a5c7d9ef0c31f27d413a0
+Status: Downloaded newer image for 54.225.249.141:5000/haproxy:latest
+
+real  4.19
+
+ssh kai@54.225.249.141 "docker images | grep haproxy"
+54.225.249.141:5000/haproxy   latest              dfe3e3cd92a5        12 weeks ago        97.88 MB
+
+ssh kai@54.225.249.141 "docker rmi 54.225.249.141:5000/haproxy:latest"
+ssh kai@54.225.249.141 "docker images | grep haproxy"
+
+ssh kai@54.225.249.141 "docker rm -f docker_registry"
+
+
+Test 8: ./pushpull.sh kai 54.225.249.141 haproxy
+
+docker images
+kiwenlau/haproxy                latest              dfe3e3cd92a5        12 weeks ago        97.91 MB
+
+docker tag kiwenlau/haproxy:latest 54.225.249.141:5000/haproxy:latest
+
+docker images
+54.225.249.141:5000/haproxy     latest              dfe3e3cd92a5        12 weeks ago        97.91 MB
+kiwenlau/haproxy                latest              dfe3e3cd92a5        12 weeks ago        97.91 MB
+
+ssh kai@54.225.249.141 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+d11f1c42c623        kiwenlau/registry:2.0.1   "registry cmd/regist   3 seconds ago       Up 2 seconds        0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 54.225.249.141:5000/haproxy:latest
+The push refers to a repository [54.225.249.141:5000/haproxy] (len: 1)
+dfe3e3cd92a5: Buffering to Disk
+dfe3e3cd92a5: Image successfully pushed
+dfe3e3cd92a5: Image already exists
+5408df9cff00: Buffering to Disk
+5408df9cff00: Image successfully pushed
+09d6aa7ac4e3: Image already exists
+f111ea60fdc4: Image already exists
+4ae31d69e28b: Image already exists
+760f5612c717: Buffering to Disk
+760f5612c717: Image successfully pushed
+b3d362b23ec1: Image already exists
+21e4345e9035: Buffering to Disk
+21e4345e9035: Image successfully pushed
+Digest: sha256:68ed14dad9c5e6aaf08cdbd245dfea67d460ba4e299a5c7d9ef0c31f27d413a0
+
+real  37.36
+
+ssh kai@54.225.249.141 "docker images | grep haproxy"
+
+docker pull 54.225.249.141:5000/haproxy:latest
+latest: Pulling from 54.225.249.141:5000/haproxy
+21e4345e9035: Pulling fs layer
+b3d362b23ec1: Pulling fs layer
+760f5612c717: Pulling fs layer
+4ae31d69e28b: Pulling fs layer
+f111ea60fdc4: Pulling fs layer
+09d6aa7ac4e3: Pulling fs layer
+5408df9cff00: Pulling fs layer
+dfe3e3cd92a5: Pulling fs layer
+dfe3e3cd92a5: Pulling fs layer
+dfe3e3cd92a5: Layer already being pulled by another client. Waiting.
+4ae31d69e28b: Verifying Checksum
+4ae31d69e28b: Download complete
+09d6aa7ac4e3: Verifying Checksum
+09d6aa7ac4e3: Download complete
+f111ea60fdc4: Verifying Checksum
+f111ea60fdc4: Download complete
+b3d362b23ec1: Verifying Checksum
+b3d362b23ec1: Download complete
+dfe3e3cd92a5: Verifying Checksum
+dfe3e3cd92a5: Download complete
+dfe3e3cd92a5: Download complete
+5408df9cff00: Verifying Checksum
+5408df9cff00: Download complete
+760f5612c717: Verifying Checksum
+760f5612c717: Download complete
+21e4345e9035: Verifying Checksum
+21e4345e9035: Download complete
+21e4345e9035: Pull complete
+b3d362b23ec1: Pull complete
+760f5612c717: Pull complete
+4ae31d69e28b: Pull complete
+f111ea60fdc4: Pull complete
+09d6aa7ac4e3: Pull complete
+5408df9cff00: Pull complete
+dfe3e3cd92a5: Pull complete
+dfe3e3cd92a5: Already exists
+Digest: sha256:68ed14dad9c5e6aaf08cdbd245dfea67d460ba4e299a5c7d9ef0c31f27d413a0
+Status: Downloaded newer image for 54.225.249.141:5000/haproxy:latest
+
+real  4.34
+
+ssh kai@54.225.249.141 "docker images | grep haproxy"
+54.225.249.141:5000/haproxy   latest              dfe3e3cd92a5        12 weeks ago        97.88 MB
+
+ssh kai@54.225.249.141 "docker rmi 54.225.249.141:5000/haproxy:latest"
+ssh kai@54.225.249.141 "docker images | grep haproxy"
+
+ssh kai@54.225.249.141 "docker rm -f docker_registry"
+
+
+Test 9: ./pushpull.sh kai 54.225.249.141 haproxy
+
+docker images
+kiwenlau/haproxy                latest              dfe3e3cd92a5        12 weeks ago        97.91 MB
+
+docker tag kiwenlau/haproxy:latest 54.225.249.141:5000/haproxy:latest
+
+docker images
+kiwenlau/haproxy                latest              dfe3e3cd92a5        12 weeks ago        97.91 MB
+54.225.249.141:5000/haproxy     latest              dfe3e3cd92a5        12 weeks ago        97.91 MB
+
+ssh kai@54.225.249.141 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+4f0037e6b3b4        kiwenlau/registry:2.0.1   "registry cmd/regist   3 seconds ago       Up 2 seconds        0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 54.225.249.141:5000/haproxy:latest
+The push refers to a repository [54.225.249.141:5000/haproxy] (len: 1)
+dfe3e3cd92a5: Buffering to Disk
+dfe3e3cd92a5: Image successfully pushed
+dfe3e3cd92a5: Image already exists
+5408df9cff00: Buffering to Disk
+5408df9cff00: Image successfully pushed
+09d6aa7ac4e3: Image already exists
+f111ea60fdc4: Image already exists
+4ae31d69e28b: Image already exists
+760f5612c717: Buffering to Disk
+760f5612c717: Image successfully pushed
+b3d362b23ec1: Image already exists
+21e4345e9035: Buffering to Disk
+21e4345e9035: Image successfully pushed
+Digest: sha256:68ed14dad9c5e6aaf08cdbd245dfea67d460ba4e299a5c7d9ef0c31f27d413a0
+
+real  37.76
+
+ssh kai@54.225.249.141 "docker images | grep haproxy"
+
+docker pull 54.225.249.141:5000/haproxy:latest
+latest: Pulling from 54.225.249.141:5000/haproxy
+21e4345e9035: Pulling fs layer
+b3d362b23ec1: Pulling fs layer
+760f5612c717: Pulling fs layer
+4ae31d69e28b: Pulling fs layer
+f111ea60fdc4: Pulling fs layer
+09d6aa7ac4e3: Pulling fs layer
+5408df9cff00: Pulling fs layer
+dfe3e3cd92a5: Pulling fs layer
+dfe3e3cd92a5: Pulling fs layer
+dfe3e3cd92a5: Layer already being pulled by another client. Waiting.
+4ae31d69e28b: Verifying Checksum
+4ae31d69e28b: Download complete
+09d6aa7ac4e3: Verifying Checksum
+09d6aa7ac4e3: Download complete
+f111ea60fdc4: Verifying Checksum
+f111ea60fdc4: Download complete
+b3d362b23ec1: Verifying Checksum
+b3d362b23ec1: Download complete
+dfe3e3cd92a5: Verifying Checksum
+dfe3e3cd92a5: Download complete
+dfe3e3cd92a5: Download complete
+760f5612c717: Verifying Checksum
+760f5612c717: Download complete
+21e4345e9035: Verifying Checksum
+21e4345e9035: Download complete
+5408df9cff00: Verifying Checksum
+5408df9cff00: Download complete
+21e4345e9035: Pull complete
+b3d362b23ec1: Pull complete
+760f5612c717: Pull complete
+4ae31d69e28b: Pull complete
+f111ea60fdc4: Pull complete
+09d6aa7ac4e3: Pull complete
+5408df9cff00: Pull complete
+dfe3e3cd92a5: Pull complete
+dfe3e3cd92a5: Already exists
+Digest: sha256:68ed14dad9c5e6aaf08cdbd245dfea67d460ba4e299a5c7d9ef0c31f27d413a0
+Status: Downloaded newer image for 54.225.249.141:5000/haproxy:latest
+
+real  4.02
+
+ssh kai@54.225.249.141 "docker images | grep haproxy"
+54.225.249.141:5000/haproxy   latest              dfe3e3cd92a5        12 weeks ago        97.88 MB
+
+ssh kai@54.225.249.141 "docker rmi 54.225.249.141:5000/haproxy:latest"
+ssh kai@54.225.249.141 "docker images | grep haproxy"
+
+ssh kai@54.225.249.141 "docker rm -f docker_registry"
+
+
+Test 10: ./pushpull.sh kai 54.225.249.141 haproxy
+
+docker images
+kiwenlau/haproxy                latest              dfe3e3cd92a5        12 weeks ago        97.91 MB
+
+docker tag kiwenlau/haproxy:latest 54.225.249.141:5000/haproxy:latest
+
+docker images
+kiwenlau/haproxy                latest              dfe3e3cd92a5        12 weeks ago        97.91 MB
+54.225.249.141:5000/haproxy     latest              dfe3e3cd92a5        12 weeks ago        97.91 MB
+
+ssh kai@54.225.249.141 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+77a67ec5a28e        kiwenlau/registry:2.0.1   "registry cmd/regist   2 seconds ago       Up 2 seconds        0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 54.225.249.141:5000/haproxy:latest
+The push refers to a repository [54.225.249.141:5000/haproxy] (len: 1)
+dfe3e3cd92a5: Buffering to Disk
+dfe3e3cd92a5: Image successfully pushed
+dfe3e3cd92a5: Image already exists
+5408df9cff00: Buffering to Disk
+5408df9cff00: Image successfully pushed
+09d6aa7ac4e3: Image already exists
+f111ea60fdc4: Image already exists
+4ae31d69e28b: Image already exists
+760f5612c717: Buffering to Disk
+760f5612c717: Image successfully pushed
+b3d362b23ec1: Image already exists
+21e4345e9035: Buffering to Disk
+21e4345e9035: Image successfully pushed
+Digest: sha256:68ed14dad9c5e6aaf08cdbd245dfea67d460ba4e299a5c7d9ef0c31f27d413a0
+
+real  37.52
+
+ssh kai@54.225.249.141 "docker images | grep haproxy"
+
+docker pull 54.225.249.141:5000/haproxy:latest
+latest: Pulling from 54.225.249.141:5000/haproxy
+21e4345e9035: Pulling fs layer
+b3d362b23ec1: Pulling fs layer
+760f5612c717: Pulling fs layer
+4ae31d69e28b: Pulling fs layer
+f111ea60fdc4: Pulling fs layer
+09d6aa7ac4e3: Pulling fs layer
+5408df9cff00: Pulling fs layer
+dfe3e3cd92a5: Pulling fs layer
+dfe3e3cd92a5: Pulling fs layer
+dfe3e3cd92a5: Layer already being pulled by another client. Waiting.
+f111ea60fdc4: Verifying Checksum
+f111ea60fdc4: Download complete
+dfe3e3cd92a5: Verifying Checksum
+dfe3e3cd92a5: Download complete
+dfe3e3cd92a5: Download complete
+09d6aa7ac4e3: Verifying Checksum
+09d6aa7ac4e3: Download complete
+b3d362b23ec1: Verifying Checksum
+b3d362b23ec1: Download complete
+4ae31d69e28b: Verifying Checksum
+4ae31d69e28b: Download complete
+760f5612c717: Verifying Checksum
+760f5612c717: Download complete
+5408df9cff00: Verifying Checksum
+5408df9cff00: Download complete
+21e4345e9035: Verifying Checksum
+21e4345e9035: Download complete
+21e4345e9035: Pull complete
+b3d362b23ec1: Pull complete
+760f5612c717: Pull complete
+4ae31d69e28b: Pull complete
+f111ea60fdc4: Pull complete
+09d6aa7ac4e3: Pull complete
+5408df9cff00: Pull complete
+dfe3e3cd92a5: Pull complete
+dfe3e3cd92a5: Already exists
+Digest: sha256:68ed14dad9c5e6aaf08cdbd245dfea67d460ba4e299a5c7d9ef0c31f27d413a0
+Status: Downloaded newer image for 54.225.249.141:5000/haproxy:latest
+
+real  4.07
+
+ssh kai@54.225.249.141 "docker images | grep haproxy"
+54.225.249.141:5000/haproxy   latest              dfe3e3cd92a5        12 weeks ago        97.88 MB
+
+ssh kai@54.225.249.141 "docker rmi 54.225.249.141:5000/haproxy:latest"
+ssh kai@54.225.249.141 "docker images | grep haproxy"
+
+ssh kai@54.225.249.141 "docker rm -f docker_registry"
+
+end date: Fri Aug  7 00:30:34 JST 2015
+
+

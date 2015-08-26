@@ -1,0 +1,965 @@
+
+pullpush benchmark: transfer mono image to 136.187.101.71 host
+ 
+hostname: kuruwa-gw
+begin date: Wed Jun 17 02:48:15 JST 2015
+
+sudo docker images
+kiwenlau/mono                latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+sudo docker images
+kiwenlau/mono                latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+
+Test 1: ./pushpull.sh kai 136.187.101.71 mono
+
+docker images
+kiwenlau/mono                latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+docker tag kiwenlau/mono:latest 136.187.101.80:5000/mono:latest
+
+docker images
+kiwenlau/mono                latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+136.187.101.80:5000/mono     latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1
+84e74ad5f31a        kiwenlau/registry:0.9.1   "docker-registry"   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.80:5000/mono:latest
+
+docker rm -f docker_registry
+
+
+
+Test 1: ./pushpull.sh kai 136.187.101.71 mono
+
+docker images
+kiwenlau/mono                latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+docker tag kiwenlau/mono:latest 136.187.101.80:5000/mono:latest
+
+docker images
+136.187.101.80:5000/mono     latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+kiwenlau/mono                latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1
+c7be1d0a0f0b        kiwenlau/registry:0.9.1   "docker-registry"   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.80:5000/mono:latest
+
+docker rm -f docker_registry
+
+
+
+Test 1: ./pushpull.sh kai 136.187.101.71 mono
+
+docker images
+kiwenlau/mono                latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+docker tag kiwenlau/mono:latest 136.187.101.80:5000/mono:latest
+
+docker images
+kiwenlau/mono                latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+136.187.101.80:5000/mono     latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1
+1ff2e2486614        kiwenlau/registry:0.9.1   "docker-registry"   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.80:5000/mono:latest
+The push refers to a repository [136.187.101.80:5000/mono] (len: 1)
+Sending image list
+Pushing repository 136.187.101.80:5000/mono (1 tags)
+21e4345e9035: Pushing
+21e4345e9035: Buffering to disk
+21e4345e9035: Image successfully pushed
+b3d362b23ec1: Pushing
+b3d362b23ec1: Buffering to disk
+b3d362b23ec1: Image successfully pushed
+414e39f12386: Pushing
+414e39f12386: Buffering to disk
+414e39f12386: Image successfully pushed
+1984117500e8: Pushing
+1984117500e8: Buffering to disk
+1984117500e8: Image successfully pushed
+0beb24926495: Pushing
+0beb24926495: Buffering to disk
+0beb24926495: Image successfully pushed
+a04c64dc2bd9: Pushing
+a04c64dc2bd9: Buffering to disk
+a04c64dc2bd9: Image successfully pushed
+Pushing tag for rev [a04c64dc2bd9] on {http://136.187.101.80:5000/v1/repositories/mono/tags/latest}
+
+real  96.76
+
+ssh kai@136.187.101.71 "docker images | grep mono"
+
+docker pull 136.187.101.80:5000/mono:latest
+Pulling repository 136.187.101.80:5000/mono
+a04c64dc2bd9: Pulling image (latest) from 136.187.101.80:5000/mono
+a04c64dc2bd9: Pulling image (latest) from 136.187.101.80:5000/mono, endpoint: http://136.187.101.80:5000/v1/
+a04c64dc2bd9: Pulling dependent layers
+21e4345e9035: Pulling metadata
+21e4345e9035: Pulling fs layer
+21e4345e9035: Download complete
+b3d362b23ec1: Pulling metadata
+b3d362b23ec1: Pulling fs layer
+b3d362b23ec1: Download complete
+414e39f12386: Pulling metadata
+414e39f12386: Pulling fs layer
+414e39f12386: Download complete
+1984117500e8: Pulling metadata
+1984117500e8: Pulling fs layer
+1984117500e8: Download complete
+0beb24926495: Pulling metadata
+0beb24926495: Pulling fs layer
+0beb24926495: Download complete
+a04c64dc2bd9: Pulling metadata
+a04c64dc2bd9: Pulling fs layer
+a04c64dc2bd9: Download complete
+a04c64dc2bd9: Download complete
+Status: Downloaded newer image for 136.187.101.80:5000/mono:latest
+
+real  18.42
+
+ssh kai@136.187.101.71 "docker images | grep mono"
+136.187.101.80:5000/mono   latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.80:5000/mono:latest"
+ssh kai@136.187.101.71 "docker images | grep mono"
+
+docker rm -f docker_registry
+
+
+Test 2: ./pushpull.sh kai 136.187.101.71 mono
+
+docker images
+kiwenlau/mono                latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+docker tag kiwenlau/mono:latest 136.187.101.80:5000/mono:latest
+
+docker images
+136.187.101.80:5000/mono     latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+kiwenlau/mono                latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1
+eb8e6f5686bf        kiwenlau/registry:0.9.1   "docker-registry"   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.80:5000/mono:latest
+The push refers to a repository [136.187.101.80:5000/mono] (len: 1)
+Sending image list
+Pushing repository 136.187.101.80:5000/mono (1 tags)
+21e4345e9035: Pushing
+21e4345e9035: Buffering to disk
+21e4345e9035: Image successfully pushed
+b3d362b23ec1: Pushing
+b3d362b23ec1: Buffering to disk
+b3d362b23ec1: Image successfully pushed
+414e39f12386: Pushing
+414e39f12386: Buffering to disk
+414e39f12386: Image successfully pushed
+1984117500e8: Pushing
+1984117500e8: Buffering to disk
+1984117500e8: Image successfully pushed
+0beb24926495: Pushing
+0beb24926495: Buffering to disk
+0beb24926495: Image successfully pushed
+a04c64dc2bd9: Pushing
+a04c64dc2bd9: Buffering to disk
+a04c64dc2bd9: Image successfully pushed
+Pushing tag for rev [a04c64dc2bd9] on {http://136.187.101.80:5000/v1/repositories/mono/tags/latest}
+
+real  95.57
+
+ssh kai@136.187.101.71 "docker images | grep mono"
+
+docker pull 136.187.101.80:5000/mono:latest
+Pulling repository 136.187.101.80:5000/mono
+a04c64dc2bd9: Pulling image (latest) from 136.187.101.80:5000/mono
+a04c64dc2bd9: Pulling image (latest) from 136.187.101.80:5000/mono, endpoint: http://136.187.101.80:5000/v1/
+a04c64dc2bd9: Pulling dependent layers
+21e4345e9035: Pulling metadata
+21e4345e9035: Pulling fs layer
+21e4345e9035: Download complete
+b3d362b23ec1: Pulling metadata
+b3d362b23ec1: Pulling fs layer
+b3d362b23ec1: Download complete
+414e39f12386: Pulling metadata
+414e39f12386: Pulling fs layer
+414e39f12386: Download complete
+1984117500e8: Pulling metadata
+1984117500e8: Pulling fs layer
+1984117500e8: Download complete
+0beb24926495: Pulling metadata
+0beb24926495: Pulling fs layer
+0beb24926495: Download complete
+a04c64dc2bd9: Pulling metadata
+a04c64dc2bd9: Pulling fs layer
+a04c64dc2bd9: Download complete
+a04c64dc2bd9: Download complete
+Status: Downloaded newer image for 136.187.101.80:5000/mono:latest
+
+real  18.44
+
+ssh kai@136.187.101.71 "docker images | grep mono"
+136.187.101.80:5000/mono   latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.80:5000/mono:latest"
+ssh kai@136.187.101.71 "docker images | grep mono"
+
+docker rm -f docker_registry
+
+
+Test 3: ./pushpull.sh kai 136.187.101.71 mono
+
+docker images
+kiwenlau/mono                latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+docker tag kiwenlau/mono:latest 136.187.101.80:5000/mono:latest
+
+docker images
+kiwenlau/mono                latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+136.187.101.80:5000/mono     latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1
+8592f92181f6        kiwenlau/registry:0.9.1   "docker-registry"   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.80:5000/mono:latest
+
+docker rm -f docker_registry
+
+
+
+Test 3: ./pushpull.sh kai 136.187.101.71 mono
+
+docker images
+kiwenlau/mono                latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+docker tag kiwenlau/mono:latest 136.187.101.80:5000/mono:latest
+
+docker images
+kiwenlau/mono                latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+136.187.101.80:5000/mono     latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1
+2022f1a376f3        kiwenlau/registry:0.9.1   "docker-registry"   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.80:5000/mono:latest
+
+docker rm -f docker_registry
+
+
+
+Test 3: ./pushpull.sh kai 136.187.101.71 mono
+
+docker images
+kiwenlau/mono                latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+docker tag kiwenlau/mono:latest 136.187.101.80:5000/mono:latest
+
+docker images
+kiwenlau/mono                latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+136.187.101.80:5000/mono     latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1
+33f4978a11f2        kiwenlau/registry:0.9.1   "docker-registry"   1 seconds ago       Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.80:5000/mono:latest
+The push refers to a repository [136.187.101.80:5000/mono] (len: 1)
+Sending image list
+Pushing repository 136.187.101.80:5000/mono (1 tags)
+21e4345e9035: Pushing
+21e4345e9035: Buffering to disk
+21e4345e9035: Image successfully pushed
+b3d362b23ec1: Pushing
+b3d362b23ec1: Buffering to disk
+b3d362b23ec1: Image successfully pushed
+414e39f12386: Pushing
+414e39f12386: Buffering to disk
+414e39f12386: Image successfully pushed
+1984117500e8: Pushing
+1984117500e8: Buffering to disk
+1984117500e8: Image successfully pushed
+0beb24926495: Pushing
+0beb24926495: Buffering to disk
+0beb24926495: Image successfully pushed
+a04c64dc2bd9: Pushing
+a04c64dc2bd9: Buffering to disk
+a04c64dc2bd9: Image successfully pushed
+Pushing tag for rev [a04c64dc2bd9] on {http://136.187.101.80:5000/v1/repositories/mono/tags/latest}
+
+real  95.15
+
+ssh kai@136.187.101.71 "docker images | grep mono"
+
+docker pull 136.187.101.80:5000/mono:latest
+Pulling repository 136.187.101.80:5000/mono
+a04c64dc2bd9: Pulling image (latest) from 136.187.101.80:5000/mono
+a04c64dc2bd9: Pulling image (latest) from 136.187.101.80:5000/mono, endpoint: http://136.187.101.80:5000/v1/
+a04c64dc2bd9: Pulling dependent layers
+21e4345e9035: Pulling metadata
+21e4345e9035: Pulling fs layer
+21e4345e9035: Download complete
+b3d362b23ec1: Pulling metadata
+b3d362b23ec1: Pulling fs layer
+b3d362b23ec1: Download complete
+414e39f12386: Pulling metadata
+414e39f12386: Pulling fs layer
+414e39f12386: Download complete
+1984117500e8: Pulling metadata
+1984117500e8: Pulling fs layer
+1984117500e8: Download complete
+0beb24926495: Pulling metadata
+0beb24926495: Pulling fs layer
+0beb24926495: Download complete
+a04c64dc2bd9: Pulling metadata
+a04c64dc2bd9: Pulling fs layer
+a04c64dc2bd9: Download complete
+a04c64dc2bd9: Download complete
+Status: Downloaded newer image for 136.187.101.80:5000/mono:latest
+
+real  18.18
+
+ssh kai@136.187.101.71 "docker images | grep mono"
+136.187.101.80:5000/mono   latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.80:5000/mono:latest"
+ssh kai@136.187.101.71 "docker images | grep mono"
+
+docker rm -f docker_registry
+
+
+Test 4: ./pushpull.sh kai 136.187.101.71 mono
+
+docker images
+kiwenlau/mono                latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+docker tag kiwenlau/mono:latest 136.187.101.80:5000/mono:latest
+
+docker images
+kiwenlau/mono                latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+136.187.101.80:5000/mono     latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1
+d3331b5da98c        kiwenlau/registry:0.9.1   "docker-registry"   1 seconds ago       Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.80:5000/mono:latest
+The push refers to a repository [136.187.101.80:5000/mono] (len: 1)
+Sending image list
+Pushing repository 136.187.101.80:5000/mono (1 tags)
+21e4345e9035: Pushing
+21e4345e9035: Buffering to disk
+21e4345e9035: Image successfully pushed
+b3d362b23ec1: Pushing
+b3d362b23ec1: Buffering to disk
+b3d362b23ec1: Image successfully pushed
+414e39f12386: Pushing
+414e39f12386: Buffering to disk
+414e39f12386: Image successfully pushed
+1984117500e8: Pushing
+1984117500e8: Buffering to disk
+1984117500e8: Image successfully pushed
+0beb24926495: Pushing
+0beb24926495: Buffering to disk
+0beb24926495: Image successfully pushed
+a04c64dc2bd9: Pushing
+a04c64dc2bd9: Buffering to disk
+a04c64dc2bd9: Image successfully pushed
+Pushing tag for rev [a04c64dc2bd9] on {http://136.187.101.80:5000/v1/repositories/mono/tags/latest}
+
+real  94.34
+
+ssh kai@136.187.101.71 "docker images | grep mono"
+
+docker pull 136.187.101.80:5000/mono:latest
+Pulling repository 136.187.101.80:5000/mono
+a04c64dc2bd9: Pulling image (latest) from 136.187.101.80:5000/mono
+a04c64dc2bd9: Pulling image (latest) from 136.187.101.80:5000/mono, endpoint: http://136.187.101.80:5000/v1/
+a04c64dc2bd9: Pulling dependent layers
+21e4345e9035: Pulling metadata
+21e4345e9035: Pulling fs layer
+21e4345e9035: Download complete
+b3d362b23ec1: Pulling metadata
+b3d362b23ec1: Pulling fs layer
+b3d362b23ec1: Download complete
+414e39f12386: Pulling metadata
+414e39f12386: Pulling fs layer
+414e39f12386: Download complete
+1984117500e8: Pulling metadata
+1984117500e8: Pulling fs layer
+1984117500e8: Download complete
+0beb24926495: Pulling metadata
+0beb24926495: Pulling fs layer
+0beb24926495: Download complete
+a04c64dc2bd9: Pulling metadata
+a04c64dc2bd9: Pulling fs layer
+a04c64dc2bd9: Download complete
+a04c64dc2bd9: Download complete
+Status: Downloaded newer image for 136.187.101.80:5000/mono:latest
+
+real  18.60
+
+ssh kai@136.187.101.71 "docker images | grep mono"
+136.187.101.80:5000/mono   latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.80:5000/mono:latest"
+ssh kai@136.187.101.71 "docker images | grep mono"
+
+docker rm -f docker_registry
+
+
+Test 5: ./pushpull.sh kai 136.187.101.71 mono
+
+docker images
+kiwenlau/mono                latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+docker tag kiwenlau/mono:latest 136.187.101.80:5000/mono:latest
+
+docker images
+kiwenlau/mono                latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+136.187.101.80:5000/mono     latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1
+c30057da6636        kiwenlau/registry:0.9.1   "docker-registry"   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.80:5000/mono:latest
+The push refers to a repository [136.187.101.80:5000/mono] (len: 1)
+Sending image list
+Pushing repository 136.187.101.80:5000/mono (1 tags)
+21e4345e9035: Pushing
+21e4345e9035: Buffering to disk
+21e4345e9035: Image successfully pushed
+b3d362b23ec1: Pushing
+b3d362b23ec1: Buffering to disk
+b3d362b23ec1: Image successfully pushed
+414e39f12386: Pushing
+414e39f12386: Buffering to disk
+414e39f12386: Image successfully pushed
+1984117500e8: Pushing
+1984117500e8: Buffering to disk
+1984117500e8: Image successfully pushed
+0beb24926495: Pushing
+0beb24926495: Buffering to disk
+0beb24926495: Image successfully pushed
+a04c64dc2bd9: Pushing
+a04c64dc2bd9: Buffering to disk
+a04c64dc2bd9: Image successfully pushed
+Pushing tag for rev [a04c64dc2bd9] on {http://136.187.101.80:5000/v1/repositories/mono/tags/latest}
+
+real  94.82
+
+ssh kai@136.187.101.71 "docker images | grep mono"
+
+docker pull 136.187.101.80:5000/mono:latest
+Pulling repository 136.187.101.80:5000/mono
+a04c64dc2bd9: Pulling image (latest) from 136.187.101.80:5000/mono
+a04c64dc2bd9: Pulling image (latest) from 136.187.101.80:5000/mono, endpoint: http://136.187.101.80:5000/v1/
+a04c64dc2bd9: Pulling dependent layers
+21e4345e9035: Pulling metadata
+21e4345e9035: Pulling fs layer
+21e4345e9035: Download complete
+b3d362b23ec1: Pulling metadata
+b3d362b23ec1: Pulling fs layer
+b3d362b23ec1: Download complete
+414e39f12386: Pulling metadata
+414e39f12386: Pulling fs layer
+414e39f12386: Download complete
+1984117500e8: Pulling metadata
+1984117500e8: Pulling fs layer
+1984117500e8: Download complete
+0beb24926495: Pulling metadata
+0beb24926495: Pulling fs layer
+0beb24926495: Download complete
+a04c64dc2bd9: Pulling metadata
+a04c64dc2bd9: Pulling fs layer
+a04c64dc2bd9: Download complete
+a04c64dc2bd9: Download complete
+Status: Downloaded newer image for 136.187.101.80:5000/mono:latest
+
+real  18.32
+
+ssh kai@136.187.101.71 "docker images | grep mono"
+136.187.101.80:5000/mono   latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.80:5000/mono:latest"
+ssh kai@136.187.101.71 "docker images | grep mono"
+
+docker rm -f docker_registry
+
+
+Test 6: ./pushpull.sh kai 136.187.101.71 mono
+
+docker images
+kiwenlau/mono                latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+docker tag kiwenlau/mono:latest 136.187.101.80:5000/mono:latest
+
+docker images
+kiwenlau/mono                latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+136.187.101.80:5000/mono     latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1
+14ac7c0f8392        kiwenlau/registry:0.9.1   "docker-registry"   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.80:5000/mono:latest
+The push refers to a repository [136.187.101.80:5000/mono] (len: 1)
+Sending image list
+Pushing repository 136.187.101.80:5000/mono (1 tags)
+21e4345e9035: Pushing
+21e4345e9035: Buffering to disk
+21e4345e9035: Image successfully pushed
+b3d362b23ec1: Pushing
+b3d362b23ec1: Buffering to disk
+b3d362b23ec1: Image successfully pushed
+414e39f12386: Pushing
+414e39f12386: Buffering to disk
+414e39f12386: Image successfully pushed
+1984117500e8: Pushing
+1984117500e8: Buffering to disk
+1984117500e8: Image successfully pushed
+0beb24926495: Pushing
+0beb24926495: Buffering to disk
+0beb24926495: Image successfully pushed
+a04c64dc2bd9: Pushing
+a04c64dc2bd9: Buffering to disk
+a04c64dc2bd9: Image successfully pushed
+Pushing tag for rev [a04c64dc2bd9] on {http://136.187.101.80:5000/v1/repositories/mono/tags/latest}
+
+real  94.54
+
+ssh kai@136.187.101.71 "docker images | grep mono"
+
+docker pull 136.187.101.80:5000/mono:latest
+Pulling repository 136.187.101.80:5000/mono
+a04c64dc2bd9: Pulling image (latest) from 136.187.101.80:5000/mono
+a04c64dc2bd9: Pulling image (latest) from 136.187.101.80:5000/mono, endpoint: http://136.187.101.80:5000/v1/
+a04c64dc2bd9: Pulling dependent layers
+21e4345e9035: Pulling metadata
+21e4345e9035: Pulling fs layer
+21e4345e9035: Download complete
+b3d362b23ec1: Pulling metadata
+b3d362b23ec1: Pulling fs layer
+b3d362b23ec1: Download complete
+414e39f12386: Pulling metadata
+414e39f12386: Pulling fs layer
+414e39f12386: Download complete
+1984117500e8: Pulling metadata
+1984117500e8: Pulling fs layer
+1984117500e8: Download complete
+0beb24926495: Pulling metadata
+0beb24926495: Pulling fs layer
+0beb24926495: Download complete
+a04c64dc2bd9: Pulling metadata
+a04c64dc2bd9: Pulling fs layer
+a04c64dc2bd9: Download complete
+a04c64dc2bd9: Download complete
+Status: Downloaded newer image for 136.187.101.80:5000/mono:latest
+
+real  18.16
+
+ssh kai@136.187.101.71 "docker images | grep mono"
+136.187.101.80:5000/mono   latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.80:5000/mono:latest"
+ssh kai@136.187.101.71 "docker images | grep mono"
+
+docker rm -f docker_registry
+
+
+Test 7: ./pushpull.sh kai 136.187.101.71 mono
+
+docker images
+kiwenlau/mono                latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+docker tag kiwenlau/mono:latest 136.187.101.80:5000/mono:latest
+
+docker images
+kiwenlau/mono                latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+136.187.101.80:5000/mono     latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1
+fff35ce9a9c6        kiwenlau/registry:0.9.1   "docker-registry"   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.80:5000/mono:latest
+The push refers to a repository [136.187.101.80:5000/mono] (len: 1)
+Sending image list
+Pushing repository 136.187.101.80:5000/mono (1 tags)
+21e4345e9035: Pushing
+21e4345e9035: Buffering to disk
+21e4345e9035: Image successfully pushed
+b3d362b23ec1: Pushing
+b3d362b23ec1: Buffering to disk
+b3d362b23ec1: Image successfully pushed
+414e39f12386: Pushing
+414e39f12386: Buffering to disk
+414e39f12386: Image successfully pushed
+1984117500e8: Pushing
+1984117500e8: Buffering to disk
+1984117500e8: Image successfully pushed
+0beb24926495: Pushing
+0beb24926495: Buffering to disk
+0beb24926495: Image successfully pushed
+a04c64dc2bd9: Pushing
+a04c64dc2bd9: Buffering to disk
+a04c64dc2bd9: Image successfully pushed
+Pushing tag for rev [a04c64dc2bd9] on {http://136.187.101.80:5000/v1/repositories/mono/tags/latest}
+
+real  94.67
+
+ssh kai@136.187.101.71 "docker images | grep mono"
+
+docker pull 136.187.101.80:5000/mono:latest
+Pulling repository 136.187.101.80:5000/mono
+a04c64dc2bd9: Pulling image (latest) from 136.187.101.80:5000/mono
+a04c64dc2bd9: Pulling image (latest) from 136.187.101.80:5000/mono, endpoint: http://136.187.101.80:5000/v1/
+a04c64dc2bd9: Pulling dependent layers
+21e4345e9035: Pulling metadata
+21e4345e9035: Pulling fs layer
+21e4345e9035: Download complete
+b3d362b23ec1: Pulling metadata
+b3d362b23ec1: Pulling fs layer
+b3d362b23ec1: Download complete
+414e39f12386: Pulling metadata
+414e39f12386: Pulling fs layer
+414e39f12386: Download complete
+1984117500e8: Pulling metadata
+1984117500e8: Pulling fs layer
+1984117500e8: Download complete
+0beb24926495: Pulling metadata
+0beb24926495: Pulling fs layer
+0beb24926495: Download complete
+a04c64dc2bd9: Pulling metadata
+a04c64dc2bd9: Pulling fs layer
+a04c64dc2bd9: Download complete
+a04c64dc2bd9: Download complete
+Status: Downloaded newer image for 136.187.101.80:5000/mono:latest
+
+real  18.27
+
+ssh kai@136.187.101.71 "docker images | grep mono"
+136.187.101.80:5000/mono   latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.80:5000/mono:latest"
+ssh kai@136.187.101.71 "docker images | grep mono"
+
+docker rm -f docker_registry
+
+
+Test 8: ./pushpull.sh kai 136.187.101.71 mono
+
+docker images
+kiwenlau/mono                latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+docker tag kiwenlau/mono:latest 136.187.101.80:5000/mono:latest
+
+docker images
+136.187.101.80:5000/mono     latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+kiwenlau/mono                latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1
+22a192147afd        kiwenlau/registry:0.9.1   "docker-registry"   1 seconds ago       Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.80:5000/mono:latest
+
+docker rm -f docker_registry
+
+
+
+Test 8: ./pushpull.sh kai 136.187.101.71 mono
+
+docker images
+kiwenlau/mono                latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+docker tag kiwenlau/mono:latest 136.187.101.80:5000/mono:latest
+
+docker images
+kiwenlau/mono                latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+136.187.101.80:5000/mono     latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1
+64f6fbfb7d86        kiwenlau/registry:0.9.1   "docker-registry"   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.80:5000/mono:latest
+
+docker rm -f docker_registry
+
+
+
+Test 8: ./pushpull.sh kai 136.187.101.71 mono
+
+docker images
+kiwenlau/mono                latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+docker tag kiwenlau/mono:latest 136.187.101.80:5000/mono:latest
+
+docker images
+kiwenlau/mono                latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+136.187.101.80:5000/mono     latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1
+966d63b6df66        kiwenlau/registry:0.9.1   "docker-registry"   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.80:5000/mono:latest
+
+docker rm -f docker_registry
+
+
+
+Test 8: ./pushpull.sh kai 136.187.101.71 mono
+
+docker images
+kiwenlau/mono                latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+docker tag kiwenlau/mono:latest 136.187.101.80:5000/mono:latest
+
+docker images
+kiwenlau/mono                latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+136.187.101.80:5000/mono     latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1
+a86eb11e2e0c        kiwenlau/registry:0.9.1   "docker-registry"   1 seconds ago       Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.80:5000/mono:latest
+The push refers to a repository [136.187.101.80:5000/mono] (len: 1)
+Sending image list
+Pushing repository 136.187.101.80:5000/mono (1 tags)
+21e4345e9035: Pushing
+21e4345e9035: Buffering to disk
+21e4345e9035: Image successfully pushed
+b3d362b23ec1: Pushing
+b3d362b23ec1: Buffering to disk
+b3d362b23ec1: Image successfully pushed
+414e39f12386: Pushing
+414e39f12386: Buffering to disk
+414e39f12386: Image successfully pushed
+1984117500e8: Pushing
+1984117500e8: Buffering to disk
+1984117500e8: Image successfully pushed
+0beb24926495: Pushing
+0beb24926495: Buffering to disk
+0beb24926495: Image successfully pushed
+a04c64dc2bd9: Pushing
+a04c64dc2bd9: Buffering to disk
+a04c64dc2bd9: Image successfully pushed
+Pushing tag for rev [a04c64dc2bd9] on {http://136.187.101.80:5000/v1/repositories/mono/tags/latest}
+
+real  93.14
+
+ssh kai@136.187.101.71 "docker images | grep mono"
+
+docker pull 136.187.101.80:5000/mono:latest
+Pulling repository 136.187.101.80:5000/mono
+a04c64dc2bd9: Pulling image (latest) from 136.187.101.80:5000/mono
+a04c64dc2bd9: Pulling image (latest) from 136.187.101.80:5000/mono, endpoint: http://136.187.101.80:5000/v1/
+a04c64dc2bd9: Pulling dependent layers
+21e4345e9035: Pulling metadata
+21e4345e9035: Pulling fs layer
+21e4345e9035: Download complete
+b3d362b23ec1: Pulling metadata
+b3d362b23ec1: Pulling fs layer
+b3d362b23ec1: Download complete
+414e39f12386: Pulling metadata
+414e39f12386: Pulling fs layer
+414e39f12386: Download complete
+1984117500e8: Pulling metadata
+1984117500e8: Pulling fs layer
+1984117500e8: Download complete
+0beb24926495: Pulling metadata
+0beb24926495: Pulling fs layer
+0beb24926495: Download complete
+a04c64dc2bd9: Pulling metadata
+a04c64dc2bd9: Pulling fs layer
+a04c64dc2bd9: Download complete
+a04c64dc2bd9: Download complete
+Status: Downloaded newer image for 136.187.101.80:5000/mono:latest
+
+real  18.12
+
+ssh kai@136.187.101.71 "docker images | grep mono"
+136.187.101.80:5000/mono   latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.80:5000/mono:latest"
+ssh kai@136.187.101.71 "docker images | grep mono"
+
+docker rm -f docker_registry
+
+
+Test 9: ./pushpull.sh kai 136.187.101.71 mono
+
+docker images
+kiwenlau/mono                latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+docker tag kiwenlau/mono:latest 136.187.101.80:5000/mono:latest
+
+docker images
+136.187.101.80:5000/mono     latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+kiwenlau/mono                latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1
+7c3d746cda35        kiwenlau/registry:0.9.1   "docker-registry"   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.80:5000/mono:latest
+The push refers to a repository [136.187.101.80:5000/mono] (len: 1)
+Sending image list
+Pushing repository 136.187.101.80:5000/mono (1 tags)
+21e4345e9035: Pushing
+21e4345e9035: Buffering to disk
+21e4345e9035: Image successfully pushed
+b3d362b23ec1: Pushing
+b3d362b23ec1: Buffering to disk
+b3d362b23ec1: Image successfully pushed
+414e39f12386: Pushing
+414e39f12386: Buffering to disk
+414e39f12386: Image successfully pushed
+1984117500e8: Pushing
+1984117500e8: Buffering to disk
+1984117500e8: Image successfully pushed
+0beb24926495: Pushing
+0beb24926495: Buffering to disk
+0beb24926495: Image successfully pushed
+a04c64dc2bd9: Pushing
+a04c64dc2bd9: Buffering to disk
+a04c64dc2bd9: Image successfully pushed
+Pushing tag for rev [a04c64dc2bd9] on {http://136.187.101.80:5000/v1/repositories/mono/tags/latest}
+
+real  92.03
+
+ssh kai@136.187.101.71 "docker images | grep mono"
+
+docker pull 136.187.101.80:5000/mono:latest
+Pulling repository 136.187.101.80:5000/mono
+a04c64dc2bd9: Pulling image (latest) from 136.187.101.80:5000/mono
+a04c64dc2bd9: Pulling image (latest) from 136.187.101.80:5000/mono, endpoint: http://136.187.101.80:5000/v1/
+a04c64dc2bd9: Pulling dependent layers
+21e4345e9035: Pulling metadata
+21e4345e9035: Pulling fs layer
+21e4345e9035: Download complete
+b3d362b23ec1: Pulling metadata
+b3d362b23ec1: Pulling fs layer
+b3d362b23ec1: Download complete
+414e39f12386: Pulling metadata
+414e39f12386: Pulling fs layer
+414e39f12386: Download complete
+1984117500e8: Pulling metadata
+1984117500e8: Pulling fs layer
+1984117500e8: Download complete
+0beb24926495: Pulling metadata
+0beb24926495: Pulling fs layer
+0beb24926495: Download complete
+a04c64dc2bd9: Pulling metadata
+a04c64dc2bd9: Pulling fs layer
+a04c64dc2bd9: Download complete
+a04c64dc2bd9: Download complete
+Status: Downloaded newer image for 136.187.101.80:5000/mono:latest
+
+real  18.23
+
+ssh kai@136.187.101.71 "docker images | grep mono"
+136.187.101.80:5000/mono   latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.80:5000/mono:latest"
+ssh kai@136.187.101.71 "docker images | grep mono"
+
+docker rm -f docker_registry
+
+
+Test 10: ./pushpull.sh kai 136.187.101.71 mono
+
+docker images
+kiwenlau/mono                latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+docker tag kiwenlau/mono:latest 136.187.101.80:5000/mono:latest
+
+docker images
+kiwenlau/mono                latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+136.187.101.80:5000/mono     latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1
+af9b618da25a        kiwenlau/registry:0.9.1   "docker-registry"   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.80:5000/mono:latest
+
+docker rm -f docker_registry
+
+
+
+Test 10: ./pushpull.sh kai 136.187.101.71 mono
+
+docker images
+kiwenlau/mono                latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+docker tag kiwenlau/mono:latest 136.187.101.80:5000/mono:latest
+
+docker images
+kiwenlau/mono                latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+136.187.101.80:5000/mono     latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1
+8173f99daa2b        kiwenlau/registry:0.9.1   "docker-registry"   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.80:5000/mono:latest
+The push refers to a repository [136.187.101.80:5000/mono] (len: 1)
+Sending image list
+Pushing repository 136.187.101.80:5000/mono (1 tags)
+21e4345e9035: Pushing
+21e4345e9035: Buffering to disk
+21e4345e9035: Image successfully pushed
+b3d362b23ec1: Pushing
+b3d362b23ec1: Buffering to disk
+b3d362b23ec1: Image successfully pushed
+414e39f12386: Pushing
+414e39f12386: Buffering to disk
+414e39f12386: Image successfully pushed
+1984117500e8: Pushing
+1984117500e8: Buffering to disk
+1984117500e8: Image successfully pushed
+0beb24926495: Pushing
+0beb24926495: Buffering to disk
+0beb24926495: Image successfully pushed
+a04c64dc2bd9: Pushing
+a04c64dc2bd9: Buffering to disk
+a04c64dc2bd9: Image successfully pushed
+Pushing tag for rev [a04c64dc2bd9] on {http://136.187.101.80:5000/v1/repositories/mono/tags/latest}
+
+real  92.49
+
+ssh kai@136.187.101.71 "docker images | grep mono"
+
+docker pull 136.187.101.80:5000/mono:latest
+Pulling repository 136.187.101.80:5000/mono
+a04c64dc2bd9: Pulling image (latest) from 136.187.101.80:5000/mono
+a04c64dc2bd9: Pulling image (latest) from 136.187.101.80:5000/mono, endpoint: http://136.187.101.80:5000/v1/
+a04c64dc2bd9: Pulling dependent layers
+21e4345e9035: Pulling metadata
+21e4345e9035: Pulling fs layer
+21e4345e9035: Download complete
+b3d362b23ec1: Pulling metadata
+b3d362b23ec1: Pulling fs layer
+b3d362b23ec1: Download complete
+414e39f12386: Pulling metadata
+414e39f12386: Pulling fs layer
+414e39f12386: Download complete
+1984117500e8: Pulling metadata
+1984117500e8: Pulling fs layer
+1984117500e8: Download complete
+0beb24926495: Pulling metadata
+0beb24926495: Pulling fs layer
+0beb24926495: Download complete
+a04c64dc2bd9: Pulling metadata
+a04c64dc2bd9: Pulling fs layer
+a04c64dc2bd9: Download complete
+a04c64dc2bd9: Download complete
+Status: Downloaded newer image for 136.187.101.80:5000/mono:latest
+
+real  18.14
+
+ssh kai@136.187.101.71 "docker images | grep mono"
+136.187.101.80:5000/mono   latest              a04c64dc2bd9        6 weeks ago         616.9 MB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.80:5000/mono:latest"
+ssh kai@136.187.101.71 "docker images | grep mono"
+
+docker rm -f docker_registry
+
+end date: Wed Jun 17 03:08:55 JST 2015
+
+

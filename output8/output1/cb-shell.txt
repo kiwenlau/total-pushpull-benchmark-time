@@ -1,0 +1,1524 @@
+
+pullpush benchmark: transfer cb-shell image to 54.225.249.141 host
+ 
+hostname: kuruwa-gw
+begin date: Sun Aug  2 00:43:06 JST 2015
+
+sudo docker images
+kiwenlau/cb-shell               flat                3c4e8d226f8d        5 weeks ago         149.1 MB
+kiwenlau/cb-shell               latest              f62e333bd3c5        11 weeks ago        150 MB
+
+sudo docker images
+kiwenlau/cb-shell               flat                3c4e8d226f8d        5 weeks ago         149.1 MB
+kiwenlau/cb-shell               latest              f62e333bd3c5        11 weeks ago        150 MB
+
+
+Test 1: ./pushpull.sh kai 54.225.249.141 cb-shell
+
+docker images
+kiwenlau/cb-shell               latest              f62e333bd3c5        11 weeks ago        150 MB
+
+docker tag kiwenlau/cb-shell:latest 54.225.249.141:5000/cb-shell:latest
+
+docker images
+kiwenlau/cb-shell               latest              f62e333bd3c5        11 weeks ago        150 MB
+54.225.249.141:5000/cb-shell    latest              f62e333bd3c5        11 weeks ago        150 MB
+
+ssh kai@54.225.249.141 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+e6d87f21c87a        kiwenlau/registry:0.9.1   "docker-registry"   3 seconds ago       Up 2 seconds        0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 54.225.249.141:5000/cb-shell:latest
+The push refers to a repository [54.225.249.141:5000/cb-shell] (len: 1)
+Sending image list
+Pushing repository 54.225.249.141:5000/cb-shell (1 tags)
+511136ea3c5a: Pushing
+511136ea3c5a: Buffering to disk
+511136ea3c5a: Image successfully pushed
+d8136e131778: Pushing
+d8136e131778: Buffering to disk
+d8136e131778: Image successfully pushed
+db6fa2b0ded7: Pushing
+db6fa2b0ded7: Buffering to disk
+db6fa2b0ded7: Image successfully pushed
+2239add4b301: Pushing
+2239add4b301: Buffering to disk
+2239add4b301: Image successfully pushed
+7468398321fd: Pushing
+7468398321fd: Buffering to disk
+7468398321fd: Image successfully pushed
+feb56519521d: Pushing
+feb56519521d: Buffering to disk
+feb56519521d: Image successfully pushed
+c5ef8c7522b8: Pushing
+c5ef8c7522b8: Buffering to disk
+c5ef8c7522b8: Image successfully pushed
+77c3d1c88b6b: Pushing
+77c3d1c88b6b: Buffering to disk
+77c3d1c88b6b: Image successfully pushed
+7c6e5a567b42: Pushing
+7c6e5a567b42: Buffering to disk
+7c6e5a567b42: Image successfully pushed
+8d1f1b0e9df0: Pushing
+8d1f1b0e9df0: Buffering to disk
+8d1f1b0e9df0: Image successfully pushed
+37090dad085c: Pushing
+37090dad085c: Buffering to disk
+37090dad085c: Image successfully pushed
+4c9967358fc2: Pushing
+4c9967358fc2: Buffering to disk
+4c9967358fc2: Image successfully pushed
+3fca8bed72c7: Pushing
+3fca8bed72c7: Buffering to disk
+3fca8bed72c7: Image successfully pushed
+190129e74689: Pushing
+190129e74689: Buffering to disk
+190129e74689: Image successfully pushed
+69d795fe26a4: Pushing
+69d795fe26a4: Buffering to disk
+69d795fe26a4: Image successfully pushed
+60d799e52fcb: Pushing
+60d799e52fcb: Buffering to disk
+60d799e52fcb: Image successfully pushed
+f62e333bd3c5: Pushing
+f62e333bd3c5: Buffering to disk
+f62e333bd3c5: Image successfully pushed
+Pushing tag for rev [f62e333bd3c5] on {http://54.225.249.141:5000/v1/repositories/cb-shell/tags/latest}
+
+real  59.01
+
+ssh kai@54.225.249.141 "docker images | grep cb-shell"
+
+docker pull 54.225.249.141:5000/cb-shell:latest
+Pulling repository 54.225.249.141:5000/cb-shell
+f62e333bd3c5: Pulling image (latest) from 54.225.249.141:5000/cb-shell
+f62e333bd3c5: Pulling image (latest) from 54.225.249.141:5000/cb-shell, endpoint: http://54.225.249.141:5000/v1/
+f62e333bd3c5: Pulling dependent layers
+511136ea3c5a: Pulling metadata
+511136ea3c5a: Pulling fs layer
+511136ea3c5a: Download complete
+d8136e131778: Pulling metadata
+d8136e131778: Pulling fs layer
+d8136e131778: Download complete
+db6fa2b0ded7: Pulling metadata
+db6fa2b0ded7: Pulling fs layer
+db6fa2b0ded7: Download complete
+2239add4b301: Pulling metadata
+2239add4b301: Pulling fs layer
+2239add4b301: Download complete
+7468398321fd: Pulling metadata
+7468398321fd: Pulling fs layer
+7468398321fd: Download complete
+feb56519521d: Pulling metadata
+feb56519521d: Pulling fs layer
+feb56519521d: Download complete
+c5ef8c7522b8: Pulling metadata
+c5ef8c7522b8: Pulling fs layer
+c5ef8c7522b8: Download complete
+77c3d1c88b6b: Pulling metadata
+77c3d1c88b6b: Pulling fs layer
+77c3d1c88b6b: Download complete
+7c6e5a567b42: Pulling metadata
+7c6e5a567b42: Pulling fs layer
+7c6e5a567b42: Download complete
+8d1f1b0e9df0: Pulling metadata
+8d1f1b0e9df0: Pulling fs layer
+8d1f1b0e9df0: Download complete
+37090dad085c: Pulling metadata
+37090dad085c: Pulling fs layer
+37090dad085c: Download complete
+4c9967358fc2: Pulling metadata
+4c9967358fc2: Pulling fs layer
+4c9967358fc2: Download complete
+3fca8bed72c7: Pulling metadata
+3fca8bed72c7: Pulling fs layer
+3fca8bed72c7: Download complete
+190129e74689: Pulling metadata
+190129e74689: Pulling fs layer
+190129e74689: Download complete
+69d795fe26a4: Pulling metadata
+69d795fe26a4: Pulling fs layer
+69d795fe26a4: Download complete
+60d799e52fcb: Pulling metadata
+60d799e52fcb: Pulling fs layer
+60d799e52fcb: Download complete
+f62e333bd3c5: Pulling metadata
+f62e333bd3c5: Pulling fs layer
+f62e333bd3c5: Download complete
+f62e333bd3c5: Download complete
+Status: Downloaded newer image for 54.225.249.141:5000/cb-shell:latest
+
+real  9.78
+
+ssh kai@54.225.249.141 "docker images | grep cb-shell"
+54.225.249.141:5000/cb-shell   latest              f62e333bd3c5        11 weeks ago        150 MB
+
+ssh kai@54.225.249.141 "docker rmi 54.225.249.141:5000/cb-shell:latest"
+ssh kai@54.225.249.141 "docker images | grep cb-shell"
+
+ssh kai@54.225.249.141 "docker rm -f docker_registry"
+
+
+Test 2: ./pushpull.sh kai 54.225.249.141 cb-shell
+
+docker images
+kiwenlau/cb-shell               latest              f62e333bd3c5        11 weeks ago        150 MB
+
+docker tag kiwenlau/cb-shell:latest 54.225.249.141:5000/cb-shell:latest
+
+docker images
+54.225.249.141:5000/cb-shell    latest              f62e333bd3c5        11 weeks ago        150 MB
+kiwenlau/cb-shell               latest              f62e333bd3c5        11 weeks ago        150 MB
+
+ssh kai@54.225.249.141 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+648fad47dd15        kiwenlau/registry:0.9.1   "docker-registry"   3 seconds ago       Up 2 seconds        0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 54.225.249.141:5000/cb-shell:latest
+The push refers to a repository [54.225.249.141:5000/cb-shell] (len: 1)
+Sending image list
+Pushing repository 54.225.249.141:5000/cb-shell (1 tags)
+511136ea3c5a: Pushing
+511136ea3c5a: Buffering to disk
+511136ea3c5a: Image successfully pushed
+d8136e131778: Pushing
+d8136e131778: Buffering to disk
+d8136e131778: Image successfully pushed
+db6fa2b0ded7: Pushing
+db6fa2b0ded7: Buffering to disk
+db6fa2b0ded7: Image successfully pushed
+2239add4b301: Pushing
+2239add4b301: Buffering to disk
+2239add4b301: Image successfully pushed
+7468398321fd: Pushing
+7468398321fd: Buffering to disk
+7468398321fd: Image successfully pushed
+feb56519521d: Pushing
+feb56519521d: Buffering to disk
+feb56519521d: Image successfully pushed
+c5ef8c7522b8: Pushing
+c5ef8c7522b8: Buffering to disk
+c5ef8c7522b8: Image successfully pushed
+77c3d1c88b6b: Pushing
+77c3d1c88b6b: Buffering to disk
+77c3d1c88b6b: Image successfully pushed
+7c6e5a567b42: Pushing
+7c6e5a567b42: Buffering to disk
+7c6e5a567b42: Image successfully pushed
+8d1f1b0e9df0: Pushing
+8d1f1b0e9df0: Buffering to disk
+8d1f1b0e9df0: Image successfully pushed
+37090dad085c: Pushing
+37090dad085c: Buffering to disk
+37090dad085c: Image successfully pushed
+4c9967358fc2: Pushing
+4c9967358fc2: Buffering to disk
+4c9967358fc2: Image successfully pushed
+3fca8bed72c7: Pushing
+3fca8bed72c7: Buffering to disk
+3fca8bed72c7: Image successfully pushed
+190129e74689: Pushing
+190129e74689: Buffering to disk
+190129e74689: Image successfully pushed
+69d795fe26a4: Pushing
+69d795fe26a4: Buffering to disk
+69d795fe26a4: Image successfully pushed
+60d799e52fcb: Pushing
+60d799e52fcb: Buffering to disk
+60d799e52fcb: Image successfully pushed
+f62e333bd3c5: Pushing
+f62e333bd3c5: Buffering to disk
+f62e333bd3c5: Image successfully pushed
+Pushing tag for rev [f62e333bd3c5] on {http://54.225.249.141:5000/v1/repositories/cb-shell/tags/latest}
+
+real  58.94
+
+ssh kai@54.225.249.141 "docker images | grep cb-shell"
+
+docker pull 54.225.249.141:5000/cb-shell:latest
+Pulling repository 54.225.249.141:5000/cb-shell
+f62e333bd3c5: Pulling image (latest) from 54.225.249.141:5000/cb-shell
+f62e333bd3c5: Pulling image (latest) from 54.225.249.141:5000/cb-shell, endpoint: http://54.225.249.141:5000/v1/
+f62e333bd3c5: Pulling dependent layers
+511136ea3c5a: Pulling metadata
+511136ea3c5a: Pulling fs layer
+511136ea3c5a: Download complete
+d8136e131778: Pulling metadata
+d8136e131778: Pulling fs layer
+d8136e131778: Download complete
+db6fa2b0ded7: Pulling metadata
+db6fa2b0ded7: Pulling fs layer
+db6fa2b0ded7: Download complete
+2239add4b301: Pulling metadata
+2239add4b301: Pulling fs layer
+2239add4b301: Download complete
+7468398321fd: Pulling metadata
+7468398321fd: Pulling fs layer
+7468398321fd: Download complete
+feb56519521d: Pulling metadata
+feb56519521d: Pulling fs layer
+feb56519521d: Download complete
+c5ef8c7522b8: Pulling metadata
+c5ef8c7522b8: Pulling fs layer
+c5ef8c7522b8: Download complete
+77c3d1c88b6b: Pulling metadata
+77c3d1c88b6b: Pulling fs layer
+77c3d1c88b6b: Download complete
+7c6e5a567b42: Pulling metadata
+7c6e5a567b42: Pulling fs layer
+7c6e5a567b42: Download complete
+8d1f1b0e9df0: Pulling metadata
+8d1f1b0e9df0: Pulling fs layer
+8d1f1b0e9df0: Download complete
+37090dad085c: Pulling metadata
+37090dad085c: Pulling fs layer
+37090dad085c: Download complete
+4c9967358fc2: Pulling metadata
+4c9967358fc2: Pulling fs layer
+4c9967358fc2: Download complete
+3fca8bed72c7: Pulling metadata
+3fca8bed72c7: Pulling fs layer
+3fca8bed72c7: Download complete
+190129e74689: Pulling metadata
+190129e74689: Pulling fs layer
+190129e74689: Download complete
+69d795fe26a4: Pulling metadata
+69d795fe26a4: Pulling fs layer
+69d795fe26a4: Download complete
+60d799e52fcb: Pulling metadata
+60d799e52fcb: Pulling fs layer
+60d799e52fcb: Download complete
+f62e333bd3c5: Pulling metadata
+f62e333bd3c5: Pulling fs layer
+f62e333bd3c5: Download complete
+f62e333bd3c5: Download complete
+Status: Downloaded newer image for 54.225.249.141:5000/cb-shell:latest
+
+real  9.78
+
+ssh kai@54.225.249.141 "docker images | grep cb-shell"
+54.225.249.141:5000/cb-shell   latest              f62e333bd3c5        11 weeks ago        150 MB
+
+ssh kai@54.225.249.141 "docker rmi 54.225.249.141:5000/cb-shell:latest"
+ssh kai@54.225.249.141 "docker images | grep cb-shell"
+
+ssh kai@54.225.249.141 "docker rm -f docker_registry"
+
+
+Test 3: ./pushpull.sh kai 54.225.249.141 cb-shell
+
+docker images
+kiwenlau/cb-shell               latest              f62e333bd3c5        11 weeks ago        150 MB
+
+docker tag kiwenlau/cb-shell:latest 54.225.249.141:5000/cb-shell:latest
+
+docker images
+54.225.249.141:5000/cb-shell    latest              f62e333bd3c5        11 weeks ago        150 MB
+kiwenlau/cb-shell               latest              f62e333bd3c5        11 weeks ago        150 MB
+
+ssh kai@54.225.249.141 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+3362d212f3ef        kiwenlau/registry:0.9.1   "docker-registry"   2 seconds ago       Up 2 seconds        0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 54.225.249.141:5000/cb-shell:latest
+The push refers to a repository [54.225.249.141:5000/cb-shell] (len: 1)
+Sending image list
+Pushing repository 54.225.249.141:5000/cb-shell (1 tags)
+511136ea3c5a: Pushing
+511136ea3c5a: Buffering to disk
+511136ea3c5a: Image successfully pushed
+d8136e131778: Pushing
+d8136e131778: Buffering to disk
+d8136e131778: Image successfully pushed
+db6fa2b0ded7: Pushing
+db6fa2b0ded7: Buffering to disk
+db6fa2b0ded7: Image successfully pushed
+2239add4b301: Pushing
+2239add4b301: Buffering to disk
+2239add4b301: Image successfully pushed
+7468398321fd: Pushing
+7468398321fd: Buffering to disk
+7468398321fd: Image successfully pushed
+feb56519521d: Pushing
+feb56519521d: Buffering to disk
+feb56519521d: Image successfully pushed
+c5ef8c7522b8: Pushing
+c5ef8c7522b8: Buffering to disk
+c5ef8c7522b8: Image successfully pushed
+77c3d1c88b6b: Pushing
+77c3d1c88b6b: Buffering to disk
+77c3d1c88b6b: Image successfully pushed
+7c6e5a567b42: Pushing
+7c6e5a567b42: Buffering to disk
+7c6e5a567b42: Image successfully pushed
+8d1f1b0e9df0: Pushing
+8d1f1b0e9df0: Buffering to disk
+8d1f1b0e9df0: Image successfully pushed
+37090dad085c: Pushing
+37090dad085c: Buffering to disk
+37090dad085c: Image successfully pushed
+4c9967358fc2: Pushing
+4c9967358fc2: Buffering to disk
+4c9967358fc2: Image successfully pushed
+3fca8bed72c7: Pushing
+3fca8bed72c7: Buffering to disk
+3fca8bed72c7: Image successfully pushed
+190129e74689: Pushing
+190129e74689: Buffering to disk
+190129e74689: Image successfully pushed
+69d795fe26a4: Pushing
+69d795fe26a4: Buffering to disk
+69d795fe26a4: Image successfully pushed
+60d799e52fcb: Pushing
+60d799e52fcb: Buffering to disk
+60d799e52fcb: Image successfully pushed
+f62e333bd3c5: Pushing
+f62e333bd3c5: Buffering to disk
+f62e333bd3c5: Image successfully pushed
+Pushing tag for rev [f62e333bd3c5] on {http://54.225.249.141:5000/v1/repositories/cb-shell/tags/latest}
+
+real  56.16
+
+ssh kai@54.225.249.141 "docker images | grep cb-shell"
+
+docker pull 54.225.249.141:5000/cb-shell:latest
+Pulling repository 54.225.249.141:5000/cb-shell
+f62e333bd3c5: Pulling image (latest) from 54.225.249.141:5000/cb-shell
+f62e333bd3c5: Pulling image (latest) from 54.225.249.141:5000/cb-shell, endpoint: http://54.225.249.141:5000/v1/
+f62e333bd3c5: Pulling dependent layers
+511136ea3c5a: Pulling metadata
+511136ea3c5a: Pulling fs layer
+511136ea3c5a: Download complete
+d8136e131778: Pulling metadata
+d8136e131778: Pulling fs layer
+d8136e131778: Download complete
+db6fa2b0ded7: Pulling metadata
+db6fa2b0ded7: Pulling fs layer
+db6fa2b0ded7: Download complete
+2239add4b301: Pulling metadata
+2239add4b301: Pulling fs layer
+2239add4b301: Download complete
+7468398321fd: Pulling metadata
+7468398321fd: Pulling fs layer
+7468398321fd: Download complete
+feb56519521d: Pulling metadata
+feb56519521d: Pulling fs layer
+feb56519521d: Download complete
+c5ef8c7522b8: Pulling metadata
+c5ef8c7522b8: Pulling fs layer
+c5ef8c7522b8: Download complete
+77c3d1c88b6b: Pulling metadata
+77c3d1c88b6b: Pulling fs layer
+77c3d1c88b6b: Download complete
+7c6e5a567b42: Pulling metadata
+7c6e5a567b42: Pulling fs layer
+7c6e5a567b42: Download complete
+8d1f1b0e9df0: Pulling metadata
+8d1f1b0e9df0: Pulling fs layer
+8d1f1b0e9df0: Download complete
+37090dad085c: Pulling metadata
+37090dad085c: Pulling fs layer
+37090dad085c: Download complete
+4c9967358fc2: Pulling metadata
+4c9967358fc2: Pulling fs layer
+4c9967358fc2: Download complete
+3fca8bed72c7: Pulling metadata
+3fca8bed72c7: Pulling fs layer
+3fca8bed72c7: Download complete
+190129e74689: Pulling metadata
+190129e74689: Pulling fs layer
+190129e74689: Download complete
+69d795fe26a4: Pulling metadata
+69d795fe26a4: Pulling fs layer
+69d795fe26a4: Download complete
+60d799e52fcb: Pulling metadata
+60d799e52fcb: Pulling fs layer
+60d799e52fcb: Download complete
+f62e333bd3c5: Pulling metadata
+f62e333bd3c5: Pulling fs layer
+f62e333bd3c5: Download complete
+f62e333bd3c5: Download complete
+Status: Downloaded newer image for 54.225.249.141:5000/cb-shell:latest
+
+real  9.68
+
+ssh kai@54.225.249.141 "docker images | grep cb-shell"
+54.225.249.141:5000/cb-shell   latest              f62e333bd3c5        11 weeks ago        150 MB
+
+ssh kai@54.225.249.141 "docker rmi 54.225.249.141:5000/cb-shell:latest"
+ssh kai@54.225.249.141 "docker images | grep cb-shell"
+
+ssh kai@54.225.249.141 "docker rm -f docker_registry"
+
+
+Test 4: ./pushpull.sh kai 54.225.249.141 cb-shell
+
+docker images
+kiwenlau/cb-shell               latest              f62e333bd3c5        11 weeks ago        150 MB
+
+docker tag kiwenlau/cb-shell:latest 54.225.249.141:5000/cb-shell:latest
+
+docker images
+kiwenlau/cb-shell               latest              f62e333bd3c5        11 weeks ago        150 MB
+54.225.249.141:5000/cb-shell    latest              f62e333bd3c5        11 weeks ago        150 MB
+
+ssh kai@54.225.249.141 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+4c04158bbc2f        kiwenlau/registry:0.9.1   "docker-registry"   3 seconds ago       Up 2 seconds        0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 54.225.249.141:5000/cb-shell:latest
+The push refers to a repository [54.225.249.141:5000/cb-shell] (len: 1)
+Sending image list
+Pushing repository 54.225.249.141:5000/cb-shell (1 tags)
+511136ea3c5a: Pushing
+511136ea3c5a: Buffering to disk
+511136ea3c5a: Image successfully pushed
+d8136e131778: Pushing
+d8136e131778: Buffering to disk
+d8136e131778: Image successfully pushed
+db6fa2b0ded7: Pushing
+db6fa2b0ded7: Buffering to disk
+db6fa2b0ded7: Image successfully pushed
+2239add4b301: Pushing
+2239add4b301: Buffering to disk
+2239add4b301: Image successfully pushed
+7468398321fd: Pushing
+7468398321fd: Buffering to disk
+7468398321fd: Image successfully pushed
+feb56519521d: Pushing
+feb56519521d: Buffering to disk
+feb56519521d: Image successfully pushed
+c5ef8c7522b8: Pushing
+c5ef8c7522b8: Buffering to disk
+c5ef8c7522b8: Image successfully pushed
+77c3d1c88b6b: Pushing
+77c3d1c88b6b: Buffering to disk
+77c3d1c88b6b: Image successfully pushed
+7c6e5a567b42: Pushing
+7c6e5a567b42: Buffering to disk
+7c6e5a567b42: Image successfully pushed
+8d1f1b0e9df0: Pushing
+8d1f1b0e9df0: Buffering to disk
+8d1f1b0e9df0: Image successfully pushed
+37090dad085c: Pushing
+37090dad085c: Buffering to disk
+37090dad085c: Image successfully pushed
+4c9967358fc2: Pushing
+4c9967358fc2: Buffering to disk
+4c9967358fc2: Image successfully pushed
+3fca8bed72c7: Pushing
+3fca8bed72c7: Buffering to disk
+3fca8bed72c7: Image successfully pushed
+190129e74689: Pushing
+190129e74689: Buffering to disk
+190129e74689: Image successfully pushed
+69d795fe26a4: Pushing
+69d795fe26a4: Buffering to disk
+69d795fe26a4: Image successfully pushed
+60d799e52fcb: Pushing
+60d799e52fcb: Buffering to disk
+60d799e52fcb: Image successfully pushed
+f62e333bd3c5: Pushing
+f62e333bd3c5: Buffering to disk
+f62e333bd3c5: Image successfully pushed
+Pushing tag for rev [f62e333bd3c5] on {http://54.225.249.141:5000/v1/repositories/cb-shell/tags/latest}
+
+real  58.42
+
+ssh kai@54.225.249.141 "docker images | grep cb-shell"
+
+docker pull 54.225.249.141:5000/cb-shell:latest
+Pulling repository 54.225.249.141:5000/cb-shell
+f62e333bd3c5: Pulling image (latest) from 54.225.249.141:5000/cb-shell
+f62e333bd3c5: Pulling image (latest) from 54.225.249.141:5000/cb-shell, endpoint: http://54.225.249.141:5000/v1/
+f62e333bd3c5: Pulling dependent layers
+511136ea3c5a: Pulling metadata
+511136ea3c5a: Pulling fs layer
+511136ea3c5a: Download complete
+d8136e131778: Pulling metadata
+d8136e131778: Pulling fs layer
+d8136e131778: Download complete
+db6fa2b0ded7: Pulling metadata
+db6fa2b0ded7: Pulling fs layer
+db6fa2b0ded7: Download complete
+2239add4b301: Pulling metadata
+2239add4b301: Pulling fs layer
+2239add4b301: Download complete
+7468398321fd: Pulling metadata
+7468398321fd: Pulling fs layer
+7468398321fd: Download complete
+feb56519521d: Pulling metadata
+feb56519521d: Pulling fs layer
+feb56519521d: Download complete
+c5ef8c7522b8: Pulling metadata
+c5ef8c7522b8: Pulling fs layer
+c5ef8c7522b8: Download complete
+77c3d1c88b6b: Pulling metadata
+77c3d1c88b6b: Pulling fs layer
+77c3d1c88b6b: Download complete
+7c6e5a567b42: Pulling metadata
+7c6e5a567b42: Pulling fs layer
+7c6e5a567b42: Download complete
+8d1f1b0e9df0: Pulling metadata
+8d1f1b0e9df0: Pulling fs layer
+8d1f1b0e9df0: Download complete
+37090dad085c: Pulling metadata
+37090dad085c: Pulling fs layer
+37090dad085c: Download complete
+4c9967358fc2: Pulling metadata
+4c9967358fc2: Pulling fs layer
+4c9967358fc2: Download complete
+3fca8bed72c7: Pulling metadata
+3fca8bed72c7: Pulling fs layer
+3fca8bed72c7: Download complete
+190129e74689: Pulling metadata
+190129e74689: Pulling fs layer
+190129e74689: Download complete
+69d795fe26a4: Pulling metadata
+69d795fe26a4: Pulling fs layer
+69d795fe26a4: Download complete
+60d799e52fcb: Pulling metadata
+60d799e52fcb: Pulling fs layer
+60d799e52fcb: Download complete
+f62e333bd3c5: Pulling metadata
+f62e333bd3c5: Pulling fs layer
+f62e333bd3c5: Download complete
+f62e333bd3c5: Download complete
+Status: Downloaded newer image for 54.225.249.141:5000/cb-shell:latest
+
+real  9.67
+
+ssh kai@54.225.249.141 "docker images | grep cb-shell"
+54.225.249.141:5000/cb-shell   latest              f62e333bd3c5        11 weeks ago        150 MB
+
+ssh kai@54.225.249.141 "docker rmi 54.225.249.141:5000/cb-shell:latest"
+ssh kai@54.225.249.141 "docker images | grep cb-shell"
+
+ssh kai@54.225.249.141 "docker rm -f docker_registry"
+
+
+Test 5: ./pushpull.sh kai 54.225.249.141 cb-shell
+
+docker images
+kiwenlau/cb-shell               latest              f62e333bd3c5        11 weeks ago        150 MB
+
+docker tag kiwenlau/cb-shell:latest 54.225.249.141:5000/cb-shell:latest
+
+docker images
+54.225.249.141:5000/cb-shell    latest              f62e333bd3c5        11 weeks ago        150 MB
+kiwenlau/cb-shell               latest              f62e333bd3c5        11 weeks ago        150 MB
+
+ssh kai@54.225.249.141 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+
+docker push 54.225.249.141:5000/cb-shell:latest
+
+ssh kai@54.225.249.141 "docker rm -f docker_registry"
+
+
+
+Test 5: ./pushpull.sh kai 54.225.249.141 cb-shell
+
+docker images
+kiwenlau/cb-shell               latest              f62e333bd3c5        11 weeks ago        150 MB
+
+docker tag kiwenlau/cb-shell:latest 54.225.249.141:5000/cb-shell:latest
+
+docker images
+kiwenlau/cb-shell               latest              f62e333bd3c5        11 weeks ago        150 MB
+54.225.249.141:5000/cb-shell    latest              f62e333bd3c5        11 weeks ago        150 MB
+
+ssh kai@54.225.249.141 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+
+docker push 54.225.249.141:5000/cb-shell:latest
+
+ssh kai@54.225.249.141 "docker rm -f docker_registry"
+
+
+
+Test 5: ./pushpull.sh kai 54.225.249.141 cb-shell
+
+docker images
+kiwenlau/cb-shell               latest              f62e333bd3c5        11 weeks ago        150 MB
+
+docker tag kiwenlau/cb-shell:latest 54.225.249.141:5000/cb-shell:latest
+
+docker images
+kiwenlau/cb-shell               latest              f62e333bd3c5        11 weeks ago        150 MB
+54.225.249.141:5000/cb-shell    latest              f62e333bd3c5        11 weeks ago        150 MB
+
+ssh kai@54.225.249.141 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+a2041e8c8f72        kiwenlau/registry:0.9.1   "docker-registry"   2 seconds ago       Up 2 seconds        0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 54.225.249.141:5000/cb-shell:latest
+The push refers to a repository [54.225.249.141:5000/cb-shell] (len: 1)
+Sending image list
+Pushing repository 54.225.249.141:5000/cb-shell (1 tags)
+511136ea3c5a: Pushing
+511136ea3c5a: Buffering to disk
+511136ea3c5a: Image successfully pushed
+d8136e131778: Pushing
+d8136e131778: Buffering to disk
+d8136e131778: Image successfully pushed
+db6fa2b0ded7: Pushing
+db6fa2b0ded7: Buffering to disk
+db6fa2b0ded7: Image successfully pushed
+2239add4b301: Pushing
+2239add4b301: Buffering to disk
+2239add4b301: Image successfully pushed
+7468398321fd: Pushing
+7468398321fd: Buffering to disk
+7468398321fd: Image successfully pushed
+feb56519521d: Pushing
+feb56519521d: Buffering to disk
+feb56519521d: Image successfully pushed
+c5ef8c7522b8: Pushing
+c5ef8c7522b8: Buffering to disk
+c5ef8c7522b8: Image successfully pushed
+77c3d1c88b6b: Pushing
+77c3d1c88b6b: Buffering to disk
+77c3d1c88b6b: Image successfully pushed
+7c6e5a567b42: Pushing
+7c6e5a567b42: Buffering to disk
+7c6e5a567b42: Image successfully pushed
+8d1f1b0e9df0: Pushing
+8d1f1b0e9df0: Buffering to disk
+8d1f1b0e9df0: Image successfully pushed
+37090dad085c: Pushing
+37090dad085c: Buffering to disk
+37090dad085c: Image successfully pushed
+4c9967358fc2: Pushing
+4c9967358fc2: Buffering to disk
+4c9967358fc2: Image successfully pushed
+3fca8bed72c7: Pushing
+3fca8bed72c7: Buffering to disk
+3fca8bed72c7: Image successfully pushed
+190129e74689: Pushing
+190129e74689: Buffering to disk
+190129e74689: Image successfully pushed
+69d795fe26a4: Pushing
+69d795fe26a4: Buffering to disk
+69d795fe26a4: Image successfully pushed
+60d799e52fcb: Pushing
+60d799e52fcb: Buffering to disk
+60d799e52fcb: Image successfully pushed
+f62e333bd3c5: Pushing
+f62e333bd3c5: Buffering to disk
+f62e333bd3c5: Image successfully pushed
+Pushing tag for rev [f62e333bd3c5] on {http://54.225.249.141:5000/v1/repositories/cb-shell/tags/latest}
+
+real  56.89
+
+ssh kai@54.225.249.141 "docker images | grep cb-shell"
+
+docker pull 54.225.249.141:5000/cb-shell:latest
+Pulling repository 54.225.249.141:5000/cb-shell
+f62e333bd3c5: Pulling image (latest) from 54.225.249.141:5000/cb-shell
+f62e333bd3c5: Pulling image (latest) from 54.225.249.141:5000/cb-shell, endpoint: http://54.225.249.141:5000/v1/
+f62e333bd3c5: Pulling dependent layers
+511136ea3c5a: Pulling metadata
+511136ea3c5a: Pulling fs layer
+511136ea3c5a: Download complete
+d8136e131778: Pulling metadata
+d8136e131778: Pulling fs layer
+d8136e131778: Download complete
+db6fa2b0ded7: Pulling metadata
+db6fa2b0ded7: Pulling fs layer
+db6fa2b0ded7: Download complete
+2239add4b301: Pulling metadata
+2239add4b301: Pulling fs layer
+2239add4b301: Download complete
+7468398321fd: Pulling metadata
+7468398321fd: Pulling fs layer
+7468398321fd: Download complete
+feb56519521d: Pulling metadata
+feb56519521d: Pulling fs layer
+feb56519521d: Download complete
+c5ef8c7522b8: Pulling metadata
+c5ef8c7522b8: Pulling fs layer
+c5ef8c7522b8: Download complete
+77c3d1c88b6b: Pulling metadata
+77c3d1c88b6b: Pulling fs layer
+77c3d1c88b6b: Download complete
+7c6e5a567b42: Pulling metadata
+7c6e5a567b42: Pulling fs layer
+7c6e5a567b42: Download complete
+8d1f1b0e9df0: Pulling metadata
+8d1f1b0e9df0: Pulling fs layer
+8d1f1b0e9df0: Download complete
+37090dad085c: Pulling metadata
+37090dad085c: Pulling fs layer
+37090dad085c: Download complete
+4c9967358fc2: Pulling metadata
+4c9967358fc2: Pulling fs layer
+4c9967358fc2: Download complete
+3fca8bed72c7: Pulling metadata
+3fca8bed72c7: Pulling fs layer
+3fca8bed72c7: Download complete
+190129e74689: Pulling metadata
+190129e74689: Pulling fs layer
+190129e74689: Download complete
+69d795fe26a4: Pulling metadata
+69d795fe26a4: Pulling fs layer
+69d795fe26a4: Download complete
+60d799e52fcb: Pulling metadata
+60d799e52fcb: Pulling fs layer
+60d799e52fcb: Download complete
+f62e333bd3c5: Pulling metadata
+f62e333bd3c5: Pulling fs layer
+f62e333bd3c5: Download complete
+f62e333bd3c5: Download complete
+Status: Downloaded newer image for 54.225.249.141:5000/cb-shell:latest
+
+real  9.70
+
+ssh kai@54.225.249.141 "docker images | grep cb-shell"
+54.225.249.141:5000/cb-shell   latest              f62e333bd3c5        11 weeks ago        150 MB
+
+ssh kai@54.225.249.141 "docker rmi 54.225.249.141:5000/cb-shell:latest"
+ssh kai@54.225.249.141 "docker images | grep cb-shell"
+
+ssh kai@54.225.249.141 "docker rm -f docker_registry"
+
+
+Test 6: ./pushpull.sh kai 54.225.249.141 cb-shell
+
+docker images
+kiwenlau/cb-shell               latest              f62e333bd3c5        11 weeks ago        150 MB
+
+docker tag kiwenlau/cb-shell:latest 54.225.249.141:5000/cb-shell:latest
+
+docker images
+kiwenlau/cb-shell               latest              f62e333bd3c5        11 weeks ago        150 MB
+54.225.249.141:5000/cb-shell    latest              f62e333bd3c5        11 weeks ago        150 MB
+
+ssh kai@54.225.249.141 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+9badaad47ffd        kiwenlau/registry:0.9.1   "docker-registry"   2 seconds ago       Up 2 seconds        0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 54.225.249.141:5000/cb-shell:latest
+The push refers to a repository [54.225.249.141:5000/cb-shell] (len: 1)
+Sending image list
+Pushing repository 54.225.249.141:5000/cb-shell (1 tags)
+511136ea3c5a: Pushing
+511136ea3c5a: Buffering to disk
+511136ea3c5a: Image successfully pushed
+d8136e131778: Pushing
+d8136e131778: Buffering to disk
+d8136e131778: Image successfully pushed
+db6fa2b0ded7: Pushing
+db6fa2b0ded7: Buffering to disk
+db6fa2b0ded7: Image successfully pushed
+2239add4b301: Pushing
+2239add4b301: Buffering to disk
+2239add4b301: Image successfully pushed
+7468398321fd: Pushing
+7468398321fd: Buffering to disk
+7468398321fd: Image successfully pushed
+feb56519521d: Pushing
+feb56519521d: Buffering to disk
+feb56519521d: Image successfully pushed
+c5ef8c7522b8: Pushing
+c5ef8c7522b8: Buffering to disk
+c5ef8c7522b8: Image successfully pushed
+77c3d1c88b6b: Pushing
+77c3d1c88b6b: Buffering to disk
+77c3d1c88b6b: Image successfully pushed
+7c6e5a567b42: Pushing
+7c6e5a567b42: Buffering to disk
+7c6e5a567b42: Image successfully pushed
+8d1f1b0e9df0: Pushing
+8d1f1b0e9df0: Buffering to disk
+8d1f1b0e9df0: Image successfully pushed
+37090dad085c: Pushing
+37090dad085c: Buffering to disk
+37090dad085c: Image successfully pushed
+4c9967358fc2: Pushing
+4c9967358fc2: Buffering to disk
+4c9967358fc2: Image successfully pushed
+3fca8bed72c7: Pushing
+3fca8bed72c7: Buffering to disk
+3fca8bed72c7: Image successfully pushed
+190129e74689: Pushing
+190129e74689: Buffering to disk
+190129e74689: Image successfully pushed
+69d795fe26a4: Pushing
+69d795fe26a4: Buffering to disk
+69d795fe26a4: Image successfully pushed
+60d799e52fcb: Pushing
+60d799e52fcb: Buffering to disk
+60d799e52fcb: Image successfully pushed
+f62e333bd3c5: Pushing
+f62e333bd3c5: Buffering to disk
+f62e333bd3c5: Image successfully pushed
+Pushing tag for rev [f62e333bd3c5] on {http://54.225.249.141:5000/v1/repositories/cb-shell/tags/latest}
+
+real  58.25
+
+ssh kai@54.225.249.141 "docker images | grep cb-shell"
+
+docker pull 54.225.249.141:5000/cb-shell:latest
+Pulling repository 54.225.249.141:5000/cb-shell
+f62e333bd3c5: Pulling image (latest) from 54.225.249.141:5000/cb-shell
+f62e333bd3c5: Pulling image (latest) from 54.225.249.141:5000/cb-shell, endpoint: http://54.225.249.141:5000/v1/
+f62e333bd3c5: Pulling dependent layers
+511136ea3c5a: Pulling metadata
+511136ea3c5a: Pulling fs layer
+511136ea3c5a: Download complete
+d8136e131778: Pulling metadata
+d8136e131778: Pulling fs layer
+d8136e131778: Download complete
+db6fa2b0ded7: Pulling metadata
+db6fa2b0ded7: Pulling fs layer
+db6fa2b0ded7: Download complete
+2239add4b301: Pulling metadata
+2239add4b301: Pulling fs layer
+2239add4b301: Download complete
+7468398321fd: Pulling metadata
+7468398321fd: Pulling fs layer
+7468398321fd: Download complete
+feb56519521d: Pulling metadata
+feb56519521d: Pulling fs layer
+feb56519521d: Download complete
+c5ef8c7522b8: Pulling metadata
+c5ef8c7522b8: Pulling fs layer
+c5ef8c7522b8: Download complete
+77c3d1c88b6b: Pulling metadata
+77c3d1c88b6b: Pulling fs layer
+77c3d1c88b6b: Download complete
+7c6e5a567b42: Pulling metadata
+7c6e5a567b42: Pulling fs layer
+7c6e5a567b42: Download complete
+8d1f1b0e9df0: Pulling metadata
+8d1f1b0e9df0: Pulling fs layer
+8d1f1b0e9df0: Download complete
+37090dad085c: Pulling metadata
+37090dad085c: Pulling fs layer
+37090dad085c: Download complete
+4c9967358fc2: Pulling metadata
+4c9967358fc2: Pulling fs layer
+4c9967358fc2: Download complete
+3fca8bed72c7: Pulling metadata
+3fca8bed72c7: Pulling fs layer
+3fca8bed72c7: Download complete
+190129e74689: Pulling metadata
+190129e74689: Pulling fs layer
+190129e74689: Download complete
+69d795fe26a4: Pulling metadata
+69d795fe26a4: Pulling fs layer
+69d795fe26a4: Download complete
+60d799e52fcb: Pulling metadata
+60d799e52fcb: Pulling fs layer
+60d799e52fcb: Download complete
+f62e333bd3c5: Pulling metadata
+f62e333bd3c5: Pulling fs layer
+f62e333bd3c5: Download complete
+f62e333bd3c5: Download complete
+Status: Downloaded newer image for 54.225.249.141:5000/cb-shell:latest
+
+real  9.67
+
+ssh kai@54.225.249.141 "docker images | grep cb-shell"
+54.225.249.141:5000/cb-shell   latest              f62e333bd3c5        11 weeks ago        150 MB
+
+ssh kai@54.225.249.141 "docker rmi 54.225.249.141:5000/cb-shell:latest"
+ssh kai@54.225.249.141 "docker images | grep cb-shell"
+
+ssh kai@54.225.249.141 "docker rm -f docker_registry"
+
+
+Test 7: ./pushpull.sh kai 54.225.249.141 cb-shell
+
+docker images
+kiwenlau/cb-shell               latest              f62e333bd3c5        11 weeks ago        150 MB
+
+docker tag kiwenlau/cb-shell:latest 54.225.249.141:5000/cb-shell:latest
+
+docker images
+kiwenlau/cb-shell               latest              f62e333bd3c5        11 weeks ago        150 MB
+54.225.249.141:5000/cb-shell    latest              f62e333bd3c5        11 weeks ago        150 MB
+
+ssh kai@54.225.249.141 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+3746a54510f3        kiwenlau/registry:0.9.1   "docker-registry"   2 seconds ago       Up 2 seconds        0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 54.225.249.141:5000/cb-shell:latest
+The push refers to a repository [54.225.249.141:5000/cb-shell] (len: 1)
+Sending image list
+Pushing repository 54.225.249.141:5000/cb-shell (1 tags)
+511136ea3c5a: Pushing
+511136ea3c5a: Buffering to disk
+511136ea3c5a: Image successfully pushed
+d8136e131778: Pushing
+d8136e131778: Buffering to disk
+d8136e131778: Image successfully pushed
+db6fa2b0ded7: Pushing
+db6fa2b0ded7: Buffering to disk
+db6fa2b0ded7: Image successfully pushed
+2239add4b301: Pushing
+2239add4b301: Buffering to disk
+2239add4b301: Image successfully pushed
+7468398321fd: Pushing
+7468398321fd: Buffering to disk
+7468398321fd: Image successfully pushed
+feb56519521d: Pushing
+feb56519521d: Buffering to disk
+feb56519521d: Image successfully pushed
+c5ef8c7522b8: Pushing
+c5ef8c7522b8: Buffering to disk
+c5ef8c7522b8: Image successfully pushed
+77c3d1c88b6b: Pushing
+77c3d1c88b6b: Buffering to disk
+77c3d1c88b6b: Image successfully pushed
+7c6e5a567b42: Pushing
+7c6e5a567b42: Buffering to disk
+7c6e5a567b42: Image successfully pushed
+8d1f1b0e9df0: Pushing
+8d1f1b0e9df0: Buffering to disk
+8d1f1b0e9df0: Image successfully pushed
+37090dad085c: Pushing
+37090dad085c: Buffering to disk
+37090dad085c: Image successfully pushed
+4c9967358fc2: Pushing
+4c9967358fc2: Buffering to disk
+4c9967358fc2: Image successfully pushed
+3fca8bed72c7: Pushing
+3fca8bed72c7: Buffering to disk
+3fca8bed72c7: Image successfully pushed
+190129e74689: Pushing
+190129e74689: Buffering to disk
+190129e74689: Image successfully pushed
+69d795fe26a4: Pushing
+69d795fe26a4: Buffering to disk
+69d795fe26a4: Image successfully pushed
+60d799e52fcb: Pushing
+60d799e52fcb: Buffering to disk
+60d799e52fcb: Image successfully pushed
+f62e333bd3c5: Pushing
+f62e333bd3c5: Buffering to disk
+f62e333bd3c5: Image successfully pushed
+Pushing tag for rev [f62e333bd3c5] on {http://54.225.249.141:5000/v1/repositories/cb-shell/tags/latest}
+
+real  56.26
+
+ssh kai@54.225.249.141 "docker images | grep cb-shell"
+
+docker pull 54.225.249.141:5000/cb-shell:latest
+Pulling repository 54.225.249.141:5000/cb-shell
+f62e333bd3c5: Pulling image (latest) from 54.225.249.141:5000/cb-shell
+f62e333bd3c5: Pulling image (latest) from 54.225.249.141:5000/cb-shell, endpoint: http://54.225.249.141:5000/v1/
+f62e333bd3c5: Pulling dependent layers
+511136ea3c5a: Pulling metadata
+511136ea3c5a: Pulling fs layer
+511136ea3c5a: Download complete
+d8136e131778: Pulling metadata
+d8136e131778: Pulling fs layer
+d8136e131778: Download complete
+db6fa2b0ded7: Pulling metadata
+db6fa2b0ded7: Pulling fs layer
+db6fa2b0ded7: Download complete
+2239add4b301: Pulling metadata
+2239add4b301: Pulling fs layer
+2239add4b301: Download complete
+7468398321fd: Pulling metadata
+7468398321fd: Pulling fs layer
+7468398321fd: Download complete
+feb56519521d: Pulling metadata
+feb56519521d: Pulling fs layer
+feb56519521d: Download complete
+c5ef8c7522b8: Pulling metadata
+c5ef8c7522b8: Pulling fs layer
+c5ef8c7522b8: Download complete
+77c3d1c88b6b: Pulling metadata
+77c3d1c88b6b: Pulling fs layer
+77c3d1c88b6b: Download complete
+7c6e5a567b42: Pulling metadata
+7c6e5a567b42: Pulling fs layer
+7c6e5a567b42: Download complete
+8d1f1b0e9df0: Pulling metadata
+8d1f1b0e9df0: Pulling fs layer
+8d1f1b0e9df0: Download complete
+37090dad085c: Pulling metadata
+37090dad085c: Pulling fs layer
+37090dad085c: Download complete
+4c9967358fc2: Pulling metadata
+4c9967358fc2: Pulling fs layer
+4c9967358fc2: Download complete
+3fca8bed72c7: Pulling metadata
+3fca8bed72c7: Pulling fs layer
+3fca8bed72c7: Download complete
+190129e74689: Pulling metadata
+190129e74689: Pulling fs layer
+190129e74689: Download complete
+69d795fe26a4: Pulling metadata
+69d795fe26a4: Pulling fs layer
+69d795fe26a4: Download complete
+60d799e52fcb: Pulling metadata
+60d799e52fcb: Pulling fs layer
+60d799e52fcb: Download complete
+f62e333bd3c5: Pulling metadata
+f62e333bd3c5: Pulling fs layer
+f62e333bd3c5: Download complete
+f62e333bd3c5: Download complete
+Status: Downloaded newer image for 54.225.249.141:5000/cb-shell:latest
+
+real  9.70
+
+ssh kai@54.225.249.141 "docker images | grep cb-shell"
+54.225.249.141:5000/cb-shell   latest              f62e333bd3c5        11 weeks ago        150 MB
+
+ssh kai@54.225.249.141 "docker rmi 54.225.249.141:5000/cb-shell:latest"
+ssh kai@54.225.249.141 "docker images | grep cb-shell"
+
+ssh kai@54.225.249.141 "docker rm -f docker_registry"
+
+
+Test 8: ./pushpull.sh kai 54.225.249.141 cb-shell
+
+docker images
+kiwenlau/cb-shell               latest              f62e333bd3c5        11 weeks ago        150 MB
+
+docker tag kiwenlau/cb-shell:latest 54.225.249.141:5000/cb-shell:latest
+
+docker images
+54.225.249.141:5000/cb-shell    latest              f62e333bd3c5        11 weeks ago        150 MB
+kiwenlau/cb-shell               latest              f62e333bd3c5        11 weeks ago        150 MB
+
+ssh kai@54.225.249.141 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+533bfeef7767        kiwenlau/registry:0.9.1   "docker-registry"   2 seconds ago       Up 2 seconds        0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 54.225.249.141:5000/cb-shell:latest
+The push refers to a repository [54.225.249.141:5000/cb-shell] (len: 1)
+Sending image list
+Pushing repository 54.225.249.141:5000/cb-shell (1 tags)
+511136ea3c5a: Pushing
+511136ea3c5a: Buffering to disk
+511136ea3c5a: Image successfully pushed
+d8136e131778: Pushing
+d8136e131778: Buffering to disk
+d8136e131778: Image successfully pushed
+db6fa2b0ded7: Pushing
+db6fa2b0ded7: Buffering to disk
+db6fa2b0ded7: Image successfully pushed
+2239add4b301: Pushing
+2239add4b301: Buffering to disk
+2239add4b301: Image successfully pushed
+7468398321fd: Pushing
+7468398321fd: Buffering to disk
+7468398321fd: Image successfully pushed
+feb56519521d: Pushing
+feb56519521d: Buffering to disk
+feb56519521d: Image successfully pushed
+c5ef8c7522b8: Pushing
+c5ef8c7522b8: Buffering to disk
+c5ef8c7522b8: Image successfully pushed
+77c3d1c88b6b: Pushing
+77c3d1c88b6b: Buffering to disk
+77c3d1c88b6b: Image successfully pushed
+7c6e5a567b42: Pushing
+7c6e5a567b42: Buffering to disk
+7c6e5a567b42: Image successfully pushed
+8d1f1b0e9df0: Pushing
+8d1f1b0e9df0: Buffering to disk
+8d1f1b0e9df0: Image successfully pushed
+37090dad085c: Pushing
+37090dad085c: Buffering to disk
+37090dad085c: Image successfully pushed
+4c9967358fc2: Pushing
+4c9967358fc2: Buffering to disk
+4c9967358fc2: Image successfully pushed
+3fca8bed72c7: Pushing
+3fca8bed72c7: Buffering to disk
+3fca8bed72c7: Image successfully pushed
+190129e74689: Pushing
+190129e74689: Buffering to disk
+190129e74689: Image successfully pushed
+69d795fe26a4: Pushing
+69d795fe26a4: Buffering to disk
+69d795fe26a4: Image successfully pushed
+60d799e52fcb: Pushing
+60d799e52fcb: Buffering to disk
+60d799e52fcb: Image successfully pushed
+f62e333bd3c5: Pushing
+f62e333bd3c5: Buffering to disk
+f62e333bd3c5: Image successfully pushed
+Pushing tag for rev [f62e333bd3c5] on {http://54.225.249.141:5000/v1/repositories/cb-shell/tags/latest}
+
+real  55.45
+
+ssh kai@54.225.249.141 "docker images | grep cb-shell"
+
+docker pull 54.225.249.141:5000/cb-shell:latest
+Pulling repository 54.225.249.141:5000/cb-shell
+f62e333bd3c5: Pulling image (latest) from 54.225.249.141:5000/cb-shell
+f62e333bd3c5: Pulling image (latest) from 54.225.249.141:5000/cb-shell, endpoint: http://54.225.249.141:5000/v1/
+f62e333bd3c5: Pulling dependent layers
+511136ea3c5a: Pulling metadata
+511136ea3c5a: Pulling fs layer
+511136ea3c5a: Download complete
+d8136e131778: Pulling metadata
+d8136e131778: Pulling fs layer
+d8136e131778: Download complete
+db6fa2b0ded7: Pulling metadata
+db6fa2b0ded7: Pulling fs layer
+db6fa2b0ded7: Download complete
+2239add4b301: Pulling metadata
+2239add4b301: Pulling fs layer
+2239add4b301: Download complete
+7468398321fd: Pulling metadata
+7468398321fd: Pulling fs layer
+7468398321fd: Download complete
+feb56519521d: Pulling metadata
+feb56519521d: Pulling fs layer
+feb56519521d: Download complete
+c5ef8c7522b8: Pulling metadata
+c5ef8c7522b8: Pulling fs layer
+c5ef8c7522b8: Download complete
+77c3d1c88b6b: Pulling metadata
+77c3d1c88b6b: Pulling fs layer
+77c3d1c88b6b: Download complete
+7c6e5a567b42: Pulling metadata
+7c6e5a567b42: Pulling fs layer
+7c6e5a567b42: Download complete
+8d1f1b0e9df0: Pulling metadata
+8d1f1b0e9df0: Pulling fs layer
+8d1f1b0e9df0: Download complete
+37090dad085c: Pulling metadata
+37090dad085c: Pulling fs layer
+37090dad085c: Download complete
+4c9967358fc2: Pulling metadata
+4c9967358fc2: Pulling fs layer
+4c9967358fc2: Download complete
+3fca8bed72c7: Pulling metadata
+3fca8bed72c7: Pulling fs layer
+3fca8bed72c7: Download complete
+190129e74689: Pulling metadata
+190129e74689: Pulling fs layer
+190129e74689: Download complete
+69d795fe26a4: Pulling metadata
+69d795fe26a4: Pulling fs layer
+69d795fe26a4: Download complete
+60d799e52fcb: Pulling metadata
+60d799e52fcb: Pulling fs layer
+60d799e52fcb: Download complete
+f62e333bd3c5: Pulling metadata
+f62e333bd3c5: Pulling fs layer
+f62e333bd3c5: Download complete
+f62e333bd3c5: Download complete
+Status: Downloaded newer image for 54.225.249.141:5000/cb-shell:latest
+
+real  9.74
+
+ssh kai@54.225.249.141 "docker images | grep cb-shell"
+54.225.249.141:5000/cb-shell   latest              f62e333bd3c5        11 weeks ago        150 MB
+
+ssh kai@54.225.249.141 "docker rmi 54.225.249.141:5000/cb-shell:latest"
+ssh kai@54.225.249.141 "docker images | grep cb-shell"
+
+ssh kai@54.225.249.141 "docker rm -f docker_registry"
+
+
+Test 9: ./pushpull.sh kai 54.225.249.141 cb-shell
+
+docker images
+kiwenlau/cb-shell               latest              f62e333bd3c5        11 weeks ago        150 MB
+
+docker tag kiwenlau/cb-shell:latest 54.225.249.141:5000/cb-shell:latest
+
+docker images
+kiwenlau/cb-shell               latest              f62e333bd3c5        11 weeks ago        150 MB
+54.225.249.141:5000/cb-shell    latest              f62e333bd3c5        11 weeks ago        150 MB
+
+ssh kai@54.225.249.141 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+e80b2040fa2f        kiwenlau/registry:0.9.1   "docker-registry"   2 seconds ago       Up 2 seconds        0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 54.225.249.141:5000/cb-shell:latest
+The push refers to a repository [54.225.249.141:5000/cb-shell] (len: 1)
+Sending image list
+Pushing repository 54.225.249.141:5000/cb-shell (1 tags)
+511136ea3c5a: Pushing
+511136ea3c5a: Buffering to disk
+511136ea3c5a: Image successfully pushed
+d8136e131778: Pushing
+d8136e131778: Buffering to disk
+d8136e131778: Image successfully pushed
+db6fa2b0ded7: Pushing
+db6fa2b0ded7: Buffering to disk
+db6fa2b0ded7: Image successfully pushed
+2239add4b301: Pushing
+2239add4b301: Buffering to disk
+2239add4b301: Image successfully pushed
+7468398321fd: Pushing
+7468398321fd: Buffering to disk
+7468398321fd: Image successfully pushed
+feb56519521d: Pushing
+feb56519521d: Buffering to disk
+feb56519521d: Image successfully pushed
+c5ef8c7522b8: Pushing
+c5ef8c7522b8: Buffering to disk
+c5ef8c7522b8: Image successfully pushed
+77c3d1c88b6b: Pushing
+77c3d1c88b6b: Buffering to disk
+77c3d1c88b6b: Image successfully pushed
+7c6e5a567b42: Pushing
+7c6e5a567b42: Buffering to disk
+7c6e5a567b42: Image successfully pushed
+8d1f1b0e9df0: Pushing
+8d1f1b0e9df0: Buffering to disk
+8d1f1b0e9df0: Image successfully pushed
+37090dad085c: Pushing
+37090dad085c: Buffering to disk
+37090dad085c: Image successfully pushed
+4c9967358fc2: Pushing
+4c9967358fc2: Buffering to disk
+4c9967358fc2: Image successfully pushed
+3fca8bed72c7: Pushing
+3fca8bed72c7: Buffering to disk
+3fca8bed72c7: Image successfully pushed
+190129e74689: Pushing
+190129e74689: Buffering to disk
+190129e74689: Image successfully pushed
+69d795fe26a4: Pushing
+69d795fe26a4: Buffering to disk
+69d795fe26a4: Image successfully pushed
+60d799e52fcb: Pushing
+60d799e52fcb: Buffering to disk
+60d799e52fcb: Image successfully pushed
+f62e333bd3c5: Pushing
+f62e333bd3c5: Buffering to disk
+f62e333bd3c5: Image successfully pushed
+Pushing tag for rev [f62e333bd3c5] on {http://54.225.249.141:5000/v1/repositories/cb-shell/tags/latest}
+
+real  57.21
+
+ssh kai@54.225.249.141 "docker images | grep cb-shell"
+
+docker pull 54.225.249.141:5000/cb-shell:latest
+Pulling repository 54.225.249.141:5000/cb-shell
+f62e333bd3c5: Pulling image (latest) from 54.225.249.141:5000/cb-shell
+f62e333bd3c5: Pulling image (latest) from 54.225.249.141:5000/cb-shell, endpoint: http://54.225.249.141:5000/v1/
+f62e333bd3c5: Pulling dependent layers
+511136ea3c5a: Pulling metadata
+511136ea3c5a: Pulling fs layer
+511136ea3c5a: Download complete
+d8136e131778: Pulling metadata
+d8136e131778: Pulling fs layer
+d8136e131778: Download complete
+db6fa2b0ded7: Pulling metadata
+db6fa2b0ded7: Pulling fs layer
+db6fa2b0ded7: Download complete
+2239add4b301: Pulling metadata
+2239add4b301: Pulling fs layer
+2239add4b301: Download complete
+7468398321fd: Pulling metadata
+7468398321fd: Pulling fs layer
+7468398321fd: Download complete
+feb56519521d: Pulling metadata
+feb56519521d: Pulling fs layer
+feb56519521d: Download complete
+c5ef8c7522b8: Pulling metadata
+c5ef8c7522b8: Pulling fs layer
+c5ef8c7522b8: Download complete
+77c3d1c88b6b: Pulling metadata
+77c3d1c88b6b: Pulling fs layer
+77c3d1c88b6b: Download complete
+7c6e5a567b42: Pulling metadata
+7c6e5a567b42: Pulling fs layer
+7c6e5a567b42: Download complete
+8d1f1b0e9df0: Pulling metadata
+8d1f1b0e9df0: Pulling fs layer
+8d1f1b0e9df0: Download complete
+37090dad085c: Pulling metadata
+37090dad085c: Pulling fs layer
+37090dad085c: Download complete
+4c9967358fc2: Pulling metadata
+4c9967358fc2: Pulling fs layer
+4c9967358fc2: Download complete
+3fca8bed72c7: Pulling metadata
+3fca8bed72c7: Pulling fs layer
+3fca8bed72c7: Download complete
+190129e74689: Pulling metadata
+190129e74689: Pulling fs layer
+190129e74689: Download complete
+69d795fe26a4: Pulling metadata
+69d795fe26a4: Pulling fs layer
+69d795fe26a4: Download complete
+60d799e52fcb: Pulling metadata
+60d799e52fcb: Pulling fs layer
+60d799e52fcb: Download complete
+f62e333bd3c5: Pulling metadata
+f62e333bd3c5: Pulling fs layer
+f62e333bd3c5: Download complete
+f62e333bd3c5: Download complete
+Status: Downloaded newer image for 54.225.249.141:5000/cb-shell:latest
+
+real  9.61
+
+ssh kai@54.225.249.141 "docker images | grep cb-shell"
+54.225.249.141:5000/cb-shell   latest              f62e333bd3c5        11 weeks ago        150 MB
+
+ssh kai@54.225.249.141 "docker rmi 54.225.249.141:5000/cb-shell:latest"
+ssh kai@54.225.249.141 "docker images | grep cb-shell"
+
+ssh kai@54.225.249.141 "docker rm -f docker_registry"
+
+
+Test 10: ./pushpull.sh kai 54.225.249.141 cb-shell
+
+docker images
+kiwenlau/cb-shell               latest              f62e333bd3c5        11 weeks ago        150 MB
+
+docker tag kiwenlau/cb-shell:latest 54.225.249.141:5000/cb-shell:latest
+
+docker images
+kiwenlau/cb-shell               latest              f62e333bd3c5        11 weeks ago        150 MB
+54.225.249.141:5000/cb-shell    latest              f62e333bd3c5        11 weeks ago        150 MB
+
+ssh kai@54.225.249.141 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+
+docker push 54.225.249.141:5000/cb-shell:latest
+
+ssh kai@54.225.249.141 "docker rm -f docker_registry"
+
+
+
+Test 10: ./pushpull.sh kai 54.225.249.141 cb-shell
+
+docker images
+kiwenlau/cb-shell               latest              f62e333bd3c5        11 weeks ago        150 MB
+
+docker tag kiwenlau/cb-shell:latest 54.225.249.141:5000/cb-shell:latest
+
+docker images
+54.225.249.141:5000/cb-shell    latest              f62e333bd3c5        11 weeks ago        150 MB
+kiwenlau/cb-shell               latest              f62e333bd3c5        11 weeks ago        150 MB
+
+ssh kai@54.225.249.141 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+d2fe26523ed5        kiwenlau/registry:0.9.1   "docker-registry"   2 seconds ago       Up 2 seconds        0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 54.225.249.141:5000/cb-shell:latest
+The push refers to a repository [54.225.249.141:5000/cb-shell] (len: 1)
+Sending image list
+Pushing repository 54.225.249.141:5000/cb-shell (1 tags)
+511136ea3c5a: Pushing
+511136ea3c5a: Buffering to disk
+511136ea3c5a: Image successfully pushed
+d8136e131778: Pushing
+d8136e131778: Buffering to disk
+d8136e131778: Image successfully pushed
+db6fa2b0ded7: Pushing
+db6fa2b0ded7: Buffering to disk
+db6fa2b0ded7: Image successfully pushed
+2239add4b301: Pushing
+2239add4b301: Buffering to disk
+2239add4b301: Image successfully pushed
+7468398321fd: Pushing
+7468398321fd: Buffering to disk
+7468398321fd: Image successfully pushed
+feb56519521d: Pushing
+feb56519521d: Buffering to disk
+feb56519521d: Image successfully pushed
+c5ef8c7522b8: Pushing
+c5ef8c7522b8: Buffering to disk
+c5ef8c7522b8: Image successfully pushed
+77c3d1c88b6b: Pushing
+77c3d1c88b6b: Buffering to disk
+77c3d1c88b6b: Image successfully pushed
+7c6e5a567b42: Pushing
+7c6e5a567b42: Buffering to disk
+7c6e5a567b42: Image successfully pushed
+8d1f1b0e9df0: Pushing
+8d1f1b0e9df0: Buffering to disk
+8d1f1b0e9df0: Image successfully pushed
+37090dad085c: Pushing
+37090dad085c: Buffering to disk
+37090dad085c: Image successfully pushed
+4c9967358fc2: Pushing
+4c9967358fc2: Buffering to disk
+4c9967358fc2: Image successfully pushed
+3fca8bed72c7: Pushing
+3fca8bed72c7: Buffering to disk
+3fca8bed72c7: Image successfully pushed
+190129e74689: Pushing
+190129e74689: Buffering to disk
+190129e74689: Image successfully pushed
+69d795fe26a4: Pushing
+69d795fe26a4: Buffering to disk
+69d795fe26a4: Image successfully pushed
+60d799e52fcb: Pushing
+60d799e52fcb: Buffering to disk
+60d799e52fcb: Image successfully pushed
+f62e333bd3c5: Pushing
+f62e333bd3c5: Buffering to disk
+f62e333bd3c5: Image successfully pushed
+Pushing tag for rev [f62e333bd3c5] on {http://54.225.249.141:5000/v1/repositories/cb-shell/tags/latest}
+
+real  56.22
+
+ssh kai@54.225.249.141 "docker images | grep cb-shell"
+
+docker pull 54.225.249.141:5000/cb-shell:latest
+Pulling repository 54.225.249.141:5000/cb-shell
+f62e333bd3c5: Pulling image (latest) from 54.225.249.141:5000/cb-shell
+f62e333bd3c5: Pulling image (latest) from 54.225.249.141:5000/cb-shell, endpoint: http://54.225.249.141:5000/v1/
+f62e333bd3c5: Pulling dependent layers
+511136ea3c5a: Pulling metadata
+511136ea3c5a: Pulling fs layer
+511136ea3c5a: Download complete
+d8136e131778: Pulling metadata
+d8136e131778: Pulling fs layer
+d8136e131778: Download complete
+db6fa2b0ded7: Pulling metadata
+db6fa2b0ded7: Pulling fs layer
+db6fa2b0ded7: Download complete
+2239add4b301: Pulling metadata
+2239add4b301: Pulling fs layer
+2239add4b301: Download complete
+7468398321fd: Pulling metadata
+7468398321fd: Pulling fs layer
+7468398321fd: Download complete
+feb56519521d: Pulling metadata
+feb56519521d: Pulling fs layer
+feb56519521d: Download complete
+c5ef8c7522b8: Pulling metadata
+c5ef8c7522b8: Pulling fs layer
+c5ef8c7522b8: Download complete
+77c3d1c88b6b: Pulling metadata
+77c3d1c88b6b: Pulling fs layer
+77c3d1c88b6b: Download complete
+7c6e5a567b42: Pulling metadata
+7c6e5a567b42: Pulling fs layer
+7c6e5a567b42: Download complete
+8d1f1b0e9df0: Pulling metadata
+8d1f1b0e9df0: Pulling fs layer
+8d1f1b0e9df0: Download complete
+37090dad085c: Pulling metadata
+37090dad085c: Pulling fs layer
+37090dad085c: Download complete
+4c9967358fc2: Pulling metadata
+4c9967358fc2: Pulling fs layer
+4c9967358fc2: Download complete
+3fca8bed72c7: Pulling metadata
+3fca8bed72c7: Pulling fs layer
+3fca8bed72c7: Download complete
+190129e74689: Pulling metadata
+190129e74689: Pulling fs layer
+190129e74689: Download complete
+69d795fe26a4: Pulling metadata
+69d795fe26a4: Pulling fs layer
+69d795fe26a4: Download complete
+60d799e52fcb: Pulling metadata
+60d799e52fcb: Pulling fs layer
+60d799e52fcb: Download complete
+f62e333bd3c5: Pulling metadata
+f62e333bd3c5: Pulling fs layer
+f62e333bd3c5: Download complete
+f62e333bd3c5: Download complete
+Status: Downloaded newer image for 54.225.249.141:5000/cb-shell:latest
+
+real  9.62
+
+ssh kai@54.225.249.141 "docker images | grep cb-shell"
+54.225.249.141:5000/cb-shell   latest              f62e333bd3c5        11 weeks ago        150 MB
+
+ssh kai@54.225.249.141 "docker rmi 54.225.249.141:5000/cb-shell:latest"
+ssh kai@54.225.249.141 "docker images | grep cb-shell"
+
+ssh kai@54.225.249.141 "docker rm -f docker_registry"
+
+end date: Sun Aug  2 01:01:18 JST 2015
+
+

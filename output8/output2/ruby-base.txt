@@ -1,0 +1,1140 @@
+
+pullpush benchmark: transfer ruby-base image to 54.225.249.141 host
+ 
+hostname: kuruwa-gw
+begin date: Mon Aug  3 02:02:29 JST 2015
+
+sudo docker images
+kiwenlau/ruby-base              latest              1f54124cf60b        9 weeks ago         349.8 MB
+
+sudo docker images
+kiwenlau/ruby-base              latest              1f54124cf60b        9 weeks ago         349.8 MB
+
+
+Test 1: ./pushpull.sh kai 54.225.249.141 ruby-base
+
+docker images
+kiwenlau/ruby-base              latest              1f54124cf60b        9 weeks ago         349.8 MB
+
+docker tag kiwenlau/ruby-base:latest 54.225.249.141:5000/ruby-base:latest
+
+docker images
+kiwenlau/ruby-base              latest              1f54124cf60b        9 weeks ago         349.8 MB
+54.225.249.141:5000/ruby-base   latest              1f54124cf60b        9 weeks ago         349.8 MB
+
+ssh kai@54.225.249.141 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+6c32172a512b        kiwenlau/registry:0.9.1   "docker-registry"   2 seconds ago       Up 2 seconds        0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 54.225.249.141:5000/ruby-base:latest
+The push refers to a repository [54.225.249.141:5000/ruby-base] (len: 1)
+Sending image list
+Pushing repository 54.225.249.141:5000/ruby-base (1 tags)
+7a3e804ed6c0: Pushing
+7a3e804ed6c0: Buffering to disk
+7a3e804ed6c0: Image successfully pushed
+b96d1548a24e: Pushing
+b96d1548a24e: Buffering to disk
+b96d1548a24e: Image successfully pushed
+672054a98d48: Pushing
+672054a98d48: Buffering to disk
+672054a98d48: Image successfully pushed
+2a0c07d7c0ae: Pushing
+2a0c07d7c0ae: Buffering to disk
+2a0c07d7c0ae: Image successfully pushed
+b314890c6b6b: Pushing
+b314890c6b6b: Buffering to disk
+b314890c6b6b: Image successfully pushed
+c16281490785: Pushing
+c16281490785: Buffering to disk
+c16281490785: Image successfully pushed
+0a974e326c0c: Pushing
+0a974e326c0c: Buffering to disk
+0a974e326c0c: Image successfully pushed
+6bc8b2cc73bb: Pushing
+6bc8b2cc73bb: Buffering to disk
+6bc8b2cc73bb: Image successfully pushed
+237da86f80ae: Pushing
+237da86f80ae: Buffering to disk
+237da86f80ae: Image successfully pushed
+1f54124cf60b: Pushing
+1f54124cf60b: Buffering to disk
+1f54124cf60b: Image successfully pushed
+Pushing tag for rev [1f54124cf60b] on {http://54.225.249.141:5000/v1/repositories/ruby-base/tags/latest}
+
+real  74.91
+
+ssh kai@54.225.249.141 "docker images | grep ruby-base"
+
+docker pull 54.225.249.141:5000/ruby-base:latest
+Pulling repository 54.225.249.141:5000/ruby-base
+1f54124cf60b: Pulling image (latest) from 54.225.249.141:5000/ruby-base
+1f54124cf60b: Pulling image (latest) from 54.225.249.141:5000/ruby-base, endpoint: http://54.225.249.141:5000/v1/
+1f54124cf60b: Pulling dependent layers
+7a3e804ed6c0: Pulling metadata
+7a3e804ed6c0: Pulling fs layer
+7a3e804ed6c0: Download complete
+b96d1548a24e: Pulling metadata
+b96d1548a24e: Pulling fs layer
+b96d1548a24e: Download complete
+672054a98d48: Pulling metadata
+672054a98d48: Pulling fs layer
+672054a98d48: Download complete
+2a0c07d7c0ae: Pulling metadata
+2a0c07d7c0ae: Pulling fs layer
+2a0c07d7c0ae: Download complete
+b314890c6b6b: Pulling metadata
+b314890c6b6b: Pulling fs layer
+b314890c6b6b: Download complete
+c16281490785: Pulling metadata
+c16281490785: Pulling fs layer
+c16281490785: Download complete
+0a974e326c0c: Pulling metadata
+0a974e326c0c: Pulling fs layer
+0a974e326c0c: Download complete
+6bc8b2cc73bb: Pulling metadata
+6bc8b2cc73bb: Pulling fs layer
+6bc8b2cc73bb: Download complete
+237da86f80ae: Pulling metadata
+237da86f80ae: Pulling fs layer
+237da86f80ae: Download complete
+1f54124cf60b: Pulling metadata
+1f54124cf60b: Pulling fs layer
+1f54124cf60b: Download complete
+1f54124cf60b: Download complete
+Status: Downloaded newer image for 54.225.249.141:5000/ruby-base:latest
+
+real  14.66
+
+ssh kai@54.225.249.141 "docker images | grep ruby-base"
+54.225.249.141:5000/ruby-base   latest              1f54124cf60b        9 weeks ago         349.7 MB
+
+ssh kai@54.225.249.141 "docker rmi 54.225.249.141:5000/ruby-base:latest"
+ssh kai@54.225.249.141 "docker images | grep ruby-base"
+
+ssh kai@54.225.249.141 "docker rm -f docker_registry"
+
+
+Test 2: ./pushpull.sh kai 54.225.249.141 ruby-base
+
+docker images
+kiwenlau/ruby-base              latest              1f54124cf60b        9 weeks ago         349.8 MB
+
+docker tag kiwenlau/ruby-base:latest 54.225.249.141:5000/ruby-base:latest
+
+docker images
+54.225.249.141:5000/ruby-base   latest              1f54124cf60b        9 weeks ago         349.8 MB
+kiwenlau/ruby-base              latest              1f54124cf60b        9 weeks ago         349.8 MB
+
+ssh kai@54.225.249.141 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+0c9826c5cf92        kiwenlau/registry:0.9.1   "docker-registry"   2 seconds ago       Up 2 seconds        0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 54.225.249.141:5000/ruby-base:latest
+The push refers to a repository [54.225.249.141:5000/ruby-base] (len: 1)
+Sending image list
+Pushing repository 54.225.249.141:5000/ruby-base (1 tags)
+7a3e804ed6c0: Pushing
+7a3e804ed6c0: Buffering to disk
+7a3e804ed6c0: Image successfully pushed
+b96d1548a24e: Pushing
+b96d1548a24e: Buffering to disk
+b96d1548a24e: Image successfully pushed
+672054a98d48: Pushing
+672054a98d48: Buffering to disk
+672054a98d48: Image successfully pushed
+2a0c07d7c0ae: Pushing
+2a0c07d7c0ae: Buffering to disk
+2a0c07d7c0ae: Image successfully pushed
+b314890c6b6b: Pushing
+b314890c6b6b: Buffering to disk
+b314890c6b6b: Image successfully pushed
+c16281490785: Pushing
+c16281490785: Buffering to disk
+c16281490785: Image successfully pushed
+0a974e326c0c: Pushing
+0a974e326c0c: Buffering to disk
+0a974e326c0c: Image successfully pushed
+6bc8b2cc73bb: Pushing
+6bc8b2cc73bb: Buffering to disk
+6bc8b2cc73bb: Image successfully pushed
+237da86f80ae: Pushing
+237da86f80ae: Buffering to disk
+237da86f80ae: Image successfully pushed
+1f54124cf60b: Pushing
+1f54124cf60b: Buffering to disk
+1f54124cf60b: Image successfully pushed
+Pushing tag for rev [1f54124cf60b] on {http://54.225.249.141:5000/v1/repositories/ruby-base/tags/latest}
+
+real  81.42
+
+ssh kai@54.225.249.141 "docker images | grep ruby-base"
+
+docker pull 54.225.249.141:5000/ruby-base:latest
+Pulling repository 54.225.249.141:5000/ruby-base
+1f54124cf60b: Pulling image (latest) from 54.225.249.141:5000/ruby-base
+1f54124cf60b: Pulling image (latest) from 54.225.249.141:5000/ruby-base, endpoint: http://54.225.249.141:5000/v1/
+1f54124cf60b: Pulling dependent layers
+7a3e804ed6c0: Pulling metadata
+7a3e804ed6c0: Pulling fs layer
+7a3e804ed6c0: Download complete
+b96d1548a24e: Pulling metadata
+b96d1548a24e: Pulling fs layer
+b96d1548a24e: Download complete
+672054a98d48: Pulling metadata
+672054a98d48: Pulling fs layer
+672054a98d48: Download complete
+2a0c07d7c0ae: Pulling metadata
+2a0c07d7c0ae: Pulling fs layer
+2a0c07d7c0ae: Download complete
+b314890c6b6b: Pulling metadata
+b314890c6b6b: Pulling fs layer
+b314890c6b6b: Download complete
+c16281490785: Pulling metadata
+c16281490785: Pulling fs layer
+c16281490785: Download complete
+0a974e326c0c: Pulling metadata
+0a974e326c0c: Pulling fs layer
+0a974e326c0c: Download complete
+6bc8b2cc73bb: Pulling metadata
+6bc8b2cc73bb: Pulling fs layer
+6bc8b2cc73bb: Download complete
+237da86f80ae: Pulling metadata
+237da86f80ae: Pulling fs layer
+237da86f80ae: Download complete
+1f54124cf60b: Pulling metadata
+1f54124cf60b: Pulling fs layer
+1f54124cf60b: Download complete
+1f54124cf60b: Download complete
+Status: Downloaded newer image for 54.225.249.141:5000/ruby-base:latest
+
+real  15.00
+
+ssh kai@54.225.249.141 "docker images | grep ruby-base"
+54.225.249.141:5000/ruby-base   latest              1f54124cf60b        9 weeks ago         349.7 MB
+
+ssh kai@54.225.249.141 "docker rmi 54.225.249.141:5000/ruby-base:latest"
+ssh kai@54.225.249.141 "docker images | grep ruby-base"
+
+ssh kai@54.225.249.141 "docker rm -f docker_registry"
+
+
+Test 3: ./pushpull.sh kai 54.225.249.141 ruby-base
+
+docker images
+kiwenlau/ruby-base              latest              1f54124cf60b        9 weeks ago         349.8 MB
+
+docker tag kiwenlau/ruby-base:latest 54.225.249.141:5000/ruby-base:latest
+
+docker images
+kiwenlau/ruby-base              latest              1f54124cf60b        9 weeks ago         349.8 MB
+54.225.249.141:5000/ruby-base   latest              1f54124cf60b        9 weeks ago         349.8 MB
+
+ssh kai@54.225.249.141 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+
+docker push 54.225.249.141:5000/ruby-base:latest
+
+ssh kai@54.225.249.141 "docker rm -f docker_registry"
+
+
+
+Test 3: ./pushpull.sh kai 54.225.249.141 ruby-base
+
+docker images
+kiwenlau/ruby-base              latest              1f54124cf60b        9 weeks ago         349.8 MB
+
+docker tag kiwenlau/ruby-base:latest 54.225.249.141:5000/ruby-base:latest
+
+docker images
+kiwenlau/ruby-base              latest              1f54124cf60b        9 weeks ago         349.8 MB
+54.225.249.141:5000/ruby-base   latest              1f54124cf60b        9 weeks ago         349.8 MB
+
+ssh kai@54.225.249.141 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+
+docker push 54.225.249.141:5000/ruby-base:latest
+
+ssh kai@54.225.249.141 "docker rm -f docker_registry"
+
+
+
+Test 3: ./pushpull.sh kai 54.225.249.141 ruby-base
+
+docker images
+kiwenlau/ruby-base              latest              1f54124cf60b        9 weeks ago         349.8 MB
+
+docker tag kiwenlau/ruby-base:latest 54.225.249.141:5000/ruby-base:latest
+
+docker images
+54.225.249.141:5000/ruby-base   latest              1f54124cf60b        9 weeks ago         349.8 MB
+kiwenlau/ruby-base              latest              1f54124cf60b        9 weeks ago         349.8 MB
+
+ssh kai@54.225.249.141 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+a04c4a2147b9        kiwenlau/registry:0.9.1   "docker-registry"   3 seconds ago       Up 2 seconds        0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 54.225.249.141:5000/ruby-base:latest
+The push refers to a repository [54.225.249.141:5000/ruby-base] (len: 1)
+Sending image list
+Pushing repository 54.225.249.141:5000/ruby-base (1 tags)
+7a3e804ed6c0: Pushing
+7a3e804ed6c0: Buffering to disk
+7a3e804ed6c0: Image successfully pushed
+b96d1548a24e: Pushing
+b96d1548a24e: Buffering to disk
+b96d1548a24e: Image successfully pushed
+672054a98d48: Pushing
+672054a98d48: Buffering to disk
+672054a98d48: Image successfully pushed
+2a0c07d7c0ae: Pushing
+2a0c07d7c0ae: Buffering to disk
+2a0c07d7c0ae: Image successfully pushed
+b314890c6b6b: Pushing
+b314890c6b6b: Buffering to disk
+b314890c6b6b: Image successfully pushed
+c16281490785: Pushing
+c16281490785: Buffering to disk
+c16281490785: Image successfully pushed
+0a974e326c0c: Pushing
+0a974e326c0c: Buffering to disk
+0a974e326c0c: Image successfully pushed
+6bc8b2cc73bb: Pushing
+6bc8b2cc73bb: Buffering to disk
+6bc8b2cc73bb: Image successfully pushed
+237da86f80ae: Pushing
+237da86f80ae: Buffering to disk
+237da86f80ae: Image successfully pushed
+1f54124cf60b: Pushing
+1f54124cf60b: Buffering to disk
+1f54124cf60b: Image successfully pushed
+Pushing tag for rev [1f54124cf60b] on {http://54.225.249.141:5000/v1/repositories/ruby-base/tags/latest}
+
+real  76.30
+
+ssh kai@54.225.249.141 "docker images | grep ruby-base"
+
+docker pull 54.225.249.141:5000/ruby-base:latest
+Pulling repository 54.225.249.141:5000/ruby-base
+1f54124cf60b: Pulling image (latest) from 54.225.249.141:5000/ruby-base
+1f54124cf60b: Pulling image (latest) from 54.225.249.141:5000/ruby-base, endpoint: http://54.225.249.141:5000/v1/
+1f54124cf60b: Pulling dependent layers
+7a3e804ed6c0: Pulling metadata
+7a3e804ed6c0: Pulling fs layer
+7a3e804ed6c0: Download complete
+b96d1548a24e: Pulling metadata
+b96d1548a24e: Pulling fs layer
+b96d1548a24e: Download complete
+672054a98d48: Pulling metadata
+672054a98d48: Pulling fs layer
+672054a98d48: Download complete
+2a0c07d7c0ae: Pulling metadata
+2a0c07d7c0ae: Pulling fs layer
+2a0c07d7c0ae: Download complete
+b314890c6b6b: Pulling metadata
+b314890c6b6b: Pulling fs layer
+b314890c6b6b: Download complete
+c16281490785: Pulling metadata
+c16281490785: Pulling fs layer
+c16281490785: Download complete
+0a974e326c0c: Pulling metadata
+0a974e326c0c: Pulling fs layer
+0a974e326c0c: Download complete
+6bc8b2cc73bb: Pulling metadata
+6bc8b2cc73bb: Pulling fs layer
+6bc8b2cc73bb: Download complete
+237da86f80ae: Pulling metadata
+237da86f80ae: Pulling fs layer
+237da86f80ae: Download complete
+1f54124cf60b: Pulling metadata
+1f54124cf60b: Pulling fs layer
+1f54124cf60b: Download complete
+1f54124cf60b: Download complete
+Status: Downloaded newer image for 54.225.249.141:5000/ruby-base:latest
+
+real  14.92
+
+ssh kai@54.225.249.141 "docker images | grep ruby-base"
+54.225.249.141:5000/ruby-base   latest              1f54124cf60b        9 weeks ago         349.7 MB
+
+ssh kai@54.225.249.141 "docker rmi 54.225.249.141:5000/ruby-base:latest"
+ssh kai@54.225.249.141 "docker images | grep ruby-base"
+
+ssh kai@54.225.249.141 "docker rm -f docker_registry"
+
+
+Test 4: ./pushpull.sh kai 54.225.249.141 ruby-base
+
+docker images
+kiwenlau/ruby-base              latest              1f54124cf60b        9 weeks ago         349.8 MB
+
+docker tag kiwenlau/ruby-base:latest 54.225.249.141:5000/ruby-base:latest
+
+docker images
+kiwenlau/ruby-base              latest              1f54124cf60b        9 weeks ago         349.8 MB
+54.225.249.141:5000/ruby-base   latest              1f54124cf60b        9 weeks ago         349.8 MB
+
+ssh kai@54.225.249.141 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+
+docker push 54.225.249.141:5000/ruby-base:latest
+
+ssh kai@54.225.249.141 "docker rm -f docker_registry"
+
+
+
+Test 4: ./pushpull.sh kai 54.225.249.141 ruby-base
+
+docker images
+kiwenlau/ruby-base              latest              1f54124cf60b        9 weeks ago         349.8 MB
+
+docker tag kiwenlau/ruby-base:latest 54.225.249.141:5000/ruby-base:latest
+
+docker images
+54.225.249.141:5000/ruby-base   latest              1f54124cf60b        9 weeks ago         349.8 MB
+kiwenlau/ruby-base              latest              1f54124cf60b        9 weeks ago         349.8 MB
+
+ssh kai@54.225.249.141 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+
+docker push 54.225.249.141:5000/ruby-base:latest
+
+ssh kai@54.225.249.141 "docker rm -f docker_registry"
+
+
+
+Test 4: ./pushpull.sh kai 54.225.249.141 ruby-base
+
+docker images
+kiwenlau/ruby-base              latest              1f54124cf60b        9 weeks ago         349.8 MB
+
+docker tag kiwenlau/ruby-base:latest 54.225.249.141:5000/ruby-base:latest
+
+docker images
+54.225.249.141:5000/ruby-base   latest              1f54124cf60b        9 weeks ago         349.8 MB
+kiwenlau/ruby-base              latest              1f54124cf60b        9 weeks ago         349.8 MB
+
+ssh kai@54.225.249.141 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+ab6993222217        kiwenlau/registry:0.9.1   "docker-registry"   2 seconds ago       Up 2 seconds        0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 54.225.249.141:5000/ruby-base:latest
+The push refers to a repository [54.225.249.141:5000/ruby-base] (len: 1)
+Sending image list
+Pushing repository 54.225.249.141:5000/ruby-base (1 tags)
+7a3e804ed6c0: Pushing
+7a3e804ed6c0: Buffering to disk
+7a3e804ed6c0: Image successfully pushed
+b96d1548a24e: Pushing
+b96d1548a24e: Buffering to disk
+b96d1548a24e: Image successfully pushed
+672054a98d48: Pushing
+672054a98d48: Buffering to disk
+672054a98d48: Image successfully pushed
+2a0c07d7c0ae: Pushing
+2a0c07d7c0ae: Buffering to disk
+2a0c07d7c0ae: Image successfully pushed
+b314890c6b6b: Pushing
+b314890c6b6b: Buffering to disk
+b314890c6b6b: Image successfully pushed
+c16281490785: Pushing
+c16281490785: Buffering to disk
+c16281490785: Image successfully pushed
+0a974e326c0c: Pushing
+0a974e326c0c: Buffering to disk
+0a974e326c0c: Image successfully pushed
+6bc8b2cc73bb: Pushing
+6bc8b2cc73bb: Buffering to disk
+6bc8b2cc73bb: Image successfully pushed
+237da86f80ae: Pushing
+237da86f80ae: Buffering to disk
+237da86f80ae: Image successfully pushed
+1f54124cf60b: Pushing
+1f54124cf60b: Buffering to disk
+1f54124cf60b: Image successfully pushed
+Pushing tag for rev [1f54124cf60b] on {http://54.225.249.141:5000/v1/repositories/ruby-base/tags/latest}
+
+real  75.25
+
+ssh kai@54.225.249.141 "docker images | grep ruby-base"
+
+docker pull 54.225.249.141:5000/ruby-base:latest
+Pulling repository 54.225.249.141:5000/ruby-base
+1f54124cf60b: Pulling image (latest) from 54.225.249.141:5000/ruby-base
+1f54124cf60b: Pulling image (latest) from 54.225.249.141:5000/ruby-base, endpoint: http://54.225.249.141:5000/v1/
+1f54124cf60b: Pulling dependent layers
+7a3e804ed6c0: Pulling metadata
+7a3e804ed6c0: Pulling fs layer
+7a3e804ed6c0: Download complete
+b96d1548a24e: Pulling metadata
+b96d1548a24e: Pulling fs layer
+b96d1548a24e: Download complete
+672054a98d48: Pulling metadata
+672054a98d48: Pulling fs layer
+672054a98d48: Download complete
+2a0c07d7c0ae: Pulling metadata
+2a0c07d7c0ae: Pulling fs layer
+2a0c07d7c0ae: Download complete
+b314890c6b6b: Pulling metadata
+b314890c6b6b: Pulling fs layer
+b314890c6b6b: Download complete
+c16281490785: Pulling metadata
+c16281490785: Pulling fs layer
+c16281490785: Download complete
+0a974e326c0c: Pulling metadata
+0a974e326c0c: Pulling fs layer
+0a974e326c0c: Download complete
+6bc8b2cc73bb: Pulling metadata
+6bc8b2cc73bb: Pulling fs layer
+6bc8b2cc73bb: Download complete
+237da86f80ae: Pulling metadata
+237da86f80ae: Pulling fs layer
+237da86f80ae: Download complete
+1f54124cf60b: Pulling metadata
+1f54124cf60b: Pulling fs layer
+1f54124cf60b: Download complete
+1f54124cf60b: Download complete
+Status: Downloaded newer image for 54.225.249.141:5000/ruby-base:latest
+
+real  15.06
+
+ssh kai@54.225.249.141 "docker images | grep ruby-base"
+54.225.249.141:5000/ruby-base   latest              1f54124cf60b        9 weeks ago         349.7 MB
+
+ssh kai@54.225.249.141 "docker rmi 54.225.249.141:5000/ruby-base:latest"
+ssh kai@54.225.249.141 "docker images | grep ruby-base"
+
+ssh kai@54.225.249.141 "docker rm -f docker_registry"
+
+
+Test 5: ./pushpull.sh kai 54.225.249.141 ruby-base
+
+docker images
+kiwenlau/ruby-base              latest              1f54124cf60b        9 weeks ago         349.8 MB
+
+docker tag kiwenlau/ruby-base:latest 54.225.249.141:5000/ruby-base:latest
+
+docker images
+kiwenlau/ruby-base              latest              1f54124cf60b        9 weeks ago         349.8 MB
+54.225.249.141:5000/ruby-base   latest              1f54124cf60b        9 weeks ago         349.8 MB
+
+ssh kai@54.225.249.141 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+e438d5693682        kiwenlau/registry:0.9.1   "docker-registry"   2 seconds ago       Up 2 seconds        0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 54.225.249.141:5000/ruby-base:latest
+The push refers to a repository [54.225.249.141:5000/ruby-base] (len: 1)
+Sending image list
+Pushing repository 54.225.249.141:5000/ruby-base (1 tags)
+7a3e804ed6c0: Pushing
+7a3e804ed6c0: Buffering to disk
+7a3e804ed6c0: Image successfully pushed
+b96d1548a24e: Pushing
+b96d1548a24e: Buffering to disk
+b96d1548a24e: Image successfully pushed
+672054a98d48: Pushing
+672054a98d48: Buffering to disk
+672054a98d48: Image successfully pushed
+2a0c07d7c0ae: Pushing
+2a0c07d7c0ae: Buffering to disk
+2a0c07d7c0ae: Image successfully pushed
+b314890c6b6b: Pushing
+b314890c6b6b: Buffering to disk
+b314890c6b6b: Image successfully pushed
+c16281490785: Pushing
+c16281490785: Buffering to disk
+c16281490785: Image successfully pushed
+0a974e326c0c: Pushing
+0a974e326c0c: Buffering to disk
+0a974e326c0c: Image successfully pushed
+6bc8b2cc73bb: Pushing
+6bc8b2cc73bb: Buffering to disk
+6bc8b2cc73bb: Image successfully pushed
+237da86f80ae: Pushing
+237da86f80ae: Buffering to disk
+237da86f80ae: Image successfully pushed
+1f54124cf60b: Pushing
+1f54124cf60b: Buffering to disk
+1f54124cf60b: Image successfully pushed
+Pushing tag for rev [1f54124cf60b] on {http://54.225.249.141:5000/v1/repositories/ruby-base/tags/latest}
+
+real  75.50
+
+ssh kai@54.225.249.141 "docker images | grep ruby-base"
+
+docker pull 54.225.249.141:5000/ruby-base:latest
+Pulling repository 54.225.249.141:5000/ruby-base
+1f54124cf60b: Pulling image (latest) from 54.225.249.141:5000/ruby-base
+1f54124cf60b: Pulling image (latest) from 54.225.249.141:5000/ruby-base, endpoint: http://54.225.249.141:5000/v1/
+1f54124cf60b: Pulling dependent layers
+7a3e804ed6c0: Pulling metadata
+7a3e804ed6c0: Pulling fs layer
+7a3e804ed6c0: Download complete
+b96d1548a24e: Pulling metadata
+b96d1548a24e: Pulling fs layer
+b96d1548a24e: Download complete
+672054a98d48: Pulling metadata
+672054a98d48: Pulling fs layer
+672054a98d48: Download complete
+2a0c07d7c0ae: Pulling metadata
+2a0c07d7c0ae: Pulling fs layer
+2a0c07d7c0ae: Download complete
+b314890c6b6b: Pulling metadata
+b314890c6b6b: Pulling fs layer
+b314890c6b6b: Download complete
+c16281490785: Pulling metadata
+c16281490785: Pulling fs layer
+c16281490785: Download complete
+0a974e326c0c: Pulling metadata
+0a974e326c0c: Pulling fs layer
+0a974e326c0c: Download complete
+6bc8b2cc73bb: Pulling metadata
+6bc8b2cc73bb: Pulling fs layer
+6bc8b2cc73bb: Download complete
+237da86f80ae: Pulling metadata
+237da86f80ae: Pulling fs layer
+237da86f80ae: Download complete
+1f54124cf60b: Pulling metadata
+1f54124cf60b: Pulling fs layer
+1f54124cf60b: Download complete
+1f54124cf60b: Download complete
+Status: Downloaded newer image for 54.225.249.141:5000/ruby-base:latest
+
+real  14.65
+
+ssh kai@54.225.249.141 "docker images | grep ruby-base"
+54.225.249.141:5000/ruby-base   latest              1f54124cf60b        9 weeks ago         349.7 MB
+
+ssh kai@54.225.249.141 "docker rmi 54.225.249.141:5000/ruby-base:latest"
+ssh kai@54.225.249.141 "docker images | grep ruby-base"
+
+ssh kai@54.225.249.141 "docker rm -f docker_registry"
+
+
+Test 6: ./pushpull.sh kai 54.225.249.141 ruby-base
+
+docker images
+kiwenlau/ruby-base              latest              1f54124cf60b        9 weeks ago         349.8 MB
+
+docker tag kiwenlau/ruby-base:latest 54.225.249.141:5000/ruby-base:latest
+
+docker images
+kiwenlau/ruby-base              latest              1f54124cf60b        9 weeks ago         349.8 MB
+54.225.249.141:5000/ruby-base   latest              1f54124cf60b        9 weeks ago         349.8 MB
+
+ssh kai@54.225.249.141 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+1e148bc87879        kiwenlau/registry:0.9.1   "docker-registry"   3 seconds ago       Up 2 seconds        0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 54.225.249.141:5000/ruby-base:latest
+The push refers to a repository [54.225.249.141:5000/ruby-base] (len: 1)
+Sending image list
+Pushing repository 54.225.249.141:5000/ruby-base (1 tags)
+7a3e804ed6c0: Pushing
+7a3e804ed6c0: Buffering to disk
+7a3e804ed6c0: Image successfully pushed
+b96d1548a24e: Pushing
+b96d1548a24e: Buffering to disk
+b96d1548a24e: Image successfully pushed
+672054a98d48: Pushing
+672054a98d48: Buffering to disk
+672054a98d48: Image successfully pushed
+2a0c07d7c0ae: Pushing
+2a0c07d7c0ae: Buffering to disk
+2a0c07d7c0ae: Image successfully pushed
+b314890c6b6b: Pushing
+b314890c6b6b: Buffering to disk
+b314890c6b6b: Image successfully pushed
+c16281490785: Pushing
+c16281490785: Buffering to disk
+c16281490785: Image successfully pushed
+0a974e326c0c: Pushing
+0a974e326c0c: Buffering to disk
+0a974e326c0c: Image successfully pushed
+6bc8b2cc73bb: Pushing
+6bc8b2cc73bb: Buffering to disk
+6bc8b2cc73bb: Image successfully pushed
+237da86f80ae: Pushing
+237da86f80ae: Buffering to disk
+237da86f80ae: Image successfully pushed
+1f54124cf60b: Pushing
+1f54124cf60b: Buffering to disk
+1f54124cf60b: Image successfully pushed
+Pushing tag for rev [1f54124cf60b] on {http://54.225.249.141:5000/v1/repositories/ruby-base/tags/latest}
+
+real  76.14
+
+ssh kai@54.225.249.141 "docker images | grep ruby-base"
+
+docker pull 54.225.249.141:5000/ruby-base:latest
+Pulling repository 54.225.249.141:5000/ruby-base
+1f54124cf60b: Pulling image (latest) from 54.225.249.141:5000/ruby-base
+1f54124cf60b: Pulling image (latest) from 54.225.249.141:5000/ruby-base, endpoint: http://54.225.249.141:5000/v1/
+1f54124cf60b: Pulling dependent layers
+7a3e804ed6c0: Pulling metadata
+7a3e804ed6c0: Pulling fs layer
+7a3e804ed6c0: Download complete
+b96d1548a24e: Pulling metadata
+b96d1548a24e: Pulling fs layer
+b96d1548a24e: Download complete
+672054a98d48: Pulling metadata
+672054a98d48: Pulling fs layer
+672054a98d48: Download complete
+2a0c07d7c0ae: Pulling metadata
+2a0c07d7c0ae: Pulling fs layer
+2a0c07d7c0ae: Download complete
+b314890c6b6b: Pulling metadata
+b314890c6b6b: Pulling fs layer
+b314890c6b6b: Download complete
+c16281490785: Pulling metadata
+c16281490785: Pulling fs layer
+c16281490785: Download complete
+0a974e326c0c: Pulling metadata
+0a974e326c0c: Pulling fs layer
+0a974e326c0c: Download complete
+6bc8b2cc73bb: Pulling metadata
+6bc8b2cc73bb: Pulling fs layer
+6bc8b2cc73bb: Download complete
+237da86f80ae: Pulling metadata
+237da86f80ae: Pulling fs layer
+237da86f80ae: Download complete
+1f54124cf60b: Pulling metadata
+1f54124cf60b: Pulling fs layer
+1f54124cf60b: Download complete
+1f54124cf60b: Download complete
+Status: Downloaded newer image for 54.225.249.141:5000/ruby-base:latest
+
+real  14.95
+
+ssh kai@54.225.249.141 "docker images | grep ruby-base"
+54.225.249.141:5000/ruby-base   latest              1f54124cf60b        9 weeks ago         349.7 MB
+
+ssh kai@54.225.249.141 "docker rmi 54.225.249.141:5000/ruby-base:latest"
+ssh kai@54.225.249.141 "docker images | grep ruby-base"
+
+ssh kai@54.225.249.141 "docker rm -f docker_registry"
+
+
+Test 7: ./pushpull.sh kai 54.225.249.141 ruby-base
+
+docker images
+kiwenlau/ruby-base              latest              1f54124cf60b        9 weeks ago         349.8 MB
+
+docker tag kiwenlau/ruby-base:latest 54.225.249.141:5000/ruby-base:latest
+
+docker images
+54.225.249.141:5000/ruby-base   latest              1f54124cf60b        9 weeks ago         349.8 MB
+kiwenlau/ruby-base              latest              1f54124cf60b        9 weeks ago         349.8 MB
+
+ssh kai@54.225.249.141 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+426c4e5b67b0        kiwenlau/registry:0.9.1   "docker-registry"   2 seconds ago       Up 2 seconds        0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 54.225.249.141:5000/ruby-base:latest
+The push refers to a repository [54.225.249.141:5000/ruby-base] (len: 1)
+Sending image list
+Pushing repository 54.225.249.141:5000/ruby-base (1 tags)
+7a3e804ed6c0: Pushing
+7a3e804ed6c0: Buffering to disk
+7a3e804ed6c0: Image successfully pushed
+b96d1548a24e: Pushing
+b96d1548a24e: Buffering to disk
+b96d1548a24e: Image successfully pushed
+672054a98d48: Pushing
+672054a98d48: Buffering to disk
+672054a98d48: Image successfully pushed
+2a0c07d7c0ae: Pushing
+2a0c07d7c0ae: Buffering to disk
+2a0c07d7c0ae: Image successfully pushed
+b314890c6b6b: Pushing
+b314890c6b6b: Buffering to disk
+b314890c6b6b: Image successfully pushed
+c16281490785: Pushing
+c16281490785: Buffering to disk
+c16281490785: Image successfully pushed
+0a974e326c0c: Pushing
+0a974e326c0c: Buffering to disk
+0a974e326c0c: Image successfully pushed
+6bc8b2cc73bb: Pushing
+6bc8b2cc73bb: Buffering to disk
+6bc8b2cc73bb: Image successfully pushed
+237da86f80ae: Pushing
+237da86f80ae: Buffering to disk
+237da86f80ae: Image successfully pushed
+1f54124cf60b: Pushing
+1f54124cf60b: Buffering to disk
+1f54124cf60b: Image successfully pushed
+Pushing tag for rev [1f54124cf60b] on {http://54.225.249.141:5000/v1/repositories/ruby-base/tags/latest}
+
+real  75.42
+
+ssh kai@54.225.249.141 "docker images | grep ruby-base"
+
+docker pull 54.225.249.141:5000/ruby-base:latest
+Pulling repository 54.225.249.141:5000/ruby-base
+1f54124cf60b: Pulling image (latest) from 54.225.249.141:5000/ruby-base
+1f54124cf60b: Pulling image (latest) from 54.225.249.141:5000/ruby-base, endpoint: http://54.225.249.141:5000/v1/
+1f54124cf60b: Pulling dependent layers
+7a3e804ed6c0: Pulling metadata
+7a3e804ed6c0: Pulling fs layer
+7a3e804ed6c0: Download complete
+b96d1548a24e: Pulling metadata
+b96d1548a24e: Pulling fs layer
+b96d1548a24e: Download complete
+672054a98d48: Pulling metadata
+672054a98d48: Pulling fs layer
+672054a98d48: Download complete
+2a0c07d7c0ae: Pulling metadata
+2a0c07d7c0ae: Pulling fs layer
+2a0c07d7c0ae: Download complete
+b314890c6b6b: Pulling metadata
+b314890c6b6b: Pulling fs layer
+b314890c6b6b: Download complete
+c16281490785: Pulling metadata
+c16281490785: Pulling fs layer
+c16281490785: Download complete
+0a974e326c0c: Pulling metadata
+0a974e326c0c: Pulling fs layer
+0a974e326c0c: Download complete
+6bc8b2cc73bb: Pulling metadata
+6bc8b2cc73bb: Pulling fs layer
+6bc8b2cc73bb: Download complete
+237da86f80ae: Pulling metadata
+237da86f80ae: Pulling fs layer
+237da86f80ae: Download complete
+1f54124cf60b: Pulling metadata
+1f54124cf60b: Pulling fs layer
+1f54124cf60b: Download complete
+1f54124cf60b: Download complete
+Status: Downloaded newer image for 54.225.249.141:5000/ruby-base:latest
+
+real  14.59
+
+ssh kai@54.225.249.141 "docker images | grep ruby-base"
+54.225.249.141:5000/ruby-base   latest              1f54124cf60b        9 weeks ago         349.7 MB
+
+ssh kai@54.225.249.141 "docker rmi 54.225.249.141:5000/ruby-base:latest"
+ssh kai@54.225.249.141 "docker images | grep ruby-base"
+
+ssh kai@54.225.249.141 "docker rm -f docker_registry"
+
+
+Test 8: ./pushpull.sh kai 54.225.249.141 ruby-base
+
+docker images
+kiwenlau/ruby-base              latest              1f54124cf60b        9 weeks ago         349.8 MB
+
+docker tag kiwenlau/ruby-base:latest 54.225.249.141:5000/ruby-base:latest
+
+docker images
+kiwenlau/ruby-base              latest              1f54124cf60b        9 weeks ago         349.8 MB
+54.225.249.141:5000/ruby-base   latest              1f54124cf60b        9 weeks ago         349.8 MB
+
+ssh kai@54.225.249.141 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+197e33b0196b        kiwenlau/registry:0.9.1   "docker-registry"   2 seconds ago       Up 2 seconds        0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 54.225.249.141:5000/ruby-base:latest
+The push refers to a repository [54.225.249.141:5000/ruby-base] (len: 1)
+Sending image list
+Pushing repository 54.225.249.141:5000/ruby-base (1 tags)
+7a3e804ed6c0: Pushing
+7a3e804ed6c0: Buffering to disk
+7a3e804ed6c0: Image successfully pushed
+b96d1548a24e: Pushing
+b96d1548a24e: Buffering to disk
+b96d1548a24e: Image successfully pushed
+672054a98d48: Pushing
+672054a98d48: Buffering to disk
+672054a98d48: Image successfully pushed
+2a0c07d7c0ae: Pushing
+2a0c07d7c0ae: Buffering to disk
+2a0c07d7c0ae: Image successfully pushed
+b314890c6b6b: Pushing
+b314890c6b6b: Buffering to disk
+b314890c6b6b: Image successfully pushed
+c16281490785: Pushing
+c16281490785: Buffering to disk
+c16281490785: Image successfully pushed
+0a974e326c0c: Pushing
+0a974e326c0c: Buffering to disk
+0a974e326c0c: Image successfully pushed
+6bc8b2cc73bb: Pushing
+6bc8b2cc73bb: Buffering to disk
+6bc8b2cc73bb: Image successfully pushed
+237da86f80ae: Pushing
+237da86f80ae: Buffering to disk
+237da86f80ae: Image successfully pushed
+1f54124cf60b: Pushing
+1f54124cf60b: Buffering to disk
+1f54124cf60b: Image successfully pushed
+Pushing tag for rev [1f54124cf60b] on {http://54.225.249.141:5000/v1/repositories/ruby-base/tags/latest}
+
+real  76.53
+
+ssh kai@54.225.249.141 "docker images | grep ruby-base"
+
+docker pull 54.225.249.141:5000/ruby-base:latest
+Pulling repository 54.225.249.141:5000/ruby-base
+1f54124cf60b: Pulling image (latest) from 54.225.249.141:5000/ruby-base
+1f54124cf60b: Pulling image (latest) from 54.225.249.141:5000/ruby-base, endpoint: http://54.225.249.141:5000/v1/
+1f54124cf60b: Pulling dependent layers
+7a3e804ed6c0: Pulling metadata
+7a3e804ed6c0: Pulling fs layer
+7a3e804ed6c0: Download complete
+b96d1548a24e: Pulling metadata
+b96d1548a24e: Pulling fs layer
+b96d1548a24e: Download complete
+672054a98d48: Pulling metadata
+672054a98d48: Pulling fs layer
+672054a98d48: Download complete
+2a0c07d7c0ae: Pulling metadata
+2a0c07d7c0ae: Pulling fs layer
+2a0c07d7c0ae: Download complete
+b314890c6b6b: Pulling metadata
+b314890c6b6b: Pulling fs layer
+b314890c6b6b: Download complete
+c16281490785: Pulling metadata
+c16281490785: Pulling fs layer
+c16281490785: Download complete
+0a974e326c0c: Pulling metadata
+0a974e326c0c: Pulling fs layer
+0a974e326c0c: Download complete
+6bc8b2cc73bb: Pulling metadata
+6bc8b2cc73bb: Pulling fs layer
+6bc8b2cc73bb: Download complete
+237da86f80ae: Pulling metadata
+237da86f80ae: Pulling fs layer
+237da86f80ae: Download complete
+1f54124cf60b: Pulling metadata
+1f54124cf60b: Pulling fs layer
+1f54124cf60b: Download complete
+1f54124cf60b: Download complete
+Status: Downloaded newer image for 54.225.249.141:5000/ruby-base:latest
+
+real  15.01
+
+ssh kai@54.225.249.141 "docker images | grep ruby-base"
+54.225.249.141:5000/ruby-base   latest              1f54124cf60b        9 weeks ago         349.7 MB
+
+ssh kai@54.225.249.141 "docker rmi 54.225.249.141:5000/ruby-base:latest"
+ssh kai@54.225.249.141 "docker images | grep ruby-base"
+
+ssh kai@54.225.249.141 "docker rm -f docker_registry"
+
+
+Test 9: ./pushpull.sh kai 54.225.249.141 ruby-base
+
+docker images
+kiwenlau/ruby-base              latest              1f54124cf60b        9 weeks ago         349.8 MB
+
+docker tag kiwenlau/ruby-base:latest 54.225.249.141:5000/ruby-base:latest
+
+docker images
+kiwenlau/ruby-base              latest              1f54124cf60b        9 weeks ago         349.8 MB
+54.225.249.141:5000/ruby-base   latest              1f54124cf60b        9 weeks ago         349.8 MB
+
+ssh kai@54.225.249.141 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+
+docker push 54.225.249.141:5000/ruby-base:latest
+
+ssh kai@54.225.249.141 "docker rm -f docker_registry"
+
+
+
+Test 9: ./pushpull.sh kai 54.225.249.141 ruby-base
+
+docker images
+kiwenlau/ruby-base              latest              1f54124cf60b        9 weeks ago         349.8 MB
+
+docker tag kiwenlau/ruby-base:latest 54.225.249.141:5000/ruby-base:latest
+
+docker images
+kiwenlau/ruby-base              latest              1f54124cf60b        9 weeks ago         349.8 MB
+54.225.249.141:5000/ruby-base   latest              1f54124cf60b        9 weeks ago         349.8 MB
+
+ssh kai@54.225.249.141 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+73b894fae9d5        kiwenlau/registry:0.9.1   "docker-registry"   3 seconds ago       Up 2 seconds        0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 54.225.249.141:5000/ruby-base:latest
+The push refers to a repository [54.225.249.141:5000/ruby-base] (len: 1)
+Sending image list
+Pushing repository 54.225.249.141:5000/ruby-base (1 tags)
+7a3e804ed6c0: Pushing
+7a3e804ed6c0: Buffering to disk
+7a3e804ed6c0: Image successfully pushed
+b96d1548a24e: Pushing
+b96d1548a24e: Buffering to disk
+b96d1548a24e: Image successfully pushed
+672054a98d48: Pushing
+672054a98d48: Buffering to disk
+672054a98d48: Image successfully pushed
+2a0c07d7c0ae: Pushing
+2a0c07d7c0ae: Buffering to disk
+2a0c07d7c0ae: Image successfully pushed
+b314890c6b6b: Pushing
+b314890c6b6b: Buffering to disk
+b314890c6b6b: Image successfully pushed
+c16281490785: Pushing
+c16281490785: Buffering to disk
+c16281490785: Image successfully pushed
+0a974e326c0c: Pushing
+0a974e326c0c: Buffering to disk
+0a974e326c0c: Image successfully pushed
+6bc8b2cc73bb: Pushing
+6bc8b2cc73bb: Buffering to disk
+6bc8b2cc73bb: Image successfully pushed
+237da86f80ae: Pushing
+237da86f80ae: Buffering to disk
+237da86f80ae: Image successfully pushed
+1f54124cf60b: Pushing
+1f54124cf60b: Buffering to disk
+1f54124cf60b: Image successfully pushed
+Pushing tag for rev [1f54124cf60b] on {http://54.225.249.141:5000/v1/repositories/ruby-base/tags/latest}
+
+real  83.72
+
+ssh kai@54.225.249.141 "docker images | grep ruby-base"
+
+docker pull 54.225.249.141:5000/ruby-base:latest
+Pulling repository 54.225.249.141:5000/ruby-base
+1f54124cf60b: Pulling image (latest) from 54.225.249.141:5000/ruby-base
+1f54124cf60b: Pulling image (latest) from 54.225.249.141:5000/ruby-base, endpoint: http://54.225.249.141:5000/v1/
+1f54124cf60b: Pulling dependent layers
+7a3e804ed6c0: Pulling metadata
+7a3e804ed6c0: Pulling fs layer
+7a3e804ed6c0: Download complete
+b96d1548a24e: Pulling metadata
+b96d1548a24e: Pulling fs layer
+b96d1548a24e: Download complete
+672054a98d48: Pulling metadata
+672054a98d48: Pulling fs layer
+672054a98d48: Download complete
+2a0c07d7c0ae: Pulling metadata
+2a0c07d7c0ae: Pulling fs layer
+2a0c07d7c0ae: Download complete
+b314890c6b6b: Pulling metadata
+b314890c6b6b: Pulling fs layer
+b314890c6b6b: Download complete
+c16281490785: Pulling metadata
+c16281490785: Pulling fs layer
+c16281490785: Download complete
+0a974e326c0c: Pulling metadata
+0a974e326c0c: Pulling fs layer
+0a974e326c0c: Download complete
+6bc8b2cc73bb: Pulling metadata
+6bc8b2cc73bb: Pulling fs layer
+6bc8b2cc73bb: Download complete
+237da86f80ae: Pulling metadata
+237da86f80ae: Pulling fs layer
+237da86f80ae: Download complete
+1f54124cf60b: Pulling metadata
+1f54124cf60b: Pulling fs layer
+1f54124cf60b: Download complete
+1f54124cf60b: Download complete
+Status: Downloaded newer image for 54.225.249.141:5000/ruby-base:latest
+
+real  14.83
+
+ssh kai@54.225.249.141 "docker images | grep ruby-base"
+54.225.249.141:5000/ruby-base   latest              1f54124cf60b        9 weeks ago         349.7 MB
+
+ssh kai@54.225.249.141 "docker rmi 54.225.249.141:5000/ruby-base:latest"
+ssh kai@54.225.249.141 "docker images | grep ruby-base"
+
+ssh kai@54.225.249.141 "docker rm -f docker_registry"
+
+
+Test 10: ./pushpull.sh kai 54.225.249.141 ruby-base
+
+docker images
+kiwenlau/ruby-base              latest              1f54124cf60b        9 weeks ago         349.8 MB
+
+docker tag kiwenlau/ruby-base:latest 54.225.249.141:5000/ruby-base:latest
+
+docker images
+54.225.249.141:5000/ruby-base   latest              1f54124cf60b        9 weeks ago         349.8 MB
+kiwenlau/ruby-base              latest              1f54124cf60b        9 weeks ago         349.8 MB
+
+ssh kai@54.225.249.141 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:0.9.1"
+844451f2b118        kiwenlau/registry:0.9.1   "docker-registry"   2 seconds ago       Up 2 seconds        0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 54.225.249.141:5000/ruby-base:latest
+The push refers to a repository [54.225.249.141:5000/ruby-base] (len: 1)
+Sending image list
+Pushing repository 54.225.249.141:5000/ruby-base (1 tags)
+7a3e804ed6c0: Pushing
+7a3e804ed6c0: Buffering to disk
+7a3e804ed6c0: Image successfully pushed
+b96d1548a24e: Pushing
+b96d1548a24e: Buffering to disk
+b96d1548a24e: Image successfully pushed
+672054a98d48: Pushing
+672054a98d48: Buffering to disk
+672054a98d48: Image successfully pushed
+2a0c07d7c0ae: Pushing
+2a0c07d7c0ae: Buffering to disk
+2a0c07d7c0ae: Image successfully pushed
+b314890c6b6b: Pushing
+b314890c6b6b: Buffering to disk
+b314890c6b6b: Image successfully pushed
+c16281490785: Pushing
+c16281490785: Buffering to disk
+c16281490785: Image successfully pushed
+0a974e326c0c: Pushing
+0a974e326c0c: Buffering to disk
+0a974e326c0c: Image successfully pushed
+6bc8b2cc73bb: Pushing
+6bc8b2cc73bb: Buffering to disk
+6bc8b2cc73bb: Image successfully pushed
+237da86f80ae: Pushing
+237da86f80ae: Buffering to disk
+237da86f80ae: Image successfully pushed
+1f54124cf60b: Pushing
+1f54124cf60b: Buffering to disk
+1f54124cf60b: Image successfully pushed
+Pushing tag for rev [1f54124cf60b] on {http://54.225.249.141:5000/v1/repositories/ruby-base/tags/latest}
+
+real  75.41
+
+ssh kai@54.225.249.141 "docker images | grep ruby-base"
+
+docker pull 54.225.249.141:5000/ruby-base:latest
+Pulling repository 54.225.249.141:5000/ruby-base
+1f54124cf60b: Pulling image (latest) from 54.225.249.141:5000/ruby-base
+1f54124cf60b: Pulling image (latest) from 54.225.249.141:5000/ruby-base, endpoint: http://54.225.249.141:5000/v1/
+1f54124cf60b: Pulling dependent layers
+7a3e804ed6c0: Pulling metadata
+7a3e804ed6c0: Pulling fs layer
+7a3e804ed6c0: Download complete
+b96d1548a24e: Pulling metadata
+b96d1548a24e: Pulling fs layer
+b96d1548a24e: Download complete
+672054a98d48: Pulling metadata
+672054a98d48: Pulling fs layer
+672054a98d48: Download complete
+2a0c07d7c0ae: Pulling metadata
+2a0c07d7c0ae: Pulling fs layer
+2a0c07d7c0ae: Download complete
+b314890c6b6b: Pulling metadata
+b314890c6b6b: Pulling fs layer
+b314890c6b6b: Download complete
+c16281490785: Pulling metadata
+c16281490785: Pulling fs layer
+c16281490785: Download complete
+0a974e326c0c: Pulling metadata
+0a974e326c0c: Pulling fs layer
+0a974e326c0c: Download complete
+6bc8b2cc73bb: Pulling metadata
+6bc8b2cc73bb: Pulling fs layer
+6bc8b2cc73bb: Download complete
+237da86f80ae: Pulling metadata
+237da86f80ae: Pulling fs layer
+237da86f80ae: Download complete
+1f54124cf60b: Pulling metadata
+1f54124cf60b: Pulling fs layer
+1f54124cf60b: Download complete
+1f54124cf60b: Download complete
+Status: Downloaded newer image for 54.225.249.141:5000/ruby-base:latest
+
+real  15.12
+
+ssh kai@54.225.249.141 "docker images | grep ruby-base"
+54.225.249.141:5000/ruby-base   latest              1f54124cf60b        9 weeks ago         349.7 MB
+
+ssh kai@54.225.249.141 "docker rmi 54.225.249.141:5000/ruby-base:latest"
+ssh kai@54.225.249.141 "docker images | grep ruby-base"
+
+ssh kai@54.225.249.141 "docker rm -f docker_registry"
+
+end date: Mon Aug  3 02:25:04 JST 2015
+
+

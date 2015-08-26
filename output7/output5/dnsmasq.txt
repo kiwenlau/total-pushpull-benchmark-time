@@ -1,0 +1,1715 @@
+
+pullpush benchmark: transfer dnsmasq image to 52.68.197.112 host
+ 
+hostname: kuruwa-gw
+begin date: Sun Jul 19 08:50:11 JST 2015
+
+sudo docker images
+kiwenlau/dnsmasq                latest              8efa72c0e3bf        4 months ago        975.2 MB
+
+sudo docker images
+kiwenlau/dnsmasq                latest              8efa72c0e3bf        4 months ago        975.2 MB
+
+
+Test 1: ./pushpull.sh kai 52.68.197.112 dnsmasq
+
+docker images
+kiwenlau/dnsmasq                latest              8efa72c0e3bf        4 months ago        975.2 MB
+
+docker tag kiwenlau/dnsmasq:latest 52.68.197.112:5000/dnsmasq:latest
+
+docker images
+52.68.197.112:5000/dnsmasq      latest              8efa72c0e3bf        4 months ago        975.2 MB
+kiwenlau/dnsmasq                latest              8efa72c0e3bf        4 months ago        975.2 MB
+
+ssh kai@52.68.197.112 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+91b01a3b08d0        kiwenlau/registry:2.0.1   "registry cmd/regist   1 seconds ago       Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 52.68.197.112:5000/dnsmasq:latest
+The push refers to a repository [52.68.197.112:5000/dnsmasq] (len: 1)
+8efa72c0e3bf: Buffering to Disk
+8efa72c0e3bf: Image successfully pushed
+8efa72c0e3bf: Image already exists
+8595d42081a4: Buffering to Disk
+8595d42081a4: Image successfully pushed
+095e6c0da29d: Buffering to Disk
+095e6c0da29d: Image successfully pushed
+91966184510d: Buffering to Disk
+91966184510d: Image successfully pushed
+eaa9926e8e86: Image already exists
+03f374be6b99: Image already exists
+af1b08109992: Buffering to Disk
+af1b08109992: Image successfully pushed
+0169c9130d45: Buffering to Disk
+0169c9130d45: Image successfully pushed
+b9c57fb0a9b3: Image already exists
+9df0a016daf1: Buffering to Disk
+9df0a016daf1: Image successfully pushed
+dd2b2e9acaae: Image already exists
+6db61134ec96: Buffering to Disk
+6db61134ec96: Image successfully pushed
+39150769ad52: Buffering to Disk
+39150769ad52: Image successfully pushed
+b7c2fd737a85: Buffering to Disk
+b7c2fd737a85: Image successfully pushed
+5bc3a847e4e4: Buffering to Disk
+5bc3a847e4e4: Image successfully pushed
+b1e58a832efd: Buffering to Disk
+b1e58a832efd: Image successfully pushed
+b7822357f520: Buffering to Disk
+b7822357f520: Image successfully pushed
+189cb885ba89: Buffering to Disk
+189cb885ba89: Image successfully pushed
+5032be9f808a: Buffering to Disk
+5032be9f808a: Image successfully pushed
+08f25e6d880b: Buffering to Disk
+08f25e6d880b: Image successfully pushed
+47fb1b41ad2f: Image already exists
+89b52f216c6c: Buffering to Disk
+89b52f216c6c: Image successfully pushed
+Digest: sha256:ce51840738db71e621ca83cd915b4429c76dd9750a2e1c6a3abfcf74d7cddd1e
+
+real  124.40
+
+ssh kai@52.68.197.112 "docker images | grep dnsmasq"
+
+docker pull 52.68.197.112:5000/dnsmasq:latest
+latest: Pulling from 52.68.197.112:5000/dnsmasq
+89b52f216c6c: Pulling fs layer
+47fb1b41ad2f: Pulling fs layer
+08f25e6d880b: Pulling fs layer
+5032be9f808a: Pulling fs layer
+189cb885ba89: Pulling fs layer
+b7822357f520: Pulling fs layer
+b1e58a832efd: Pulling fs layer
+5bc3a847e4e4: Pulling fs layer
+b7c2fd737a85: Pulling fs layer
+39150769ad52: Pulling fs layer
+6db61134ec96: Pulling fs layer
+dd2b2e9acaae: Pulling fs layer
+9df0a016daf1: Pulling fs layer
+b9c57fb0a9b3: Pulling fs layer
+0169c9130d45: Pulling fs layer
+af1b08109992: Pulling fs layer
+03f374be6b99: Pulling fs layer
+eaa9926e8e86: Pulling fs layer
+91966184510d: Pulling fs layer
+095e6c0da29d: Pulling fs layer
+8595d42081a4: Pulling fs layer
+8efa72c0e3bf: Pulling fs layer
+8efa72c0e3bf: Pulling fs layer
+8efa72c0e3bf: Layer already being pulled by another client. Waiting.
+47fb1b41ad2f: Verifying Checksum
+47fb1b41ad2f: Download complete
+08f25e6d880b: Verifying Checksum
+08f25e6d880b: Download complete
+dd2b2e9acaae: Verifying Checksum
+dd2b2e9acaae: Download complete
+39150769ad52: Verifying Checksum
+39150769ad52: Download complete
+8efa72c0e3bf: Verifying Checksum
+8efa72c0e3bf: Download complete
+8595d42081a4: Verifying Checksum
+8595d42081a4: Download complete
+eaa9926e8e86: Verifying Checksum
+eaa9926e8e86: Download complete
+0169c9130d45: Verifying Checksum
+0169c9130d45: Download complete
+03f374be6b99: Verifying Checksum
+03f374be6b99: Download complete
+af1b08109992: Verifying Checksum
+af1b08109992: Download complete
+6db61134ec96: Verifying Checksum
+6db61134ec96: Download complete
+b9c57fb0a9b3: Verifying Checksum
+b9c57fb0a9b3: Download complete
+8efa72c0e3bf: Download complete
+91966184510d: Verifying Checksum
+91966184510d: Download complete
+5bc3a847e4e4: Verifying Checksum
+5bc3a847e4e4: Download complete
+095e6c0da29d: Verifying Checksum
+095e6c0da29d: Download complete
+b1e58a832efd: Verifying Checksum
+b1e58a832efd: Download complete
+b7c2fd737a85: Verifying Checksum
+b7c2fd737a85: Download complete
+89b52f216c6c: Verifying Checksum
+89b52f216c6c: Download complete
+9df0a016daf1: Verifying Checksum
+9df0a016daf1: Download complete
+189cb885ba89: Verifying Checksum
+189cb885ba89: Download complete
+5032be9f808a: Verifying Checksum
+5032be9f808a: Download complete
+b7822357f520: Verifying Checksum
+b7822357f520: Download complete
+89b52f216c6c: Pull complete
+47fb1b41ad2f: Pull complete
+08f25e6d880b: Pull complete
+5032be9f808a: Pull complete
+189cb885ba89: Pull complete
+b7822357f520: Pull complete
+b1e58a832efd: Pull complete
+5bc3a847e4e4: Pull complete
+b7c2fd737a85: Pull complete
+39150769ad52: Pull complete
+6db61134ec96: Pull complete
+dd2b2e9acaae: Pull complete
+9df0a016daf1: Pull complete
+b9c57fb0a9b3: Pull complete
+0169c9130d45: Pull complete
+af1b08109992: Pull complete
+03f374be6b99: Pull complete
+eaa9926e8e86: Pull complete
+91966184510d: Pull complete
+095e6c0da29d: Pull complete
+8595d42081a4: Pull complete
+8efa72c0e3bf: Pull complete
+8efa72c0e3bf: Already exists
+Digest: sha256:ce51840738db71e621ca83cd915b4429c76dd9750a2e1c6a3abfcf74d7cddd1e
+Status: Downloaded newer image for 52.68.197.112:5000/dnsmasq:latest
+
+real  323.99
+
+ssh kai@52.68.197.112 "docker images | grep dnsmasq"
+52.68.197.112:5000/dnsmasq   latest              8efa72c0e3bf        4 months ago        975.2 MB
+
+ssh kai@52.68.197.112 "docker rmi 52.68.197.112:5000/dnsmasq:latest"
+ssh kai@52.68.197.112 "docker images | grep dnsmasq"
+
+ssh kai@52.68.197.112 "docker rm -f docker_registry"
+
+
+Test 2: ./pushpull.sh kai 52.68.197.112 dnsmasq
+
+docker images
+kiwenlau/dnsmasq                latest              8efa72c0e3bf        4 months ago        975.2 MB
+
+docker tag kiwenlau/dnsmasq:latest 52.68.197.112:5000/dnsmasq:latest
+
+docker images
+52.68.197.112:5000/dnsmasq      latest              8efa72c0e3bf        4 months ago        975.2 MB
+kiwenlau/dnsmasq                latest              8efa72c0e3bf        4 months ago        975.2 MB
+
+ssh kai@52.68.197.112 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+9d73e8815730        kiwenlau/registry:2.0.1   "registry cmd/regist   1 seconds ago       Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 52.68.197.112:5000/dnsmasq:latest
+The push refers to a repository [52.68.197.112:5000/dnsmasq] (len: 1)
+8efa72c0e3bf: Buffering to Disk
+8efa72c0e3bf: Image successfully pushed
+8efa72c0e3bf: Image already exists
+8595d42081a4: Buffering to Disk
+8595d42081a4: Image successfully pushed
+095e6c0da29d: Buffering to Disk
+095e6c0da29d: Image successfully pushed
+91966184510d: Buffering to Disk
+91966184510d: Image successfully pushed
+eaa9926e8e86: Image already exists
+03f374be6b99: Image already exists
+af1b08109992: Buffering to Disk
+af1b08109992: Image successfully pushed
+0169c9130d45: Buffering to Disk
+0169c9130d45: Image successfully pushed
+b9c57fb0a9b3: Image already exists
+9df0a016daf1: Buffering to Disk
+9df0a016daf1: Image successfully pushed
+dd2b2e9acaae: Image already exists
+6db61134ec96: Buffering to Disk
+6db61134ec96: Image successfully pushed
+39150769ad52: Buffering to Disk
+39150769ad52: Image successfully pushed
+b7c2fd737a85: Buffering to Disk
+b7c2fd737a85: Image successfully pushed
+5bc3a847e4e4: Buffering to Disk
+5bc3a847e4e4: Image successfully pushed
+b1e58a832efd: Buffering to Disk
+b1e58a832efd: Image successfully pushed
+b7822357f520: Buffering to Disk
+b7822357f520: Image successfully pushed
+189cb885ba89: Buffering to Disk
+189cb885ba89: Image successfully pushed
+5032be9f808a: Buffering to Disk
+5032be9f808a: Image successfully pushed
+08f25e6d880b: Buffering to Disk
+08f25e6d880b: Image successfully pushed
+47fb1b41ad2f: Image already exists
+89b52f216c6c: Buffering to Disk
+89b52f216c6c: Image successfully pushed
+Digest: sha256:75993e879487e61e44acc8ff5e56e6696c4ed0605622be40ccf51715d95439bb
+
+real  128.90
+
+ssh kai@52.68.197.112 "docker images | grep dnsmasq"
+
+docker pull 52.68.197.112:5000/dnsmasq:latest
+latest: Pulling from 52.68.197.112:5000/dnsmasq
+89b52f216c6c: Pulling fs layer
+47fb1b41ad2f: Pulling fs layer
+08f25e6d880b: Pulling fs layer
+5032be9f808a: Pulling fs layer
+189cb885ba89: Pulling fs layer
+b7822357f520: Pulling fs layer
+b1e58a832efd: Pulling fs layer
+5bc3a847e4e4: Pulling fs layer
+b7c2fd737a85: Pulling fs layer
+39150769ad52: Pulling fs layer
+6db61134ec96: Pulling fs layer
+dd2b2e9acaae: Pulling fs layer
+9df0a016daf1: Pulling fs layer
+b9c57fb0a9b3: Pulling fs layer
+0169c9130d45: Pulling fs layer
+af1b08109992: Pulling fs layer
+03f374be6b99: Pulling fs layer
+eaa9926e8e86: Pulling fs layer
+91966184510d: Pulling fs layer
+095e6c0da29d: Pulling fs layer
+8595d42081a4: Pulling fs layer
+8efa72c0e3bf: Pulling fs layer
+8efa72c0e3bf: Pulling fs layer
+8efa72c0e3bf: Layer already being pulled by another client. Waiting.
+08f25e6d880b: Verifying Checksum
+08f25e6d880b: Download complete
+dd2b2e9acaae: Verifying Checksum
+dd2b2e9acaae: Download complete
+b9c57fb0a9b3: Verifying Checksum
+b9c57fb0a9b3: Download complete
+0169c9130d45: Verifying Checksum
+0169c9130d45: Download complete
+91966184510d: Verifying Checksum
+91966184510d: Download complete
+03f374be6b99: Verifying Checksum
+03f374be6b99: Download complete
+8595d42081a4: Verifying Checksum
+8595d42081a4: Download complete
+eaa9926e8e86: Verifying Checksum
+eaa9926e8e86: Download complete
+af1b08109992: Verifying Checksum
+af1b08109992: Download complete
+6db61134ec96: Verifying Checksum
+6db61134ec96: Download complete
+39150769ad52: Verifying Checksum
+39150769ad52: Download complete
+8efa72c0e3bf: Verifying Checksum
+8efa72c0e3bf: Download complete
+47fb1b41ad2f: Verifying Checksum
+47fb1b41ad2f: Download complete
+8efa72c0e3bf: Download complete
+5bc3a847e4e4: Verifying Checksum
+5bc3a847e4e4: Download complete
+9df0a016daf1: Verifying Checksum
+9df0a016daf1: Download complete
+b1e58a832efd: Verifying Checksum
+b1e58a832efd: Download complete
+b7c2fd737a85: Verifying Checksum
+b7c2fd737a85: Download complete
+095e6c0da29d: Verifying Checksum
+095e6c0da29d: Download complete
+189cb885ba89: Verifying Checksum
+189cb885ba89: Download complete
+89b52f216c6c: Verifying Checksum
+89b52f216c6c: Download complete
+5032be9f808a: Verifying Checksum
+5032be9f808a: Download complete
+b7822357f520: Verifying Checksum
+b7822357f520: Download complete
+89b52f216c6c: Pull complete
+47fb1b41ad2f: Pull complete
+08f25e6d880b: Pull complete
+5032be9f808a: Pull complete
+189cb885ba89: Pull complete
+b7822357f520: Pull complete
+b1e58a832efd: Pull complete
+5bc3a847e4e4: Pull complete
+b7c2fd737a85: Pull complete
+39150769ad52: Pull complete
+6db61134ec96: Pull complete
+dd2b2e9acaae: Pull complete
+9df0a016daf1: Pull complete
+b9c57fb0a9b3: Pull complete
+0169c9130d45: Pull complete
+af1b08109992: Pull complete
+03f374be6b99: Pull complete
+eaa9926e8e86: Pull complete
+91966184510d: Pull complete
+095e6c0da29d: Pull complete
+8595d42081a4: Pull complete
+8efa72c0e3bf: Pull complete
+8efa72c0e3bf: Already exists
+Digest: sha256:75993e879487e61e44acc8ff5e56e6696c4ed0605622be40ccf51715d95439bb
+Status: Downloaded newer image for 52.68.197.112:5000/dnsmasq:latest
+
+real  323.94
+
+ssh kai@52.68.197.112 "docker images | grep dnsmasq"
+52.68.197.112:5000/dnsmasq   latest              8efa72c0e3bf        4 months ago        975.2 MB
+
+ssh kai@52.68.197.112 "docker rmi 52.68.197.112:5000/dnsmasq:latest"
+ssh kai@52.68.197.112 "docker images | grep dnsmasq"
+
+ssh kai@52.68.197.112 "docker rm -f docker_registry"
+
+
+Test 3: ./pushpull.sh kai 52.68.197.112 dnsmasq
+
+docker images
+kiwenlau/dnsmasq                latest              8efa72c0e3bf        4 months ago        975.2 MB
+
+docker tag kiwenlau/dnsmasq:latest 52.68.197.112:5000/dnsmasq:latest
+
+docker images
+52.68.197.112:5000/dnsmasq      latest              8efa72c0e3bf        4 months ago        975.2 MB
+kiwenlau/dnsmasq                latest              8efa72c0e3bf        4 months ago        975.2 MB
+
+ssh kai@52.68.197.112 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+babadf6fac03        kiwenlau/registry:2.0.1   "registry cmd/regist   1 seconds ago       Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 52.68.197.112:5000/dnsmasq:latest
+The push refers to a repository [52.68.197.112:5000/dnsmasq] (len: 1)
+8efa72c0e3bf: Buffering to Disk
+8efa72c0e3bf: Image successfully pushed
+8efa72c0e3bf: Image already exists
+8595d42081a4: Buffering to Disk
+8595d42081a4: Image successfully pushed
+095e6c0da29d: Buffering to Disk
+095e6c0da29d: Image successfully pushed
+91966184510d: Buffering to Disk
+91966184510d: Image successfully pushed
+eaa9926e8e86: Image already exists
+03f374be6b99: Image already exists
+af1b08109992: Buffering to Disk
+af1b08109992: Image successfully pushed
+0169c9130d45: Buffering to Disk
+0169c9130d45: Image successfully pushed
+b9c57fb0a9b3: Image already exists
+9df0a016daf1: Buffering to Disk
+9df0a016daf1: Image successfully pushed
+dd2b2e9acaae: Image already exists
+6db61134ec96: Buffering to Disk
+6db61134ec96: Image successfully pushed
+39150769ad52: Buffering to Disk
+39150769ad52: Image successfully pushed
+b7c2fd737a85: Buffering to Disk
+b7c2fd737a85: Image successfully pushed
+5bc3a847e4e4: Buffering to Disk
+5bc3a847e4e4: Image successfully pushed
+b1e58a832efd: Buffering to Disk
+b1e58a832efd: Image successfully pushed
+b7822357f520: Buffering to Disk
+b7822357f520: Image successfully pushed
+189cb885ba89: Buffering to Disk
+189cb885ba89: Image successfully pushed
+5032be9f808a: Buffering to Disk
+5032be9f808a: Image successfully pushed
+08f25e6d880b: Buffering to Disk
+08f25e6d880b: Image successfully pushed
+47fb1b41ad2f: Image already exists
+89b52f216c6c: Buffering to Disk
+89b52f216c6c: Image successfully pushed
+Digest: sha256:4dda761bba20fb0f69176b36829289c67a1ad07ebe31b517813c67d5081695ae
+
+real  129.97
+
+ssh kai@52.68.197.112 "docker images | grep dnsmasq"
+
+docker pull 52.68.197.112:5000/dnsmasq:latest
+latest: Pulling from 52.68.197.112:5000/dnsmasq
+89b52f216c6c: Pulling fs layer
+47fb1b41ad2f: Pulling fs layer
+08f25e6d880b: Pulling fs layer
+5032be9f808a: Pulling fs layer
+189cb885ba89: Pulling fs layer
+b7822357f520: Pulling fs layer
+b1e58a832efd: Pulling fs layer
+5bc3a847e4e4: Pulling fs layer
+b7c2fd737a85: Pulling fs layer
+39150769ad52: Pulling fs layer
+6db61134ec96: Pulling fs layer
+dd2b2e9acaae: Pulling fs layer
+9df0a016daf1: Pulling fs layer
+b9c57fb0a9b3: Pulling fs layer
+0169c9130d45: Pulling fs layer
+af1b08109992: Pulling fs layer
+03f374be6b99: Pulling fs layer
+eaa9926e8e86: Pulling fs layer
+91966184510d: Pulling fs layer
+095e6c0da29d: Pulling fs layer
+8595d42081a4: Pulling fs layer
+8efa72c0e3bf: Pulling fs layer
+8efa72c0e3bf: Pulling fs layer
+8efa72c0e3bf: Layer already being pulled by another client. Waiting.
+0169c9130d45: Verifying Checksum
+0169c9130d45: Download complete
+eaa9926e8e86: Verifying Checksum
+eaa9926e8e86: Download complete
+af1b08109992: Verifying Checksum
+af1b08109992: Download complete
+6db61134ec96: Verifying Checksum
+6db61134ec96: Download complete
+39150769ad52: Verifying Checksum
+39150769ad52: Download complete
+03f374be6b99: Verifying Checksum
+03f374be6b99: Download complete
+08f25e6d880b: Verifying Checksum
+08f25e6d880b: Download complete
+47fb1b41ad2f: Verifying Checksum
+47fb1b41ad2f: Download complete
+8595d42081a4: Verifying Checksum
+8595d42081a4: Download complete
+b9c57fb0a9b3: Verifying Checksum
+b9c57fb0a9b3: Download complete
+dd2b2e9acaae: Verifying Checksum
+dd2b2e9acaae: Download complete
+91966184510d: Verifying Checksum
+91966184510d: Download complete
+8efa72c0e3bf: Verifying Checksum
+8efa72c0e3bf: Download complete
+8efa72c0e3bf: Download complete
+5bc3a847e4e4: Verifying Checksum
+5bc3a847e4e4: Download complete
+b1e58a832efd: Verifying Checksum
+b1e58a832efd: Download complete
+9df0a016daf1: Verifying Checksum
+9df0a016daf1: Download complete
+189cb885ba89: Verifying Checksum
+189cb885ba89: Download complete
+89b52f216c6c: Verifying Checksum
+89b52f216c6c: Download complete
+095e6c0da29d: Verifying Checksum
+095e6c0da29d: Download complete
+b7c2fd737a85: Verifying Checksum
+b7c2fd737a85: Download complete
+5032be9f808a: Verifying Checksum
+5032be9f808a: Download complete
+b7822357f520: Verifying Checksum
+b7822357f520: Download complete
+89b52f216c6c: Pull complete
+47fb1b41ad2f: Pull complete
+08f25e6d880b: Pull complete
+5032be9f808a: Pull complete
+189cb885ba89: Pull complete
+b7822357f520: Pull complete
+b1e58a832efd: Pull complete
+5bc3a847e4e4: Pull complete
+b7c2fd737a85: Pull complete
+39150769ad52: Pull complete
+6db61134ec96: Pull complete
+dd2b2e9acaae: Pull complete
+9df0a016daf1: Pull complete
+b9c57fb0a9b3: Pull complete
+0169c9130d45: Pull complete
+af1b08109992: Pull complete
+03f374be6b99: Pull complete
+eaa9926e8e86: Pull complete
+91966184510d: Pull complete
+095e6c0da29d: Pull complete
+8595d42081a4: Pull complete
+8efa72c0e3bf: Pull complete
+8efa72c0e3bf: Already exists
+Digest: sha256:4dda761bba20fb0f69176b36829289c67a1ad07ebe31b517813c67d5081695ae
+Status: Downloaded newer image for 52.68.197.112:5000/dnsmasq:latest
+
+real  315.23
+
+ssh kai@52.68.197.112 "docker images | grep dnsmasq"
+52.68.197.112:5000/dnsmasq   latest              8efa72c0e3bf        4 months ago        975.2 MB
+
+ssh kai@52.68.197.112 "docker rmi 52.68.197.112:5000/dnsmasq:latest"
+ssh kai@52.68.197.112 "docker images | grep dnsmasq"
+
+ssh kai@52.68.197.112 "docker rm -f docker_registry"
+
+
+Test 4: ./pushpull.sh kai 52.68.197.112 dnsmasq
+
+docker images
+kiwenlau/dnsmasq                latest              8efa72c0e3bf        4 months ago        975.2 MB
+
+docker tag kiwenlau/dnsmasq:latest 52.68.197.112:5000/dnsmasq:latest
+
+docker images
+52.68.197.112:5000/dnsmasq      latest              8efa72c0e3bf        4 months ago        975.2 MB
+kiwenlau/dnsmasq                latest              8efa72c0e3bf        4 months ago        975.2 MB
+
+ssh kai@52.68.197.112 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+29d90167e84f        kiwenlau/registry:2.0.1   "registry cmd/regist   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 52.68.197.112:5000/dnsmasq:latest
+The push refers to a repository [52.68.197.112:5000/dnsmasq] (len: 1)
+8efa72c0e3bf: Buffering to Disk
+8efa72c0e3bf: Image successfully pushed
+8efa72c0e3bf: Image already exists
+8595d42081a4: Buffering to Disk
+8595d42081a4: Image successfully pushed
+095e6c0da29d: Buffering to Disk
+095e6c0da29d: Image successfully pushed
+91966184510d: Buffering to Disk
+91966184510d: Image successfully pushed
+eaa9926e8e86: Image already exists
+03f374be6b99: Image already exists
+af1b08109992: Buffering to Disk
+af1b08109992: Image successfully pushed
+0169c9130d45: Buffering to Disk
+0169c9130d45: Image successfully pushed
+b9c57fb0a9b3: Image already exists
+9df0a016daf1: Buffering to Disk
+9df0a016daf1: Image successfully pushed
+dd2b2e9acaae: Image already exists
+6db61134ec96: Buffering to Disk
+6db61134ec96: Image successfully pushed
+39150769ad52: Buffering to Disk
+39150769ad52: Image successfully pushed
+b7c2fd737a85: Buffering to Disk
+b7c2fd737a85: Image successfully pushed
+5bc3a847e4e4: Buffering to Disk
+5bc3a847e4e4: Image successfully pushed
+b1e58a832efd: Buffering to Disk
+b1e58a832efd: Image successfully pushed
+b7822357f520: Buffering to Disk
+b7822357f520: Image successfully pushed
+189cb885ba89: Buffering to Disk
+189cb885ba89: Image successfully pushed
+5032be9f808a: Buffering to Disk
+5032be9f808a: Image successfully pushed
+08f25e6d880b: Buffering to Disk
+08f25e6d880b: Image successfully pushed
+47fb1b41ad2f: Image already exists
+89b52f216c6c: Buffering to Disk
+89b52f216c6c: Image successfully pushed
+Digest: sha256:200a44722d08337f83fc49357c197cae6ca4af412936470dd5b5d17bce2e556c
+
+real  130.62
+
+ssh kai@52.68.197.112 "docker images | grep dnsmasq"
+
+docker pull 52.68.197.112:5000/dnsmasq:latest
+latest: Pulling from 52.68.197.112:5000/dnsmasq
+89b52f216c6c: Pulling fs layer
+47fb1b41ad2f: Pulling fs layer
+08f25e6d880b: Pulling fs layer
+5032be9f808a: Pulling fs layer
+189cb885ba89: Pulling fs layer
+b7822357f520: Pulling fs layer
+b1e58a832efd: Pulling fs layer
+5bc3a847e4e4: Pulling fs layer
+b7c2fd737a85: Pulling fs layer
+39150769ad52: Pulling fs layer
+6db61134ec96: Pulling fs layer
+dd2b2e9acaae: Pulling fs layer
+9df0a016daf1: Pulling fs layer
+b9c57fb0a9b3: Pulling fs layer
+0169c9130d45: Pulling fs layer
+af1b08109992: Pulling fs layer
+03f374be6b99: Pulling fs layer
+eaa9926e8e86: Pulling fs layer
+91966184510d: Pulling fs layer
+095e6c0da29d: Pulling fs layer
+8595d42081a4: Pulling fs layer
+8efa72c0e3bf: Pulling fs layer
+8efa72c0e3bf: Pulling fs layer
+8efa72c0e3bf: Layer already being pulled by another client. Waiting.
+eaa9926e8e86: Verifying Checksum
+eaa9926e8e86: Download complete
+08f25e6d880b: Verifying Checksum
+08f25e6d880b: Download complete
+47fb1b41ad2f: Verifying Checksum
+47fb1b41ad2f: Download complete
+dd2b2e9acaae: Verifying Checksum
+dd2b2e9acaae: Download complete
+6db61134ec96: Verifying Checksum
+6db61134ec96: Download complete
+39150769ad52: Verifying Checksum
+39150769ad52: Download complete
+af1b08109992: Verifying Checksum
+af1b08109992: Download complete
+0169c9130d45: Verifying Checksum
+0169c9130d45: Download complete
+b9c57fb0a9b3: Verifying Checksum
+b9c57fb0a9b3: Download complete
+03f374be6b99: Verifying Checksum
+03f374be6b99: Download complete
+8efa72c0e3bf: Verifying Checksum
+8efa72c0e3bf: Download complete
+8595d42081a4: Verifying Checksum
+8595d42081a4: Download complete
+91966184510d: Verifying Checksum
+91966184510d: Download complete
+8efa72c0e3bf: Download complete
+b1e58a832efd: Verifying Checksum
+b1e58a832efd: Download complete
+5bc3a847e4e4: Verifying Checksum
+5bc3a847e4e4: Download complete
+b7c2fd737a85: Verifying Checksum
+b7c2fd737a85: Download complete
+9df0a016daf1: Verifying Checksum
+9df0a016daf1: Download complete
+189cb885ba89: Verifying Checksum
+189cb885ba89: Download complete
+095e6c0da29d: Verifying Checksum
+095e6c0da29d: Download complete
+89b52f216c6c: Verifying Checksum
+89b52f216c6c: Download complete
+5032be9f808a: Verifying Checksum
+5032be9f808a: Download complete
+b7822357f520: Verifying Checksum
+b7822357f520: Download complete
+89b52f216c6c: Pull complete
+47fb1b41ad2f: Pull complete
+08f25e6d880b: Pull complete
+5032be9f808a: Pull complete
+189cb885ba89: Pull complete
+b7822357f520: Pull complete
+b1e58a832efd: Pull complete
+5bc3a847e4e4: Pull complete
+b7c2fd737a85: Pull complete
+39150769ad52: Pull complete
+6db61134ec96: Pull complete
+dd2b2e9acaae: Pull complete
+9df0a016daf1: Pull complete
+b9c57fb0a9b3: Pull complete
+0169c9130d45: Pull complete
+af1b08109992: Pull complete
+03f374be6b99: Pull complete
+eaa9926e8e86: Pull complete
+91966184510d: Pull complete
+095e6c0da29d: Pull complete
+8595d42081a4: Pull complete
+8efa72c0e3bf: Pull complete
+8efa72c0e3bf: Already exists
+Digest: sha256:200a44722d08337f83fc49357c197cae6ca4af412936470dd5b5d17bce2e556c
+Status: Downloaded newer image for 52.68.197.112:5000/dnsmasq:latest
+
+real  316.47
+
+ssh kai@52.68.197.112 "docker images | grep dnsmasq"
+52.68.197.112:5000/dnsmasq   latest              8efa72c0e3bf        4 months ago        975.2 MB
+
+ssh kai@52.68.197.112 "docker rmi 52.68.197.112:5000/dnsmasq:latest"
+ssh kai@52.68.197.112 "docker images | grep dnsmasq"
+
+ssh kai@52.68.197.112 "docker rm -f docker_registry"
+
+
+Test 5: ./pushpull.sh kai 52.68.197.112 dnsmasq
+
+docker images
+kiwenlau/dnsmasq                latest              8efa72c0e3bf        4 months ago        975.2 MB
+
+docker tag kiwenlau/dnsmasq:latest 52.68.197.112:5000/dnsmasq:latest
+
+docker images
+52.68.197.112:5000/dnsmasq      latest              8efa72c0e3bf        4 months ago        975.2 MB
+kiwenlau/dnsmasq                latest              8efa72c0e3bf        4 months ago        975.2 MB
+
+ssh kai@52.68.197.112 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+0ac0099c0c0b        kiwenlau/registry:2.0.1   "registry cmd/regist   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 52.68.197.112:5000/dnsmasq:latest
+The push refers to a repository [52.68.197.112:5000/dnsmasq] (len: 1)
+8efa72c0e3bf: Buffering to Disk
+8efa72c0e3bf: Image successfully pushed
+8efa72c0e3bf: Image already exists
+8595d42081a4: Buffering to Disk
+8595d42081a4: Image successfully pushed
+095e6c0da29d: Buffering to Disk
+095e6c0da29d: Image successfully pushed
+91966184510d: Buffering to Disk
+91966184510d: Image successfully pushed
+eaa9926e8e86: Image already exists
+03f374be6b99: Image already exists
+af1b08109992: Buffering to Disk
+af1b08109992: Image successfully pushed
+0169c9130d45: Buffering to Disk
+0169c9130d45: Image successfully pushed
+b9c57fb0a9b3: Image already exists
+9df0a016daf1: Buffering to Disk
+9df0a016daf1: Image successfully pushed
+dd2b2e9acaae: Image already exists
+6db61134ec96: Buffering to Disk
+6db61134ec96: Image successfully pushed
+39150769ad52: Buffering to Disk
+39150769ad52: Image successfully pushed
+b7c2fd737a85: Buffering to Disk
+b7c2fd737a85: Image successfully pushed
+5bc3a847e4e4: Buffering to Disk
+5bc3a847e4e4: Image successfully pushed
+b1e58a832efd: Buffering to Disk
+b1e58a832efd: Image successfully pushed
+b7822357f520: Buffering to Disk
+b7822357f520: Image successfully pushed
+189cb885ba89: Buffering to Disk
+189cb885ba89: Image successfully pushed
+5032be9f808a: Buffering to Disk
+5032be9f808a: Image successfully pushed
+08f25e6d880b: Buffering to Disk
+08f25e6d880b: Image successfully pushed
+47fb1b41ad2f: Image already exists
+89b52f216c6c: Buffering to Disk
+89b52f216c6c: Image successfully pushed
+Digest: sha256:a41fdd37d7fa5157d841ef00220178cc04dfbc4d3d97d6643e94a3b0aee1ffe3
+
+real  133.77
+
+ssh kai@52.68.197.112 "docker images | grep dnsmasq"
+
+docker pull 52.68.197.112:5000/dnsmasq:latest
+latest: Pulling from 52.68.197.112:5000/dnsmasq
+89b52f216c6c: Pulling fs layer
+47fb1b41ad2f: Pulling fs layer
+08f25e6d880b: Pulling fs layer
+5032be9f808a: Pulling fs layer
+189cb885ba89: Pulling fs layer
+b7822357f520: Pulling fs layer
+b1e58a832efd: Pulling fs layer
+5bc3a847e4e4: Pulling fs layer
+b7c2fd737a85: Pulling fs layer
+39150769ad52: Pulling fs layer
+6db61134ec96: Pulling fs layer
+dd2b2e9acaae: Pulling fs layer
+9df0a016daf1: Pulling fs layer
+b9c57fb0a9b3: Pulling fs layer
+0169c9130d45: Pulling fs layer
+af1b08109992: Pulling fs layer
+03f374be6b99: Pulling fs layer
+eaa9926e8e86: Pulling fs layer
+91966184510d: Pulling fs layer
+095e6c0da29d: Pulling fs layer
+8595d42081a4: Pulling fs layer
+8efa72c0e3bf: Pulling fs layer
+8efa72c0e3bf: Pulling fs layer
+8efa72c0e3bf: Layer already being pulled by another client. Waiting.
+dd2b2e9acaae: Verifying Checksum
+dd2b2e9acaae: Download complete
+39150769ad52: Verifying Checksum
+39150769ad52: Download complete
+47fb1b41ad2f: Verifying Checksum
+47fb1b41ad2f: Download complete
+08f25e6d880b: Verifying Checksum
+08f25e6d880b: Download complete
+6db61134ec96: Verifying Checksum
+6db61134ec96: Download complete
+b9c57fb0a9b3: Verifying Checksum
+b9c57fb0a9b3: Download complete
+8595d42081a4: Verifying Checksum
+8595d42081a4: Download complete
+91966184510d: Verifying Checksum
+91966184510d: Download complete
+03f374be6b99: Verifying Checksum
+03f374be6b99: Download complete
+eaa9926e8e86: Verifying Checksum
+eaa9926e8e86: Download complete
+af1b08109992: Verifying Checksum
+af1b08109992: Download complete
+0169c9130d45: Verifying Checksum
+0169c9130d45: Download complete
+8efa72c0e3bf: Verifying Checksum
+8efa72c0e3bf: Download complete
+8efa72c0e3bf: Download complete
+b7c2fd737a85: Verifying Checksum
+b7c2fd737a85: Download complete
+5bc3a847e4e4: Verifying Checksum
+5bc3a847e4e4: Download complete
+095e6c0da29d: Verifying Checksum
+095e6c0da29d: Download complete
+9df0a016daf1: Verifying Checksum
+9df0a016daf1: Download complete
+b1e58a832efd: Verifying Checksum
+b1e58a832efd: Download complete
+189cb885ba89: Verifying Checksum
+189cb885ba89: Download complete
+89b52f216c6c: Verifying Checksum
+89b52f216c6c: Download complete
+5032be9f808a: Verifying Checksum
+5032be9f808a: Download complete
+b7822357f520: Verifying Checksum
+b7822357f520: Download complete
+89b52f216c6c: Pull complete
+47fb1b41ad2f: Pull complete
+08f25e6d880b: Pull complete
+5032be9f808a: Pull complete
+189cb885ba89: Pull complete
+b7822357f520: Pull complete
+b1e58a832efd: Pull complete
+5bc3a847e4e4: Pull complete
+b7c2fd737a85: Pull complete
+39150769ad52: Pull complete
+6db61134ec96: Pull complete
+dd2b2e9acaae: Pull complete
+9df0a016daf1: Pull complete
+b9c57fb0a9b3: Pull complete
+0169c9130d45: Pull complete
+af1b08109992: Pull complete
+03f374be6b99: Pull complete
+eaa9926e8e86: Pull complete
+91966184510d: Pull complete
+095e6c0da29d: Pull complete
+8595d42081a4: Pull complete
+8efa72c0e3bf: Pull complete
+8efa72c0e3bf: Already exists
+Digest: sha256:a41fdd37d7fa5157d841ef00220178cc04dfbc4d3d97d6643e94a3b0aee1ffe3
+Status: Downloaded newer image for 52.68.197.112:5000/dnsmasq:latest
+
+real  321.35
+
+ssh kai@52.68.197.112 "docker images | grep dnsmasq"
+52.68.197.112:5000/dnsmasq   latest              8efa72c0e3bf        4 months ago        975.2 MB
+
+ssh kai@52.68.197.112 "docker rmi 52.68.197.112:5000/dnsmasq:latest"
+ssh kai@52.68.197.112 "docker images | grep dnsmasq"
+
+ssh kai@52.68.197.112 "docker rm -f docker_registry"
+
+
+Test 6: ./pushpull.sh kai 52.68.197.112 dnsmasq
+
+docker images
+kiwenlau/dnsmasq                latest              8efa72c0e3bf        4 months ago        975.2 MB
+
+docker tag kiwenlau/dnsmasq:latest 52.68.197.112:5000/dnsmasq:latest
+
+docker images
+52.68.197.112:5000/dnsmasq      latest              8efa72c0e3bf        4 months ago        975.2 MB
+kiwenlau/dnsmasq                latest              8efa72c0e3bf        4 months ago        975.2 MB
+
+ssh kai@52.68.197.112 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+c7d9ed72455c        kiwenlau/registry:2.0.1   "registry cmd/regist   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 52.68.197.112:5000/dnsmasq:latest
+The push refers to a repository [52.68.197.112:5000/dnsmasq] (len: 1)
+8efa72c0e3bf: Buffering to Disk
+8efa72c0e3bf: Image successfully pushed
+8efa72c0e3bf: Image already exists
+8595d42081a4: Buffering to Disk
+8595d42081a4: Image successfully pushed
+095e6c0da29d: Buffering to Disk
+095e6c0da29d: Image successfully pushed
+91966184510d: Buffering to Disk
+91966184510d: Image successfully pushed
+eaa9926e8e86: Image already exists
+03f374be6b99: Image already exists
+af1b08109992: Buffering to Disk
+af1b08109992: Image successfully pushed
+0169c9130d45: Buffering to Disk
+0169c9130d45: Image successfully pushed
+b9c57fb0a9b3: Image already exists
+9df0a016daf1: Buffering to Disk
+9df0a016daf1: Image successfully pushed
+dd2b2e9acaae: Image already exists
+6db61134ec96: Buffering to Disk
+6db61134ec96: Image successfully pushed
+39150769ad52: Buffering to Disk
+39150769ad52: Image successfully pushed
+b7c2fd737a85: Buffering to Disk
+b7c2fd737a85: Image successfully pushed
+5bc3a847e4e4: Buffering to Disk
+5bc3a847e4e4: Image successfully pushed
+b1e58a832efd: Buffering to Disk
+b1e58a832efd: Image successfully pushed
+b7822357f520: Buffering to Disk
+b7822357f520: Image successfully pushed
+189cb885ba89: Buffering to Disk
+189cb885ba89: Image successfully pushed
+5032be9f808a: Buffering to Disk
+5032be9f808a: Image successfully pushed
+08f25e6d880b: Buffering to Disk
+08f25e6d880b: Image successfully pushed
+47fb1b41ad2f: Image already exists
+89b52f216c6c: Buffering to Disk
+89b52f216c6c: Image successfully pushed
+Digest: sha256:927744fe0be195e269cceea2a878d776ac6be73064042d5cd7424188cacec6fb
+
+real  133.83
+
+ssh kai@52.68.197.112 "docker images | grep dnsmasq"
+
+docker pull 52.68.197.112:5000/dnsmasq:latest
+latest: Pulling from 52.68.197.112:5000/dnsmasq
+89b52f216c6c: Pulling fs layer
+47fb1b41ad2f: Pulling fs layer
+08f25e6d880b: Pulling fs layer
+5032be9f808a: Pulling fs layer
+189cb885ba89: Pulling fs layer
+b7822357f520: Pulling fs layer
+b1e58a832efd: Pulling fs layer
+5bc3a847e4e4: Pulling fs layer
+b7c2fd737a85: Pulling fs layer
+39150769ad52: Pulling fs layer
+6db61134ec96: Pulling fs layer
+dd2b2e9acaae: Pulling fs layer
+9df0a016daf1: Pulling fs layer
+b9c57fb0a9b3: Pulling fs layer
+0169c9130d45: Pulling fs layer
+af1b08109992: Pulling fs layer
+03f374be6b99: Pulling fs layer
+eaa9926e8e86: Pulling fs layer
+91966184510d: Pulling fs layer
+095e6c0da29d: Pulling fs layer
+8595d42081a4: Pulling fs layer
+8efa72c0e3bf: Pulling fs layer
+8efa72c0e3bf: Pulling fs layer
+8efa72c0e3bf: Layer already being pulled by another client. Waiting.
+91966184510d: Verifying Checksum
+91966184510d: Download complete
+08f25e6d880b: Verifying Checksum
+08f25e6d880b: Download complete
+47fb1b41ad2f: Verifying Checksum
+47fb1b41ad2f: Download complete
+6db61134ec96: Verifying Checksum
+6db61134ec96: Download complete
+dd2b2e9acaae: Verifying Checksum
+dd2b2e9acaae: Download complete
+39150769ad52: Verifying Checksum
+39150769ad52: Download complete
+8595d42081a4: Verifying Checksum
+8595d42081a4: Download complete
+eaa9926e8e86: Verifying Checksum
+eaa9926e8e86: Download complete
+03f374be6b99: Verifying Checksum
+03f374be6b99: Download complete
+af1b08109992: Verifying Checksum
+af1b08109992: Download complete
+0169c9130d45: Verifying Checksum
+0169c9130d45: Download complete
+b9c57fb0a9b3: Verifying Checksum
+b9c57fb0a9b3: Download complete
+8efa72c0e3bf: Verifying Checksum
+8efa72c0e3bf: Download complete
+8efa72c0e3bf: Download complete
+5bc3a847e4e4: Verifying Checksum
+5bc3a847e4e4: Download complete
+b1e58a832efd: Verifying Checksum
+b1e58a832efd: Download complete
+9df0a016daf1: Verifying Checksum
+9df0a016daf1: Download complete
+095e6c0da29d: Verifying Checksum
+095e6c0da29d: Download complete
+189cb885ba89: Verifying Checksum
+189cb885ba89: Download complete
+b7c2fd737a85: Verifying Checksum
+b7c2fd737a85: Download complete
+89b52f216c6c: Verifying Checksum
+89b52f216c6c: Download complete
+b7822357f520: Verifying Checksum
+b7822357f520: Download complete
+5032be9f808a: Verifying Checksum
+5032be9f808a: Download complete
+89b52f216c6c: Pull complete
+47fb1b41ad2f: Pull complete
+08f25e6d880b: Pull complete
+5032be9f808a: Pull complete
+189cb885ba89: Pull complete
+b7822357f520: Pull complete
+b1e58a832efd: Pull complete
+5bc3a847e4e4: Pull complete
+b7c2fd737a85: Pull complete
+39150769ad52: Pull complete
+6db61134ec96: Pull complete
+dd2b2e9acaae: Pull complete
+9df0a016daf1: Pull complete
+b9c57fb0a9b3: Pull complete
+0169c9130d45: Pull complete
+af1b08109992: Pull complete
+03f374be6b99: Pull complete
+eaa9926e8e86: Pull complete
+91966184510d: Pull complete
+095e6c0da29d: Pull complete
+8595d42081a4: Pull complete
+8efa72c0e3bf: Pull complete
+8efa72c0e3bf: Already exists
+Digest: sha256:927744fe0be195e269cceea2a878d776ac6be73064042d5cd7424188cacec6fb
+Status: Downloaded newer image for 52.68.197.112:5000/dnsmasq:latest
+
+real  316.61
+
+ssh kai@52.68.197.112 "docker images | grep dnsmasq"
+52.68.197.112:5000/dnsmasq   latest              8efa72c0e3bf        4 months ago        975.2 MB
+
+ssh kai@52.68.197.112 "docker rmi 52.68.197.112:5000/dnsmasq:latest"
+ssh kai@52.68.197.112 "docker images | grep dnsmasq"
+
+ssh kai@52.68.197.112 "docker rm -f docker_registry"
+
+
+Test 7: ./pushpull.sh kai 52.68.197.112 dnsmasq
+
+docker images
+kiwenlau/dnsmasq                latest              8efa72c0e3bf        4 months ago        975.2 MB
+
+docker tag kiwenlau/dnsmasq:latest 52.68.197.112:5000/dnsmasq:latest
+
+docker images
+52.68.197.112:5000/dnsmasq      latest              8efa72c0e3bf        4 months ago        975.2 MB
+kiwenlau/dnsmasq                latest              8efa72c0e3bf        4 months ago        975.2 MB
+
+ssh kai@52.68.197.112 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+18ad1fd4ff30        kiwenlau/registry:2.0.1   "registry cmd/regist   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 52.68.197.112:5000/dnsmasq:latest
+The push refers to a repository [52.68.197.112:5000/dnsmasq] (len: 1)
+8efa72c0e3bf: Buffering to Disk
+8efa72c0e3bf: Image successfully pushed
+8efa72c0e3bf: Image already exists
+8595d42081a4: Buffering to Disk
+8595d42081a4: Image successfully pushed
+095e6c0da29d: Buffering to Disk
+095e6c0da29d: Image successfully pushed
+91966184510d: Buffering to Disk
+91966184510d: Image successfully pushed
+eaa9926e8e86: Image already exists
+03f374be6b99: Image already exists
+af1b08109992: Buffering to Disk
+af1b08109992: Image successfully pushed
+0169c9130d45: Buffering to Disk
+0169c9130d45: Image successfully pushed
+b9c57fb0a9b3: Image already exists
+9df0a016daf1: Buffering to Disk
+9df0a016daf1: Image successfully pushed
+dd2b2e9acaae: Image already exists
+6db61134ec96: Buffering to Disk
+6db61134ec96: Image successfully pushed
+39150769ad52: Buffering to Disk
+39150769ad52: Image successfully pushed
+b7c2fd737a85: Buffering to Disk
+b7c2fd737a85: Image successfully pushed
+5bc3a847e4e4: Buffering to Disk
+5bc3a847e4e4: Image successfully pushed
+b1e58a832efd: Buffering to Disk
+b1e58a832efd: Image successfully pushed
+b7822357f520: Buffering to Disk
+b7822357f520: Image successfully pushed
+189cb885ba89: Buffering to Disk
+189cb885ba89: Image successfully pushed
+5032be9f808a: Buffering to Disk
+5032be9f808a: Image successfully pushed
+08f25e6d880b: Buffering to Disk
+08f25e6d880b: Image successfully pushed
+47fb1b41ad2f: Image already exists
+89b52f216c6c: Buffering to Disk
+89b52f216c6c: Image successfully pushed
+Digest: sha256:0e2910b237cb9b2d6a3995674a193d6e29ad2721af3117192eaf514470cb9c01
+
+real  136.02
+
+ssh kai@52.68.197.112 "docker images | grep dnsmasq"
+
+docker pull 52.68.197.112:5000/dnsmasq:latest
+latest: Pulling from 52.68.197.112:5000/dnsmasq
+89b52f216c6c: Pulling fs layer
+47fb1b41ad2f: Pulling fs layer
+08f25e6d880b: Pulling fs layer
+5032be9f808a: Pulling fs layer
+189cb885ba89: Pulling fs layer
+b7822357f520: Pulling fs layer
+b1e58a832efd: Pulling fs layer
+5bc3a847e4e4: Pulling fs layer
+b7c2fd737a85: Pulling fs layer
+39150769ad52: Pulling fs layer
+6db61134ec96: Pulling fs layer
+dd2b2e9acaae: Pulling fs layer
+9df0a016daf1: Pulling fs layer
+b9c57fb0a9b3: Pulling fs layer
+0169c9130d45: Pulling fs layer
+af1b08109992: Pulling fs layer
+03f374be6b99: Pulling fs layer
+eaa9926e8e86: Pulling fs layer
+91966184510d: Pulling fs layer
+095e6c0da29d: Pulling fs layer
+8595d42081a4: Pulling fs layer
+8efa72c0e3bf: Pulling fs layer
+8efa72c0e3bf: Pulling fs layer
+8efa72c0e3bf: Layer already being pulled by another client. Waiting.
+6db61134ec96: Verifying Checksum
+6db61134ec96: Download complete
+39150769ad52: Verifying Checksum
+39150769ad52: Download complete
+dd2b2e9acaae: Verifying Checksum
+dd2b2e9acaae: Download complete
+47fb1b41ad2f: Verifying Checksum
+47fb1b41ad2f: Download complete
+08f25e6d880b: Verifying Checksum
+08f25e6d880b: Download complete
+b9c57fb0a9b3: Verifying Checksum
+b9c57fb0a9b3: Download complete
+91966184510d: Verifying Checksum
+91966184510d: Download complete
+03f374be6b99: Verifying Checksum
+03f374be6b99: Download complete
+0169c9130d45: Verifying Checksum
+0169c9130d45: Download complete
+af1b08109992: Verifying Checksum
+af1b08109992: Download complete
+b1e58a832efd: Verifying Checksum
+b1e58a832efd: Download complete
+8efa72c0e3bf: Verifying Checksum
+8efa72c0e3bf: Download complete
+8595d42081a4: Verifying Checksum
+8595d42081a4: Download complete
+eaa9926e8e86: Verifying Checksum
+eaa9926e8e86: Download complete
+8efa72c0e3bf: Download complete
+5bc3a847e4e4: Verifying Checksum
+5bc3a847e4e4: Download complete
+b7c2fd737a85: Verifying Checksum
+b7c2fd737a85: Download complete
+9df0a016daf1: Verifying Checksum
+9df0a016daf1: Download complete
+095e6c0da29d: Verifying Checksum
+095e6c0da29d: Download complete
+189cb885ba89: Verifying Checksum
+189cb885ba89: Download complete
+89b52f216c6c: Verifying Checksum
+89b52f216c6c: Download complete
+5032be9f808a: Verifying Checksum
+5032be9f808a: Download complete
+b7822357f520: Verifying Checksum
+b7822357f520: Download complete
+89b52f216c6c: Pull complete
+47fb1b41ad2f: Pull complete
+08f25e6d880b: Pull complete
+5032be9f808a: Pull complete
+189cb885ba89: Pull complete
+b7822357f520: Pull complete
+b1e58a832efd: Pull complete
+5bc3a847e4e4: Pull complete
+b7c2fd737a85: Pull complete
+39150769ad52: Pull complete
+6db61134ec96: Pull complete
+dd2b2e9acaae: Pull complete
+9df0a016daf1: Pull complete
+b9c57fb0a9b3: Pull complete
+0169c9130d45: Pull complete
+af1b08109992: Pull complete
+03f374be6b99: Pull complete
+eaa9926e8e86: Pull complete
+91966184510d: Pull complete
+095e6c0da29d: Pull complete
+8595d42081a4: Pull complete
+8efa72c0e3bf: Pull complete
+8efa72c0e3bf: Already exists
+Digest: sha256:0e2910b237cb9b2d6a3995674a193d6e29ad2721af3117192eaf514470cb9c01
+Status: Downloaded newer image for 52.68.197.112:5000/dnsmasq:latest
+
+real  313.08
+
+ssh kai@52.68.197.112 "docker images | grep dnsmasq"
+52.68.197.112:5000/dnsmasq   latest              8efa72c0e3bf        4 months ago        975.2 MB
+
+ssh kai@52.68.197.112 "docker rmi 52.68.197.112:5000/dnsmasq:latest"
+ssh kai@52.68.197.112 "docker images | grep dnsmasq"
+
+ssh kai@52.68.197.112 "docker rm -f docker_registry"
+
+
+Test 8: ./pushpull.sh kai 52.68.197.112 dnsmasq
+
+docker images
+kiwenlau/dnsmasq                latest              8efa72c0e3bf        4 months ago        975.2 MB
+
+docker tag kiwenlau/dnsmasq:latest 52.68.197.112:5000/dnsmasq:latest
+
+docker images
+52.68.197.112:5000/dnsmasq      latest              8efa72c0e3bf        4 months ago        975.2 MB
+kiwenlau/dnsmasq                latest              8efa72c0e3bf        4 months ago        975.2 MB
+
+ssh kai@52.68.197.112 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+745be92c603f        kiwenlau/registry:2.0.1   "registry cmd/regist   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 52.68.197.112:5000/dnsmasq:latest
+The push refers to a repository [52.68.197.112:5000/dnsmasq] (len: 1)
+8efa72c0e3bf: Buffering to Disk
+8efa72c0e3bf: Image successfully pushed
+8efa72c0e3bf: Image already exists
+8595d42081a4: Buffering to Disk
+8595d42081a4: Image successfully pushed
+095e6c0da29d: Buffering to Disk
+095e6c0da29d: Image successfully pushed
+91966184510d: Buffering to Disk
+91966184510d: Image successfully pushed
+eaa9926e8e86: Image already exists
+03f374be6b99: Image already exists
+af1b08109992: Buffering to Disk
+af1b08109992: Image successfully pushed
+0169c9130d45: Buffering to Disk
+0169c9130d45: Image successfully pushed
+b9c57fb0a9b3: Image already exists
+9df0a016daf1: Buffering to Disk
+9df0a016daf1: Image successfully pushed
+dd2b2e9acaae: Image already exists
+6db61134ec96: Buffering to Disk
+6db61134ec96: Image successfully pushed
+39150769ad52: Buffering to Disk
+39150769ad52: Image successfully pushed
+b7c2fd737a85: Buffering to Disk
+b7c2fd737a85: Image successfully pushed
+5bc3a847e4e4: Buffering to Disk
+5bc3a847e4e4: Image successfully pushed
+b1e58a832efd: Buffering to Disk
+b1e58a832efd: Image successfully pushed
+b7822357f520: Buffering to Disk
+b7822357f520: Image successfully pushed
+189cb885ba89: Buffering to Disk
+189cb885ba89: Image successfully pushed
+5032be9f808a: Buffering to Disk
+5032be9f808a: Image successfully pushed
+08f25e6d880b: Buffering to Disk
+08f25e6d880b: Image successfully pushed
+47fb1b41ad2f: Image already exists
+89b52f216c6c: Buffering to Disk
+89b52f216c6c: Image successfully pushed
+Digest: sha256:b19569b6a663cca2ad5547c6dcc7f909114ca33f17e1ac9cd6061ef5c5100f3c
+
+real  135.65
+
+ssh kai@52.68.197.112 "docker images | grep dnsmasq"
+
+docker pull 52.68.197.112:5000/dnsmasq:latest
+latest: Pulling from 52.68.197.112:5000/dnsmasq
+89b52f216c6c: Pulling fs layer
+47fb1b41ad2f: Pulling fs layer
+08f25e6d880b: Pulling fs layer
+5032be9f808a: Pulling fs layer
+189cb885ba89: Pulling fs layer
+b7822357f520: Pulling fs layer
+b1e58a832efd: Pulling fs layer
+5bc3a847e4e4: Pulling fs layer
+b7c2fd737a85: Pulling fs layer
+39150769ad52: Pulling fs layer
+6db61134ec96: Pulling fs layer
+dd2b2e9acaae: Pulling fs layer
+9df0a016daf1: Pulling fs layer
+b9c57fb0a9b3: Pulling fs layer
+0169c9130d45: Pulling fs layer
+af1b08109992: Pulling fs layer
+03f374be6b99: Pulling fs layer
+eaa9926e8e86: Pulling fs layer
+91966184510d: Pulling fs layer
+095e6c0da29d: Pulling fs layer
+8595d42081a4: Pulling fs layer
+8efa72c0e3bf: Pulling fs layer
+8efa72c0e3bf: Pulling fs layer
+8efa72c0e3bf: Layer already being pulled by another client. Waiting.
+6db61134ec96: Verifying Checksum
+6db61134ec96: Download complete
+08f25e6d880b: Verifying Checksum
+08f25e6d880b: Download complete
+47fb1b41ad2f: Verifying Checksum
+47fb1b41ad2f: Download complete
+dd2b2e9acaae: Verifying Checksum
+dd2b2e9acaae: Download complete
+39150769ad52: Verifying Checksum
+39150769ad52: Download complete
+b9c57fb0a9b3: Verifying Checksum
+b9c57fb0a9b3: Download complete
+5bc3a847e4e4: Verifying Checksum
+5bc3a847e4e4: Download complete
+8efa72c0e3bf: Verifying Checksum
+8efa72c0e3bf: Download complete
+8595d42081a4: Verifying Checksum
+8595d42081a4: Download complete
+91966184510d: Verifying Checksum
+91966184510d: Download complete
+03f374be6b99: Verifying Checksum
+03f374be6b99: Download complete
+eaa9926e8e86: Verifying Checksum
+eaa9926e8e86: Download complete
+af1b08109992: Verifying Checksum
+af1b08109992: Download complete
+0169c9130d45: Verifying Checksum
+0169c9130d45: Download complete
+8efa72c0e3bf: Download complete
+b1e58a832efd: Verifying Checksum
+b1e58a832efd: Download complete
+095e6c0da29d: Verifying Checksum
+095e6c0da29d: Download complete
+189cb885ba89: Verifying Checksum
+189cb885ba89: Download complete
+b7c2fd737a85: Verifying Checksum
+b7c2fd737a85: Download complete
+89b52f216c6c: Verifying Checksum
+89b52f216c6c: Download complete
+9df0a016daf1: Verifying Checksum
+9df0a016daf1: Download complete
+5032be9f808a: Verifying Checksum
+5032be9f808a: Download complete
+b7822357f520: Verifying Checksum
+b7822357f520: Download complete
+89b52f216c6c: Pull complete
+47fb1b41ad2f: Pull complete
+08f25e6d880b: Pull complete
+5032be9f808a: Pull complete
+189cb885ba89: Pull complete
+b7822357f520: Pull complete
+b1e58a832efd: Pull complete
+5bc3a847e4e4: Pull complete
+b7c2fd737a85: Pull complete
+39150769ad52: Pull complete
+6db61134ec96: Pull complete
+dd2b2e9acaae: Pull complete
+9df0a016daf1: Pull complete
+b9c57fb0a9b3: Pull complete
+0169c9130d45: Pull complete
+af1b08109992: Pull complete
+03f374be6b99: Pull complete
+eaa9926e8e86: Pull complete
+91966184510d: Pull complete
+095e6c0da29d: Pull complete
+8595d42081a4: Pull complete
+8efa72c0e3bf: Pull complete
+8efa72c0e3bf: Already exists
+Digest: sha256:b19569b6a663cca2ad5547c6dcc7f909114ca33f17e1ac9cd6061ef5c5100f3c
+Status: Downloaded newer image for 52.68.197.112:5000/dnsmasq:latest
+
+real  314.42
+
+ssh kai@52.68.197.112 "docker images | grep dnsmasq"
+52.68.197.112:5000/dnsmasq   latest              8efa72c0e3bf        4 months ago        975.2 MB
+
+ssh kai@52.68.197.112 "docker rmi 52.68.197.112:5000/dnsmasq:latest"
+ssh kai@52.68.197.112 "docker images | grep dnsmasq"
+
+ssh kai@52.68.197.112 "docker rm -f docker_registry"
+
+
+Test 9: ./pushpull.sh kai 52.68.197.112 dnsmasq
+
+docker images
+kiwenlau/dnsmasq                latest              8efa72c0e3bf        4 months ago        975.2 MB
+
+docker tag kiwenlau/dnsmasq:latest 52.68.197.112:5000/dnsmasq:latest
+
+docker images
+52.68.197.112:5000/dnsmasq      latest              8efa72c0e3bf        4 months ago        975.2 MB
+kiwenlau/dnsmasq                latest              8efa72c0e3bf        4 months ago        975.2 MB
+
+ssh kai@52.68.197.112 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+1c864916a7f2        kiwenlau/registry:2.0.1   "registry cmd/regist   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 52.68.197.112:5000/dnsmasq:latest
+The push refers to a repository [52.68.197.112:5000/dnsmasq] (len: 1)
+8efa72c0e3bf: Buffering to Disk
+8efa72c0e3bf: Image successfully pushed
+8efa72c0e3bf: Image already exists
+8595d42081a4: Buffering to Disk
+8595d42081a4: Image successfully pushed
+095e6c0da29d: Buffering to Disk
+095e6c0da29d: Image successfully pushed
+91966184510d: Buffering to Disk
+91966184510d: Image successfully pushed
+eaa9926e8e86: Image already exists
+03f374be6b99: Image already exists
+af1b08109992: Buffering to Disk
+af1b08109992: Image successfully pushed
+0169c9130d45: Buffering to Disk
+0169c9130d45: Image successfully pushed
+b9c57fb0a9b3: Image already exists
+9df0a016daf1: Buffering to Disk
+9df0a016daf1: Image successfully pushed
+dd2b2e9acaae: Image already exists
+6db61134ec96: Buffering to Disk
+6db61134ec96: Image successfully pushed
+39150769ad52: Buffering to Disk
+39150769ad52: Image successfully pushed
+b7c2fd737a85: Buffering to Disk
+b7c2fd737a85: Image successfully pushed
+5bc3a847e4e4: Buffering to Disk
+5bc3a847e4e4: Image successfully pushed
+b1e58a832efd: Buffering to Disk
+b1e58a832efd: Image successfully pushed
+b7822357f520: Buffering to Disk
+b7822357f520: Image successfully pushed
+189cb885ba89: Buffering to Disk
+189cb885ba89: Image successfully pushed
+5032be9f808a: Buffering to Disk
+5032be9f808a: Image successfully pushed
+08f25e6d880b: Buffering to Disk
+08f25e6d880b: Image successfully pushed
+47fb1b41ad2f: Image already exists
+89b52f216c6c: Buffering to Disk
+89b52f216c6c: Image successfully pushed
+Digest: sha256:4cd4354d482b4ebb329c2b00f0d0f789c21c63cd2930fd1af84f8e704f9dcb68
+
+real  136.22
+
+ssh kai@52.68.197.112 "docker images | grep dnsmasq"
+
+docker pull 52.68.197.112:5000/dnsmasq:latest
+latest: Pulling from 52.68.197.112:5000/dnsmasq
+89b52f216c6c: Pulling fs layer
+47fb1b41ad2f: Pulling fs layer
+08f25e6d880b: Pulling fs layer
+5032be9f808a: Pulling fs layer
+189cb885ba89: Pulling fs layer
+b7822357f520: Pulling fs layer
+b1e58a832efd: Pulling fs layer
+5bc3a847e4e4: Pulling fs layer
+b7c2fd737a85: Pulling fs layer
+39150769ad52: Pulling fs layer
+6db61134ec96: Pulling fs layer
+dd2b2e9acaae: Pulling fs layer
+9df0a016daf1: Pulling fs layer
+b9c57fb0a9b3: Pulling fs layer
+0169c9130d45: Pulling fs layer
+af1b08109992: Pulling fs layer
+03f374be6b99: Pulling fs layer
+eaa9926e8e86: Pulling fs layer
+91966184510d: Pulling fs layer
+095e6c0da29d: Pulling fs layer
+8595d42081a4: Pulling fs layer
+8efa72c0e3bf: Pulling fs layer
+8efa72c0e3bf: Pulling fs layer
+8efa72c0e3bf: Layer already being pulled by another client. Waiting.
+08f25e6d880b: Verifying Checksum
+08f25e6d880b: Download complete
+47fb1b41ad2f: Verifying Checksum
+47fb1b41ad2f: Download complete
+dd2b2e9acaae: Verifying Checksum
+dd2b2e9acaae: Download complete
+6db61134ec96: Verifying Checksum
+6db61134ec96: Download complete
+39150769ad52: Verifying Checksum
+39150769ad52: Download complete
+b1e58a832efd: Verifying Checksum
+b1e58a832efd: Download complete
+8595d42081a4: Verifying Checksum
+8595d42081a4: Download complete
+91966184510d: Verifying Checksum
+91966184510d: Download complete
+eaa9926e8e86: Verifying Checksum
+eaa9926e8e86: Download complete
+03f374be6b99: Verifying Checksum
+03f374be6b99: Download complete
+b9c57fb0a9b3: Verifying Checksum
+b9c57fb0a9b3: Download complete
+af1b08109992: Verifying Checksum
+af1b08109992: Download complete
+0169c9130d45: Verifying Checksum
+0169c9130d45: Download complete
+8efa72c0e3bf: Verifying Checksum
+8efa72c0e3bf: Download complete
+8efa72c0e3bf: Download complete
+5bc3a847e4e4: Verifying Checksum
+5bc3a847e4e4: Download complete
+9df0a016daf1: Verifying Checksum
+9df0a016daf1: Download complete
+b7c2fd737a85: Verifying Checksum
+b7c2fd737a85: Download complete
+189cb885ba89: Verifying Checksum
+189cb885ba89: Download complete
+095e6c0da29d: Verifying Checksum
+095e6c0da29d: Download complete
+5032be9f808a: Verifying Checksum
+5032be9f808a: Download complete
+b7822357f520: Verifying Checksum
+b7822357f520: Download complete
+89b52f216c6c: Verifying Checksum
+89b52f216c6c: Download complete
+89b52f216c6c: Pull complete
+47fb1b41ad2f: Pull complete
+08f25e6d880b: Pull complete
+5032be9f808a: Pull complete
+189cb885ba89: Pull complete
+b7822357f520: Pull complete
+b1e58a832efd: Pull complete
+5bc3a847e4e4: Pull complete
+b7c2fd737a85: Pull complete
+39150769ad52: Pull complete
+6db61134ec96: Pull complete
+dd2b2e9acaae: Pull complete
+9df0a016daf1: Pull complete
+b9c57fb0a9b3: Pull complete
+0169c9130d45: Pull complete
+af1b08109992: Pull complete
+03f374be6b99: Pull complete
+eaa9926e8e86: Pull complete
+91966184510d: Pull complete
+095e6c0da29d: Pull complete
+8595d42081a4: Pull complete
+8efa72c0e3bf: Pull complete
+8efa72c0e3bf: Already exists
+Digest: sha256:4cd4354d482b4ebb329c2b00f0d0f789c21c63cd2930fd1af84f8e704f9dcb68
+Status: Downloaded newer image for 52.68.197.112:5000/dnsmasq:latest
+
+real  311.78
+
+ssh kai@52.68.197.112 "docker images | grep dnsmasq"
+52.68.197.112:5000/dnsmasq   latest              8efa72c0e3bf        4 months ago        975.2 MB
+
+ssh kai@52.68.197.112 "docker rmi 52.68.197.112:5000/dnsmasq:latest"
+ssh kai@52.68.197.112 "docker images | grep dnsmasq"
+
+ssh kai@52.68.197.112 "docker rm -f docker_registry"
+
+
+Test 10: ./pushpull.sh kai 52.68.197.112 dnsmasq
+
+docker images
+kiwenlau/dnsmasq                latest              8efa72c0e3bf        4 months ago        975.2 MB
+
+docker tag kiwenlau/dnsmasq:latest 52.68.197.112:5000/dnsmasq:latest
+
+docker images
+52.68.197.112:5000/dnsmasq      latest              8efa72c0e3bf        4 months ago        975.2 MB
+kiwenlau/dnsmasq                latest              8efa72c0e3bf        4 months ago        975.2 MB
+
+ssh kai@52.68.197.112 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+1c3297e1f72f        kiwenlau/registry:2.0.1   "registry cmd/regist   1 seconds ago       Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 52.68.197.112:5000/dnsmasq:latest
+The push refers to a repository [52.68.197.112:5000/dnsmasq] (len: 1)
+8efa72c0e3bf: Buffering to Disk
+8efa72c0e3bf: Image successfully pushed
+8efa72c0e3bf: Image already exists
+8595d42081a4: Buffering to Disk
+8595d42081a4: Image successfully pushed
+095e6c0da29d: Buffering to Disk
+095e6c0da29d: Image successfully pushed
+91966184510d: Buffering to Disk
+91966184510d: Image successfully pushed
+eaa9926e8e86: Image already exists
+03f374be6b99: Image already exists
+af1b08109992: Buffering to Disk
+af1b08109992: Image successfully pushed
+0169c9130d45: Buffering to Disk
+0169c9130d45: Image successfully pushed
+b9c57fb0a9b3: Image already exists
+9df0a016daf1: Buffering to Disk
+9df0a016daf1: Image successfully pushed
+dd2b2e9acaae: Image already exists
+6db61134ec96: Buffering to Disk
+6db61134ec96: Image successfully pushed
+39150769ad52: Buffering to Disk
+39150769ad52: Image successfully pushed
+b7c2fd737a85: Buffering to Disk
+b7c2fd737a85: Image successfully pushed
+5bc3a847e4e4: Buffering to Disk
+5bc3a847e4e4: Image successfully pushed
+b1e58a832efd: Buffering to Disk
+b1e58a832efd: Image successfully pushed
+b7822357f520: Buffering to Disk
+b7822357f520: Image successfully pushed
+189cb885ba89: Buffering to Disk
+189cb885ba89: Image successfully pushed
+5032be9f808a: Buffering to Disk
+5032be9f808a: Image successfully pushed
+08f25e6d880b: Buffering to Disk
+08f25e6d880b: Image successfully pushed
+47fb1b41ad2f: Image already exists
+89b52f216c6c: Buffering to Disk
+89b52f216c6c: Image successfully pushed
+Digest: sha256:197429aceafe377e942aaeb870d218ea77115886b3f3a7c2a52144f8b3dd05d7
+
+real  136.84
+
+ssh kai@52.68.197.112 "docker images | grep dnsmasq"
+
+docker pull 52.68.197.112:5000/dnsmasq:latest
+latest: Pulling from 52.68.197.112:5000/dnsmasq
+89b52f216c6c: Pulling fs layer
+47fb1b41ad2f: Pulling fs layer
+08f25e6d880b: Pulling fs layer
+5032be9f808a: Pulling fs layer
+189cb885ba89: Pulling fs layer
+b7822357f520: Pulling fs layer
+b1e58a832efd: Pulling fs layer
+5bc3a847e4e4: Pulling fs layer
+b7c2fd737a85: Pulling fs layer
+39150769ad52: Pulling fs layer
+6db61134ec96: Pulling fs layer
+dd2b2e9acaae: Pulling fs layer
+9df0a016daf1: Pulling fs layer
+b9c57fb0a9b3: Pulling fs layer
+0169c9130d45: Pulling fs layer
+af1b08109992: Pulling fs layer
+03f374be6b99: Pulling fs layer
+eaa9926e8e86: Pulling fs layer
+91966184510d: Pulling fs layer
+095e6c0da29d: Pulling fs layer
+8595d42081a4: Pulling fs layer
+8efa72c0e3bf: Pulling fs layer
+8efa72c0e3bf: Pulling fs layer
+8efa72c0e3bf: Layer already being pulled by another client. Waiting.
+b9c57fb0a9b3: Verifying Checksum
+b9c57fb0a9b3: Download complete
+dd2b2e9acaae: Verifying Checksum
+dd2b2e9acaae: Download complete
+6db61134ec96: Verifying Checksum
+6db61134ec96: Download complete
+39150769ad52: Verifying Checksum
+39150769ad52: Download complete
+08f25e6d880b: Verifying Checksum
+08f25e6d880b: Download complete
+47fb1b41ad2f: Verifying Checksum
+47fb1b41ad2f: Download complete
+af1b08109992: Verifying Checksum
+af1b08109992: Download complete
+8efa72c0e3bf: Verifying Checksum
+8efa72c0e3bf: Download complete
+8595d42081a4: Verifying Checksum
+8595d42081a4: Download complete
+91966184510d: Verifying Checksum
+91966184510d: Download complete
+eaa9926e8e86: Verifying Checksum
+eaa9926e8e86: Download complete
+03f374be6b99: Verifying Checksum
+03f374be6b99: Download complete
+0169c9130d45: Verifying Checksum
+0169c9130d45: Download complete
+8efa72c0e3bf: Download complete
+b1e58a832efd: Verifying Checksum
+b1e58a832efd: Download complete
+b7c2fd737a85: Verifying Checksum
+b7c2fd737a85: Download complete
+5bc3a847e4e4: Verifying Checksum
+5bc3a847e4e4: Download complete
+9df0a016daf1: Verifying Checksum
+9df0a016daf1: Download complete
+095e6c0da29d: Verifying Checksum
+095e6c0da29d: Download complete
+189cb885ba89: Verifying Checksum
+189cb885ba89: Download complete
+89b52f216c6c: Verifying Checksum
+89b52f216c6c: Download complete
+5032be9f808a: Verifying Checksum
+5032be9f808a: Download complete
+b7822357f520: Verifying Checksum
+b7822357f520: Download complete
+89b52f216c6c: Pull complete
+47fb1b41ad2f: Pull complete
+08f25e6d880b: Pull complete
+5032be9f808a: Pull complete
+189cb885ba89: Pull complete
+b7822357f520: Pull complete
+b1e58a832efd: Pull complete
+5bc3a847e4e4: Pull complete
+b7c2fd737a85: Pull complete
+39150769ad52: Pull complete
+6db61134ec96: Pull complete
+dd2b2e9acaae: Pull complete
+9df0a016daf1: Pull complete
+b9c57fb0a9b3: Pull complete
+0169c9130d45: Pull complete
+af1b08109992: Pull complete
+03f374be6b99: Pull complete
+eaa9926e8e86: Pull complete
+91966184510d: Pull complete
+095e6c0da29d: Pull complete
+8595d42081a4: Pull complete
+8efa72c0e3bf: Pull complete
+8efa72c0e3bf: Already exists
+Digest: sha256:197429aceafe377e942aaeb870d218ea77115886b3f3a7c2a52144f8b3dd05d7
+Status: Downloaded newer image for 52.68.197.112:5000/dnsmasq:latest
+
+real  320.28
+
+ssh kai@52.68.197.112 "docker images | grep dnsmasq"
+52.68.197.112:5000/dnsmasq   latest              8efa72c0e3bf        4 months ago        975.2 MB
+
+ssh kai@52.68.197.112 "docker rmi 52.68.197.112:5000/dnsmasq:latest"
+ssh kai@52.68.197.112 "docker images | grep dnsmasq"
+
+ssh kai@52.68.197.112 "docker rm -f docker_registry"
+
+end date: Sun Jul 19 10:10:09 JST 2015
+
+

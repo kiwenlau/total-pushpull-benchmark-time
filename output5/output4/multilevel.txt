@@ -1,0 +1,1759 @@
+
+pullpush benchmark: transfer multilevel image to 136.187.101.71 host
+ 
+hostname: kuruwa-gw
+begin date: Sun Jun 14 01:08:30 JST 2015
+
+sudo docker images
+kiwenlau/multilevel          latest              ec168b54c5e5        7 months ago        448.2 MB
+
+sudo docker images
+kiwenlau/multilevel          latest              ec168b54c5e5        7 months ago        448.2 MB
+
+
+Test 1: ./pushpull.sh kai 136.187.101.71 multilevel
+
+docker images
+kiwenlau/multilevel          latest              ec168b54c5e5        7 months ago        448.2 MB
+
+docker tag kiwenlau/multilevel:latest 136.187.101.71:5000/multilevel:latest
+
+docker images
+136.187.101.71:5000/multilevel   latest              ec168b54c5e5        7 months ago        448.2 MB
+kiwenlau/multilevel              latest              ec168b54c5e5        7 months ago        448.2 MB
+
+ssh kai@136.187.101.71 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+3a58700cdeab        kiwenlau/registry:2.0.1   "registry cmd/regist   1 seconds ago       Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.71:5000/multilevel:latest
+The push refers to a repository [136.187.101.71:5000/multilevel] (len: 1)
+ec168b54c5e5: Buffering to Disk
+ec168b54c5e5: Image successfully pushed
+ec168b54c5e5: Image already exists
+a2fb88a60a2a: Buffering to Disk
+a2fb88a60a2a: Image successfully pushed
+c243118e72a4: Buffering to Disk
+c243118e72a4: Image successfully pushed
+732f95431f4f: Buffering to Disk
+732f95431f4f: Image successfully pushed
+a23c4b097a25: Buffering to Disk
+a23c4b097a25: Image successfully pushed
+d7683dce04c0: Buffering to Disk
+d7683dce04c0: Image successfully pushed
+1675cb5623b7: Buffering to Disk
+1675cb5623b7: Image successfully pushed
+c543de9fa973: Buffering to Disk
+c543de9fa973: Image successfully pushed
+8c41351f802d: Buffering to Disk
+8c41351f802d: Image successfully pushed
+98f274d6ad68: Buffering to Disk
+98f274d6ad68: Image successfully pushed
+4fff97e3b983: Buffering to Disk
+4fff97e3b983: Image successfully pushed
+763c0a69bca6: Buffering to Disk
+763c0a69bca6: Image successfully pushed
+7d4bad739229: Buffering to Disk
+7d4bad739229: Image successfully pushed
+3dacd6758f14: Buffering to Disk
+3dacd6758f14: Image successfully pushed
+dad131381a54: Buffering to Disk
+dad131381a54: Image successfully pushed
+69667ea51ce9: Buffering to Disk
+69667ea51ce9: Image successfully pushed
+1edc7d40fb01: Buffering to Disk
+1edc7d40fb01: Image successfully pushed
+fc183b81cd8a: Buffering to Disk
+fc183b81cd8a: Image successfully pushed
+813921ad49c7: Buffering to Disk
+813921ad49c7: Image successfully pushed
+1bf6265ac0c9: Buffering to Disk
+1bf6265ac0c9: Image successfully pushed
+fb42cf21d5c1: Buffering to Disk
+fb42cf21d5c1: Image successfully pushed
+71d9d77ae89e: Buffering to Disk
+71d9d77ae89e: Image successfully pushed
+848d84b4b2ab: Buffering to Disk
+848d84b4b2ab: Image successfully pushed
+511136ea3c5a: Image already exists
+Digest: sha256:c3f8b2d715e702f3916aefd2cb15d232f4fa21b605503b231834524ce86d232f
+
+real  70.90
+
+ssh kai@136.187.101.71 "docker images | grep multilevel"
+
+docker pull 136.187.101.71:5000/multilevel:latest
+latest: Pulling from 136.187.101.71:5000/multilevel
+511136ea3c5a: Pulling fs layer
+848d84b4b2ab: Pulling fs layer
+71d9d77ae89e: Pulling fs layer
+fb42cf21d5c1: Pulling fs layer
+1bf6265ac0c9: Pulling fs layer
+813921ad49c7: Pulling fs layer
+fc183b81cd8a: Pulling fs layer
+1edc7d40fb01: Pulling fs layer
+69667ea51ce9: Pulling fs layer
+dad131381a54: Pulling fs layer
+3dacd6758f14: Pulling fs layer
+7d4bad739229: Pulling fs layer
+763c0a69bca6: Pulling fs layer
+4fff97e3b983: Pulling fs layer
+98f274d6ad68: Pulling fs layer
+8c41351f802d: Pulling fs layer
+c543de9fa973: Pulling fs layer
+1675cb5623b7: Pulling fs layer
+d7683dce04c0: Pulling fs layer
+a23c4b097a25: Pulling fs layer
+732f95431f4f: Pulling fs layer
+c243118e72a4: Pulling fs layer
+a2fb88a60a2a: Pulling fs layer
+ec168b54c5e5: Pulling fs layer
+ec168b54c5e5: Pulling fs layer
+ec168b54c5e5: Layer already being pulled by another client. Waiting.
+dad131381a54: Verifying Checksum
+dad131381a54: Download complete
+3dacd6758f14: Verifying Checksum
+3dacd6758f14: Download complete
+7d4bad739229: Verifying Checksum
+7d4bad739229: Download complete
+4fff97e3b983: Verifying Checksum
+4fff97e3b983: Download complete
+98f274d6ad68: Verifying Checksum
+98f274d6ad68: Download complete
+c543de9fa973: Verifying Checksum
+c543de9fa973: Download complete
+d7683dce04c0: Verifying Checksum
+d7683dce04c0: Download complete
+a2fb88a60a2a: Verifying Checksum
+a2fb88a60a2a: Download complete
+c243118e72a4: Verifying Checksum
+c243118e72a4: Download complete
+ec168b54c5e5: Verifying Checksum
+ec168b54c5e5: Download complete
+ec168b54c5e5: Download complete
+511136ea3c5a: Verifying Checksum
+511136ea3c5a: Download complete
+71d9d77ae89e: Verifying Checksum
+71d9d77ae89e: Download complete
+fb42cf21d5c1: Verifying Checksum
+fb42cf21d5c1: Download complete
+813921ad49c7: Verifying Checksum
+813921ad49c7: Download complete
+511136ea3c5a: Pull complete
+732f95431f4f: Verifying Checksum
+732f95431f4f: Download complete
+1675cb5623b7: Verifying Checksum
+1675cb5623b7: Download complete
+69667ea51ce9: Verifying Checksum
+69667ea51ce9: Download complete
+1edc7d40fb01: Verifying Checksum
+1edc7d40fb01: Download complete
+fc183b81cd8a: Verifying Checksum
+fc183b81cd8a: Download complete
+a23c4b097a25: Verifying Checksum
+a23c4b097a25: Download complete
+8c41351f802d: Verifying Checksum
+8c41351f802d: Download complete
+763c0a69bca6: Verifying Checksum
+763c0a69bca6: Download complete
+848d84b4b2ab: Verifying Checksum
+848d84b4b2ab: Download complete
+1bf6265ac0c9: Verifying Checksum
+1bf6265ac0c9: Download complete
+848d84b4b2ab: Pull complete
+71d9d77ae89e: Pull complete
+fb42cf21d5c1: Pull complete
+1bf6265ac0c9: Pull complete
+813921ad49c7: Pull complete
+fc183b81cd8a: Pull complete
+1edc7d40fb01: Pull complete
+69667ea51ce9: Pull complete
+dad131381a54: Pull complete
+3dacd6758f14: Pull complete
+7d4bad739229: Pull complete
+763c0a69bca6: Pull complete
+4fff97e3b983: Pull complete
+98f274d6ad68: Pull complete
+8c41351f802d: Pull complete
+c543de9fa973: Pull complete
+1675cb5623b7: Pull complete
+d7683dce04c0: Pull complete
+a23c4b097a25: Pull complete
+732f95431f4f: Pull complete
+c243118e72a4: Pull complete
+a2fb88a60a2a: Pull complete
+ec168b54c5e5: Pull complete
+ec168b54c5e5: Already exists
+Digest: sha256:c3f8b2d715e702f3916aefd2cb15d232f4fa21b605503b231834524ce86d232f
+Status: Downloaded newer image for 136.187.101.71:5000/multilevel:latest
+
+real  12.14
+
+ssh kai@136.187.101.71 "docker images | grep multilevel"
+136.187.101.71:5000/multilevel   latest              ec168b54c5e5        7 months ago        448.2 MB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.71:5000/multilevel:latest"
+ssh kai@136.187.101.71 "docker images | grep multilevel"
+mkdir: cannot create directory 'logs': File exists
+
+ssh kai@136.187.101.71 "docker rm -f docker_registry"
+
+
+Test 2: ./pushpull.sh kai 136.187.101.71 multilevel
+
+docker images
+kiwenlau/multilevel          latest              ec168b54c5e5        7 months ago        448.2 MB
+
+docker tag kiwenlau/multilevel:latest 136.187.101.71:5000/multilevel:latest
+
+docker images
+136.187.101.71:5000/multilevel   latest              ec168b54c5e5        7 months ago        448.2 MB
+kiwenlau/multilevel              latest              ec168b54c5e5        7 months ago        448.2 MB
+
+ssh kai@136.187.101.71 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+d1d49a9e1a45        kiwenlau/registry:2.0.1   "registry cmd/regist   1 seconds ago       Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.71:5000/multilevel:latest
+The push refers to a repository [136.187.101.71:5000/multilevel] (len: 1)
+ec168b54c5e5: Buffering to Disk
+ec168b54c5e5: Image successfully pushed
+ec168b54c5e5: Image already exists
+a2fb88a60a2a: Image already exists
+c243118e72a4: Image already exists
+732f95431f4f: Image already exists
+a23c4b097a25: Buffering to Disk
+a23c4b097a25: Image successfully pushed
+d7683dce04c0: Buffering to Disk
+d7683dce04c0: Image successfully pushed
+1675cb5623b7: Image already exists
+c543de9fa973: Image already exists
+8c41351f802d: Buffering to Disk
+8c41351f802d: Image successfully pushed
+98f274d6ad68: Image already exists
+4fff97e3b983: Buffering to Disk
+4fff97e3b983: Image successfully pushed
+763c0a69bca6: Buffering to Disk
+763c0a69bca6: Image successfully pushed
+7d4bad739229: Image already exists
+3dacd6758f14: Image already exists
+dad131381a54: Image already exists
+69667ea51ce9: Image already exists
+1edc7d40fb01: Image already exists
+fc183b81cd8a: Image already exists
+813921ad49c7: Buffering to Disk
+813921ad49c7: Image successfully pushed
+1bf6265ac0c9: Buffering to Disk
+1bf6265ac0c9: Image successfully pushed
+fb42cf21d5c1: Image already exists
+71d9d77ae89e: Image already exists
+848d84b4b2ab: Buffering to Disk
+848d84b4b2ab: Image successfully pushed
+511136ea3c5a: Image already exists
+Digest: sha256:480834deb3d28c6c3c95330897b302fabfa50e8649ebc54127f72375954eeefa
+
+real  67.93
+
+ssh kai@136.187.101.71 "docker images | grep multilevel"
+
+docker pull 136.187.101.71:5000/multilevel:latest
+latest: Pulling from 136.187.101.71:5000/multilevel
+511136ea3c5a: Pulling fs layer
+848d84b4b2ab: Pulling fs layer
+71d9d77ae89e: Pulling fs layer
+fb42cf21d5c1: Pulling fs layer
+1bf6265ac0c9: Pulling fs layer
+813921ad49c7: Pulling fs layer
+fc183b81cd8a: Pulling fs layer
+1edc7d40fb01: Pulling fs layer
+69667ea51ce9: Pulling fs layer
+dad131381a54: Pulling fs layer
+3dacd6758f14: Pulling fs layer
+7d4bad739229: Pulling fs layer
+763c0a69bca6: Pulling fs layer
+4fff97e3b983: Pulling fs layer
+98f274d6ad68: Pulling fs layer
+8c41351f802d: Pulling fs layer
+c543de9fa973: Pulling fs layer
+1675cb5623b7: Pulling fs layer
+d7683dce04c0: Pulling fs layer
+a23c4b097a25: Pulling fs layer
+732f95431f4f: Pulling fs layer
+c243118e72a4: Pulling fs layer
+a2fb88a60a2a: Pulling fs layer
+ec168b54c5e5: Pulling fs layer
+ec168b54c5e5: Pulling fs layer
+ec168b54c5e5: Layer already being pulled by another client. Waiting.
+98f274d6ad68: Verifying Checksum
+98f274d6ad68: Download complete
+d7683dce04c0: Verifying Checksum
+d7683dce04c0: Download complete
+1675cb5623b7: Verifying Checksum
+1675cb5623b7: Download complete
+c543de9fa973: Verifying Checksum
+c543de9fa973: Download complete
+c243118e72a4: Verifying Checksum
+c243118e72a4: Download complete
+732f95431f4f: Verifying Checksum
+732f95431f4f: Download complete
+511136ea3c5a: Verifying Checksum
+511136ea3c5a: Download complete
+ec168b54c5e5: Verifying Checksum
+ec168b54c5e5: Download complete
+813921ad49c7: Verifying Checksum
+813921ad49c7: Download complete
+fb42cf21d5c1: Verifying Checksum
+fb42cf21d5c1: Download complete
+71d9d77ae89e: Verifying Checksum
+71d9d77ae89e: Download complete
+7d4bad739229: Verifying Checksum
+7d4bad739229: Download complete
+3dacd6758f14: Verifying Checksum
+3dacd6758f14: Download complete
+dad131381a54: Verifying Checksum
+dad131381a54: Download complete
+69667ea51ce9: Verifying Checksum
+69667ea51ce9: Download complete
+1edc7d40fb01: Verifying Checksum
+1edc7d40fb01: Download complete
+fc183b81cd8a: Verifying Checksum
+fc183b81cd8a: Download complete
+4fff97e3b983: Verifying Checksum
+4fff97e3b983: Download complete
+a2fb88a60a2a: Verifying Checksum
+a2fb88a60a2a: Download complete
+ec168b54c5e5: Download complete
+511136ea3c5a: Pull complete
+8c41351f802d: Verifying Checksum
+8c41351f802d: Download complete
+763c0a69bca6: Verifying Checksum
+763c0a69bca6: Download complete
+a23c4b097a25: Verifying Checksum
+a23c4b097a25: Download complete
+848d84b4b2ab: Verifying Checksum
+848d84b4b2ab: Download complete
+1bf6265ac0c9: Verifying Checksum
+1bf6265ac0c9: Download complete
+848d84b4b2ab: Pull complete
+71d9d77ae89e: Pull complete
+fb42cf21d5c1: Pull complete
+1bf6265ac0c9: Pull complete
+813921ad49c7: Pull complete
+fc183b81cd8a: Pull complete
+1edc7d40fb01: Pull complete
+69667ea51ce9: Pull complete
+dad131381a54: Pull complete
+3dacd6758f14: Pull complete
+7d4bad739229: Pull complete
+763c0a69bca6: Pull complete
+4fff97e3b983: Pull complete
+98f274d6ad68: Pull complete
+8c41351f802d: Pull complete
+c543de9fa973: Pull complete
+1675cb5623b7: Pull complete
+d7683dce04c0: Pull complete
+a23c4b097a25: Pull complete
+732f95431f4f: Pull complete
+c243118e72a4: Pull complete
+a2fb88a60a2a: Pull complete
+ec168b54c5e5: Pull complete
+ec168b54c5e5: Already exists
+Digest: sha256:480834deb3d28c6c3c95330897b302fabfa50e8649ebc54127f72375954eeefa
+Status: Downloaded newer image for 136.187.101.71:5000/multilevel:latest
+
+real  12.06
+
+ssh kai@136.187.101.71 "docker images | grep multilevel"
+136.187.101.71:5000/multilevel   latest              ec168b54c5e5        7 months ago        448.2 MB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.71:5000/multilevel:latest"
+ssh kai@136.187.101.71 "docker images | grep multilevel"
+mkdir: cannot create directory 'logs': File exists
+
+ssh kai@136.187.101.71 "docker rm -f docker_registry"
+
+
+Test 3: ./pushpull.sh kai 136.187.101.71 multilevel
+
+docker images
+kiwenlau/multilevel          latest              ec168b54c5e5        7 months ago        448.2 MB
+
+docker tag kiwenlau/multilevel:latest 136.187.101.71:5000/multilevel:latest
+
+docker images
+136.187.101.71:5000/multilevel   latest              ec168b54c5e5        7 months ago        448.2 MB
+kiwenlau/multilevel              latest              ec168b54c5e5        7 months ago        448.2 MB
+
+ssh kai@136.187.101.71 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+5042620d0940        kiwenlau/registry:2.0.1   "registry cmd/regist   1 seconds ago       Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.71:5000/multilevel:latest
+The push refers to a repository [136.187.101.71:5000/multilevel] (len: 1)
+ec168b54c5e5: Buffering to Disk
+ec168b54c5e5: Image successfully pushed
+ec168b54c5e5: Image already exists
+a2fb88a60a2a: Image already exists
+c243118e72a4: Image already exists
+732f95431f4f: Image already exists
+a23c4b097a25: Buffering to Disk
+a23c4b097a25: Image successfully pushed
+d7683dce04c0: Buffering to Disk
+d7683dce04c0: Image successfully pushed
+1675cb5623b7: Image already exists
+c543de9fa973: Image already exists
+8c41351f802d: Buffering to Disk
+8c41351f802d: Image successfully pushed
+98f274d6ad68: Image already exists
+4fff97e3b983: Buffering to Disk
+4fff97e3b983: Image successfully pushed
+763c0a69bca6: Buffering to Disk
+763c0a69bca6: Image successfully pushed
+7d4bad739229: Image already exists
+3dacd6758f14: Image already exists
+dad131381a54: Image already exists
+69667ea51ce9: Image already exists
+1edc7d40fb01: Image already exists
+fc183b81cd8a: Image already exists
+813921ad49c7: Buffering to Disk
+813921ad49c7: Image successfully pushed
+1bf6265ac0c9: Buffering to Disk
+1bf6265ac0c9: Image successfully pushed
+fb42cf21d5c1: Image already exists
+71d9d77ae89e: Image already exists
+848d84b4b2ab: Buffering to Disk
+848d84b4b2ab: Image successfully pushed
+511136ea3c5a: Image already exists
+Digest: sha256:c817eaf0e4ebd03660fdc33c1f790d206c40f6e04cfff31e3b2f1784be8758cb
+
+real  67.52
+
+ssh kai@136.187.101.71 "docker images | grep multilevel"
+
+docker pull 136.187.101.71:5000/multilevel:latest
+latest: Pulling from 136.187.101.71:5000/multilevel
+511136ea3c5a: Pulling fs layer
+848d84b4b2ab: Pulling fs layer
+71d9d77ae89e: Pulling fs layer
+fb42cf21d5c1: Pulling fs layer
+1bf6265ac0c9: Pulling fs layer
+813921ad49c7: Pulling fs layer
+fc183b81cd8a: Pulling fs layer
+1edc7d40fb01: Pulling fs layer
+69667ea51ce9: Pulling fs layer
+dad131381a54: Pulling fs layer
+3dacd6758f14: Pulling fs layer
+7d4bad739229: Pulling fs layer
+763c0a69bca6: Pulling fs layer
+4fff97e3b983: Pulling fs layer
+98f274d6ad68: Pulling fs layer
+8c41351f802d: Pulling fs layer
+c543de9fa973: Pulling fs layer
+1675cb5623b7: Pulling fs layer
+d7683dce04c0: Pulling fs layer
+a23c4b097a25: Pulling fs layer
+732f95431f4f: Pulling fs layer
+c243118e72a4: Pulling fs layer
+a2fb88a60a2a: Pulling fs layer
+ec168b54c5e5: Pulling fs layer
+ec168b54c5e5: Pulling fs layer
+ec168b54c5e5: Layer already being pulled by another client. Waiting.
+ec168b54c5e5: Verifying Checksum
+ec168b54c5e5: Download complete
+ec168b54c5e5: Download complete
+c243118e72a4: Verifying Checksum
+c243118e72a4: Download complete
+a2fb88a60a2a: Verifying Checksum
+a2fb88a60a2a: Download complete
+511136ea3c5a: Verifying Checksum
+511136ea3c5a: Download complete
+71d9d77ae89e: Verifying Checksum
+71d9d77ae89e: Download complete
+fb42cf21d5c1: Verifying Checksum
+fb42cf21d5c1: Download complete
+813921ad49c7: Verifying Checksum
+813921ad49c7: Download complete
+fc183b81cd8a: Verifying Checksum
+fc183b81cd8a: Download complete
+1edc7d40fb01: Verifying Checksum
+1edc7d40fb01: Download complete
+3dacd6758f14: Verifying Checksum
+3dacd6758f14: Download complete
+511136ea3c5a: Pull complete
+7d4bad739229: Verifying Checksum
+7d4bad739229: Download complete
+98f274d6ad68: Verifying Checksum
+98f274d6ad68: Download complete
+4fff97e3b983: Verifying Checksum
+4fff97e3b983: Download complete
+dad131381a54: Verifying Checksum
+dad131381a54: Download complete
+69667ea51ce9: Verifying Checksum
+69667ea51ce9: Download complete
+732f95431f4f: Verifying Checksum
+732f95431f4f: Download complete
+d7683dce04c0: Verifying Checksum
+d7683dce04c0: Download complete
+1675cb5623b7: Verifying Checksum
+1675cb5623b7: Download complete
+c543de9fa973: Verifying Checksum
+c543de9fa973: Download complete
+8c41351f802d: Verifying Checksum
+8c41351f802d: Download complete
+a23c4b097a25: Verifying Checksum
+a23c4b097a25: Download complete
+763c0a69bca6: Verifying Checksum
+763c0a69bca6: Download complete
+848d84b4b2ab: Verifying Checksum
+848d84b4b2ab: Download complete
+1bf6265ac0c9: Verifying Checksum
+1bf6265ac0c9: Download complete
+848d84b4b2ab: Pull complete
+71d9d77ae89e: Pull complete
+fb42cf21d5c1: Pull complete
+1bf6265ac0c9: Pull complete
+813921ad49c7: Pull complete
+fc183b81cd8a: Pull complete
+1edc7d40fb01: Pull complete
+69667ea51ce9: Pull complete
+dad131381a54: Pull complete
+3dacd6758f14: Pull complete
+7d4bad739229: Pull complete
+763c0a69bca6: Pull complete
+4fff97e3b983: Pull complete
+98f274d6ad68: Pull complete
+8c41351f802d: Pull complete
+c543de9fa973: Pull complete
+1675cb5623b7: Pull complete
+d7683dce04c0: Pull complete
+a23c4b097a25: Pull complete
+732f95431f4f: Pull complete
+c243118e72a4: Pull complete
+a2fb88a60a2a: Pull complete
+ec168b54c5e5: Pull complete
+ec168b54c5e5: Already exists
+Digest: sha256:c817eaf0e4ebd03660fdc33c1f790d206c40f6e04cfff31e3b2f1784be8758cb
+Status: Downloaded newer image for 136.187.101.71:5000/multilevel:latest
+
+real  12.08
+
+ssh kai@136.187.101.71 "docker images | grep multilevel"
+136.187.101.71:5000/multilevel   latest              ec168b54c5e5        7 months ago        448.2 MB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.71:5000/multilevel:latest"
+ssh kai@136.187.101.71 "docker images | grep multilevel"
+mkdir: cannot create directory 'logs': File exists
+
+ssh kai@136.187.101.71 "docker rm -f docker_registry"
+
+
+Test 4: ./pushpull.sh kai 136.187.101.71 multilevel
+
+docker images
+kiwenlau/multilevel          latest              ec168b54c5e5        7 months ago        448.2 MB
+
+docker tag kiwenlau/multilevel:latest 136.187.101.71:5000/multilevel:latest
+
+docker images
+136.187.101.71:5000/multilevel   latest              ec168b54c5e5        7 months ago        448.2 MB
+kiwenlau/multilevel              latest              ec168b54c5e5        7 months ago        448.2 MB
+
+ssh kai@136.187.101.71 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+8562cb06782c        kiwenlau/registry:2.0.1   "registry cmd/regist   1 seconds ago       Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.71:5000/multilevel:latest
+The push refers to a repository [136.187.101.71:5000/multilevel] (len: 1)
+ec168b54c5e5: Buffering to Disk
+ec168b54c5e5: Image successfully pushed
+ec168b54c5e5: Image already exists
+a2fb88a60a2a: Image already exists
+c243118e72a4: Image already exists
+732f95431f4f: Image already exists
+a23c4b097a25: Buffering to Disk
+a23c4b097a25: Image successfully pushed
+d7683dce04c0: Buffering to Disk
+d7683dce04c0: Image successfully pushed
+1675cb5623b7: Image already exists
+c543de9fa973: Image already exists
+8c41351f802d: Buffering to Disk
+8c41351f802d: Image successfully pushed
+98f274d6ad68: Image already exists
+4fff97e3b983: Buffering to Disk
+4fff97e3b983: Image successfully pushed
+763c0a69bca6: Buffering to Disk
+763c0a69bca6: Image successfully pushed
+7d4bad739229: Image already exists
+3dacd6758f14: Image already exists
+dad131381a54: Image already exists
+69667ea51ce9: Image already exists
+1edc7d40fb01: Image already exists
+fc183b81cd8a: Image already exists
+813921ad49c7: Buffering to Disk
+813921ad49c7: Image successfully pushed
+1bf6265ac0c9: Buffering to Disk
+1bf6265ac0c9: Image successfully pushed
+fb42cf21d5c1: Image already exists
+71d9d77ae89e: Image already exists
+848d84b4b2ab: Buffering to Disk
+848d84b4b2ab: Image successfully pushed
+511136ea3c5a: Image already exists
+Digest: sha256:f69767ac925aeb844d18effed6fb7ef49eb3b68538ff65777b68567239120b1d
+
+real  71.99
+
+ssh kai@136.187.101.71 "docker images | grep multilevel"
+
+docker pull 136.187.101.71:5000/multilevel:latest
+latest: Pulling from 136.187.101.71:5000/multilevel
+511136ea3c5a: Pulling fs layer
+848d84b4b2ab: Pulling fs layer
+71d9d77ae89e: Pulling fs layer
+fb42cf21d5c1: Pulling fs layer
+1bf6265ac0c9: Pulling fs layer
+813921ad49c7: Pulling fs layer
+fc183b81cd8a: Pulling fs layer
+1edc7d40fb01: Pulling fs layer
+69667ea51ce9: Pulling fs layer
+dad131381a54: Pulling fs layer
+3dacd6758f14: Pulling fs layer
+7d4bad739229: Pulling fs layer
+763c0a69bca6: Pulling fs layer
+4fff97e3b983: Pulling fs layer
+98f274d6ad68: Pulling fs layer
+8c41351f802d: Pulling fs layer
+c543de9fa973: Pulling fs layer
+1675cb5623b7: Pulling fs layer
+d7683dce04c0: Pulling fs layer
+a23c4b097a25: Pulling fs layer
+732f95431f4f: Pulling fs layer
+c243118e72a4: Pulling fs layer
+a2fb88a60a2a: Pulling fs layer
+ec168b54c5e5: Pulling fs layer
+ec168b54c5e5: Pulling fs layer
+ec168b54c5e5: Layer already being pulled by another client. Waiting.
+813921ad49c7: Verifying Checksum
+813921ad49c7: Download complete
+fc183b81cd8a: Verifying Checksum
+fc183b81cd8a: Download complete
+69667ea51ce9: Verifying Checksum
+69667ea51ce9: Download complete
+dad131381a54: Verifying Checksum
+dad131381a54: Download complete
+3dacd6758f14: Verifying Checksum
+3dacd6758f14: Download complete
+7d4bad739229: Verifying Checksum
+7d4bad739229: Download complete
+4fff97e3b983: Verifying Checksum
+4fff97e3b983: Download complete
+98f274d6ad68: Verifying Checksum
+98f274d6ad68: Download complete
+c543de9fa973: Verifying Checksum
+c543de9fa973: Download complete
+1675cb5623b7: Verifying Checksum
+1675cb5623b7: Download complete
+d7683dce04c0: Verifying Checksum
+d7683dce04c0: Download complete
+a2fb88a60a2a: Verifying Checksum
+a2fb88a60a2a: Download complete
+c243118e72a4: Verifying Checksum
+c243118e72a4: Download complete
+732f95431f4f: Verifying Checksum
+732f95431f4f: Download complete
+fb42cf21d5c1: Verifying Checksum
+fb42cf21d5c1: Download complete
+71d9d77ae89e: Verifying Checksum
+71d9d77ae89e: Download complete
+511136ea3c5a: Verifying Checksum
+511136ea3c5a: Download complete
+1edc7d40fb01: Verifying Checksum
+1edc7d40fb01: Download complete
+ec168b54c5e5: Verifying Checksum
+ec168b54c5e5: Download complete
+ec168b54c5e5: Download complete
+511136ea3c5a: Pull complete
+8c41351f802d: Verifying Checksum
+8c41351f802d: Download complete
+763c0a69bca6: Verifying Checksum
+763c0a69bca6: Download complete
+a23c4b097a25: Verifying Checksum
+a23c4b097a25: Download complete
+848d84b4b2ab: Verifying Checksum
+848d84b4b2ab: Download complete
+1bf6265ac0c9: Verifying Checksum
+1bf6265ac0c9: Download complete
+848d84b4b2ab: Pull complete
+71d9d77ae89e: Pull complete
+fb42cf21d5c1: Pull complete
+1bf6265ac0c9: Pull complete
+813921ad49c7: Pull complete
+fc183b81cd8a: Pull complete
+1edc7d40fb01: Pull complete
+69667ea51ce9: Pull complete
+dad131381a54: Pull complete
+3dacd6758f14: Pull complete
+7d4bad739229: Pull complete
+763c0a69bca6: Pull complete
+4fff97e3b983: Pull complete
+98f274d6ad68: Pull complete
+8c41351f802d: Pull complete
+c543de9fa973: Pull complete
+1675cb5623b7: Pull complete
+d7683dce04c0: Pull complete
+a23c4b097a25: Pull complete
+732f95431f4f: Pull complete
+c243118e72a4: Pull complete
+a2fb88a60a2a: Pull complete
+ec168b54c5e5: Pull complete
+ec168b54c5e5: Already exists
+Digest: sha256:f69767ac925aeb844d18effed6fb7ef49eb3b68538ff65777b68567239120b1d
+Status: Downloaded newer image for 136.187.101.71:5000/multilevel:latest
+
+real  12.16
+
+ssh kai@136.187.101.71 "docker images | grep multilevel"
+136.187.101.71:5000/multilevel   latest              ec168b54c5e5        7 months ago        448.2 MB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.71:5000/multilevel:latest"
+ssh kai@136.187.101.71 "docker images | grep multilevel"
+mkdir: cannot create directory 'logs': File exists
+
+ssh kai@136.187.101.71 "docker rm -f docker_registry"
+
+
+Test 5: ./pushpull.sh kai 136.187.101.71 multilevel
+
+docker images
+kiwenlau/multilevel          latest              ec168b54c5e5        7 months ago        448.2 MB
+
+docker tag kiwenlau/multilevel:latest 136.187.101.71:5000/multilevel:latest
+
+docker images
+136.187.101.71:5000/multilevel   latest              ec168b54c5e5        7 months ago        448.2 MB
+kiwenlau/multilevel              latest              ec168b54c5e5        7 months ago        448.2 MB
+
+ssh kai@136.187.101.71 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+28042f5e5db6        kiwenlau/registry:2.0.1   "registry cmd/regist   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.71:5000/multilevel:latest
+The push refers to a repository [136.187.101.71:5000/multilevel] (len: 1)
+ec168b54c5e5: Buffering to Disk
+ec168b54c5e5: Image successfully pushed
+ec168b54c5e5: Image already exists
+a2fb88a60a2a: Image already exists
+c243118e72a4: Image already exists
+732f95431f4f: Image already exists
+a23c4b097a25: Buffering to Disk
+a23c4b097a25: Image successfully pushed
+d7683dce04c0: Buffering to Disk
+d7683dce04c0: Image successfully pushed
+1675cb5623b7: Image already exists
+c543de9fa973: Image already exists
+8c41351f802d: Buffering to Disk
+8c41351f802d: Image successfully pushed
+98f274d6ad68: Image already exists
+4fff97e3b983: Buffering to Disk
+4fff97e3b983: Image successfully pushed
+763c0a69bca6: Buffering to Disk
+763c0a69bca6: Image successfully pushed
+7d4bad739229: Image already exists
+3dacd6758f14: Image already exists
+dad131381a54: Image already exists
+69667ea51ce9: Image already exists
+1edc7d40fb01: Image already exists
+fc183b81cd8a: Image already exists
+813921ad49c7: Buffering to Disk
+813921ad49c7: Image successfully pushed
+1bf6265ac0c9: Buffering to Disk
+1bf6265ac0c9: Image successfully pushed
+fb42cf21d5c1: Image already exists
+71d9d77ae89e: Image already exists
+848d84b4b2ab: Buffering to Disk
+848d84b4b2ab: Image successfully pushed
+511136ea3c5a: Image already exists
+Digest: sha256:480834deb3d28c6c3c95330897b302fabfa50e8649ebc54127f72375954eeefa
+
+real  68.78
+
+ssh kai@136.187.101.71 "docker images | grep multilevel"
+
+docker pull 136.187.101.71:5000/multilevel:latest
+latest: Pulling from 136.187.101.71:5000/multilevel
+511136ea3c5a: Pulling fs layer
+848d84b4b2ab: Pulling fs layer
+71d9d77ae89e: Pulling fs layer
+fb42cf21d5c1: Pulling fs layer
+1bf6265ac0c9: Pulling fs layer
+813921ad49c7: Pulling fs layer
+fc183b81cd8a: Pulling fs layer
+1edc7d40fb01: Pulling fs layer
+69667ea51ce9: Pulling fs layer
+dad131381a54: Pulling fs layer
+3dacd6758f14: Pulling fs layer
+7d4bad739229: Pulling fs layer
+763c0a69bca6: Pulling fs layer
+4fff97e3b983: Pulling fs layer
+98f274d6ad68: Pulling fs layer
+8c41351f802d: Pulling fs layer
+c543de9fa973: Pulling fs layer
+1675cb5623b7: Pulling fs layer
+d7683dce04c0: Pulling fs layer
+a23c4b097a25: Pulling fs layer
+732f95431f4f: Pulling fs layer
+c243118e72a4: Pulling fs layer
+a2fb88a60a2a: Pulling fs layer
+ec168b54c5e5: Pulling fs layer
+ec168b54c5e5: Pulling fs layer
+ec168b54c5e5: Layer already being pulled by another client. Waiting.
+1edc7d40fb01: Verifying Checksum
+1edc7d40fb01: Download complete
+69667ea51ce9: Verifying Checksum
+69667ea51ce9: Download complete
+dad131381a54: Verifying Checksum
+dad131381a54: Download complete
+3dacd6758f14: Verifying Checksum
+3dacd6758f14: Download complete
+7d4bad739229: Verifying Checksum
+7d4bad739229: Download complete
+4fff97e3b983: Verifying Checksum
+4fff97e3b983: Download complete
+98f274d6ad68: Verifying Checksum
+98f274d6ad68: Download complete
+c543de9fa973: Verifying Checksum
+c543de9fa973: Download complete
+1675cb5623b7: Verifying Checksum
+1675cb5623b7: Download complete
+d7683dce04c0: Verifying Checksum
+d7683dce04c0: Download complete
+732f95431f4f: Verifying Checksum
+732f95431f4f: Download complete
+a2fb88a60a2a: Verifying Checksum
+a2fb88a60a2a: Download complete
+ec168b54c5e5: Verifying Checksum
+ec168b54c5e5: Download complete
+ec168b54c5e5: Download complete
+511136ea3c5a: Verifying Checksum
+511136ea3c5a: Download complete
+fc183b81cd8a: Verifying Checksum
+fc183b81cd8a: Download complete
+813921ad49c7: Verifying Checksum
+813921ad49c7: Download complete
+fb42cf21d5c1: Verifying Checksum
+fb42cf21d5c1: Download complete
+71d9d77ae89e: Verifying Checksum
+71d9d77ae89e: Download complete
+c243118e72a4: Verifying Checksum
+c243118e72a4: Download complete
+511136ea3c5a: Pull complete
+8c41351f802d: Verifying Checksum
+8c41351f802d: Download complete
+763c0a69bca6: Verifying Checksum
+763c0a69bca6: Download complete
+a23c4b097a25: Verifying Checksum
+a23c4b097a25: Download complete
+848d84b4b2ab: Verifying Checksum
+848d84b4b2ab: Download complete
+1bf6265ac0c9: Verifying Checksum
+1bf6265ac0c9: Download complete
+848d84b4b2ab: Pull complete
+71d9d77ae89e: Pull complete
+fb42cf21d5c1: Pull complete
+1bf6265ac0c9: Pull complete
+813921ad49c7: Pull complete
+fc183b81cd8a: Pull complete
+1edc7d40fb01: Pull complete
+69667ea51ce9: Pull complete
+dad131381a54: Pull complete
+3dacd6758f14: Pull complete
+7d4bad739229: Pull complete
+763c0a69bca6: Pull complete
+4fff97e3b983: Pull complete
+98f274d6ad68: Pull complete
+8c41351f802d: Pull complete
+c543de9fa973: Pull complete
+1675cb5623b7: Pull complete
+d7683dce04c0: Pull complete
+a23c4b097a25: Pull complete
+732f95431f4f: Pull complete
+c243118e72a4: Pull complete
+a2fb88a60a2a: Pull complete
+ec168b54c5e5: Pull complete
+ec168b54c5e5: Already exists
+Digest: sha256:480834deb3d28c6c3c95330897b302fabfa50e8649ebc54127f72375954eeefa
+Status: Downloaded newer image for 136.187.101.71:5000/multilevel:latest
+
+real  12.07
+
+ssh kai@136.187.101.71 "docker images | grep multilevel"
+136.187.101.71:5000/multilevel   latest              ec168b54c5e5        7 months ago        448.2 MB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.71:5000/multilevel:latest"
+ssh kai@136.187.101.71 "docker images | grep multilevel"
+mkdir: cannot create directory 'logs': File exists
+
+ssh kai@136.187.101.71 "docker rm -f docker_registry"
+
+
+Test 6: ./pushpull.sh kai 136.187.101.71 multilevel
+
+docker images
+kiwenlau/multilevel          latest              ec168b54c5e5        7 months ago        448.2 MB
+
+docker tag kiwenlau/multilevel:latest 136.187.101.71:5000/multilevel:latest
+
+docker images
+136.187.101.71:5000/multilevel   latest              ec168b54c5e5        7 months ago        448.2 MB
+kiwenlau/multilevel              latest              ec168b54c5e5        7 months ago        448.2 MB
+
+ssh kai@136.187.101.71 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+af47d8939bd6        kiwenlau/registry:2.0.1   "registry cmd/regist   1 seconds ago       Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.71:5000/multilevel:latest
+The push refers to a repository [136.187.101.71:5000/multilevel] (len: 1)
+ec168b54c5e5: Buffering to Disk
+ec168b54c5e5: Image successfully pushed
+ec168b54c5e5: Image already exists
+a2fb88a60a2a: Image already exists
+c243118e72a4: Image already exists
+732f95431f4f: Image already exists
+a23c4b097a25: Buffering to Disk
+a23c4b097a25: Image successfully pushed
+d7683dce04c0: Buffering to Disk
+d7683dce04c0: Image successfully pushed
+1675cb5623b7: Image already exists
+c543de9fa973: Image already exists
+8c41351f802d: Buffering to Disk
+8c41351f802d: Image successfully pushed
+98f274d6ad68: Image already exists
+4fff97e3b983: Buffering to Disk
+4fff97e3b983: Image successfully pushed
+763c0a69bca6: Buffering to Disk
+763c0a69bca6: Image successfully pushed
+7d4bad739229: Image already exists
+3dacd6758f14: Image already exists
+dad131381a54: Image already exists
+69667ea51ce9: Image already exists
+1edc7d40fb01: Image already exists
+fc183b81cd8a: Image already exists
+813921ad49c7: Buffering to Disk
+813921ad49c7: Image successfully pushed
+1bf6265ac0c9: Buffering to Disk
+1bf6265ac0c9: Image successfully pushed
+fb42cf21d5c1: Image already exists
+71d9d77ae89e: Image already exists
+848d84b4b2ab: Buffering to Disk
+848d84b4b2ab: Image successfully pushed
+511136ea3c5a: Image already exists
+Digest: sha256:0066f6a999b8421f169382c916ea3a1fcb09e816f9380382da99d96cf64b6996
+
+real  70.87
+
+ssh kai@136.187.101.71 "docker images | grep multilevel"
+
+docker pull 136.187.101.71:5000/multilevel:latest
+latest: Pulling from 136.187.101.71:5000/multilevel
+511136ea3c5a: Pulling fs layer
+848d84b4b2ab: Pulling fs layer
+71d9d77ae89e: Pulling fs layer
+fb42cf21d5c1: Pulling fs layer
+1bf6265ac0c9: Pulling fs layer
+813921ad49c7: Pulling fs layer
+fc183b81cd8a: Pulling fs layer
+1edc7d40fb01: Pulling fs layer
+69667ea51ce9: Pulling fs layer
+dad131381a54: Pulling fs layer
+3dacd6758f14: Pulling fs layer
+7d4bad739229: Pulling fs layer
+763c0a69bca6: Pulling fs layer
+4fff97e3b983: Pulling fs layer
+98f274d6ad68: Pulling fs layer
+8c41351f802d: Pulling fs layer
+c543de9fa973: Pulling fs layer
+1675cb5623b7: Pulling fs layer
+d7683dce04c0: Pulling fs layer
+a23c4b097a25: Pulling fs layer
+732f95431f4f: Pulling fs layer
+c243118e72a4: Pulling fs layer
+a2fb88a60a2a: Pulling fs layer
+ec168b54c5e5: Pulling fs layer
+ec168b54c5e5: Pulling fs layer
+ec168b54c5e5: Layer already being pulled by another client. Waiting.
+ec168b54c5e5: Verifying Checksum
+ec168b54c5e5: Download complete
+ec168b54c5e5: Download complete
+511136ea3c5a: Verifying Checksum
+511136ea3c5a: Download complete
+511136ea3c5a: Pull complete
+71d9d77ae89e: Verifying Checksum
+71d9d77ae89e: Download complete
+69667ea51ce9: Verifying Checksum
+69667ea51ce9: Download complete
+1edc7d40fb01: Verifying Checksum
+1edc7d40fb01: Download complete
+813921ad49c7: Verifying Checksum
+813921ad49c7: Download complete
+fb42cf21d5c1: Verifying Checksum
+fb42cf21d5c1: Download complete
+7d4bad739229: Verifying Checksum
+7d4bad739229: Download complete
+dad131381a54: Verifying Checksum
+dad131381a54: Download complete
+fc183b81cd8a: Verifying Checksum
+fc183b81cd8a: Download complete
+732f95431f4f: Verifying Checksum
+732f95431f4f: Download complete
+1675cb5623b7: Verifying Checksum
+1675cb5623b7: Download complete
+c543de9fa973: Verifying Checksum
+c543de9fa973: Download complete
+d7683dce04c0: Verifying Checksum
+d7683dce04c0: Download complete
+98f274d6ad68: Verifying Checksum
+98f274d6ad68: Download complete
+4fff97e3b983: Verifying Checksum
+4fff97e3b983: Download complete
+3dacd6758f14: Verifying Checksum
+3dacd6758f14: Download complete
+a2fb88a60a2a: Verifying Checksum
+a2fb88a60a2a: Download complete
+c243118e72a4: Verifying Checksum
+c243118e72a4: Download complete
+8c41351f802d: Verifying Checksum
+8c41351f802d: Download complete
+763c0a69bca6: Verifying Checksum
+763c0a69bca6: Download complete
+a23c4b097a25: Verifying Checksum
+a23c4b097a25: Download complete
+848d84b4b2ab: Verifying Checksum
+848d84b4b2ab: Download complete
+1bf6265ac0c9: Verifying Checksum
+1bf6265ac0c9: Download complete
+848d84b4b2ab: Pull complete
+71d9d77ae89e: Pull complete
+fb42cf21d5c1: Pull complete
+1bf6265ac0c9: Pull complete
+813921ad49c7: Pull complete
+fc183b81cd8a: Pull complete
+1edc7d40fb01: Pull complete
+69667ea51ce9: Pull complete
+dad131381a54: Pull complete
+3dacd6758f14: Pull complete
+7d4bad739229: Pull complete
+763c0a69bca6: Pull complete
+4fff97e3b983: Pull complete
+98f274d6ad68: Pull complete
+8c41351f802d: Pull complete
+c543de9fa973: Pull complete
+1675cb5623b7: Pull complete
+d7683dce04c0: Pull complete
+a23c4b097a25: Pull complete
+732f95431f4f: Pull complete
+c243118e72a4: Pull complete
+a2fb88a60a2a: Pull complete
+ec168b54c5e5: Pull complete
+ec168b54c5e5: Already exists
+Digest: sha256:0066f6a999b8421f169382c916ea3a1fcb09e816f9380382da99d96cf64b6996
+Status: Downloaded newer image for 136.187.101.71:5000/multilevel:latest
+
+real  12.10
+
+ssh kai@136.187.101.71 "docker images | grep multilevel"
+136.187.101.71:5000/multilevel   latest              ec168b54c5e5        7 months ago        448.2 MB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.71:5000/multilevel:latest"
+ssh kai@136.187.101.71 "docker images | grep multilevel"
+mkdir: cannot create directory 'logs': File exists
+
+ssh kai@136.187.101.71 "docker rm -f docker_registry"
+
+
+Test 7: ./pushpull.sh kai 136.187.101.71 multilevel
+
+docker images
+kiwenlau/multilevel          latest              ec168b54c5e5        7 months ago        448.2 MB
+
+docker tag kiwenlau/multilevel:latest 136.187.101.71:5000/multilevel:latest
+
+docker images
+136.187.101.71:5000/multilevel   latest              ec168b54c5e5        7 months ago        448.2 MB
+kiwenlau/multilevel              latest              ec168b54c5e5        7 months ago        448.2 MB
+
+ssh kai@136.187.101.71 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+ea45045f97f0        kiwenlau/registry:2.0.1   "registry cmd/regist   1 seconds ago       Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.71:5000/multilevel:latest
+The push refers to a repository [136.187.101.71:5000/multilevel] (len: 1)
+ec168b54c5e5: Buffering to Disk
+ec168b54c5e5: Image successfully pushed
+ec168b54c5e5: Image already exists
+a2fb88a60a2a: Image already exists
+c243118e72a4: Image already exists
+732f95431f4f: Image already exists
+a23c4b097a25: Buffering to Disk
+a23c4b097a25: Image successfully pushed
+d7683dce04c0: Buffering to Disk
+d7683dce04c0: Image successfully pushed
+1675cb5623b7: Image already exists
+c543de9fa973: Image already exists
+8c41351f802d: Buffering to Disk
+8c41351f802d: Image successfully pushed
+98f274d6ad68: Image already exists
+4fff97e3b983: Buffering to Disk
+4fff97e3b983: Image successfully pushed
+763c0a69bca6: Buffering to Disk
+763c0a69bca6: Image successfully pushed
+7d4bad739229: Image already exists
+3dacd6758f14: Image already exists
+dad131381a54: Image already exists
+69667ea51ce9: Image already exists
+1edc7d40fb01: Image already exists
+fc183b81cd8a: Image already exists
+813921ad49c7: Buffering to Disk
+813921ad49c7: Image successfully pushed
+1bf6265ac0c9: Buffering to Disk
+1bf6265ac0c9: Image successfully pushed
+fb42cf21d5c1: Image already exists
+71d9d77ae89e: Image already exists
+848d84b4b2ab: Buffering to Disk
+848d84b4b2ab: Image successfully pushed
+511136ea3c5a: Image already exists
+Digest: sha256:480834deb3d28c6c3c95330897b302fabfa50e8649ebc54127f72375954eeefa
+
+real  69.84
+
+ssh kai@136.187.101.71 "docker images | grep multilevel"
+
+docker pull 136.187.101.71:5000/multilevel:latest
+latest: Pulling from 136.187.101.71:5000/multilevel
+511136ea3c5a: Pulling fs layer
+848d84b4b2ab: Pulling fs layer
+71d9d77ae89e: Pulling fs layer
+fb42cf21d5c1: Pulling fs layer
+1bf6265ac0c9: Pulling fs layer
+813921ad49c7: Pulling fs layer
+fc183b81cd8a: Pulling fs layer
+1edc7d40fb01: Pulling fs layer
+69667ea51ce9: Pulling fs layer
+dad131381a54: Pulling fs layer
+3dacd6758f14: Pulling fs layer
+7d4bad739229: Pulling fs layer
+763c0a69bca6: Pulling fs layer
+4fff97e3b983: Pulling fs layer
+98f274d6ad68: Pulling fs layer
+8c41351f802d: Pulling fs layer
+c543de9fa973: Pulling fs layer
+1675cb5623b7: Pulling fs layer
+d7683dce04c0: Pulling fs layer
+a23c4b097a25: Pulling fs layer
+732f95431f4f: Pulling fs layer
+c243118e72a4: Pulling fs layer
+a2fb88a60a2a: Pulling fs layer
+ec168b54c5e5: Pulling fs layer
+ec168b54c5e5: Pulling fs layer
+ec168b54c5e5: Layer already being pulled by another client. Waiting.
+ec168b54c5e5: Verifying Checksum
+ec168b54c5e5: Download complete
+ec168b54c5e5: Download complete
+511136ea3c5a: Verifying Checksum
+511136ea3c5a: Download complete
+fb42cf21d5c1: Verifying Checksum
+fb42cf21d5c1: Download complete
+71d9d77ae89e: Verifying Checksum
+71d9d77ae89e: Download complete
+fc183b81cd8a: Verifying Checksum
+fc183b81cd8a: Download complete
+813921ad49c7: Verifying Checksum
+813921ad49c7: Download complete
+7d4bad739229: Verifying Checksum
+7d4bad739229: Download complete
+3dacd6758f14: Verifying Checksum
+3dacd6758f14: Download complete
+dad131381a54: Verifying Checksum
+dad131381a54: Download complete
+69667ea51ce9: Verifying Checksum
+69667ea51ce9: Download complete
+1edc7d40fb01: Verifying Checksum
+1edc7d40fb01: Download complete
+511136ea3c5a: Pull complete
+1675cb5623b7: Verifying Checksum
+1675cb5623b7: Download complete
+c543de9fa973: Verifying Checksum
+c543de9fa973: Download complete
+98f274d6ad68: Verifying Checksum
+98f274d6ad68: Download complete
+4fff97e3b983: Verifying Checksum
+4fff97e3b983: Download complete
+a2fb88a60a2a: Verifying Checksum
+a2fb88a60a2a: Download complete
+c243118e72a4: Verifying Checksum
+c243118e72a4: Download complete
+732f95431f4f: Verifying Checksum
+732f95431f4f: Download complete
+d7683dce04c0: Verifying Checksum
+d7683dce04c0: Download complete
+8c41351f802d: Verifying Checksum
+8c41351f802d: Download complete
+a23c4b097a25: Verifying Checksum
+a23c4b097a25: Download complete
+763c0a69bca6: Verifying Checksum
+763c0a69bca6: Download complete
+848d84b4b2ab: Verifying Checksum
+848d84b4b2ab: Download complete
+1bf6265ac0c9: Verifying Checksum
+1bf6265ac0c9: Download complete
+848d84b4b2ab: Pull complete
+71d9d77ae89e: Pull complete
+fb42cf21d5c1: Pull complete
+1bf6265ac0c9: Pull complete
+813921ad49c7: Pull complete
+fc183b81cd8a: Pull complete
+1edc7d40fb01: Pull complete
+69667ea51ce9: Pull complete
+dad131381a54: Pull complete
+3dacd6758f14: Pull complete
+7d4bad739229: Pull complete
+763c0a69bca6: Pull complete
+4fff97e3b983: Pull complete
+98f274d6ad68: Pull complete
+8c41351f802d: Pull complete
+c543de9fa973: Pull complete
+1675cb5623b7: Pull complete
+d7683dce04c0: Pull complete
+a23c4b097a25: Pull complete
+732f95431f4f: Pull complete
+c243118e72a4: Pull complete
+a2fb88a60a2a: Pull complete
+ec168b54c5e5: Pull complete
+ec168b54c5e5: Already exists
+Digest: sha256:480834deb3d28c6c3c95330897b302fabfa50e8649ebc54127f72375954eeefa
+Status: Downloaded newer image for 136.187.101.71:5000/multilevel:latest
+
+real  12.10
+
+ssh kai@136.187.101.71 "docker images | grep multilevel"
+136.187.101.71:5000/multilevel   latest              ec168b54c5e5        7 months ago        448.2 MB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.71:5000/multilevel:latest"
+ssh kai@136.187.101.71 "docker images | grep multilevel"
+mkdir: cannot create directory 'logs': File exists
+
+ssh kai@136.187.101.71 "docker rm -f docker_registry"
+
+
+Test 8: ./pushpull.sh kai 136.187.101.71 multilevel
+
+docker images
+kiwenlau/multilevel          latest              ec168b54c5e5        7 months ago        448.2 MB
+
+docker tag kiwenlau/multilevel:latest 136.187.101.71:5000/multilevel:latest
+
+docker images
+136.187.101.71:5000/multilevel   latest              ec168b54c5e5        7 months ago        448.2 MB
+kiwenlau/multilevel              latest              ec168b54c5e5        7 months ago        448.2 MB
+
+ssh kai@136.187.101.71 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+1d7a26cc41df        kiwenlau/registry:2.0.1   "registry cmd/regist   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.71:5000/multilevel:latest
+The push refers to a repository [136.187.101.71:5000/multilevel] (len: 1)
+ec168b54c5e5: Buffering to Disk
+ec168b54c5e5: Image successfully pushed
+ec168b54c5e5: Image already exists
+a2fb88a60a2a: Image already exists
+c243118e72a4: Image already exists
+732f95431f4f: Image already exists
+a23c4b097a25: Buffering to Disk
+a23c4b097a25: Image successfully pushed
+d7683dce04c0: Buffering to Disk
+d7683dce04c0: Image successfully pushed
+1675cb5623b7: Image already exists
+c543de9fa973: Image already exists
+8c41351f802d: Buffering to Disk
+8c41351f802d: Image successfully pushed
+98f274d6ad68: Image already exists
+4fff97e3b983: Buffering to Disk
+4fff97e3b983: Image successfully pushed
+763c0a69bca6: Buffering to Disk
+763c0a69bca6: Image successfully pushed
+7d4bad739229: Image already exists
+3dacd6758f14: Image already exists
+dad131381a54: Image already exists
+69667ea51ce9: Image already exists
+1edc7d40fb01: Image already exists
+fc183b81cd8a: Image already exists
+813921ad49c7: Buffering to Disk
+813921ad49c7: Image successfully pushed
+1bf6265ac0c9: Buffering to Disk
+1bf6265ac0c9: Image successfully pushed
+fb42cf21d5c1: Image already exists
+71d9d77ae89e: Image already exists
+848d84b4b2ab: Buffering to Disk
+848d84b4b2ab: Image successfully pushed
+511136ea3c5a: Image already exists
+Digest: sha256:3a6a18e93d0e1bd128970104e7ab25221c5c5e8dc1853ba8a862e4e8ad52c62a
+
+real  69.71
+
+ssh kai@136.187.101.71 "docker images | grep multilevel"
+
+docker pull 136.187.101.71:5000/multilevel:latest
+latest: Pulling from 136.187.101.71:5000/multilevel
+511136ea3c5a: Pulling fs layer
+848d84b4b2ab: Pulling fs layer
+71d9d77ae89e: Pulling fs layer
+fb42cf21d5c1: Pulling fs layer
+1bf6265ac0c9: Pulling fs layer
+813921ad49c7: Pulling fs layer
+fc183b81cd8a: Pulling fs layer
+1edc7d40fb01: Pulling fs layer
+69667ea51ce9: Pulling fs layer
+dad131381a54: Pulling fs layer
+3dacd6758f14: Pulling fs layer
+7d4bad739229: Pulling fs layer
+763c0a69bca6: Pulling fs layer
+4fff97e3b983: Pulling fs layer
+98f274d6ad68: Pulling fs layer
+8c41351f802d: Pulling fs layer
+c543de9fa973: Pulling fs layer
+1675cb5623b7: Pulling fs layer
+d7683dce04c0: Pulling fs layer
+a23c4b097a25: Pulling fs layer
+732f95431f4f: Pulling fs layer
+c243118e72a4: Pulling fs layer
+a2fb88a60a2a: Pulling fs layer
+ec168b54c5e5: Pulling fs layer
+ec168b54c5e5: Pulling fs layer
+ec168b54c5e5: Layer already being pulled by another client. Waiting.
+ec168b54c5e5: Verifying Checksum
+ec168b54c5e5: Download complete
+ec168b54c5e5: Download complete
+511136ea3c5a: Verifying Checksum
+511136ea3c5a: Download complete
+fb42cf21d5c1: Verifying Checksum
+fb42cf21d5c1: Download complete
+71d9d77ae89e: Verifying Checksum
+71d9d77ae89e: Download complete
+dad131381a54: Verifying Checksum
+dad131381a54: Download complete
+69667ea51ce9: Verifying Checksum
+69667ea51ce9: Download complete
+1edc7d40fb01: Verifying Checksum
+1edc7d40fb01: Download complete
+fc183b81cd8a: Verifying Checksum
+fc183b81cd8a: Download complete
+813921ad49c7: Verifying Checksum
+813921ad49c7: Download complete
+4fff97e3b983: Verifying Checksum
+4fff97e3b983: Download complete
+7d4bad739229: Verifying Checksum
+7d4bad739229: Download complete
+3dacd6758f14: Verifying Checksum
+3dacd6758f14: Download complete
+1675cb5623b7: Verifying Checksum
+1675cb5623b7: Download complete
+c543de9fa973: Verifying Checksum
+c543de9fa973: Download complete
+98f274d6ad68: Verifying Checksum
+98f274d6ad68: Download complete
+a2fb88a60a2a: Verifying Checksum
+a2fb88a60a2a: Download complete
+c243118e72a4: Verifying Checksum
+c243118e72a4: Download complete
+732f95431f4f: Verifying Checksum
+732f95431f4f: Download complete
+d7683dce04c0: Verifying Checksum
+d7683dce04c0: Download complete
+511136ea3c5a: Pull complete
+8c41351f802d: Verifying Checksum
+8c41351f802d: Download complete
+a23c4b097a25: Verifying Checksum
+a23c4b097a25: Download complete
+763c0a69bca6: Verifying Checksum
+763c0a69bca6: Download complete
+848d84b4b2ab: Verifying Checksum
+848d84b4b2ab: Download complete
+1bf6265ac0c9: Verifying Checksum
+1bf6265ac0c9: Download complete
+848d84b4b2ab: Pull complete
+71d9d77ae89e: Pull complete
+fb42cf21d5c1: Pull complete
+1bf6265ac0c9: Pull complete
+813921ad49c7: Pull complete
+fc183b81cd8a: Pull complete
+1edc7d40fb01: Pull complete
+69667ea51ce9: Pull complete
+dad131381a54: Pull complete
+3dacd6758f14: Pull complete
+7d4bad739229: Pull complete
+763c0a69bca6: Pull complete
+4fff97e3b983: Pull complete
+98f274d6ad68: Pull complete
+8c41351f802d: Pull complete
+c543de9fa973: Pull complete
+1675cb5623b7: Pull complete
+d7683dce04c0: Pull complete
+a23c4b097a25: Pull complete
+732f95431f4f: Pull complete
+c243118e72a4: Pull complete
+a2fb88a60a2a: Pull complete
+ec168b54c5e5: Pull complete
+ec168b54c5e5: Already exists
+Digest: sha256:3a6a18e93d0e1bd128970104e7ab25221c5c5e8dc1853ba8a862e4e8ad52c62a
+Status: Downloaded newer image for 136.187.101.71:5000/multilevel:latest
+
+real  11.99
+
+ssh kai@136.187.101.71 "docker images | grep multilevel"
+136.187.101.71:5000/multilevel   latest              ec168b54c5e5        7 months ago        448.2 MB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.71:5000/multilevel:latest"
+ssh kai@136.187.101.71 "docker images | grep multilevel"
+mkdir: cannot create directory 'logs': File exists
+
+ssh kai@136.187.101.71 "docker rm -f docker_registry"
+
+
+Test 9: ./pushpull.sh kai 136.187.101.71 multilevel
+
+docker images
+kiwenlau/multilevel          latest              ec168b54c5e5        7 months ago        448.2 MB
+
+docker tag kiwenlau/multilevel:latest 136.187.101.71:5000/multilevel:latest
+
+docker images
+136.187.101.71:5000/multilevel   latest              ec168b54c5e5        7 months ago        448.2 MB
+kiwenlau/multilevel              latest              ec168b54c5e5        7 months ago        448.2 MB
+
+ssh kai@136.187.101.71 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+b0a57ccf2188        kiwenlau/registry:2.0.1   "registry cmd/regist   1 seconds ago       Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.71:5000/multilevel:latest
+The push refers to a repository [136.187.101.71:5000/multilevel] (len: 1)
+ec168b54c5e5: Buffering to Disk
+ec168b54c5e5: Image successfully pushed
+ec168b54c5e5: Image already exists
+a2fb88a60a2a: Image already exists
+c243118e72a4: Image already exists
+732f95431f4f: Image already exists
+a23c4b097a25: Buffering to Disk
+a23c4b097a25: Image successfully pushed
+d7683dce04c0: Buffering to Disk
+d7683dce04c0: Image successfully pushed
+1675cb5623b7: Image already exists
+c543de9fa973: Image already exists
+8c41351f802d: Buffering to Disk
+8c41351f802d: Image successfully pushed
+98f274d6ad68: Image already exists
+4fff97e3b983: Buffering to Disk
+4fff97e3b983: Image successfully pushed
+763c0a69bca6: Buffering to Disk
+763c0a69bca6: Image successfully pushed
+7d4bad739229: Image already exists
+3dacd6758f14: Image already exists
+dad131381a54: Image already exists
+69667ea51ce9: Image already exists
+1edc7d40fb01: Image already exists
+fc183b81cd8a: Image already exists
+813921ad49c7: Buffering to Disk
+813921ad49c7: Image successfully pushed
+1bf6265ac0c9: Buffering to Disk
+1bf6265ac0c9: Image successfully pushed
+fb42cf21d5c1: Image already exists
+71d9d77ae89e: Image already exists
+848d84b4b2ab: Buffering to Disk
+848d84b4b2ab: Image successfully pushed
+511136ea3c5a: Image already exists
+Digest: sha256:945667d82ad1bb56fb3d96d8cdff09836777d09ff8b1e434d85bda90eaa698b6
+
+real  69.80
+
+ssh kai@136.187.101.71 "docker images | grep multilevel"
+
+docker pull 136.187.101.71:5000/multilevel:latest
+latest: Pulling from 136.187.101.71:5000/multilevel
+511136ea3c5a: Pulling fs layer
+848d84b4b2ab: Pulling fs layer
+71d9d77ae89e: Pulling fs layer
+fb42cf21d5c1: Pulling fs layer
+1bf6265ac0c9: Pulling fs layer
+813921ad49c7: Pulling fs layer
+fc183b81cd8a: Pulling fs layer
+1edc7d40fb01: Pulling fs layer
+69667ea51ce9: Pulling fs layer
+dad131381a54: Pulling fs layer
+3dacd6758f14: Pulling fs layer
+7d4bad739229: Pulling fs layer
+763c0a69bca6: Pulling fs layer
+4fff97e3b983: Pulling fs layer
+98f274d6ad68: Pulling fs layer
+8c41351f802d: Pulling fs layer
+c543de9fa973: Pulling fs layer
+1675cb5623b7: Pulling fs layer
+d7683dce04c0: Pulling fs layer
+a23c4b097a25: Pulling fs layer
+732f95431f4f: Pulling fs layer
+c243118e72a4: Pulling fs layer
+a2fb88a60a2a: Pulling fs layer
+ec168b54c5e5: Pulling fs layer
+ec168b54c5e5: Pulling fs layer
+ec168b54c5e5: Layer already being pulled by another client. Waiting.
+ec168b54c5e5: Verifying Checksum
+ec168b54c5e5: Download complete
+ec168b54c5e5: Download complete
+71d9d77ae89e: Verifying Checksum
+71d9d77ae89e: Download complete
+511136ea3c5a: Verifying Checksum
+511136ea3c5a: Download complete
+fc183b81cd8a: Verifying Checksum
+fc183b81cd8a: Download complete
+813921ad49c7: Verifying Checksum
+813921ad49c7: Download complete
+fb42cf21d5c1: Verifying Checksum
+fb42cf21d5c1: Download complete
+7d4bad739229: Verifying Checksum
+7d4bad739229: Download complete
+3dacd6758f14: Verifying Checksum
+3dacd6758f14: Download complete
+dad131381a54: Verifying Checksum
+dad131381a54: Download complete
+69667ea51ce9: Verifying Checksum
+69667ea51ce9: Download complete
+1edc7d40fb01: Verifying Checksum
+1edc7d40fb01: Download complete
+1675cb5623b7: Verifying Checksum
+1675cb5623b7: Download complete
+c543de9fa973: Verifying Checksum
+c543de9fa973: Download complete
+98f274d6ad68: Verifying Checksum
+98f274d6ad68: Download complete
+4fff97e3b983: Verifying Checksum
+4fff97e3b983: Download complete
+a2fb88a60a2a: Verifying Checksum
+a2fb88a60a2a: Download complete
+c243118e72a4: Verifying Checksum
+c243118e72a4: Download complete
+732f95431f4f: Verifying Checksum
+732f95431f4f: Download complete
+d7683dce04c0: Verifying Checksum
+d7683dce04c0: Download complete
+511136ea3c5a: Pull complete
+a23c4b097a25: Verifying Checksum
+a23c4b097a25: Download complete
+8c41351f802d: Verifying Checksum
+8c41351f802d: Download complete
+763c0a69bca6: Verifying Checksum
+763c0a69bca6: Download complete
+848d84b4b2ab: Verifying Checksum
+848d84b4b2ab: Download complete
+1bf6265ac0c9: Verifying Checksum
+1bf6265ac0c9: Download complete
+848d84b4b2ab: Pull complete
+71d9d77ae89e: Pull complete
+fb42cf21d5c1: Pull complete
+1bf6265ac0c9: Pull complete
+813921ad49c7: Pull complete
+fc183b81cd8a: Pull complete
+1edc7d40fb01: Pull complete
+69667ea51ce9: Pull complete
+dad131381a54: Pull complete
+3dacd6758f14: Pull complete
+7d4bad739229: Pull complete
+763c0a69bca6: Pull complete
+4fff97e3b983: Pull complete
+98f274d6ad68: Pull complete
+8c41351f802d: Pull complete
+c543de9fa973: Pull complete
+1675cb5623b7: Pull complete
+d7683dce04c0: Pull complete
+a23c4b097a25: Pull complete
+732f95431f4f: Pull complete
+c243118e72a4: Pull complete
+a2fb88a60a2a: Pull complete
+ec168b54c5e5: Pull complete
+ec168b54c5e5: Already exists
+Digest: sha256:945667d82ad1bb56fb3d96d8cdff09836777d09ff8b1e434d85bda90eaa698b6
+Status: Downloaded newer image for 136.187.101.71:5000/multilevel:latest
+
+real  12.17
+
+ssh kai@136.187.101.71 "docker images | grep multilevel"
+136.187.101.71:5000/multilevel   latest              ec168b54c5e5        7 months ago        448.2 MB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.71:5000/multilevel:latest"
+ssh kai@136.187.101.71 "docker images | grep multilevel"
+mkdir: cannot create directory 'logs': File exists
+
+ssh kai@136.187.101.71 "docker rm -f docker_registry"
+
+
+Test 10: ./pushpull.sh kai 136.187.101.71 multilevel
+
+docker images
+kiwenlau/multilevel          latest              ec168b54c5e5        7 months ago        448.2 MB
+
+docker tag kiwenlau/multilevel:latest 136.187.101.71:5000/multilevel:latest
+
+docker images
+136.187.101.71:5000/multilevel   latest              ec168b54c5e5        7 months ago        448.2 MB
+kiwenlau/multilevel              latest              ec168b54c5e5        7 months ago        448.2 MB
+
+ssh kai@136.187.101.71 "docker run --name="docker_registry" -p 5000:5000 -v /etc/localtime:/etc/localtime:ro -v ~/registry:/tmp/registry -d kiwenlau/registry:2.0.1"
+d60a5b745d17        kiwenlau/registry:2.0.1   "registry cmd/regist   Less than a second ago   Up Less than a second   0.0.0.0:5000->5000/tcp   docker_registry     
+
+docker push 136.187.101.71:5000/multilevel:latest
+The push refers to a repository [136.187.101.71:5000/multilevel] (len: 1)
+ec168b54c5e5: Buffering to Disk
+ec168b54c5e5: Image successfully pushed
+ec168b54c5e5: Image already exists
+a2fb88a60a2a: Image already exists
+c243118e72a4: Image already exists
+732f95431f4f: Image already exists
+a23c4b097a25: Buffering to Disk
+a23c4b097a25: Image successfully pushed
+d7683dce04c0: Buffering to Disk
+d7683dce04c0: Image successfully pushed
+1675cb5623b7: Image already exists
+c543de9fa973: Image already exists
+8c41351f802d: Buffering to Disk
+8c41351f802d: Image successfully pushed
+98f274d6ad68: Image already exists
+4fff97e3b983: Buffering to Disk
+4fff97e3b983: Image successfully pushed
+763c0a69bca6: Buffering to Disk
+763c0a69bca6: Image successfully pushed
+7d4bad739229: Image already exists
+3dacd6758f14: Image already exists
+dad131381a54: Image already exists
+69667ea51ce9: Image already exists
+1edc7d40fb01: Image already exists
+fc183b81cd8a: Image already exists
+813921ad49c7: Buffering to Disk
+813921ad49c7: Image successfully pushed
+1bf6265ac0c9: Buffering to Disk
+1bf6265ac0c9: Image successfully pushed
+fb42cf21d5c1: Image already exists
+71d9d77ae89e: Image already exists
+848d84b4b2ab: Buffering to Disk
+848d84b4b2ab: Image successfully pushed
+511136ea3c5a: Image already exists
+Digest: sha256:c3f8b2d715e702f3916aefd2cb15d232f4fa21b605503b231834524ce86d232f
+
+real  72.76
+
+ssh kai@136.187.101.71 "docker images | grep multilevel"
+
+docker pull 136.187.101.71:5000/multilevel:latest
+latest: Pulling from 136.187.101.71:5000/multilevel
+511136ea3c5a: Pulling fs layer
+848d84b4b2ab: Pulling fs layer
+71d9d77ae89e: Pulling fs layer
+fb42cf21d5c1: Pulling fs layer
+1bf6265ac0c9: Pulling fs layer
+813921ad49c7: Pulling fs layer
+fc183b81cd8a: Pulling fs layer
+1edc7d40fb01: Pulling fs layer
+69667ea51ce9: Pulling fs layer
+dad131381a54: Pulling fs layer
+3dacd6758f14: Pulling fs layer
+7d4bad739229: Pulling fs layer
+763c0a69bca6: Pulling fs layer
+4fff97e3b983: Pulling fs layer
+98f274d6ad68: Pulling fs layer
+8c41351f802d: Pulling fs layer
+c543de9fa973: Pulling fs layer
+1675cb5623b7: Pulling fs layer
+d7683dce04c0: Pulling fs layer
+a23c4b097a25: Pulling fs layer
+732f95431f4f: Pulling fs layer
+c243118e72a4: Pulling fs layer
+a2fb88a60a2a: Pulling fs layer
+ec168b54c5e5: Pulling fs layer
+ec168b54c5e5: Pulling fs layer
+ec168b54c5e5: Layer already being pulled by another client. Waiting.
+ec168b54c5e5: Verifying Checksum
+ec168b54c5e5: Download complete
+ec168b54c5e5: Download complete
+a2fb88a60a2a: Verifying Checksum
+a2fb88a60a2a: Download complete
+511136ea3c5a: Verifying Checksum
+511136ea3c5a: Download complete
+511136ea3c5a: Pull complete
+71d9d77ae89e: Verifying Checksum
+71d9d77ae89e: Download complete
+fb42cf21d5c1: Verifying Checksum
+fb42cf21d5c1: Download complete
+813921ad49c7: Verifying Checksum
+813921ad49c7: Download complete
+fc183b81cd8a: Verifying Checksum
+fc183b81cd8a: Download complete
+1edc7d40fb01: Verifying Checksum
+1edc7d40fb01: Download complete
+69667ea51ce9: Verifying Checksum
+69667ea51ce9: Download complete
+dad131381a54: Verifying Checksum
+dad131381a54: Download complete
+3dacd6758f14: Verifying Checksum
+3dacd6758f14: Download complete
+7d4bad739229: Verifying Checksum
+7d4bad739229: Download complete
+4fff97e3b983: Verifying Checksum
+4fff97e3b983: Download complete
+98f274d6ad68: Verifying Checksum
+98f274d6ad68: Download complete
+c543de9fa973: Verifying Checksum
+c543de9fa973: Download complete
+1675cb5623b7: Verifying Checksum
+1675cb5623b7: Download complete
+d7683dce04c0: Verifying Checksum
+d7683dce04c0: Download complete
+c243118e72a4: Verifying Checksum
+c243118e72a4: Download complete
+732f95431f4f: Verifying Checksum
+732f95431f4f: Download complete
+8c41351f802d: Verifying Checksum
+8c41351f802d: Download complete
+763c0a69bca6: Verifying Checksum
+763c0a69bca6: Download complete
+a23c4b097a25: Verifying Checksum
+a23c4b097a25: Download complete
+848d84b4b2ab: Verifying Checksum
+848d84b4b2ab: Download complete
+1bf6265ac0c9: Verifying Checksum
+1bf6265ac0c9: Download complete
+848d84b4b2ab: Pull complete
+71d9d77ae89e: Pull complete
+fb42cf21d5c1: Pull complete
+1bf6265ac0c9: Pull complete
+813921ad49c7: Pull complete
+fc183b81cd8a: Pull complete
+1edc7d40fb01: Pull complete
+69667ea51ce9: Pull complete
+dad131381a54: Pull complete
+3dacd6758f14: Pull complete
+7d4bad739229: Pull complete
+763c0a69bca6: Pull complete
+4fff97e3b983: Pull complete
+98f274d6ad68: Pull complete
+8c41351f802d: Pull complete
+c543de9fa973: Pull complete
+1675cb5623b7: Pull complete
+d7683dce04c0: Pull complete
+a23c4b097a25: Pull complete
+732f95431f4f: Pull complete
+c243118e72a4: Pull complete
+a2fb88a60a2a: Pull complete
+ec168b54c5e5: Pull complete
+ec168b54c5e5: Already exists
+Digest: sha256:c3f8b2d715e702f3916aefd2cb15d232f4fa21b605503b231834524ce86d232f
+Status: Downloaded newer image for 136.187.101.71:5000/multilevel:latest
+
+real  12.28
+
+ssh kai@136.187.101.71 "docker images | grep multilevel"
+136.187.101.71:5000/multilevel   latest              ec168b54c5e5        7 months ago        448.2 MB
+
+ssh kai@136.187.101.71 "docker rmi 136.187.101.71:5000/multilevel:latest"
+ssh kai@136.187.101.71 "docker images | grep multilevel"
+mkdir: cannot create directory 'logs': File exists
+
+ssh kai@136.187.101.71 "docker rm -f docker_registry"
+
+end date: Sun Jun 14 01:23:44 JST 2015
+
+
